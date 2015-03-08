@@ -22,7 +22,7 @@ G3 = -z6/(z5*(z6*c2*s+1))
 G4 = -1/(z7*c3*s)
 
 %% Função de trasferência completa
-G = G1*G2*G3*G4
+G = minreal(G1*G2*G3*G4)
 
 %% Diagrama de bode
 % Incluindo margens de fase e ganho do sistema
@@ -30,15 +30,15 @@ margin(G);
 
 %% Entrada
 % Uma onda quadrada de 1 Hz e amplitude 1 (volt)
-t = 0:.0001:4;
+t = 0:.0001:3;
 r = square(2*pi*t)*0.5+0.5;
 plot(t,r);
-axis([0 4 -0.1 1.1]);
+axis([0 3 -0.1 1.1]);
 xlabel('t (s)');
 ylabel('r (V)');
 
-%malha aberta
-% figure, lsim(v1,r,t)
-% figure, lsim(v2,r,t)
-% figure, lsim(v3,r,t)
-% figure, lsim(y,r,t)
+%% Saída dos estágios
+lsim(G1,r,t), title('Saída estágio I (y1)'), snapnow;
+lsim(G1*G2,r,t), title('Saída estágio II (y2)'), snapnow;
+lsim(G1*G2*G3,r,t), title('Saída estágio III (y3)'), snapnow;
+lsim(G,r,t), title('Saída estágio IV (y)');
