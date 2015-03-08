@@ -1,0 +1,185 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Lab 2 - Pr&eacute; Relat&oacute;rio</title><meta name="generator" content="MATLAB 8.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2015-03-08"><meta name="DC.source" content="lab.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, tt, code { font-size:12px; }
+pre { margin:0px 0px 20px; }
+pre.error { color:red; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Lab 2 - Pr&eacute; Relat&oacute;rio</h1><!--introduction--><p>Intro</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Valores dos resistores</a></li><li><a href="#2">Fun&ccedil;&otilde;es de transfer&ecirc;ncia de cada est&aacute;gio</a></li><li><a href="#3">Fun&ccedil;&atilde;o de trasfer&ecirc;ncia completa</a></li><li><a href="#4">Diagrama de bode</a></li><li><a href="#5">Entrada</a></li><li><a href="#6">Sa&iacute;da dos est&aacute;gios</a></li></ul></div><h2>Valores dos resistores<a name="1"></a></h2><pre class="codeinput">z1 = 100e3;
+z2 = 10e3;
+z3 = 100e3;
+z4 = 220e3;
+z5 = 100e3;
+z6 = 470e3;
+z7 = 1e6;
+c1 = 0.1e-6;
+c2 = 0.1e-6;
+c3 = 0.1e-6;
+</pre><h2>Fun&ccedil;&otilde;es de transfer&ecirc;ncia de cada est&aacute;gio<a name="2"></a></h2><p>As equa&ccedil;es foram obtidas pelo circuito j&aacute; transformado para a frequ&ecirc;ncia por Laplace</p><pre class="codeinput">s = tf(<span class="string">'s'</span>);
+G1 = tf(-z2/z1)
+G2 = -z4/(z3*(z4*c1*s+1))
+G3 = -z6/(z5*(z6*c2*s+1))
+G4 = -1/(z7*c3*s)
+</pre><pre class="codeoutput">
+G1 =
+ 
+  -0.1
+ 
+Static gain.
+
+
+G2 =
+ 
+      -220000
+  ---------------
+  2200 s + 100000
+ 
+Continuous-time transfer function.
+
+
+G3 =
+ 
+      -470000
+  ---------------
+  4700 s + 100000
+ 
+Continuous-time transfer function.
+
+
+G4 =
+ 
+   -1
+  -----
+  0.1 s
+ 
+Continuous-time transfer function.
+
+</pre><h2>Fun&ccedil;&atilde;o de trasfer&ecirc;ncia completa<a name="3"></a></h2><pre class="codeinput">G = minreal(G1*G2*G3*G4)
+</pre><pre class="codeoutput">
+G =
+ 
+            1e04
+  -------------------------
+  s^3 + 66.73 s^2 + 967.1 s
+ 
+Continuous-time transfer function.
+
+</pre><h2>Diagrama de bode<a name="4"></a></h2><p>Incluindo margens de fase e ganho do sistema</p><pre class="codeinput">margin(G);
+</pre><img vspace="5" hspace="5" src="lab_01.png" alt=""> <h2>Entrada<a name="5"></a></h2><p>Uma onda quadrada de 1 Hz e amplitude 1 (volt)</p><pre class="codeinput">t = 0:.0001:3;
+r = square(2*pi*t)*0.5+0.5;
+plot(t,r);
+axis([0 3 -0.1 1.1]);
+xlabel(<span class="string">'t (s)'</span>);
+ylabel(<span class="string">'r (V)'</span>);
+</pre><img vspace="5" hspace="5" src="lab_02.png" alt=""> <h2>Sa&iacute;da dos est&aacute;gios<a name="6"></a></h2><pre class="codeinput">lsim(G1,r,t), title(<span class="string">'Sa&iacute;da est&aacute;gio I (y1)'</span>), snapnow;
+lsim(G1*G2,r,t), title(<span class="string">'Sa&iacute;da est&aacute;gio II (y2)'</span>), snapnow;
+lsim(G1*G2*G3,r,t), title(<span class="string">'Sa&iacute;da est&aacute;gio III (y3)'</span>), snapnow;
+lsim(G,r,t), title(<span class="string">'Sa&iacute;da est&aacute;gio IV (y)'</span>);
+</pre><img vspace="5" hspace="5" src="lab_03.png" alt=""> <img vspace="5" hspace="5" src="lab_04.png" alt=""> <img vspace="5" hspace="5" src="lab_05.png" alt=""> <img vspace="5" hspace="5" src="lab_06.png" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2013a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Lab 2 - Pré Relatório
+% Intro
+
+%% Valores dos resistores
+z1 = 100e3;
+z2 = 10e3;
+z3 = 100e3;
+z4 = 220e3;
+z5 = 100e3;
+z6 = 470e3;
+z7 = 1e6;
+c1 = 0.1e-6;
+c2 = 0.1e-6;
+c3 = 0.1e-6;
+
+%% Funções de transferência de cada estágio
+% As equaçes foram obtidas pelo circuito já transformado para a frequência por Laplace
+s = tf('s');
+G1 = tf(-z2/z1)
+G2 = -z4/(z3*(z4*c1*s+1))
+G3 = -z6/(z5*(z6*c2*s+1))
+G4 = -1/(z7*c3*s)
+
+%% Função de trasferência completa
+G = minreal(G1*G2*G3*G4)
+
+%% Diagrama de bode
+% Incluindo margens de fase e ganho do sistema
+margin(G);
+
+%% Entrada
+% Uma onda quadrada de 1 Hz e amplitude 1 (volt)
+t = 0:.0001:3;
+r = square(2*pi*t)*0.5+0.5;
+plot(t,r);
+axis([0 3 -0.1 1.1]);
+xlabel('t (s)');
+ylabel('r (V)');
+
+%% Saída dos estágios
+lsim(G1,r,t), title('Saída estágio I (y1)'), snapnow;
+lsim(G1*G2,r,t), title('Saída estágio II (y2)'), snapnow;
+lsim(G1*G2*G3,r,t), title('Saída estágio III (y3)'), snapnow;
+lsim(G,r,t), title('Saída estágio IV (y)');
+##### SOURCE END #####
+--></body></html>
