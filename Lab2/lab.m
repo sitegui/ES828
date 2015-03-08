@@ -6,16 +6,16 @@ format short;
 s=tf('s');
 
 %os valores dos resistores e capacitores
-z1=100000;
-z2=10000;
-z3=100000;
-z4=220000;
-z5=100000;
-z6=470000;
-z7=1000000;
-c1=0.1*10^(-6);
-c2=0.1*10^(-6);
-c3=0.1*10^(-6);
+z1=100e3;
+z2=10e3;
+z3=100e3;
+z4=220e3;
+z5=100e3;
+z6=470e3;
+z7=1e6;
+c1=0.1e-6;
+c2=0.1e-6;
+c3=0.1e-6;
 
 %v1 e a saida da 1a etapa, v2 da 2a, v3 da 3a e y da ultima.
 %as equacoes foram obtidas pelo circuito ja transformado para a frequencia
