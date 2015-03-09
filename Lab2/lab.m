@@ -89,3 +89,9 @@ lsim(G1,r,t), title('Saída estágio I (y1)'), snapnow;
 lsim(G1*G2,r,t), title('Saída estágio II (y2)'), snapnow;
 lsim(G1*G2*G3,r,t), title('Saída estágio III (y3)'), snapnow;
 lsim(G,r,t), title('Saída estágio IV (y)');
+%% 
+% Verifica-se que as respostas são estáveis, a não ser o caso levando em
+% contas todos os estágios (fica claro que a amplitude da saída cresce
+% indefinidamente). Desta forma se levando em consideração apenas a
+% estabilidade do sistema, o único a ser controlado é exatamente o
+% que possui como entrada r e saída y.
