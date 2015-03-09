@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>ES868 &#8211; Pr&eacute; Relat&oacute;rio Lab 2</title><meta name="generator" content="MATLAB 8.0"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2015-03-09"><meta name="DC.source" content="lab.m"><style type="text/css">
+      --><title>ES868 &#8211; Pr&eacute; Relat&oacute;rio Lab 2</title><meta name="generator" content="MATLAB 8.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2015-03-09"><meta name="DC.source" content="lab.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -135,7 +135,7 @@ ylabel(<span class="string">'r (V)'</span>);
 lsim(G1*G2,r,t), title(<span class="string">'Sa&iacute;da est&aacute;gio II (y2)'</span>), snapnow;
 lsim(G1*G2*G3,r,t), title(<span class="string">'Sa&iacute;da est&aacute;gio III (y3)'</span>), snapnow;
 lsim(G,r,t), title(<span class="string">'Sa&iacute;da est&aacute;gio IV (y)'</span>);
-</pre><img vspace="5" hspace="5" src="lab_03.png" alt=""> <img vspace="5" hspace="5" src="lab_04.png" alt=""> <img vspace="5" hspace="5" src="lab_05.png" alt=""> <img vspace="5" hspace="5" src="lab_06.png" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2012b</a><br></p></div><!--
+</pre><img vspace="5" hspace="5" src="lab_03.png" alt=""> <img vspace="5" hspace="5" src="lab_04.png" alt=""> <img vspace="5" hspace="5" src="lab_05.png" alt=""> <img vspace="5" hspace="5" src="lab_06.png" alt=""> <p>Verifica-se que as respostas s&atilde;o est&aacute;veis, a n&atilde;o ser o caso levando em contas todos os est&aacute;gios (fica claro que a amplitude da sa&iacute;da cresce indefinidamente). Desta forma se levando em considera&ccedil;&atilde;o apenas a estabilidade do sistema, o &uacute;nico a ser controlado &eacute; exatamente o que possui como entrada r e sa&iacute;da y.</p><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2013a</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 %% ES868 – Pré Relatório Lab 2
 % *Identificação de plantas eletrônicas*
@@ -228,5 +228,12 @@ lsim(G1,r,t), title('Saída estágio I (y1)'), snapnow;
 lsim(G1*G2,r,t), title('Saída estágio II (y2)'), snapnow;
 lsim(G1*G2*G3,r,t), title('Saída estágio III (y3)'), snapnow;
 lsim(G,r,t), title('Saída estágio IV (y)');
+%% 
+% Verifica-se que as respostas são estáveis, a não ser o caso levando em
+% contas todos os estágios (fica claro que a amplitude da saída cresce
+% indefinidamente). Desta forma se levando em consideração apenas a
+% estabilidade do sistema, o único a ser controlado é exatamente o
+% que possui como entrada r e saída y.
+
 ##### SOURCE END #####
 --></body></html>
