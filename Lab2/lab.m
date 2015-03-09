@@ -57,6 +57,10 @@ G3 = minreal(-z6/(z5*(z6*c2*s+1)))
 G4 = minreal(-1/(z7*c3*s))
 
 %% Função de trasferência completa
+%
+% A cascata de todos os estágios com o amplificador operacional 
+% impede a influência dos componentes dinâmicos do circuito, gerando:
+%
 % $$G(s) = G1(s) G2(s) G3(s) G4(s)$$
 G = minreal(G1*G2*G3*G4)
 

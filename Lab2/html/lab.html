@@ -65,7 +65,7 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
 
 
-  </style></head><body><div class="content"><h1>ES868 &#8211; Pr&eacute; Relat&oacute;rio Lab 2</h1><!--introduction--><p><b>Identifica&ccedil;&atilde;o de plantas eletr&ocirc;nicas</b></p><p>Turma A - 08/03/2015</p><div><ul><li>Augusto Miranda Garcia - 104627</li><li>Guilherme de Oliveira Souza &#8211; 117093</li><li>Vin&iacute;cius Ragazi David - 120258</li></ul></div><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Objetivos</a></li><li><a href="#2">Equacionamento</a></li><li><a href="#3">Fun&ccedil;&otilde;es de transfer&ecirc;ncia de cada est&aacute;gio</a></li><li><a href="#5">Fun&ccedil;&atilde;o de trasfer&ecirc;ncia completa</a></li><li><a href="#6">Diagrama de bode</a></li><li><a href="#8">Entrada</a></li><li><a href="#9">Sa&iacute;da dos est&aacute;gios</a></li></ul></div><h2>Objetivos<a name="1"></a></h2><p>O objetivo do pr&eacute;-relat&oacute;rio &eacute; o equacionamento do circuito dado e definir alguns par&acirc;metros para levar como base para o experimento pr&aacute;tico.</p><h2>Equacionamento<a name="2"></a></h2><p><img vspace="5" hspace="5" src="equacionamento.png" alt=""> </p><p>Para o equacionamento dos quatro est&aacute;gios como tamb&eacute;m do circuito como um todo levamos como base que a corrente que entra pelos polos positivos e negativos do amplificador operacional s&atilde;o zero, assim como a sua diferen&ccedil;a de potencial. Desta forma temos:</p><p><img src="lab_eq41397.png" alt="$$\frac{V_{out}}{V_{in}} = -\frac{Z_{out}}{Z_{in}}$$"></p><p>Onde <img src="lab_eq37934.png" alt="$V_{out}$"> &eacute; a sa&iacute;da e <img src="lab_eq67787.png" alt="$V_{in}$"> &eacute; a entrada, ambas em Volts, e <img src="lab_eq35398.png" alt="$Z_{out}$"> &eacute; a imped&acirc;ncia da sa&iacute;da e <img src="lab_eq94915.png" alt="$Z_{in}$"> a imped&acirc;ncia de entrada. Assim a fun&ccedil;&atilde;o de transfer&ecirc;ncia ser&aacute; <img src="lab_eq03072.png" alt="$H = V_{out}/V_{in}$">.</p><h2>Fun&ccedil;&otilde;es de transfer&ecirc;ncia de cada est&aacute;gio<a name="3"></a></h2><p>Usando os seguintes valores para as imped&acirc;ncias e capacit&acirc;ncias:</p><pre class="codeinput">z1 = 100e3;
+  </style></head><body><div class="content"><h1>ES868 &#8211; Pr&eacute; Relat&oacute;rio Lab 2</h1><!--introduction--><p><b>Identifica&ccedil;&atilde;o de plantas eletr&ocirc;nicas</b></p><p>Turma A - 08/03/2015</p><div><ul><li>Augusto Miranda Garcia - 104627</li><li>Guilherme de Oliveira Souza &#8211; 117093</li><li>Vin&iacute;cius Ragazi David - 120258</li></ul></div><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Objetivos</a></li><li><a href="#2">Equacionamento</a></li><li><a href="#3">Fun&ccedil;&otilde;es de transfer&ecirc;ncia de cada est&aacute;gio</a></li><li><a href="#5">Fun&ccedil;&atilde;o de trasfer&ecirc;ncia completa</a></li><li><a href="#6">Diagrama de bode</a></li><li><a href="#8">Entrada</a></li><li><a href="#9">Sa&iacute;da dos est&aacute;gios</a></li></ul></div><h2>Objetivos<a name="1"></a></h2><p>O objetivo do pr&eacute;-relat&oacute;rio &eacute; o equacionamento do circuito dado e a defini&ccedil;&atilde;o de alguns par&acirc;metros para serem levados como base para o experimento pr&aacute;tico.</p><h2>Equacionamento<a name="2"></a></h2><p><img vspace="5" hspace="5" src="equacionamento.png" alt=""> </p><p>Para o equacionamento dos quatro est&aacute;gios como tamb&eacute;m do circuito como um todo levamos como base que a corrente que entra pelos polos positivos e negativos do amplificador operacional s&atilde;o zero, assim como a sua diferen&ccedil;a de potencial. Desta forma temos:</p><p><img src="lab_eq41397.png" alt="$$\frac{V_{out}}{V_{in}} = -\frac{Z_{out}}{Z_{in}}$$"></p><p>Onde <img src="lab_eq37934.png" alt="$V_{out}$"> &eacute; a sa&iacute;da e <img src="lab_eq67787.png" alt="$V_{in}$"> &eacute; a entrada, ambas em Volts, e <img src="lab_eq35398.png" alt="$Z_{out}$"> &eacute; a imped&acirc;ncia da sa&iacute;da e <img src="lab_eq94915.png" alt="$Z_{in}$"> a imped&acirc;ncia de entrada. Assim a fun&ccedil;&atilde;o de transfer&ecirc;ncia ser&aacute; <img src="lab_eq03072.png" alt="$H = V_{out}/V_{in}$">.</p><h2>Fun&ccedil;&otilde;es de transfer&ecirc;ncia de cada est&aacute;gio<a name="3"></a></h2><p>Usando os seguintes valores para as imped&acirc;ncias e capacit&acirc;ncias:</p><pre class="codeinput">z1 = 100e3;
 z2 = 10e3;
 z3 = 100e3;
 z4 = 220e3;
@@ -114,7 +114,7 @@ G4 =
  
 Continuous-time transfer function.
 
-</pre><h2>Fun&ccedil;&atilde;o de trasfer&ecirc;ncia completa<a name="5"></a></h2><p><img src="lab_eq49992.png" alt="$$G(s) = G1(s) G2(s) G3(s) G4(s)$$"></p><pre class="codeinput">G = minreal(G1*G2*G3*G4)
+</pre><h2>Fun&ccedil;&atilde;o de trasfer&ecirc;ncia completa<a name="5"></a></h2><p>A cascata de todos os est&aacute;gios com o amplificador operacional impede a influ&ecirc;ncia dos componentes din&acirc;micos do circuito, gerando:</p><p><img src="lab_eq49992.png" alt="$$G(s) = G1(s) G2(s) G3(s) G4(s)$$"></p><pre class="codeinput">G = minreal(G1*G2*G3*G4)
 </pre><pre class="codeoutput">
 G =
  
@@ -147,8 +147,9 @@ lsim(G,r,t), title(<span class="string">'Sa&iacute;da est&aacute;gio IV (y)'</sp
 % * Vinícius Ragazi David - 120258
 
 %% Objetivos
-% O objetivo do pré-relatório é o equacionamento do circuito dado e definir
-% alguns parâmetros para levar como base para o experimento prático.
+% O objetivo do pré-relatório é o equacionamento do circuito dado e a
+% definição de alguns parâmetros para serem levados como base para o 
+% experimento prático.
 
 %% Equacionamento
 % 
@@ -195,6 +196,10 @@ G3 = minreal(-z6/(z5*(z6*c2*s+1)))
 G4 = minreal(-1/(z7*c3*s))
 
 %% Função de trasferência completa
+%
+% A cascata de todos os estágios com o amplificador operacional 
+% impede a influência dos componentes dinâmicos do circuito, gerando:
+%
 % $$G(s) = G1(s) G2(s) G3(s) G4(s)$$
 G = minreal(G1*G2*G3*G4)
 
