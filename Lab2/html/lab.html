@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Lab 2 - Pr&eacute; Relat&oacute;rio</title><meta name="generator" content="MATLAB 8.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2015-03-08"><meta name="DC.source" content="lab.m"><style type="text/css">
+      --><title>ES868 &#8211; Pr&eacute; Relat&oacute;rio Lab 2</title><meta name="generator" content="MATLAB 8.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2015-03-09"><meta name="DC.source" content="lab.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -65,7 +65,7 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
 
 
-  </style></head><body><div class="content"><h1>Lab 2 - Pr&eacute; Relat&oacute;rio</h1><!--introduction--><p>Intro</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Valores dos resistores</a></li><li><a href="#2">Fun&ccedil;&otilde;es de transfer&ecirc;ncia de cada est&aacute;gio</a></li><li><a href="#3">Fun&ccedil;&atilde;o de trasfer&ecirc;ncia completa</a></li><li><a href="#4">Diagrama de bode</a></li><li><a href="#5">Entrada</a></li><li><a href="#6">Sa&iacute;da dos est&aacute;gios</a></li></ul></div><h2>Valores dos resistores<a name="1"></a></h2><pre class="codeinput">z1 = 100e3;
+  </style></head><body><div class="content"><h1>ES868 &#8211; Pr&eacute; Relat&oacute;rio Lab 2</h1><!--introduction--><p><b>Identifica&ccedil;&atilde;o de plantas eletr&ocirc;nicas</b></p><p>Turma A - 08/03/2015</p><div><ul><li>Guilherme de Oliveira Souza &#8211; 117093</li><li>Vin&iacute;cius Ragazi David - 120258</li></ul></div><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Objetivos</a></li><li><a href="#2">Equacionamento</a></li><li><a href="#3">Fun&ccedil;&otilde;es de transfer&ecirc;ncia de cada est&aacute;gio</a></li><li><a href="#5">Fun&ccedil;&atilde;o de trasfer&ecirc;ncia completa</a></li><li><a href="#6">Diagrama de bode</a></li><li><a href="#8">Entrada</a></li><li><a href="#9">Sa&iacute;da dos est&aacute;gios</a></li></ul></div><h2>Objetivos<a name="1"></a></h2><p>O objetivo do pr&eacute;-relat&oacute;rio &eacute; o equacionamento do circuito dado e definir alguns par&acirc;metros para levar como base para o experimento pr&aacute;tico.</p><h2>Equacionamento<a name="2"></a></h2><p><img vspace="5" hspace="5" src="equacionamento.png" alt=""> </p><p>Para o equacionamento dos quatro est&aacute;gios como tamb&eacute;m do circuito como um todo levamos como base que a corrente que entra pelos polos positivos e negativos do amplificador operacional s&atilde;o zero, assim como a sua diferen&ccedil;a de potencial. Desta forma temos:</p><p><img src="lab_eq41397.png" alt="$$\frac{V_{out}}{V_{in}} = -\frac{Z_{out}}{Z_{in}}$$"></p><p>Onde <img src="lab_eq37934.png" alt="$V_{out}$"> &eacute; a sa&iacute;da e <img src="lab_eq67787.png" alt="$V_{in}$"> &eacute; a entrada, ambas em Volts, e <img src="lab_eq35398.png" alt="$Z_{out}$"> &eacute; a imped&acirc;ncia da sa&iacute;da e <img src="lab_eq94915.png" alt="$Z_{in}$"> a imped&acirc;ncia de entrada. Assim a fun&ccedil;&atilde;o de transfer&ecirc;ncia ser&aacute; <img src="lab_eq03072.png" alt="$H = V_{out}/V_{in}$">.</p><h2>Fun&ccedil;&otilde;es de transfer&ecirc;ncia de cada est&aacute;gio<a name="3"></a></h2><p>Usando os seguintes valores para as imped&acirc;ncias e capacit&acirc;ncias:</p><pre class="codeinput">z1 = 100e3;
 z2 = 10e3;
 z3 = 100e3;
 z4 = 220e3;
@@ -75,11 +75,11 @@ z7 = 1e6;
 c1 = 0.1e-6;
 c2 = 0.1e-6;
 c3 = 0.1e-6;
-</pre><h2>Fun&ccedil;&otilde;es de transfer&ecirc;ncia de cada est&aacute;gio<a name="2"></a></h2><p>As equa&ccedil;es foram obtidas pelo circuito j&aacute; transformado para a frequ&ecirc;ncia por Laplace</p><pre class="codeinput">s = tf(<span class="string">'s'</span>);
+</pre><p>As equa&ccedil;es foram obtidas pelo circuito j&aacute; transformado para a frequ&ecirc;ncia por Laplace:</p><p><img src="lab_eq12024.png" alt="$$G1(s) = -\frac{z_2}{z_1}$$,&#xA;$$G2(s) = -\frac{z_4}{z_3 (z_4 c_1 s + 1)}$$,&#xA;$$G3(s) = -\frac{z_6}{z_5 (z_6 c_2 s + 1)}$$,&#xA;$$G4(s) = -\frac{1}{z_7 c_3 s}$$"></p><pre class="codeinput">s = tf(<span class="string">'s'</span>);
 G1 = tf(-z2/z1)
-G2 = -z4/(z3*(z4*c1*s+1))
-G3 = -z6/(z5*(z6*c2*s+1))
-G4 = -1/(z7*c3*s)
+G2 = minreal(-z4/(z3*(z4*c1*s+1)))
+G3 = minreal(-z6/(z5*(z6*c2*s+1)))
+G4 = minreal(-1/(z7*c3*s))
 </pre><pre class="codeoutput">
 G1 =
  
@@ -90,57 +90,83 @@ Static gain.
 
 G2 =
  
-      -220000
-  ---------------
-  2200 s + 100000
+    -100
+  ---------
+  s + 45.45
  
 Continuous-time transfer function.
 
 
 G3 =
  
-      -470000
-  ---------------
-  4700 s + 100000
+    -100
+  ---------
+  s + 21.28
  
 Continuous-time transfer function.
 
 
 G4 =
  
-   -1
-  -----
-  0.1 s
+  -10
+  ---
+   s
  
 Continuous-time transfer function.
 
-</pre><h2>Fun&ccedil;&atilde;o de trasfer&ecirc;ncia completa<a name="3"></a></h2><pre class="codeinput">G = minreal(G1*G2*G3*G4)
+</pre><h2>Fun&ccedil;&atilde;o de trasfer&ecirc;ncia completa<a name="5"></a></h2><p><img src="lab_eq49992.png" alt="$$G(s) = G1(s) G2(s) G3(s) G4(s)$$"></p><pre class="codeinput">G = minreal(G1*G2*G3*G4)
 </pre><pre class="codeoutput">
 G =
  
-            1e04
+            10000
   -------------------------
   s^3 + 66.73 s^2 + 967.1 s
  
 Continuous-time transfer function.
 
-</pre><h2>Diagrama de bode<a name="4"></a></h2><p>Incluindo margens de fase e ganho do sistema</p><pre class="codeinput">margin(G);
-</pre><img vspace="5" hspace="5" src="lab_01.png" alt=""> <h2>Entrada<a name="5"></a></h2><p>Uma onda quadrada de 1 Hz e amplitude 1 (volt)</p><pre class="codeinput">t = 0:.0001:3;
+</pre><h2>Diagrama de bode<a name="6"></a></h2><p>Incluindo margens de fase e ganho do sistema. Levando em considera&ccedil;&atilde;o a rela&ccedil;&atilde;o da entrada <img src="lab_eq25861.png" alt="$r$"> para a sa&iacute;da <img src="lab_eq44020.png" alt="$y$"> temos a resposta ao impulso do circuito ao todo. Com isso podemos analisar a estabilidade do sistema via o diagrama de bode do mesmo.</p><pre class="codeinput">margin(G);
+</pre><img vspace="5" hspace="5" src="lab_01.png" alt=""> <p>Verifica-se desta forma que o sistema &eacute; est&aacute;vel, j&aacute; que tanto a margem de fase (54,9&ordm;) quanto a de ganho (16,2dB) s&atilde;o positivas.</p><h2>Entrada<a name="8"></a></h2><p>Uma onda quadrada de 1 Hz e amplitude 1 (volt)</p><pre class="codeinput">t = 0:.0001:3;
 r = square(2*pi*t)*0.5+0.5;
 plot(t,r);
 axis([0 3 -0.1 1.1]);
 xlabel(<span class="string">'t (s)'</span>);
 ylabel(<span class="string">'r (V)'</span>);
-</pre><img vspace="5" hspace="5" src="lab_02.png" alt=""> <h2>Sa&iacute;da dos est&aacute;gios<a name="6"></a></h2><pre class="codeinput">lsim(G1,r,t), title(<span class="string">'Sa&iacute;da est&aacute;gio I (y1)'</span>), snapnow;
+</pre><img vspace="5" hspace="5" src="lab_02.png" alt=""> <h2>Sa&iacute;da dos est&aacute;gios<a name="9"></a></h2><pre class="codeinput">lsim(G1,r,t), title(<span class="string">'Sa&iacute;da est&aacute;gio I (y1)'</span>), snapnow;
 lsim(G1*G2,r,t), title(<span class="string">'Sa&iacute;da est&aacute;gio II (y2)'</span>), snapnow;
 lsim(G1*G2*G3,r,t), title(<span class="string">'Sa&iacute;da est&aacute;gio III (y3)'</span>), snapnow;
 lsim(G,r,t), title(<span class="string">'Sa&iacute;da est&aacute;gio IV (y)'</span>);
 </pre><img vspace="5" hspace="5" src="lab_03.png" alt=""> <img vspace="5" hspace="5" src="lab_04.png" alt=""> <img vspace="5" hspace="5" src="lab_05.png" alt=""> <img vspace="5" hspace="5" src="lab_06.png" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2013a</a><br></p></div><!--
 ##### SOURCE BEGIN #####
-%% Lab 2 - Pré Relatório
-% Intro
+%% ES868 – Pré Relatório Lab 2
+% *Identificação de plantas eletrônicas*
+%
+% Turma A - 08/03/2015
+%
+% * Guilherme de Oliveira Souza – 117093
+% * Vinícius Ragazi David - 120258
 
-%% Valores dos resistores
+%% Objetivos
+% O objetivo do pré-relatório é o equacionamento do circuito dado e definir
+% alguns parâmetros para levar como base para o experimento prático.
+
+%% Equacionamento
+% 
+% <<equacionamento.png>>
+%
+% Para o equacionamento dos quatro estágios como também do circuito como um
+% todo levamos como base que a corrente que entra pelos polos positivos e
+% negativos do amplificador operacional são zero, assim como a sua
+% diferença de potencial. Desta forma temos:
+% 
+% $$\frac{V_{out}}{V_{in}} = -\frac{Z_{out}}{Z_{in}}$$
+% 
+% Onde $V_{out}$ é a saída e $V_{in}$ é a entrada, ambas em Volts, e
+% $Z_{out}$ é a impedância da saída e $Z_{in}$ a impedância de entrada.
+% Assim a função de transferência será $H = V_{out}/V_{in}$.
+
+%% Funções de transferência de cada estágio
+% Usando os seguintes valores para as impedâncias e capacitâncias:
+
 z1 = 100e3;
 z2 = 10e3;
 z3 = 100e3;
@@ -152,20 +178,35 @@ c1 = 0.1e-6;
 c2 = 0.1e-6;
 c3 = 0.1e-6;
 
-%% Funções de transferência de cada estágio
-% As equaçes foram obtidas pelo circuito já transformado para a frequência por Laplace
+%%
+% As equaçes foram obtidas pelo circuito já transformado para a frequência
+% por Laplace:
+%
+% $$G1(s) = -\frac{z_2}{z_1}$$, 
+% $$G2(s) = -\frac{z_4}{z_3 (z_4 c_1 s + 1)}$$, 
+% $$G3(s) = -\frac{z_6}{z_5 (z_6 c_2 s + 1)}$$, 
+% $$G4(s) = -\frac{1}{z_7 c_3 s}$$
+
 s = tf('s');
 G1 = tf(-z2/z1)
-G2 = -z4/(z3*(z4*c1*s+1))
-G3 = -z6/(z5*(z6*c2*s+1))
-G4 = -1/(z7*c3*s)
+G2 = minreal(-z4/(z3*(z4*c1*s+1)))
+G3 = minreal(-z6/(z5*(z6*c2*s+1)))
+G4 = minreal(-1/(z7*c3*s))
 
 %% Função de trasferência completa
+% $$G(s) = G1(s) G2(s) G3(s) G4(s)$$
 G = minreal(G1*G2*G3*G4)
 
 %% Diagrama de bode
-% Incluindo margens de fase e ganho do sistema
+% Incluindo margens de fase e ganho do sistema.
+% Levando em consideração a relação da entrada $r$ para a saída $y$ temos
+% a resposta ao impulso do circuito ao todo. Com isso podemos analisar a
+% estabilidade do sistema via o diagrama de bode do mesmo.
 margin(G);
+
+%%
+% Verifica-se desta forma que o sistema é estável, já que tanto a margem de
+% fase (54,9º) quanto a de ganho (16,2dB) são positivas.
 
 %% Entrada
 % Uma onda quadrada de 1 Hz e amplitude 1 (volt)
