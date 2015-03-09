@@ -3,12 +3,14 @@
 %
 % Turma A - 08/03/2015
 %
+% * Augusto Miranda Garcia - 104627
 % * Guilherme de Oliveira Souza – 117093
 % * Vinícius Ragazi David - 120258
 
 %% Objetivos
-% O objetivo do pré-relatório é o equacionamento do circuito dado e definir
-% alguns parâmetros para levar como base para o experimento prático.
+% O objetivo do pré-relatório é o equacionamento do circuito dado e a
+% definição de alguns parâmetros para serem levados como base para o 
+% experimento prático.
 
 %% Equacionamento
 % 
@@ -71,7 +73,7 @@ margin(G);
 
 %% Entrada
 % Uma onda quadrada de 1 Hz e amplitude 1 (volt)
-t = 0:.0001:3;
+t = 0:.001:4;
 r = square(2*pi*t)*0.5+0.5;
 plot(t,r);
 axis([0 3 -0.1 1.1]);
