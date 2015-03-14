@@ -1,0 +1,191 @@
+\documentclass[12pt]{article}
+
+%% Escrevendo em portuguÃªs:
+\usepackage[brazil]{babel}
+\usepackage[latin1]{inputenc} 
+\usepackage[T1]{fontenc}
+\usepackage{epsfig}
+\usepackage{psfrag}
+\usepackage{fullpage}
+\usepackage{setspace}
+%----------------------------
+
+
+\newtheorem{teorema}{Teorema}%[chapter]
+\newtheorem{problema}[teorema]{Problema}
+\newtheorem{conj}[teorema]{Conjectura}
+\newtheorem{lema}[teorema]{Lema}
+\newtheorem{exerc}[teorema]{ExercÃ­cio}
+
+
+% Ad hoc macros
+\newcommand{\qed}       {\hfill\Box}
+\newcommand{\card}[1]   {\left|#1\right|}
+\newcommand{\nct}       {\chi_{_T}}
+\newcommand{\cnk}[2]    {C_{#1}^{#2}}
+\newcommand{\ed}[2]     {#1#2}
+\newcommand{\teto}[1]   {\lceil #1 \rceil}
+\newcommand{\piso}[1]   {\lfloor #1 \rfloor}
+
+
+
+%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%
+
+\begin{titlepage}
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for the horizontal lines, change thickness here
+
+\center % Center everything on the page
+ 
+%----------------------------------------------------------------------------------------
+%	HEADING SECTIONS
+%----------------------------------------------------------------------------------------
+
+\textsc{\LARGE Universidade Estadual de Campinas}\\[1.5cm]
+\textsc{\Large ES828 - Laboratório de Controle de Sistemas}\\[0.5cm] % Major heading such as course name
+\textsc{\large Turma A}\\[0.5cm] % Minor heading such as course title
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\HRule \\[0.4cm]
+{ \huge \bfseries Experimento 02 - Relatório }\\[0.4cm] % Title of your document
+\HRule \\[1.5cm]
+ 
+%----------------------------------------------------------------------------------------
+%	AUTHOR SECTION
+%----------------------------------------------------------------------------------------
+
+\begin{minipage}{0.4\textwidth}
+\begin{flushleft} \large
+\emph{Author:}\\
+John \textsc{Smith} % Your name
+\end{flushleft}
+\end{minipage}
+~
+\begin{minipage}{0.4\textwidth}
+\begin{flushright} \large
+\emph{Supervisor:} \\
+Dr. James \textsc{Smith} % Supervisor's Name
+\end{flushright}
+\end{minipage}\\[4cm]
+
+% If you don't want a supervisor, uncomment the two lines below and remove the section above
+%\Large \emph{Author:}\\
+%John \textsc{Smith}\\[3cm] % Your name
+
+%----------------------------------------------------------------------------------------
+%	DATE SECTION
+%----------------------------------------------------------------------------------------
+
+{\large \today}\\[3cm] % Date, change the \today to a set date if you want to be precise
+
+%----------------------------------------------------------------------------------------
+%	LOGO SECTION
+%----------------------------------------------------------------------------------------
+
+%\includegraphics{Logo}\\[1cm] % Include a department/university logo - this will require the graphicx package
+ 
+%----------------------------------------------------------------------------------------
+
+\vfill % Fill the rest of the page with whitespace
+
+\end{titlepage}
+\title{EE532 -- Eletrônica Básica\\ Lista de Exercícios Práticos I}
+
+\author{Anonimo RA007891}
+
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Simulação do circuito RC}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+A frequência de corte esperada do circuito RC simulado
+é dada pela expressão $f_c=1/2\pi RC$. Substituindo na equação os valores utilizados
+$R=1715\Omega$ e $C=100$nF, obtemos $f_c=928$Hz.
+Observando o gráfico 1, resultante da simulação do circuito no PSPICE8, verificamos
+que a frequência de corte obtida é coerente com o valor esperado pela teoria: ao aplicarmos
+uma senóide de entrada de 1V de amplitude e tensões DC e offset nulas, obtemos uma voltagem
+de saída V(C1:1)$\approx \sqrt{2}/2$mV$\approx$707mV para uma frequência $f\approx928$Hz.
+
+ \begin{center}
+%\begin{figure}
+%%	   \includegraphics*[width=15.5cm]{lista1g1.png}
+%\caption{bla}
+%\renewcommand{\figurename}{Gráfico}
+%\end{figure}
+ \end{center}
+
+A amplitude esperada da senóide de saída é dada por $A_{V_O} = |V_o/V_I|A_{V_I}$.
+Como $|V_o/V_I| = 1/\sqrt{1+(f/f_c)^2}$, obtemos $A_{V_O}=0,68$V para uma senóide de entrada
+de 1V e frequência 1kHz. A fase da senóide de saída esperada é dada por $-\tan^{-1}(f/f_c)\approx
+-0,823$. Novamente, os resultados obtidos através da simulação foram coerentes com os
+valores esperados em teoria. O gráfico 2 apresenta as voltagens de entrada e saída (V(V1:+)
+e V(C1:1), respectivamente) em função
+do tempo. Nota-se que a senóide de saída apresenta amplitude muito próxima ao valor calculado,
+e fase atrasada em relação à senóide de entrada.
+
+ \begin{center}
+%	   \includegraphics*[width=15.5cm]{lista1g2.png}
+ \end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Simulação de amplificador inversor}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+O ganho teórico do amplificador inversor é dado por $V_O/V_I = -R_2/R_1$, onde $R_1$ e $R_2$ são
+o resistor de entrada do amplificador inversor e o resistor de realimentação, respectivamente.
+Substituindo pelos valores $R_1=1715\Omega$ e $R_2=10715\Omega$ e aplicando uma tensão de
+entrada de 1V, obtemos um ganho de
+$V_O/V_I \approx -6,25 V/V$. O gráfico 3 apresenta a análise de transitório. Nota-se que o pico
+da voltagem de saída V(R1:1)é 6,2478V e que as senóides estão invertidas,
+visto que trata-se de um
+integrador inversor.
+
+ \begin{center}
+%	   \includegraphics*[width=15.5cm]{lista1g3.png}
+ \end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Circuito Integrador}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Usando o modelo de amp-op do item anterior, contruímos um circuito integrador com resistência
+de entrada $R=1715\Omega$, $C=29$nF e resistência em paralelo com capacitor $R_F=70$k$\Omega$. 
+Os valor de C foi escolhido de forma que o pico do sinal de saída seja igual a 5V em
+regime permanente dada uma entrada de onda quadrada de 1V de amplitude e período 1ms.
+
+Para um circuito integrador, a saída é dada por
+
+\[ v_o(t) = -\frac{1}{RC}\int^0_{-\infty} v_i(\lambda)d\lambda  -\frac{1}{RC}\int^t_{0} v_i(\lambda)d\lambda\]
+
+Estamos interessados no valor de pico em regime permanente. O valor de C para o qual o
+valor de pico da saída
+é 5V será dado então por $C=T/10R = 29$nF, onde $T=0,5$ms é a largura do pulso.
+
+Para que constante de tempo $\tau=R_F\cdot C$ do resistor em paralelo com C seja de pelo menos
+2ms, usamos $R_F=70$k$\Omega$.
+
+O gráfico 4 apresenta a análise do transitório no intervalo de 1$\mu$s a 10ms. V(R1:1) e V(R2:2)
+representam $V_O$ e $V_I$, respectivamente.
+
+ \begin{center}
+%	   \includegraphics*[width=15.5cm]{lista1g4.png}
+ \end{center}
+
+A resposta em frequência do integrador será dada por $\frac{V_O}{V_I}(f) = -\frac{Z_2}{Z_1}=
+-\frac{R_F/R}{1+j2\pi f R_FC}$, onde $R_F$ é o valor da resistência em paralelo com o capacitor.
+O gráfico 5 apresenta a as tensões $V_O$ e $V_I$ %(V(R2:2) e V(R1:1), respectivamente)
+do integrador em função da frequência.
+Observa-se o circuito comporta-se como um filtro passa-baixas.
+
+ \begin{center}
+%	   \includegraphics*[width=15.5cm]{lista1g5.png}
+ \end{center}
+
+
+\end{document}
