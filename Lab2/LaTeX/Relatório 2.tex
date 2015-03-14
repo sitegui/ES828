@@ -26,7 +26,8 @@
 \newcommand{\ed}[2]     {#1#2}
 \newcommand{\teto}[1]   {\lceil #1 \rceil}
 \newcommand{\piso}[1]   {\lfloor #1 \rfloor}
-
+\newcommand{\itab}[1]{\hspace{0em}\rlap{#1}}
+\newcommand{\tab}[1]{\hspace{.2\textwidth}\rlap{#1}}
 
 
 %%%%%%%%%%%%%%%%
@@ -43,35 +44,38 @@
 %	HEADING SECTIONS
 %----------------------------------------------------------------------------------------
 
-\textsc{\LARGE Universidade Estadual de Campinas}\\[1.5cm]
-\textsc{\Large ES828 - Laboratório de Controle de Sistemas}\\[0.5cm] % Major heading such as course name
-\textsc{\large Turma A}\\[0.5cm] % Minor heading such as course title
+\textsc{\LARGE Universidade Estadual de Campinas}\\[0.5cm]
+\textsc{\normalsize ES828 - Laboratório de Controle de Sistemas}\\[0.2cm] % Major heading such as course name
+\textsc{\normalsize Turma A}\\[0.2cm] % Minor heading such as course title
 
 %----------------------------------------------------------------------------------------
 %	TITLE SECTION
 %----------------------------------------------------------------------------------------
-
-\HRule \\[0.4cm]
+\vspace {5cm}
 { \huge \bfseries Experimento 02 - Relatório }\\[0.4cm] % Title of your document
-\HRule \\[1.5cm]
  
 %----------------------------------------------------------------------------------------
 %	AUTHOR SECTION
 %----------------------------------------------------------------------------------------
-
+\vspace {5cm}
 \begin{minipage}{0.4\textwidth}
 \begin{flushleft} \large
-\emph{Author:}\\
-John \textsc{Smith} % Your name
+\emph{Alunos:}\\
+ \begin{tabbing}
+ Augusto Miranda Garcia\hspace{1cm} \=  \= 104627 \\
+ Guilherme de Oliveira Souza  \> 117093 \\
+ Vinícius Ragazi David \>{120258}\\
+ \end{tabbing}
 \end{flushleft}
 \end{minipage}
+\vspace {2cm}
 ~
 \begin{minipage}{0.4\textwidth}
 \begin{flushright} \large
-\emph{Supervisor:} \\
-Dr. James \textsc{Smith} % Supervisor's Name
+\emph{Professora responsável:} \\
+Dra. Grace Silva Deaecto
 \end{flushright}
-\end{minipage}\\[4cm]
+\end{minipage}\\[2cm]
 
 % If you don't want a supervisor, uncomment the two lines below and remove the section above
 %\Large \emph{Author:}\\
@@ -94,10 +98,6 @@ Dr. James \textsc{Smith} % Supervisor's Name
 \vfill % Fill the rest of the page with whitespace
 
 \end{titlepage}
-\title{EE532 -- Eletrônica Básica\\ Lista de Exercícios Práticos I}
-
-\author{Anonimo RA007891}
-
 \maketitle
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
