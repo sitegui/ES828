@@ -50,4 +50,23 @@ plot(trandom,fit1p,'r')
 figure, plot(t2,est2);
 hold on
 plot(t2,smooth(est2,17),'r');
+title('Saída do estágio 2 para a planta utilizada.')
+xlabel('Tempo de aquisição [s]');
+ylabel('Tensão de saída [V]');
+% Tau2 encontrado por datatips
+tau2 = (11.54 - 10.88)/4
+
+figure, plot(t3,est3);
+hold on
+plot(t3,smooth(est3,17),'r');
+title('Saída do estágio 3 para a planta utilizada.')
+xlabel('Tempo de aquisição [s]');
+ylabel('Tensão de saída [V]');
+
+k3 = -0.9854;
+a = -0.1105 / k3;
+b = -0.4372 / k3;
+poly = [1 -(1-b-exp(-2))/(1-a-exp(-1)) ((1-b)*exp(-1)-(1-a)*exp(-2))/(1-a-exp(-1)) ];
+rpoly = roots(poly);
+tau3 = rpoly(1)
 
