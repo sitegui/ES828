@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2015.3.13)  14 MAR 2015 01:27
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2015.3.13)  14 MAR 2015 01:58
 entering extended mode
 **Relatório*2.tex
 ("C:\Users\Augusto\Documents\GitHub\LabControle\Lab2\LaTeX\Relatório 2.tex"
@@ -119,18 +119,18 @@ Package: setspace 2011/12/19 v6.7a set line spacing
 \c@teorema=\count91
 
 ("C:\Users\Augusto\Documents\GitHub\LabControle\Lab2\LaTeX\Relatório 2.aux")
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 33.
+LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 33.
+LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 33.
+LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 33.
+LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 33.
+LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 33.
+LaTeX Font Info:    ... okay on input line 33.
 
 ("e:\Program Files\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -147,35 +147,41 @@ LaTeX Font Info:    ... okay on input line 34.
 \everyMPtoPDFconversion=\toks18
 )
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 70.
+(Font)              <12> on input line 69.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 70.
+(Font)              <8> on input line 69.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 70.
+(Font)              <6> on input line 69.
  [1
 Non-PDF special ignored!
 
 {C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}]
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <14.4> on input line 105.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 105.
+("C:\Users\Augusto\Documents\GitHub\LabControle\Lab2\LaTeX\Relatório 2.toc")
+\tf@toc=\write4
 
-[1] [2]
+("C:\Users\Augusto\Documents\GitHub\LabControle\Lab2\LaTeX\Relatório 2.lof")
+\tf@lof=\write5
+
+("C:\Users\Augusto\Documents\GitHub\LabControle\Lab2\LaTeX\Relatório 2.lot")
+\tf@lot=\write6
+
+[1] [2
+
+] [3]
 ("C:\Users\Augusto\Documents\GitHub\LabControle\Lab2\LaTeX\Relatório 2.aux") )
  
 Here is how much of TeX's memory you used:
- 1909 strings out of 493921
- 23898 string characters out of 3147276
+ 1913 strings out of 493921
+ 24265 string characters out of 3147276
  78883 words of memory out of 3000000
- 5199 multiletter control sequences out of 15000+200000
- 14723 words of font info for 36 fonts, out of 3000000 for 9000
+ 5194 multiletter control sequences out of 15000+200000
+ 13814 words of font info for 33 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 34i,6n,24p,258b,275s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 34i,4n,24p,258b,275s stack positions out of 5000i,500n,10000p,200000b,50000s
  <C:\Users\Augusto\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\
 ecrm1200.pk> <C:\Users\Augusto\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappe
-n\ec\dpi600\ecbx1728.pk> <C:\Users\Augusto\AppData\Local\MiKTeX\2.9\fonts\pk\lj
-four\jknappen\ec\dpi600\ecrm2074.pk> <C:\Users\Augusto\AppData\Local\MiKTeX\2.9
+n\ec\dpi600\ecbx1200.pk> <C:\Users\Augusto\AppData\Local\MiKTeX\2.9\fonts\pk\lj
+four\jknappen\ec\dpi600\ecbx1728.pk> <C:\Users\Augusto\AppData\Local\MiKTeX\2.9
 \fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1440.pk> <C:\Users\Augusto\AppData\Loca
 l\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecti1440.pk> <C:\Users\Augusto\
 AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx2488.pk> <C:\Us
@@ -190,9 +196,9 @@ ram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><e:/Program Files
 ype1/public/amsfonts/cm/cmr8.pfb><e:/Program Files/MiKTeX 2.9/fonts/type1/publi
 c/amsfonts/cm/cmsy10.pfb><e:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfon
 ts/cm/cmsy8.pfb>
-Output written on "Relatório 2.pdf" (3 pages, 178567 bytes).
+Output written on "Relatório 2.pdf" (4 pages, 179912 bytes).
 PDF statistics:
- 304 PDF objects out of 1000 (max. 8388607)
+ 314 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
