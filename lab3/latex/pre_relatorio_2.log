@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2015.3.13)  16 MAR 2015 10:57
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2015.3.13)  16 MAR 2015 11:03
 entering extended mode
-**Relat√≥rio*2.tex
-("C:\Users\Augusto\Documents\GitHub\LabControle\Lab2\LaTeX\Relat√≥rio 2.tex"
+**pre_relatorio_2.tex
+(C:\Users\Augusto\Documents\GitHub\LabControle\lab3\latex\pre_relatorio_2.tex
 LaTeX2e <2011/06/27>
 Babel <v3.8m> and hyphenation patterns for english, afrikaans, ancientgreek, ar
 abic, armenian, assamese, basque, bengali, bokmal, bulgarian, catalan, coptic, 
@@ -118,19 +118,19 @@ Package: setspace 2011/12/19 v6.7a set line spacing
 )
 \c@teorema=\count91
 
-("C:\Users\Augusto\Documents\GitHub\LabControle\Lab2\LaTeX\Relat√≥rio 2.aux")
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
+(C:\Users\Augusto\Documents\GitHub\LabControle\lab3\latex\pre_relatorio_2.aux)
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
 
 ("e:\Program Files\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -146,59 +146,39 @@ LaTeX Font Info:    ... okay on input line 33.
 \makeMPintoPDFobject=\count97
 \everyMPtoPDFconversion=\toks18
 )
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 69.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 69.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 69.
- [1
-Non-PDF special ignored!
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 49.
+ ("e:\Program Files\MiKTeX 2.9\tex\latex\base\omscmr.fd"
+File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 49.
 
-{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}]
-("C:\Users\Augusto\Documents\GitHub\LabControle\Lab2\LaTeX\Relat√≥rio 2.toc")
-\tf@toc=\write4
 
-("C:\Users\Augusto\Documents\GitHub\LabControle\Lab2\LaTeX\Relat√≥rio 2.lof")
-\tf@lof=\write5
+! Package inputenc Error: Keyboard character used is undefined
+(inputenc)                in inputencoding `latin1'.
 
-("C:\Users\Augusto\Documents\GitHub\LabControle\Lab2\LaTeX\Relat√≥rio 2.lot")
-\tf@lot=\write6
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.55 \subsection*{ES868 ñ PrÈ RelatÛrio Lab 3}
+                                              
+? 
+! Emergency stop.
+ ...                                              
+                                                  
+l.55 \subsection*{ES868 ñ PrÈ RelatÛrio Lab 3}
+                                              
+You need to provide a definition with \DeclareInputText 
+or \DeclareInputMath before using this key.
 
-[1] [2
-
-] [3]
-("C:\Users\Augusto\Documents\GitHub\LabControle\Lab2\LaTeX\Relat√≥rio 2.aux") )
  
 Here is how much of TeX's memory you used:
- 1913 strings out of 493921
- 24265 string characters out of 3147276
- 78883 words of memory out of 3000000
- 5194 multiletter control sequences out of 15000+200000
- 13814 words of font info for 33 fonts, out of 3000000 for 9000
+ 1879 strings out of 493921
+ 23740 string characters out of 3147276
+ 73883 words of memory out of 3000000
+ 5183 multiletter control sequences out of 15000+200000
+ 6502 words of font info for 19 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 34i,4n,24p,258b,275s stack positions out of 5000i,500n,10000p,200000b,50000s
- <C:\Users\Augusto\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\
-ecrm1200.pk> <C:\Users\Augusto\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappe
-n\ec\dpi600\ecbx1200.pk> <C:\Users\Augusto\AppData\Local\MiKTeX\2.9\fonts\pk\lj
-four\jknappen\ec\dpi600\ecbx1728.pk> <C:\Users\Augusto\AppData\Local\MiKTeX\2.9
-\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1440.pk> <C:\Users\Augusto\AppData\Loca
-l\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecti1440.pk> <C:\Users\Augusto\
-AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx2488.pk> <C:\Us
-ers\Augusto\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\eccc120
-0.pk> <C:\Users\Augusto\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dp
-i600\eccc2074.pk><e:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cm
-ex10.pfb><e:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb
-><e:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi6.pfb><e:/Prog
-ram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><e:/Program Files
-/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><e:/Program Files/MiKTeX 2
-.9/fonts/type1/public/amsfonts/cm/cmr6.pfb><e:/Program Files/MiKTeX 2.9/fonts/t
-ype1/public/amsfonts/cm/cmr8.pfb><e:/Program Files/MiKTeX 2.9/fonts/type1/publi
-c/amsfonts/cm/cmsy10.pfb><e:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfon
-ts/cm/cmsy8.pfb>
-Output written on "Relat√≥rio 2.pdf" (4 pages, 181031 bytes).
-PDF statistics:
- 317 PDF objects out of 1000 (max. 8388607)
- 0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
-
+ 34i,1n,24p,261b,150s stack positions out of 5000i,500n,10000p,200000b,50000s
+!  ==> Fatal error occurred, no output PDF file produced!

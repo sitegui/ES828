@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2015.3.13)  16 MAR 2015 11:17
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2015.3.13)  16 MAR 2015 11:53
 entering extended mode
 **pre_relatorio.tex
 (C:\Users\Augusto\Documents\GitHub\LabControle\lab3\latex\pre_relatorio.tex
@@ -215,14 +215,8 @@ Non-PDF special ignored!
 (C:\Users\Augusto\Documents\GitHub\LabControle\lab3\latex\pre_relatorio.toc)
 \tf@toc=\write4
 
-(C:\Users\Augusto\Documents\GitHub\LabControle\lab3\latex\pre_relatorio.lof)
-\tf@lof=\write5
-
-(C:\Users\Augusto\Documents\GitHub\LabControle\lab3\latex\pre_relatorio.lot)
-\tf@lot=\write6
-
 [1]
-LaTeX Font Info:    Try loading font information for T1+cmtt on input line 117.
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 119.
 
  ("e:\Program Files\MiKTeX 2.9\tex\latex\base\t1cmtt.fd"
 File: t1cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
@@ -235,15 +229,15 @@ Package epstopdf Info: Source file: <pre_relatorio_01.eps>
 (epstopdf)                    size: 4044 bytes
 (epstopdf)             Command: <epstopdf --outfile=pre_relatorio_01-eps-conver
 ted-to.pdf pre_relatorio_01.eps>
-(epstopdf)             \includegraphics on input line 121.
+(epstopdf)             \includegraphics on input line 123.
 Package epstopdf Info: Output file is already uptodate.
 
-<pre_relatorio_01-eps-converted-to.pdf, id=15, 375.4025pt x 299.1175pt>
+<pre_relatorio_01-eps-converted-to.pdf, id=16, 375.4025pt x 299.1175pt>
 File: pre_relatorio_01-eps-converted-to.pdf Graphic file (type pdf)
 
 <use pre_relatorio_01-eps-converted-to.pdf>
 Package pdftex.def Info: pre_relatorio_01-eps-converted-to.pdf used on input li
-ne 121.
+ne 123.
 (pdftex.def)             Requested size: 289.07999pt x 230.34856pt.
  [2
 
@@ -257,7 +251,7 @@ Package epstopdf Info: Source file: <pre_relatorio_02.eps>
 (epstopdf)                    size: 37882 bytes
 (epstopdf)             Command: <epstopdf --outfile=pre_relatorio_02-eps-conver
 ted-to.pdf pre_relatorio_02.eps>
-(epstopdf)             \includegraphics on input line 172.
+(epstopdf)             \includegraphics on input line 177.
 Package epstopdf Info: Output file is already uptodate.
 
 <pre_relatorio_02-eps-converted-to.pdf, id=31, 362.35374pt x 297.11pt>
@@ -265,7 +259,7 @@ File: pre_relatorio_02-eps-converted-to.pdf Graphic file (type pdf)
 
 <use pre_relatorio_02-eps-converted-to.pdf>
 Package pdftex.def Info: pre_relatorio_02-eps-converted-to.pdf used on input li
-ne 172.
+ne 177.
 (pdftex.def)             Requested size: 289.07999pt x 237.03549pt.
 Package epstopdf Info: Source file: <pre_relatorio_03.eps>
 (epstopdf)                    date: 2015-03-16 10:28:53
@@ -275,7 +269,7 @@ Package epstopdf Info: Source file: <pre_relatorio_03.eps>
 (epstopdf)                    size: 3557 bytes
 (epstopdf)             Command: <epstopdf --outfile=pre_relatorio_03-eps-conver
 ted-to.pdf pre_relatorio_03.eps>
-(epstopdf)             \includegraphics on input line 184.
+(epstopdf)             \includegraphics on input line 191.
 Package epstopdf Info: Output file is already uptodate.
 
 <pre_relatorio_03-eps-converted-to.pdf, id=32, 350.30875pt x 309.155pt>
@@ -283,7 +277,7 @@ File: pre_relatorio_03-eps-converted-to.pdf Graphic file (type pdf)
 
 <use pre_relatorio_03-eps-converted-to.pdf>
 Package pdftex.def Info: pre_relatorio_03-eps-converted-to.pdf used on input li
-ne 184.
+ne 191.
 (pdftex.def)             Requested size: 289.07999pt x 255.1362pt.
  [3 <C:/Users/Augusto/Documents/GitHub/LabControle/lab3/latex/pre_relatorio_02-
 eps-converted-to.pdf>]
@@ -295,7 +289,7 @@ Package epstopdf Info: Source file: <pre_relatorio_04.eps>
 (epstopdf)                    size: 14504 bytes
 (epstopdf)             Command: <epstopdf --outfile=pre_relatorio_04-eps-conver
 ted-to.pdf pre_relatorio_04.eps>
-(epstopdf)             \includegraphics on input line 194.
+(epstopdf)             \includegraphics on input line 203.
 Package epstopdf Info: Output file is already uptodate.
 
 <pre_relatorio_04-eps-converted-to.pdf, id=40, 369.38pt x 310.15875pt>
@@ -303,7 +297,7 @@ File: pre_relatorio_04-eps-converted-to.pdf Graphic file (type pdf)
 
 <use pre_relatorio_04-eps-converted-to.pdf>
 Package pdftex.def Info: pre_relatorio_04-eps-converted-to.pdf used on input li
-ne 194.
+ne 203.
 (pdftex.def)             Requested size: 289.07999pt x 242.73213pt.
  [4 <C:/Users/Augusto/Documents/GitHub/LabControle/lab3/latex/pre_relatorio_03-
 eps-converted-to.pdf> <C:/Users/Augusto/Documents/GitHub/LabControle/lab3/latex
@@ -316,14 +310,14 @@ Package epstopdf Info: Source file: <pre_relatorio_05.eps>
 (epstopdf)                    size: 16338 bytes
 (epstopdf)             Command: <epstopdf --outfile=pre_relatorio_05-eps-conver
 ted-to.pdf pre_relatorio_05.eps>
-(epstopdf)             \includegraphics on input line 205.
+(epstopdf)             \includegraphics on input line 216.
 Package epstopdf Info: Output file is already uptodate.
  <pre_relatorio_05-eps-converted-to.pdf, id=51, 350.30875pt x 309.155pt>
 File: pre_relatorio_05-eps-converted-to.pdf Graphic file (type pdf)
 
 <use pre_relatorio_05-eps-converted-to.pdf>
 Package pdftex.def Info: pre_relatorio_05-eps-converted-to.pdf used on input li
-ne 205.
+ne 216.
 (pdftex.def)             Requested size: 289.07999pt x 255.1362pt.
 Package epstopdf Info: Source file: <pre_relatorio_06.eps>
 (epstopdf)                    date: 2015-03-16 10:28:57
@@ -333,7 +327,7 @@ Package epstopdf Info: Source file: <pre_relatorio_06.eps>
 (epstopdf)                    size: 30477 bytes
 (epstopdf)             Command: <epstopdf --outfile=pre_relatorio_06-eps-conver
 ted-to.pdf pre_relatorio_06.eps>
-(epstopdf)             \includegraphics on input line 215.
+(epstopdf)             \includegraphics on input line 229.
 Package epstopdf Info: Output file is already uptodate.
 
 <pre_relatorio_06-eps-converted-to.pdf, id=52, 369.38pt x 310.15875pt>
@@ -341,16 +335,16 @@ File: pre_relatorio_06-eps-converted-to.pdf Graphic file (type pdf)
 
 <use pre_relatorio_06-eps-converted-to.pdf>
 Package pdftex.def Info: pre_relatorio_06-eps-converted-to.pdf used on input li
-ne 215.
+ne 229.
 (pdftex.def)             Requested size: 289.07999pt x 242.73213pt.
  [5 <C:/Users/Augusto/Documents/GitHub/LabControle/lab3/latex/pre_relatorio_05-
 eps-converted-to.pdf>] [6 <C:/Users/Augusto/Documents/GitHub/LabControle/lab3/l
 atex/pre_relatorio_06-eps-converted-to.pdf>] <../imgs/ziegler-nichols.png, id=6
-8, 843.15pt x 426.09187pt>
+7, 843.15pt x 426.09187pt>
 File: ../imgs/ziegler-nichols.png Graphic file (type png)
 
 <use ../imgs/ziegler-nichols.png>
-Package pdftex.def Info: ../imgs/ziegler-nichols.png used on input line 271.
+Package pdftex.def Info: ../imgs/ziegler-nichols.png used on input line 288.
 (pdftex.def)             Requested size: 289.07999pt x 146.09161pt.
  [7 <C:/Users/Augusto/Documents/GitHub/LabControle/lab3/imgs/ziegler-nichols.pn
 g>]
@@ -358,8 +352,8 @@ g>]
 File: ../imgs/ziegler-nichols_step.png Graphic file (type png)
 
 <use ../imgs/ziegler-nichols_step.png>
-Package pdftex.def Info: ../imgs/ziegler-nichols_step.png used on input line 29
-7.
+Package pdftex.def Info: ../imgs/ziegler-nichols_step.png used on input line 31
+5.
 (pdftex.def)             Requested size: 289.07999pt x 216.33899pt.
 
 <../imgs/ziegler-nichols_z_step.png, id=75, 134.904pt x 100.9371pt>
@@ -367,7 +361,7 @@ File: ../imgs/ziegler-nichols_z_step.png Graphic file (type png)
 
 <use ../imgs/ziegler-nichols_z_step.png>
 Package pdftex.def Info: ../imgs/ziegler-nichols_z_step.png used on input line 
-311.
+330.
 (pdftex.def)             Requested size: 289.07999pt x 216.33899pt.
  [8 <C:/Users/Augusto/Documents/GitHub/LabControle/lab3/imgs/ziegler-nichols_st
 ep.png>]
@@ -379,7 +373,7 @@ Package epstopdf Info: Source file: <pre_relatorio_07.eps>
 (epstopdf)                    size: 8370 bytes
 (epstopdf)             Command: <epstopdf --outfile=pre_relatorio_07-eps-conver
 ted-to.pdf pre_relatorio_07.eps>
-(epstopdf)             \includegraphics on input line 322.
+(epstopdf)             \includegraphics on input line 342.
 Package epstopdf Info: Output file is already uptodate.
 
 <pre_relatorio_07-eps-converted-to.pdf, id=80, 366.36874pt x 297.11pt>
@@ -387,7 +381,7 @@ File: pre_relatorio_07-eps-converted-to.pdf Graphic file (type pdf)
 
 <use pre_relatorio_07-eps-converted-to.pdf>
 Package pdftex.def Info: pre_relatorio_07-eps-converted-to.pdf used on input li
-ne 322.
+ne 342.
 (pdftex.def)             Requested size: 289.07999pt x 234.44684pt.
 Package epstopdf Info: Source file: <pre_relatorio_08.eps>
 (epstopdf)                    date: 2015-03-16 10:29:00
@@ -397,7 +391,7 @@ Package epstopdf Info: Source file: <pre_relatorio_08.eps>
 (epstopdf)                    size: 26610 bytes
 (epstopdf)             Command: <epstopdf --outfile=pre_relatorio_08-eps-conver
 ted-to.pdf pre_relatorio_08.eps>
-(epstopdf)             \includegraphics on input line 324.
+(epstopdf)             \includegraphics on input line 344.
 Package epstopdf Info: Output file is already uptodate.
 
 <pre_relatorio_08-eps-converted-to.pdf, id=81, 362.35374pt x 297.11pt>
@@ -405,7 +399,7 @@ File: pre_relatorio_08-eps-converted-to.pdf Graphic file (type pdf)
 
 <use pre_relatorio_08-eps-converted-to.pdf>
 Package pdftex.def Info: pre_relatorio_08-eps-converted-to.pdf used on input li
-ne 324.
+ne 344.
 (pdftex.def)             Requested size: 289.07999pt x 237.03549pt.
  [9 <C:/Users/Augusto/Documents/GitHub/LabControle/lab3/imgs/ziegler-nichols_z_
 step.png> <C:/Users/Augusto/Documents/GitHub/LabControle/lab3/latex/pre_relator
@@ -414,18 +408,18 @@ io_07-eps-converted-to.pdf>]
 eps-converted-to.pdf>]
 (C:\Users\Augusto\Documents\GitHub\LabControle\lab3\latex\pre_relatorio.aux) ) 
 Here is how much of TeX's memory you used:
- 2395 strings out of 493921
- 34035 string characters out of 3147276
+ 2389 strings out of 493921
+ 33729 string characters out of 3147276
  88108 words of memory out of 3000000
  5621 multiletter control sequences out of 15000+200000
- 14126 words of font info for 34 fonts, out of 3000000 for 9000
+ 14127 words of font info for 34 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 42i,6n,24p,325b,279s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 42i,5n,24p,325b,279s stack positions out of 5000i,500n,10000p,200000b,50000s
  
 <C:\Users\Augusto\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\e
 ctt1200.pk> <C:\Users\Augusto\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen
-\ec\dpi600\ecbx1440.pk> <C:\Users\Augusto\AppData\Local\MiKTeX\2.9\fonts\pk\ljf
-our\jknappen\ec\dpi600\ecrm1200.pk> <C:\Users\Augusto\AppData\Local\MiKTeX\2.9\
+\ec\dpi600\ecrm1200.pk> <C:\Users\Augusto\AppData\Local\MiKTeX\2.9\fonts\pk\ljf
+our\jknappen\ec\dpi600\ecbx1200.pk> <C:\Users\Augusto\AppData\Local\MiKTeX\2.9\
 fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1728.pk> <C:\Users\Augusto\AppData\Local
 \MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1440.pk> <C:\Users\Augusto\A
 ppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecti1440.pk> <C:\Use
@@ -439,9 +433,9 @@ b><e:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr6.pfb><e:/Prog
 ram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><e:/Program Files/
 MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><e:/Program Files/MiKTeX 2
 .9/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on pre_relatorio.pdf (11 pages, 400822 bytes).
+Output written on pre_relatorio.pdf (11 pages, 404993 bytes).
 PDF statistics:
- 411 PDF objects out of 1000 (max. 8388607)
+ 421 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  56 words of extra memory for PDF output out of 10000 (max. 10000000)
 

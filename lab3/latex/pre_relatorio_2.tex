@@ -1,17 +1,21 @@
+
+% This LaTeX was auto-generated from an M-file by MATLAB.
+% To make changes, update the M-file and republish this document.
+
 \documentclass[12pt]{article}
 
-%% Escrevendo em portuguÃªs:
+%% Pacotes matlab
+%\usepackage{graphicx}
+%\usepackage{color}
+
+%% Escrevendo em português:
 \usepackage[brazil]{babel}
 \usepackage[latin1]{inputenc} 
 \usepackage[T1]{fontenc}
+\usepackage{epsfig}
 \usepackage{psfrag}
 \usepackage{fullpage}
 \usepackage{setspace}
-\usepackage{graphicx}
-\usepackage{epsfig}
-\usepackage{epstopdf}
-\usepackage{color}
-
 %----------------------------
 
 
@@ -21,7 +25,6 @@
 \newtheorem{lema}[teorema]{Lema}
 \newtheorem{exerc}[teorema]{ExercÃ­cio}
 
-\definecolor{lightgray}{gray}{0.95}
 
 % Ad hoc macros
 \newcommand{\qed}       {\hfill\Box}
@@ -34,84 +37,42 @@
 \newcommand{\itab}[1]{\hspace{0em}\rlap{#1}}
 \newcommand{\tab}[1]{\hspace{.2\textwidth}\rlap{#1}}
 
-%%%%%%%%%%%%%%%%
+
 \begin{document}
-%%%%%%%%%%%%%%%%
 
-\begin{titlepage}
+    
+    
+\subsection*{Contents}
 
-\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for the horizontal lines, change thickness here
+\begin{itemize}
+\setlength{\itemsep}{-1ex}
+   \item ES868 - Pré Relatório Lab 3
+   \item Controlador proporcional
+   \item Controlador de Ziegler Nichols
+\end{itemize}
 
-\center % Center everything on the page
- 
-%----------------------------------------------------------------------------------------
-%	HEADING SECTIONS
-%----------------------------------------------------------------------------------------
 
-\textsc{\LARGE Universidade Estadual de Campinas}\\[0.5cm]
-\textsc{\normalsize ES828 - Laboratório de Controle de Sistemas}\\[0.2cm] % Major heading such as course name
-\textsc{\normalsize Turma A}\\[0.2cm] % Minor heading such as course title
+\subsection*{ES868 – Pré Relatório Lab 3}
 
-%----------------------------------------------------------------------------------------
-%	TITLE SECTION
-%----------------------------------------------------------------------------------------
-\vspace {5cm}
-{ \huge \bfseries Experimento 03 - Pré-Relatório }\\[0.4cm] % Title of your document
- 
-%----------------------------------------------------------------------------------------
-%	AUTHOR SECTION
-%----------------------------------------------------------------------------------------
-\vspace {5cm}
-\begin{minipage}{0.4\textwidth}
-\begin{flushleft} \large
-\emph{Alunos:}\\
- \begin{tabbing}
- Augusto Miranda Garcia\hspace{1cm} \=  \= 104627 \\
- Guilherme de Oliveira Souza  \> 117093 \\
- Vinícius Ragazi David \>{120258}\\
- \end{tabbing}
-\end{flushleft}
-\end{minipage}
-\vspace {2cm}
-~
-\begin{minipage}{0.4\textwidth}
-\begin{flushright} \large
-\emph{Professora responsável:} \\
-Dra. Grace Silva Deaecto
-\end{flushright}
-\end{minipage}\\[2cm]
+\begin{par}
+\textbf{Controle de plantas eletrˆonicas utilizando um controlador PID digital}
+\end{par} \vspace{1em}
+\begin{par}
+Turma A - 16/03/2015
+\end{par} \vspace{1em}
+\begin{itemize}
+\setlength{\itemsep}{-1ex}
+   \item Augusto Miranda Garcia - 104627
+   \item Guilherme de Oliveira Souza – 117093
+   \item Vinícius Ragazi David - 120258
+\end{itemize}
+\begin{verbatim}
+load ../G.mat
+s = tf('s');
+\end{verbatim}
 
-% If you don't want a supervisor, uncomment the two lines below and remove the section above
-%\Large \emph{Author:}\\
-%John \textsc{Smith}\\[3cm] % Your name
 
-%----------------------------------------------------------------------------------------
-%	DATE SECTION
-%----------------------------------------------------------------------------------------
-
-{\large \today}\\[3cm] % Date, change the \today to a set date if you want to be precise
-
-%----------------------------------------------------------------------------------------
-%	LOGO SECTION
-%----------------------------------------------------------------------------------------
-
-%\includegraphics{Logo}\\[1cm] % Include a department/university logo - this will require the graphicx package
- 
-%----------------------------------------------------------------------------------------
-
-\vfill % Fill the rest of the page with whitespace
-
-\end{titlepage}
-
-\tableofcontents
-%\listoffigures
-%\listoftables
- 
-\clearpage
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Controlador proporcional}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Controlador proporcional}
 
 \begin{par}
 Para se obter o tempo mínimo de estabilização, os pólos de malha fechadas tem de estar à mais esquerda possível. Observando o root locus da planta:
@@ -119,10 +80,8 @@ Para se obter o tempo mínimo de estabilização, os pólos de malha fechadas tem de
 \begin{verbatim}
 rlocus(G)
 \end{verbatim}
-\begin{center}
-\includegraphics [width=4in]{pre_relatorio_01.eps}
-\end{center}
 
+\includegraphics [width=4in]{pre_relatorio_01.eps}
 \begin{par}
 Pode-se observar que isso irá ocorrer quando os dois pólos (verde e azul na figura) se encontrarem, no ponto próximo de -20. Para obter a coordenada exata desse ponto, pode-se verificar a multiplicidade das raízes da equação caraterística $1 + k G(s) = 0$.
 \end{par} \vspace{1em}
@@ -172,11 +131,8 @@ sistema = feedback(k*G, 1);
 lsim(sistema, rampa, t);
 title('Resposta à rampa do controlador proporcional');
 \end{verbatim}
-\begin{center}
 
 \includegraphics [width=4in]{pre_relatorio_02.eps}
-\end{center}
-
 \begin{par}
 Entrada quadrada de amplitude 1 e 0.25Hz
 \end{par} \vspace{1em}
@@ -187,10 +143,8 @@ ylim([-0.1, 1.1]);
 title('Entrada quadrada');
 xlabel('t (s)');
 \end{verbatim}
-\begin{center}
-\includegraphics [width=4in]{pre_relatorio_03.eps}
-\end{center}
 
+\includegraphics [width=4in]{pre_relatorio_03.eps}
 \begin{par}
 Resposta à onda quadrada
 \end{par} \vspace{1em}
@@ -199,10 +153,8 @@ lsim(sistema, k*(1-sistema), 'g:', onda_quadrada, t);
 title('Reposta à onda quadrada');
 legend('y(t)', 'u(t)');
 \end{verbatim}
- \begin{center}
-\includegraphics [width=4in]{pre_relatorio_04.eps}
- \end{center}
 
+\includegraphics [width=4in]{pre_relatorio_04.eps}
 \begin{par}
 Entrada de rampa
 \end{par} \vspace{1em}
@@ -212,10 +164,8 @@ plot(t, onda_rampa);
 title('Entrada em rampa');
 xlabel('t (s)');
 \end{verbatim}
- \begin{center}
-\includegraphics [width=4in]{pre_relatorio_05.eps}
-\end{center}
 
+\includegraphics [width=4in]{pre_relatorio_05.eps}
 \begin{par}
 Resposta à rampa
 \end{par} \vspace{1em}
@@ -224,14 +174,11 @@ lsim(sistema, k*(1-sistema), '-.', onda_rampa, t);
 title('Reposta à rampa');
 legend('y(t)', 'u(t)');
 \end{verbatim}
-\begin{center}
 
 \includegraphics [width=4in]{pre_relatorio_06.eps}
-\end{center}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Controlador de Ziegler Nichols}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection*{Controlador de Ziegler Nichols}
 
 \begin{par}
 O primeiro passo no método de Ziegler Nichols é encontrar $k = k_{osc}$ que deixa a planta no limiar de estabilidade quando em malha fechada:
@@ -283,10 +230,8 @@ Usando o sisotool para ajustar o valor de kp e melhorar o desempenho do controla
 Comparação antes vs depois da alteração manual do lugar dos pólos:
 \end{par} \vspace{1em}
 \begin{par}
-\begin{center}
 
 \includegraphics [width=4in]{../imgs/ziegler-nichols.png}
-\end{center}
 
 \end{par} \vspace{1em}
 \begin{verbatim}
@@ -311,9 +256,8 @@ Cálculo dos valores de desempenho
 sistema = feedback(G*C_2, 1);
 \end{verbatim}
 \begin{par}
-\begin{center}
+
 \includegraphics [width=4in]{../imgs/ziegler-nichols_step.png}
-\end{center}
 
 \end{par} \vspace{1em}
 \begin{par}
@@ -326,9 +270,8 @@ Cz = c2d(C_2, Ts, 'matched');
 sistemaZ = feedback(Gz*Cz, 1);
 \end{verbatim}
 \begin{par}
-\begin{center}
+
 \includegraphics [width=4in]{../imgs/ziegler-nichols_z_step.png}
-\end{center}
 
 \end{par} \vspace{1em}
 \begin{par}
@@ -338,11 +281,10 @@ Simulação do sistema discreto
 lsim(sistemaZ, onda_quadrada, t), snapnow;
 lsim(sistemaZ, onda_rampa, t)
 \end{verbatim}
-\begin{center}
+
 \includegraphics [width=4in]{pre_relatorio_07.eps}
 
 \includegraphics [width=4in]{pre_relatorio_08.eps}
-\end{center}
 
 
 
