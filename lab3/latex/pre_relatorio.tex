@@ -1,21 +1,17 @@
-
-% This LaTeX was auto-generated from an M-file by MATLAB.
-% To make changes, update the M-file and republish this document.
-
 \documentclass[12pt]{article}
 
-%% Pacotes matlab
-\usepackage{graphicx}
-\usepackage{color}
-
-%% Escrevendo em português:
+%% Escrevendo em portuguÃªs:
 \usepackage[brazil]{babel}
 \usepackage[latin1]{inputenc} 
 \usepackage[T1]{fontenc}
-\usepackage{epsfig}
 \usepackage{psfrag}
 \usepackage{fullpage}
 \usepackage{setspace}
+\usepackage{graphicx}
+\usepackage{epsfig}
+\usepackage{epstopdf}
+\usepackage{color}
+
 %----------------------------
 
 
@@ -25,6 +21,7 @@
 \newtheorem{lema}[teorema]{Lema}
 \newtheorem{exerc}[teorema]{ExercÃ­cio}
 
+\definecolor{lightgray}{gray}{0.95}
 
 % Ad hoc macros
 \newcommand{\qed}       {\hfill\Box}
@@ -37,40 +34,80 @@
 \newcommand{\itab}[1]{\hspace{0em}\rlap{#1}}
 \newcommand{\tab}[1]{\hspace{.2\textwidth}\rlap{#1}}
 
-
+%%%%%%%%%%%%%%%%
 \begin{document}
+%%%%%%%%%%%%%%%%
 
-    
-    
-\subsection*{Contents}
+\begin{titlepage}
 
-\begin{itemize}
-\setlength{\itemsep}{-1ex}
-   \item ES868 – Pré Relatório Lab 3
-   \item Controlador proporcional
-   \item Controlador de Ziegler Nichols
-\end{itemize}
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for the horizontal lines, change thickness here
 
+\center % Center everything on the page
+ 
+%----------------------------------------------------------------------------------------
+%	HEADING SECTIONS
+%----------------------------------------------------------------------------------------
 
-\subsection*{ES868 – Pré Relatório Lab 3}
+\textsc{\LARGE Universidade Estadual de Campinas}\\[0.5cm]
+\textsc{\normalsize ES828 - Laboratório de Controle de Sistemas}\\[0.2cm] % Major heading such as course name
+\textsc{\normalsize Turma A}\\[0.2cm] % Minor heading such as course title
 
-\begin{par}
-\textbf{Controle de plantas eletrˆonicas utilizando um controlador PID digital}
-\end{par} \vspace{1em}
-\begin{par}
-Turma A - 16/03/2015
-\end{par} \vspace{1em}
-\begin{itemize}
-\setlength{\itemsep}{-1ex}
-   \item Augusto Miranda Garcia - 104627
-   \item Guilherme de Oliveira Souza – 117093
-   \item Vinícius Ragazi David - 120258
-\end{itemize}
-\begin{verbatim}
-load ../G.mat
-s = tf('s');
-\end{verbatim}
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+\vspace {5cm}
+{ \huge \bfseries Experimento 02 - Relatório }\\[0.4cm] % Title of your document
+ 
+%----------------------------------------------------------------------------------------
+%	AUTHOR SECTION
+%----------------------------------------------------------------------------------------
+\vspace {5cm}
+\begin{minipage}{0.4\textwidth}
+\begin{flushleft} \large
+\emph{Alunos:}\\
+ \begin{tabbing}
+ Augusto Miranda Garcia\hspace{1cm} \=  \= 104627 \\
+ Guilherme de Oliveira Souza  \> 117093 \\
+ Vinícius Ragazi David \>{120258}\\
+ \end{tabbing}
+\end{flushleft}
+\end{minipage}
+\vspace {2cm}
+~
+\begin{minipage}{0.4\textwidth}
+\begin{flushright} \large
+\emph{Professora responsável:} \\
+Dra. Grace Silva Deaecto
+\end{flushright}
+\end{minipage}\\[2cm]
 
+% If you don't want a supervisor, uncomment the two lines below and remove the section above
+%\Large \emph{Author:}\\
+%John \textsc{Smith}\\[3cm] % Your name
+
+%----------------------------------------------------------------------------------------
+%	DATE SECTION
+%----------------------------------------------------------------------------------------
+
+{\large \today}\\[3cm] % Date, change the \today to a set date if you want to be precise
+
+%----------------------------------------------------------------------------------------
+%	LOGO SECTION
+%----------------------------------------------------------------------------------------
+
+%\includegraphics{Logo}\\[1cm] % Include a department/university logo - this will require the graphicx package
+ 
+%----------------------------------------------------------------------------------------
+
+\vfill % Fill the rest of the page with whitespace
+
+\end{titlepage}
+
+\tableofcontents
+\listoffigures
+\listoftables
+ 
+\clearpage
 
 \subsection*{Controlador proporcional}
 
