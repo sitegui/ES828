@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>pre_relatorio</title><meta name="generator" content="MATLAB 8.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2015-03-15"><meta name="DC.source" content="pre_relatorio.m"><style type="text/css">
+      --><title>pre_relatorio</title><meta name="generator" content="MATLAB 8.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2015-03-16"><meta name="DC.source" content="pre_relatorio.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -65,9 +65,46 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
 
 
-  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#1">ES868 &#8211; Pr&eacute; Relat&oacute;rio Lab 3</a></li><li><a href="#2">Controlador proporcional</a></li><li><a href="#3">Controlador de Ziegler Nichols</a></li></ul></div><h2>ES868 &#8211; Pr&eacute; Relat&oacute;rio Lab 3<a name="1"></a></h2><p><b>Controle de plantas eletr&#710;onicas utilizando um controlador PID digital</b></p><p>Turma A - 16/03/2015</p><div><ul><li>Augusto Miranda Garcia - 104627</li><li>Guilherme de Oliveira Souza &#8211; 117093</li><li>Vin&iacute;cius Ragazi David - 120258</li></ul></div><pre class="codeinput">load <span class="string">../G.mat</span>
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#1">ES868 &#8211; Pr&eacute; Relat&oacute;rio Lab 3</a></li><li><a href="#2">Controlador proporcional</a></li><li><a href="#11">Controlador de Ziegler Nichols</a></li></ul></div><h2>ES868 &#8211; Pr&eacute; Relat&oacute;rio Lab 3<a name="1"></a></h2><p><b>Controle de plantas eletr&#710;onicas utilizando um controlador PID digital</b></p><p>Turma A - 16/03/2015</p><div><ul><li>Augusto Miranda Garcia - 104627</li><li>Guilherme de Oliveira Souza &#8211; 117093</li><li>Vin&iacute;cius Ragazi David - 120258</li></ul></div><pre class="codeinput">load <span class="string">../G.mat</span>
 s = tf(<span class="string">'s'</span>);
-</pre><h2>Controlador proporcional<a name="2"></a></h2><h2>Controlador de Ziegler Nichols<a name="3"></a></h2><p>O primeiro passo no m&eacute;todo de Ziegler Nichols &eacute; encontrar <img src="pre_relatorio_eq64032.png" alt="$k = k_{osc}$"> que deixa a planta no limiar de estabilidade quando em malha fechada:</p><p>Para isso pode ser usado o crit&eacute;rio de Routh com a equa&ccedil;&atilde;o caracter&iacute;stica:</p><p><img src="pre_relatorio_eq93316.png" alt="$$1 + k G(s) = 0$$"></p><p><img src="pre_relatorio_eq44316.png" alt="$$1 + \frac{8.993 k}{0.0003019 s^3 + 0.03622 s^2 + s} = 0$$"></p><p><img src="pre_relatorio_eq64259.png" alt="$$\frac{0.0003019 s^3 + 0.03622 s^2 + s + 8.993 k}{0.0003019 s^3 + 0.03622 s^2 + s} = 0$$"></p><p><img src="pre_relatorio_eq04220.png" alt="$$0.0003019 s^3 + 0.03622 s^2 + s + 8.993 k = 0$$"></p><p>Com o crit&eacute;rio de Routh chega-se em: <img src="pre_relatorio_eq77878.png" alt="$k = \frac{0.03622}{0.0003019 * 8.993} = 13.3408$"></p><pre class="codeinput">k_osc = 13.3408;
+</pre><h2>Controlador proporcional<a name="2"></a></h2><p>Para se obter o tempo m&iacute;nimo de estabiliza&ccedil;&atilde;o, os p&oacute;los de malha fechadas tem de estar &agrave; mais esquerda poss&iacute;vel. Observando o root locus da planta:</p><pre class="codeinput">rlocus(G)
+</pre><img vspace="5" hspace="5" src="pre_relatorio_01.png" alt=""> <p>Pode-se observar que isso ir&aacute; ocorrer quando os dois p&oacute;los (verde e azul na figura) se encontrarem, no ponto pr&oacute;ximo de -20. Para obter a coordenada exata desse ponto, pode-se verificar a multiplicidade das ra&iacute;zes da equa&ccedil;&atilde;o carater&iacute;stica <img src="pre_relatorio_eq90963.png" alt="$1 + k G(s) = 0$">.</p><p>No nosso caso, com <img src="pre_relatorio_eq42524.png" alt="$G(s) = \frac{P(s)}{Q(s)} = \frac{A}{B s^3 + C s^2 + D s + E}$"> , <img src="pre_relatorio_eq40943.png" alt="$k(s) = -\frac{B s^3 + C s^2 + D s + E}{A}$">.</p><p>Como o ponto buscando &eacute; raiz dupla de <img src="pre_relatorio_eq72452.png" alt="$k(s)$">, ele &eacute; raiz da derivada de <img src="pre_relatorio_eq72452.png" alt="$k(s)$"> em <img src="pre_relatorio_eq72999.png" alt="$s$">, ou seja, raiz de <img src="pre_relatorio_eq28082.png" alt="$-\frac{3 B s^2 + 2 C s + D}{A}$">.</p><p>Substituindo os valores dos coeficientes e resolvendo, chegamos em</p><pre class="codeinput">A = G.num{1}(4);
+den = G.den{1};
+raizes = roots(-polyder(den)/A)
+</pre><pre class="codeoutput">
+raizes =
+
+  -62.2543
+  -17.7369
+
+</pre><p>Observando o gr&aacute;fico do root locus mostrado anteriormente, sabemos ent&atilde;o que o valor buscado &eacute; <img src="pre_relatorio_eq55554.png" alt="$s = -17.7369$"> e</p><pre class="codeinput">k = -polyval(den, -17.7369)/A
+</pre><pre class="codeoutput">
+k =
+
+    0.8925
+
+</pre><p>A resposta &agrave; rampa do controlador &eacute; exibida abaixo:</p><pre class="codeinput">dt = 0.001;
+t = 0:dt:5;
+rampa = t;
+sistema = feedback(k*G, 1);
+lsim(sistema, rampa, t);
+title(<span class="string">'Resposta &agrave; rampa do controlador proporcional'</span>);
+</pre><img vspace="5" hspace="5" src="pre_relatorio_02.png" alt=""> <p>Entrada quadrada de amplitude 1 e 0.25Hz</p><pre class="codeinput">onda_quadrada = square(2*pi*0.25*t)*0.5+0.5;
+plot(t, onda_quadrada);
+ylim([-0.1, 1.1]);
+title(<span class="string">'Entrada quadrada'</span>);
+xlabel(<span class="string">'t (s)'</span>);
+</pre><img vspace="5" hspace="5" src="pre_relatorio_03.png" alt=""> <p>Resposta &agrave; onda quadrada</p><pre class="codeinput">lsim(sistema, k*(1-sistema), <span class="string">'g:'</span>, onda_quadrada, t);
+title(<span class="string">'Reposta &agrave; onda quadrada'</span>);
+legend(<span class="string">'y(t)'</span>, <span class="string">'u(t)'</span>);
+</pre><img vspace="5" hspace="5" src="pre_relatorio_04.png" alt=""> <p>Entrada de rampa</p><pre class="codeinput">onda_rampa = cumsum(onda_quadrada)*dt;
+plot(t, onda_rampa);
+title(<span class="string">'Entrada em rampa'</span>);
+xlabel(<span class="string">'t (s)'</span>);
+</pre><img vspace="5" hspace="5" src="pre_relatorio_05.png" alt=""> <p>Resposta &agrave; rampa</p><pre class="codeinput">lsim(sistema, k*(1-sistema), <span class="string">'-.'</span>, onda_rampa, t);
+title(<span class="string">'Reposta &agrave; rampa'</span>);
+legend(<span class="string">'y(t)'</span>, <span class="string">'u(t)'</span>);
+</pre><img vspace="5" hspace="5" src="pre_relatorio_06.png" alt=""> <h2>Controlador de Ziegler Nichols<a name="11"></a></h2><p>O primeiro passo no m&eacute;todo de Ziegler Nichols &eacute; encontrar <img src="pre_relatorio_eq64032.png" alt="$k = k_{osc}$"> que deixa a planta no limiar de estabilidade quando em malha fechada:</p><p>Para isso pode ser usado o crit&eacute;rio de Routh com a equa&ccedil;&atilde;o caracter&iacute;stica:</p><p><img src="pre_relatorio_eq93316.png" alt="$$1 + k G(s) = 0$$"></p><p><img src="pre_relatorio_eq44316.png" alt="$$1 + \frac{8.993 k}{0.0003019 s^3 + 0.03622 s^2 + s} = 0$$"></p><p><img src="pre_relatorio_eq64259.png" alt="$$\frac{0.0003019 s^3 + 0.03622 s^2 + s + 8.993 k}{0.0003019 s^3 + 0.03622 s^2 + s} = 0$$"></p><p><img src="pre_relatorio_eq04220.png" alt="$$0.0003019 s^3 + 0.03622 s^2 + s + 8.993 k = 0$$"></p><p>Com o crit&eacute;rio de Routh chega-se em: <img src="pre_relatorio_eq77878.png" alt="$k = \frac{0.03622}{0.0003019 * 8.993} = 13.3408$"></p><pre class="codeinput">k_osc = 13.3408;
 GC_mf = feedback(G*k_osc,1);
 poles = esort(pole(GC_mf));
 w_osc = abs(poles(1));
@@ -98,17 +135,14 @@ Continuous-time transfer function.
 
 </pre><p>C&aacute;lculo dos valores de desempenho</p><pre class="codeinput">sistema = feedback(G*C_2, 1);
 step(sistema)
-</pre><img vspace="5" hspace="5" src="pre_relatorio_01.png" alt=""> <p>Desempenho do sistema discreto</p><pre class="codeinput">Ts = 0.001;
+</pre><img vspace="5" hspace="5" src="pre_relatorio_07.png" alt=""> <p>Desempenho do sistema discreto</p><pre class="codeinput">Ts = 0.001;
 Gz = c2d(G, Ts, <span class="string">'zoh'</span>);
 Cz = c2d(C_2, Ts, <span class="string">'matched'</span>);
 sistemaZ = feedback(Gz*Cz, 1);
 step(sistemaZ), snapnow;
-</pre><img vspace="5" hspace="5" src="pre_relatorio_02.png" alt=""> <p>Simula&ccedil;&atilde;o do sistema discreto</p><pre class="codeinput">t = 0:.001:4;
-onda_quadrada = square(2*pi*4*t)*0.5+0.5;
-onda_rampa = cumsum(onda_quadrada);
-lsim(sistemaZ, onda_quadrada, t), snapnow;
+</pre><img vspace="5" hspace="5" src="pre_relatorio_08.png" alt=""> <p>Simula&ccedil;&atilde;o do sistema discreto</p><pre class="codeinput">lsim(sistemaZ, onda_quadrada, t), snapnow;
 lsim(sistemaZ, onda_rampa, t)
-</pre><img vspace="5" hspace="5" src="pre_relatorio_03.png" alt=""> <img vspace="5" hspace="5" src="pre_relatorio_04.png" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2013a</a><br></p></div><!--
+</pre><img vspace="5" hspace="5" src="pre_relatorio_09.png" alt=""> <img vspace="5" hspace="5" src="pre_relatorio_10.png" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2013a</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 %% ES868 – Pré Relatório Lab 3
 % *Controle de plantas eletrˆonicas utilizando um controlador PID digital*
@@ -123,6 +157,68 @@ load ../G.mat
 s = tf('s');
 
 %% Controlador proporcional
+% Para se obter o tempo mínimo de estabilização, os pólos de malha fechadas
+% tem de estar à mais esquerda possível. Observando o root locus da planta:
+rlocus(G)
+
+%%
+% Pode-se observar que isso irá ocorrer quando os dois pólos (verde e azul
+% na figura) se encontrarem, no ponto próximo de -20. Para obter a
+% coordenada exata desse ponto, pode-se verificar a multiplicidade das
+% raízes da equação caraterística $1 + k G(s) = 0$.
+%
+% No nosso caso, com $G(s) = \frac{P(s)}{Q(s)} = \frac{A}{B s^3 + C s^2 + D
+% s + E}$ , $k(s) = -\frac{B s^3 + C s^2 + D s + E}{A}$.
+%
+% Como o ponto buscando é raiz dupla de $k(s)$, ele é raiz da derivada de
+% $k(s)$ em $s$, ou seja, raiz de $-\frac{3 B s^2 + 2 C s + D}{A}$.
+
+%% 
+% Substituindo os valores dos coeficientes e resolvendo, chegamos em
+A = G.num{1}(4);
+den = G.den{1};
+raizes = roots(-polyder(den)/A)
+
+%%
+% Observando o gráfico do root locus mostrado anteriormente, sabemos então
+% que o valor buscado é $s = -17.7369$ e
+k = -polyval(den, -17.7369)/A
+
+%%
+% A resposta à rampa do controlador é exibida abaixo:
+dt = 0.001;
+t = 0:dt:5;
+rampa = t;
+sistema = feedback(k*G, 1);
+lsim(sistema, rampa, t);
+title('Resposta à rampa do controlador proporcional');
+
+%%
+% Entrada quadrada de amplitude 1 e 0.25Hz
+onda_quadrada = square(2*pi*0.25*t)*0.5+0.5;
+plot(t, onda_quadrada);
+ylim([-0.1, 1.1]);
+title('Entrada quadrada');
+xlabel('t (s)');
+
+%%
+% Resposta à onda quadrada
+lsim(sistema, k*(1-sistema), 'g:', onda_quadrada, t);
+title('Reposta à onda quadrada');
+legend('y(t)', 'u(t)');
+
+%%
+% Entrada de rampa
+onda_rampa = cumsum(onda_quadrada)*dt;
+plot(t, onda_rampa);
+title('Entrada em rampa');
+xlabel('t (s)');
+
+%%
+% Resposta à rampa
+lsim(sistema, k*(1-sistema), '-.', onda_rampa, t);
+title('Reposta à rampa');
+legend('y(t)', 'u(t)');
 
 %% Controlador de Ziegler Nichols
 % O primeiro passo no método de Ziegler Nichols é encontrar $k = k_{osc}$
@@ -173,9 +269,6 @@ step(sistemaZ), snapnow;
 
 %%
 % Simulação do sistema discreto
-t = 0:.001:4;
-onda_quadrada = square(2*pi*4*t)*0.5+0.5;
-onda_rampa = cumsum(onda_quadrada);
 lsim(sistemaZ, onda_quadrada, t), snapnow;
 lsim(sistemaZ, onda_rampa, t)
 ##### SOURCE END #####

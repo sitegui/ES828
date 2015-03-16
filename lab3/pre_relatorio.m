@@ -11,6 +11,68 @@ load ../G.mat
 s = tf('s');
 
 %% Controlador proporcional
+% Para se obter o tempo mínimo de estabilização, os pólos de malha fechadas
+% tem de estar à mais esquerda possível. Observando o root locus da planta:
+rlocus(G)
+
+%%
+% Pode-se observar que isso irá ocorrer quando os dois pólos (verde e azul
+% na figura) se encontrarem, no ponto próximo de -20. Para obter a
+% coordenada exata desse ponto, pode-se verificar a multiplicidade das
+% raízes da equação caraterística $1 + k G(s) = 0$.
+%
+% No nosso caso, com $G(s) = \frac{P(s)}{Q(s)} = \frac{A}{B s^3 + C s^2 + D
+% s + E}$ , $k(s) = -\frac{B s^3 + C s^2 + D s + E}{A}$.
+%
+% Como o ponto buscando é raiz dupla de $k(s)$, ele é raiz da derivada de
+% $k(s)$ em $s$, ou seja, raiz de $-\frac{3 B s^2 + 2 C s + D}{A}$.
+
+%% 
+% Substituindo os valores dos coeficientes e resolvendo, chegamos em
+A = G.num{1}(4);
+den = G.den{1};
+raizes = roots(-polyder(den)/A)
+
+%%
+% Observando o gráfico do root locus mostrado anteriormente, sabemos então
+% que o valor buscado é $s = -17.7369$ e
+k = -polyval(den, -17.7369)/A
+
+%%
+% A resposta à rampa do controlador é exibida abaixo:
+dt = 0.001;
+t = 0:dt:5;
+rampa = t;
+sistema = feedback(k*G, 1);
+lsim(sistema, rampa, t);
+title('Resposta à rampa do controlador proporcional');
+
+%%
+% Entrada quadrada de amplitude 1 e 0.25Hz
+onda_quadrada = square(2*pi*0.25*t)*0.5+0.5;
+plot(t, onda_quadrada);
+ylim([-0.1, 1.1]);
+title('Entrada quadrada');
+xlabel('t (s)');
+
+%%
+% Resposta à onda quadrada
+lsim(sistema, k*(1-sistema), 'g:', onda_quadrada, t);
+title('Reposta à onda quadrada');
+legend('y(t)', 'u(t)');
+
+%%
+% Entrada de rampa
+onda_rampa = cumsum(onda_quadrada)*dt;
+plot(t, onda_rampa);
+title('Entrada em rampa');
+xlabel('t (s)');
+
+%%
+% Resposta à rampa
+lsim(sistema, k*(1-sistema), '-.', onda_rampa, t);
+title('Reposta à rampa');
+legend('y(t)', 'u(t)');
 
 %% Controlador de Ziegler Nichols
 % O primeiro passo no método de Ziegler Nichols é encontrar $k = k_{osc}$
@@ -61,8 +123,5 @@ step(sistemaZ), snapnow;
 
 %%
 % Simulação do sistema discreto
-t = 0:.001:4;
-onda_quadrada = square(2*pi*4*t)*0.5+0.5;
-onda_rampa = cumsum(onda_quadrada);
 lsim(sistemaZ, onda_quadrada, t), snapnow;
 lsim(sistemaZ, onda_rampa, t)
