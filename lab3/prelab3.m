@@ -18,9 +18,9 @@ K=0.8926
 t=0:0.001:4;
 rampa=t;
 Y=minreal(G*K/(1+G*K))
-step(Y/s)
+step(Y/s, 4)
 hold on
-figure, plot(rampa,t); title('Resposta à rampa do controlador proporcional');
+plot(rampa,t,'r'); title('Resposta à rampa do controlador proporcional');
 
 %%entrada quadrada
 %% Entrada
@@ -39,8 +39,9 @@ figure,lsim(K*Y-K, sqr,t), title('Reposta do controlador à onda quadrada'), snap
 
 %%saida a onda quadrada * rampa
 
-figure,lsim(Y, sqr.*rampa,t), title('Reposta Y à rampa quadrada'), snapnow;
-figure,lsim(K*Y-K, sqr.*rampa,t), title('Reposta do controlador à rampa quadrada'), snapnow;
+rampa_2 = lsim(1/s, sqr, t);
+figure,lsim(Y, rampa_2,t), title('Reposta Y à rampa quadrada'), snapnow;
+figure,lsim(K*Y-K, rampa_2,t), title('Reposta do controlador à rampa quadrada'), snapnow;
 
 
 
