@@ -1,5 +1,5 @@
 %% ES868 – Pré Relatório Lab 3
-% *Controle de plantas eletrˆonicas utilizando um controlador PID digital*
+% *Controle de plantas eletrônicas utilizando um controlador PID digital*
 %
 % Turma A - 16/03/2015
 %
@@ -39,13 +39,28 @@ raizes = roots(-polyder(den)/A)
 k = -polyval(den, -17.7369)/A
 
 %%
+% 
+% <<../imgs/rlocus - C1.jpg>>
+%
+%%
+%
+% <<../imgs/Step - C1.jpg>>
+%
+
+
+%%
 % A resposta à rampa do controlador é exibida abaixo:
 dt = 0.001;
 t = 0:dt:5;
 rampa = t;
 sistema = feedback(k*G, 1);
-lsim(sistema, rampa, t);
-title('Resposta à rampa do controlador proporcional');
+%lsim(sistema, rampa, t);
+%title('Resposta à rampa do controlador proporcional');
+
+%%
+%
+% <<../imgs/rampa - C1.jpg>>
+% 
 
 %%
 % Entrada quadrada de amplitude 1 e 0.25Hz
