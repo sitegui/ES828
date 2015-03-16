@@ -11,7 +11,10 @@
 \usepackage{epsfig}
 \usepackage{epstopdf}
 \usepackage{color}
-
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage[section]{placeins}
+\usepackage{float}
 %----------------------------
 
 
@@ -112,7 +115,7 @@ Dra. Grace Silva Deaecto
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Controlador proporcional}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+\vspace{1em}
 \begin{par}
 Para se obter o tempo mínimo de estabilização, os pólos de malha fechadas tem de estar à mais esquerda possível. Observando o root locus da planta:
 \end{par} \vspace{1em}
@@ -120,7 +123,10 @@ Para se obter o tempo mínimo de estabilização, os pólos de malha fechadas tem de
 rlocus(G)
 \end{verbatim}
 \begin{center}
+\begin{figure}[H]
+\centering
 \includegraphics [width=4in]{pre_relatorio_01.eps}
+\end{figure}
 \end{center}
 
 \begin{par}
@@ -133,7 +139,7 @@ No nosso caso, com $G(s) = \frac{P(s)}{Q(s)} = \frac{A}{B s^3 + C s^2 + D s + E}
 Como o ponto buscando é raiz dupla de $k(s)$, ele é raiz da derivada de $k(s)$ em $s$, ou seja, raiz de $-\frac{3 B s^2 + 2 C s + D}{A}$.
 \end{par} \vspace{1em}
 \begin{par}
-Substituindo os valores dos coeficientes e resolvendo, chegamos em
+Substituindo os valores dos coeficientes e resolvendo, chegamos em:
 \end{par} \vspace{1em}
 \begin{verbatim}
 A = G.num{1}(4);
@@ -149,7 +155,8 @@ raizes =
 
 \end{verbatim} \color{black}
     \begin{par}
-Observando o gráfico do root locus mostrado anteriormente, sabemos então que o valor buscado é $s = -17.7369$ e
+Observando o gráfico do root locus mostrado anteriormente, sabemos então que o valor buscado é $s = -17.7369$. Aplicando
+a equação do controlador:
 \end{par} \vspace{1em}
 \begin{verbatim}
 k = -polyval(den, -17.7369)/A
@@ -162,7 +169,7 @@ k =
 
 \end{verbatim} \color{black}
     \begin{par}
-A resposta à rampa do controlador é exibida abaixo:
+A resposta à rampa do controlador é exibida abaixo.
 \end{par} \vspace{1em}
 \begin{verbatim}
 dt = 0.001;
@@ -172,14 +179,16 @@ sistema = feedback(k*G, 1);
 lsim(sistema, rampa, t);
 title('Resposta à rampa do controlador proporcional');
 \end{verbatim}
-\begin{center}
+\begin{figure}[H]
+\centering
+	\includegraphics [width=4in]{pre_relatorio_02.eps}
+%\caption{Resposta à rampa do controlador proporcional.} \label{rampa2}
+\end{figure}
 
-\includegraphics [width=4in]{pre_relatorio_02.eps}
-\end{center}
 
-\begin{par}
-Entrada quadrada de amplitude 1 e 0.25Hz
-\end{par} \vspace{1em}
+\subsection*{Entrada quadrada de amplitude 1 e 0.25Hz.}
+
+
 \begin{verbatim}
 onda_quadrada = square(2*pi*0.25*t)*0.5+0.5;
 plot(t, onda_quadrada);
@@ -187,54 +196,54 @@ ylim([-0.1, 1.1]);
 title('Entrada quadrada');
 xlabel('t (s)');
 \end{verbatim}
-\begin{center}
+\begin{figure}[H]
+\centering
 \includegraphics [width=4in]{pre_relatorio_03.eps}
-\end{center}
+\end{figure}
 
-\begin{par}
-Resposta à onda quadrada
-\end{par} \vspace{1em}
+\subsection*{Resposta à onda quadrada}
+
 \begin{verbatim}
 lsim(sistema, k*(1-sistema), 'g:', onda_quadrada, t);
 title('Reposta à onda quadrada');
 legend('y(t)', 'u(t)');
 \end{verbatim}
- \begin{center}
+\begin{figure}[H]
+\centering
 \includegraphics [width=4in]{pre_relatorio_04.eps}
- \end{center}
+\end{figure}
 
-\begin{par}
-Entrada de rampa
-\end{par} \vspace{1em}
+\subsection*{Entrada de rampa}
+
 \begin{verbatim}
 onda_rampa = cumsum(onda_quadrada)*dt;
 plot(t, onda_rampa);
 title('Entrada em rampa');
 xlabel('t (s)');
 \end{verbatim}
- \begin{center}
+\begin{figure}[H]
+\centering
 \includegraphics [width=4in]{pre_relatorio_05.eps}
-\end{center}
+\end{figure}
 
-\begin{par}
-Resposta à rampa
-\end{par} \vspace{1em}
+\subsection*{Resposta à rampa}
+
 \begin{verbatim}
 lsim(sistema, k*(1-sistema), '-.', onda_rampa, t);
 title('Reposta à rampa');
 legend('y(t)', 'u(t)');
 \end{verbatim}
-\begin{center}
-
+\begin{figure}[H]
+\centering
 \includegraphics [width=4in]{pre_relatorio_06.eps}
-\end{center}
+\end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Controlador de Ziegler Nichols}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{par}
-O primeiro passo no método de Ziegler Nichols é encontrar $k = k_{osc}$ que deixa a planta no limiar de estabilidade quando em malha fechada:
+\vspace{1em}
+\begin{par} 
+O primeiro passo no método de Ziegler Nichols é encontrar $k = k_{osc}$ que deixa a planta no limiar de estabilidade quando em malha fechada.
 \end{par} \vspace{1em}
 \begin{par}
 Para isso pode ser usado o critério de Routh com a equação característica:
@@ -284,8 +293,10 @@ Comparação antes vs depois da alteração manual do lugar dos pólos:
 \end{par} \vspace{1em}
 \begin{par}
 \begin{center}
-
+\begin{figure}[H]
+\centering
 \includegraphics [width=4in]{../imgs/ziegler-nichols.png}
+\end{figure}
 \end{center}
 
 \end{par} \vspace{1em}
@@ -303,21 +314,19 @@ C_2 =
  
 Continuous-time transfer function.
 
-\end{verbatim} \color{black}
-    \begin{par}
-Cálculo dos valores de desempenho
-\end{par} \vspace{1em}
+\subsection{Cálculo dos valores de desempenho}
 \begin{verbatim}
 sistema = feedback(G*C_2, 1);
 \end{verbatim}
 \begin{par}
-\begin{center}
+\begin{figure}[H]
+\centering
 \includegraphics [width=4in]{../imgs/ziegler-nichols_step.png}
-\end{center}
+\end{figure}
 
 \end{par} \vspace{1em}
 \begin{par}
-Desempenho do sistema discreto
+\subsection{Desempenho do sistema discreto}
 \end{par} \vspace{1em}
 \begin{verbatim}
 Ts = 0.001;
@@ -327,7 +336,10 @@ sistemaZ = feedback(Gz*Cz, 1);
 \end{verbatim}
 \begin{par}
 \begin{center}
+\begin{figure}[H]
+\centering
 \includegraphics [width=4in]{../imgs/ziegler-nichols_z_step.png}
+\end{figure}
 \end{center}
 
 \end{par} \vspace{1em}
@@ -338,11 +350,12 @@ Simulação do sistema discreto
 lsim(sistemaZ, onda_quadrada, t), snapnow;
 lsim(sistemaZ, onda_rampa, t)
 \end{verbatim}
-\begin{center}
+\begin{figure}[H]
+\centering
 \includegraphics [width=4in]{pre_relatorio_07.eps}
 
 \includegraphics [width=4in]{pre_relatorio_08.eps}
-\end{center}
+\end{figure}
 
 
 

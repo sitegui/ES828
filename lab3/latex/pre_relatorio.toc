@@ -1,3 +1,4 @@
 \select@language {brazil}
 \contentsline {section}{\numberline {1}Controlador proporcional}{2}
 \contentsline {section}{\numberline {2}Controlador de Ziegler Nichols}{6}
+\contentsline {subsection}{\numberline {2.1}Desempenho do sistema discreto}{8}
