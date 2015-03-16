@@ -29,6 +29,7 @@ s = tf('s');
 % Com o critério de Routh chega-se em: $k = \frac{0.03622}{0.0003019 *
 % 8.993} = 13.3408$
 % 
+% 
 k_osc = 13.3408;
 GC_mf = feedback(G*k_osc,1);
 poles = esort(pole(GC_mf));
@@ -49,3 +50,19 @@ C_2 = 1.31*C
 % Cálculo dos valores de desempenho
 sistema = feedback(G*C_2, 1);
 step(sistema)
+
+%% 
+% Desempenho do sistema discreto
+Ts = 0.001;
+Gz = c2d(G, Ts, 'zoh');
+Cz = c2d(C_2, Ts, 'matched');
+sistemaZ = feedback(Gz*Cz, 1);
+step(sistemaZ), snapnow;
+
+%%
+% Simulação do sistema discreto
+t = 0:.001:4;
+onda_quadrada = square(2*pi*4*t)*0.5+0.5;
+onda_rampa = cumsum(onda_quadrada);
+lsim(sistemaZ, onda_quadrada, t), snapnow;
+lsim(sistemaZ, onda_rampa, t)
