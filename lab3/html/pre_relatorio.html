@@ -122,7 +122,7 @@ C =
  
 Continuous-time transfer function.
 
-</pre><p>Usando o sisotool para ajustar o valor de kp e melhorar o desempenho do controlador, obtemos <img src="pre_relatorio_eq31446.png" alt="$kp_2 = 1.31 kp$"></p><pre class="codeinput">kp_2 = 1.31*kp;
+</pre><p>Usando o sisotool para ajustar o valor de kp e melhorar o desempenho do controlador, obtemos <img src="pre_relatorio_eq31446.png" alt="$kp_2 = 1.31 kp$">.</p><p>Compara&ccedil;&atilde;o antes vs depois da altera&ccedil;&atilde;o manual do lugar dos p&oacute;los:</p><p><img vspace="5" hspace="5" src="../imgs/ziegler-nichols.png" alt=""> </p><pre class="codeinput">kp_2 = 1.31*kp;
 C_2 = 1.31*C
 </pre><pre class="codeoutput">
 C_2 =
@@ -134,15 +134,13 @@ C_2 =
 Continuous-time transfer function.
 
 </pre><p>C&aacute;lculo dos valores de desempenho</p><pre class="codeinput">sistema = feedback(G*C_2, 1);
-step(sistema)
-</pre><img vspace="5" hspace="5" src="pre_relatorio_07.png" alt=""> <p>Desempenho do sistema discreto</p><pre class="codeinput">Ts = 0.001;
+</pre><p><img vspace="5" hspace="5" src="../imgs/ziegler-nichols_step.png" alt=""> </p><p>Desempenho do sistema discreto</p><pre class="codeinput">Ts = 0.001;
 Gz = c2d(G, Ts, <span class="string">'zoh'</span>);
 Cz = c2d(C_2, Ts, <span class="string">'matched'</span>);
 sistemaZ = feedback(Gz*Cz, 1);
-step(sistemaZ), snapnow;
-</pre><img vspace="5" hspace="5" src="pre_relatorio_08.png" alt=""> <p>Simula&ccedil;&atilde;o do sistema discreto</p><pre class="codeinput">lsim(sistemaZ, onda_quadrada, t), snapnow;
+</pre><p><img vspace="5" hspace="5" src="../imgs/ziegler-nichols_z_step.png" alt=""> </p><p>Simula&ccedil;&atilde;o do sistema discreto</p><pre class="codeinput">lsim(sistemaZ, onda_quadrada, t), snapnow;
 lsim(sistemaZ, onda_rampa, t)
-</pre><img vspace="5" hspace="5" src="pre_relatorio_09.png" alt=""> <img vspace="5" hspace="5" src="pre_relatorio_10.png" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2013a</a><br></p></div><!--
+</pre><img vspace="5" hspace="5" src="pre_relatorio_07.png" alt=""> <img vspace="5" hspace="5" src="pre_relatorio_08.png" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2013a</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 %% ES868 – Pré Relatório Lab 3
 % *Controle de plantas eletrˆonicas utilizando um controlador PID digital*
@@ -250,14 +248,19 @@ C = kp*(1 + 1/(Ti*s) + Td*s)
 
 %%
 % Usando o sisotool para ajustar o valor de kp e melhorar o desempenho do
-% controlador, obtemos $kp_2 = 1.31 kp$
+% controlador, obtemos $kp_2 = 1.31 kp$.
+%
+% Comparação antes vs depois da alteração manual do lugar dos pólos:
+% 
+% <<../imgs/ziegler-nichols.png>>
 kp_2 = 1.31*kp;
 C_2 = 1.31*C
 
 %%
 % Cálculo dos valores de desempenho
 sistema = feedback(G*C_2, 1);
-step(sistema)
+%%
+% <<../imgs/ziegler-nichols_step.png>>
 
 %% 
 % Desempenho do sistema discreto
@@ -265,7 +268,8 @@ Ts = 0.001;
 Gz = c2d(G, Ts, 'zoh');
 Cz = c2d(C_2, Ts, 'matched');
 sistemaZ = feedback(Gz*Cz, 1);
-step(sistemaZ), snapnow;
+%%
+% <<../imgs/ziegler-nichols_z_step.png>>
 
 %%
 % Simulação do sistema discreto

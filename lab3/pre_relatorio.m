@@ -104,14 +104,19 @@ C = kp*(1 + 1/(Ti*s) + Td*s)
 
 %%
 % Usando o sisotool para ajustar o valor de kp e melhorar o desempenho do
-% controlador, obtemos $kp_2 = 1.31 kp$
+% controlador, obtemos $kp_2 = 1.31 kp$.
+%
+% Comparação antes vs depois da alteração manual do lugar dos pólos:
+% 
+% <<../imgs/ziegler-nichols.png>>
 kp_2 = 1.31*kp;
 C_2 = 1.31*C
 
 %%
 % Cálculo dos valores de desempenho
 sistema = feedback(G*C_2, 1);
-step(sistema)
+%%
+% <<../imgs/ziegler-nichols_step.png>>
 
 %% 
 % Desempenho do sistema discreto
@@ -119,7 +124,8 @@ Ts = 0.001;
 Gz = c2d(G, Ts, 'zoh');
 Cz = c2d(C_2, Ts, 'matched');
 sistemaZ = feedback(Gz*Cz, 1);
-step(sistemaZ), snapnow;
+%%
+% <<../imgs/ziegler-nichols_z_step.png>>
 
 %%
 % Simulação do sistema discreto
