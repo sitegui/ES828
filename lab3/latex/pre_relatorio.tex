@@ -147,7 +147,7 @@ den = G.den{1};
 raizes = roots(-polyder(den)/A)
 \end{verbatim}
 
-        \color{lightgray} \begin{verbatim}
+         \begin{verbatim}
 raizes =
 
   -62.2543
@@ -162,12 +162,25 @@ a equação do controlador:
 k = -polyval(den, -17.7369)/A
 \end{verbatim}
 
-        \color{lightgray} \begin{verbatim}
+         \begin{verbatim}
 k =
 
     0.8925
 
 \end{verbatim} \color{black}
+
+\begin{figure}[H]
+\centering
+
+	\includegraphics [width=6in]{rlocus-C1.jpg}
+
+\end{figure}
+\vspace{1em}
+\begin{figure}[H]
+\centering
+	\includegraphics [width=4in]{Step-C1.jpg}
+\end{figure}
+
     \begin{par}
 A resposta à rampa do controlador é exibida abaixo.
 \end{par} \vspace{1em}
@@ -181,12 +194,13 @@ title('Resposta à rampa do controlador proporcional');
 \end{verbatim}
 \begin{figure}[H]
 \centering
-	\includegraphics [width=4in]{pre_relatorio_02.eps}
+
+	\includegraphics [width=4in]{rampa-C1.jpg}
 %\caption{Resposta à rampa do controlador proporcional.} \label{rampa2}
 \end{figure}
 
 
-\subsection*{Entrada quadrada de amplitude 1 e 0.25Hz.}
+\subsection{Entrada quadrada de amplitude 1 e 0.25Hz.}
 
 
 \begin{verbatim}
@@ -201,7 +215,7 @@ xlabel('t (s)');
 \includegraphics [width=4in]{pre_relatorio_03.eps}
 \end{figure}
 
-\subsection*{Resposta à onda quadrada}
+\subsection{Resposta à onda quadrada}
 
 \begin{verbatim}
 lsim(sistema, k*(1-sistema), 'g:', onda_quadrada, t);
@@ -213,7 +227,7 @@ legend('y(t)', 'u(t)');
 \includegraphics [width=4in]{pre_relatorio_04.eps}
 \end{figure}
 
-\subsection*{Entrada de rampa}
+\subsection{Entrada de rampa}
 
 \begin{verbatim}
 onda_rampa = cumsum(onda_quadrada)*dt;
@@ -226,7 +240,7 @@ xlabel('t (s)');
 \includegraphics [width=4in]{pre_relatorio_05.eps}
 \end{figure}
 
-\subsection*{Resposta à rampa}
+\subsection{Resposta à rampa}
 
 \begin{verbatim}
 lsim(sistema, k*(1-sistema), '-.', onda_rampa, t);
@@ -275,7 +289,7 @@ Td = T_osc/8;
 C = kp*(1 + 1/(Ti*s) + Td*s)
 \end{verbatim}
 
-        \color{lightgray} \begin{verbatim}
+         \begin{verbatim}
 C =
  
   0.005963 s^2 + 0.4369 s + 8.004
@@ -305,7 +319,7 @@ kp_2 = 1.31*kp;
 C_2 = 1.31*C
 \end{verbatim}
 
-        \color{lightgray} \begin{verbatim}
+         \begin{verbatim}
 C_2 =
  
   0.007811 s^2 + 0.5724 s + 10.49
@@ -325,9 +339,8 @@ sistema = feedback(G*C_2, 1);
 \end{figure}
 
 \end{par} \vspace{1em}
-\begin{par}
 \subsection{Desempenho do sistema discreto}
-\end{par} \vspace{1em}
+\vspace{1em}
 \begin{verbatim}
 Ts = 0.001;
 Gz = c2d(G, Ts, 'zoh');
@@ -357,7 +370,45 @@ lsim(sistemaZ, onda_rampa, t)
 \includegraphics [width=4in]{pre_relatorio_08.eps}
 \end{figure}
 
+\section{Controlador utilizando o sisotool}
+\begin{par}
+	Utilizando o sisotool, foram adicionados um polo e um zero, caracterizando
+	assim um controlador em avanço, e com um posicionamento cuidadoso do polo
+	e zero, foi possível obter um desempenho melhor do sistema, que pode ser 
+	conferido a seguir.
+\end{par}
 
+\begin{figure}[H]
+\centering
+\includegraphics [width=4in]{sisotool_rootlocus.png}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics [width=4in]{sisotool_step.png}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics [width=4in]{sisotool_rampa.png}
+\end{figure}
+
+\subsection{Desempenho do sistema discreto}
+
+\begin{par}
+	Para a resposta discreta do sistema com esse controlador, os resultados obtidos
+	foram os seguintes:
+\end{par}
+
+\begin{figure}[H]
+\centering
+\includegraphics [width=4in]{sisotool_stepd.png}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics [width=4in]{sisotool_rampad.png}
+\end{figure}
 
 \end{document}
     
