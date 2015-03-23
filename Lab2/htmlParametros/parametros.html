@@ -1,0 +1,210 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Determina&ccedil;&atilde;o dos par&acirc;metros</title><meta name="generator" content="MATLAB 8.0"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2015-03-23"><meta name="DC.source" content="parametros.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, tt, code { font-size:12px; }
+pre { margin:0px 0px 20px; }
+pre.error { color:red; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Determina&ccedil;&atilde;o dos par&acirc;metros</h1><!--introduction--><p>Determinar os par&acirc;metros da planta experimental, com base nos dados coletados com o aux&iacute;lio do ambiente LabView e Elvis</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Dados coletados</a></li><li><a href="#2">Est&aacute;gio I: K1</a></li><li><a href="#3">Est&aacute;gio II: K2</a></li><li><a href="#4">Est&aacute;gio II: Tau2</a></li><li><a href="#5">Est&aacute;gio III: K3</a></li><li><a href="#6">Est&aacute;gio III: Tau3</a></li><li><a href="#9">Est&aacute;gio IV: K4</a></li><li><a href="#10">Simula&ccedil;&atilde;o e verifica&ccedil;&atilde;o</a></li></ul></div><h2>Dados coletados<a name="1"></a></h2><pre class="codeinput">load(<span class="string">'single-sample.mat'</span>);
+plot(t, se, t, s1, t, s2, t, s3, t, s4);
+legend(<span class="string">'Entrada'</span>, <span class="string">'Est&aacute;gio I'</span>, <span class="string">'Est&aacute;gio II'</span>, <span class="string">'Est&aacute;gio III'</span>, <span class="string">'Est&aacute;gio IV'</span>, <span class="string">'Location'</span>, <span class="string">'NorthWest'</span>);
+xlabel(<span class="string">'Tempo (s)'</span>);
+</pre><img vspace="5" hspace="5" src="parametros_01.png" alt=""> <h2>Est&aacute;gio I: K1<a name="2"></a></h2><pre class="codeinput">entrada_mediana = median(se);
+saida_mediana = median(s1);
+k1 = saida_mediana/entrada_mediana
+</pre><pre class="codeoutput">
+k1 =
+
+   -0.0995
+
+</pre><h2>Est&aacute;gio II: K2<a name="3"></a></h2><pre class="codeinput">s2sm = smooth(s2, 17);
+plot(t, s2, <span class="string">':'</span>, t, s2sm);
+legend(<span class="string">'Sa&iacute;da'</span>, <span class="string">'Sa&iacute;da suavizada'</span>, <span class="string">'Location'</span>, <span class="string">'SouthEast'</span>);
+xlabel(<span class="string">'Tempo (s)'</span>);
+k12 = median(s2sm(end-20:end));
+k2 = k12/k1
+</pre><pre class="codeoutput">
+k2 =
+
+   -2.1626
+
+</pre><img vspace="5" hspace="5" src="parametros_02.png" alt=""> <h2>Est&aacute;gio II: Tau2<a name="4"></a></h2><pre class="codeinput">line([0, 0.5], [k12, k12]*0.98, <span class="string">'Color'</span>, <span class="string">'red'</span>, <span class="string">'LineStyle'</span>, <span class="string">'-.'</span>);
+tau2 = t(find(s2sm &gt;= k12*0.98, 1))/4
+</pre><pre class="codeoutput">
+tau2 =
+
+    0.0130
+
+</pre><img vspace="5" hspace="5" src="parametros_03.png" alt=""> <h2>Est&aacute;gio III: K3<a name="5"></a></h2><pre class="codeinput">s3sm = smooth(s3, 17);
+plot(t, s3, <span class="string">':'</span>, t, s3sm);
+legend(<span class="string">'Sa&iacute;da'</span>, <span class="string">'Sa&iacute;da suavizada'</span>);
+xlabel(<span class="string">'Tempo (s)'</span>);
+k123 = median(s3sm(end-20:end));
+k3 = k123/k12
+</pre><pre class="codeoutput">
+k3 =
+
+   -4.5739
+
+</pre><img vspace="5" hspace="5" src="parametros_04.png" alt=""> <h2>Est&aacute;gio III: Tau3<a name="6"></a></h2><p>Encontrar y(tau2) e y(2*tau2)</p><pre class="codeinput">line(tau2*[1, 1], [-1, 0], <span class="string">'Color'</span>, <span class="string">'red'</span>, <span class="string">'LineStyle'</span>, <span class="string">'-.'</span>);
+line(tau2*[2, 2], [-1, 0], <span class="string">'Color'</span>, <span class="string">'red'</span>, <span class="string">'LineStyle'</span>, <span class="string">'-.'</span>);
+ytau = s3sm(find(t &gt;= tau2, 1));
+y2tau = s3sm(find(t &gt;= 2*tau2, 1));
+a = ytau/k123;
+b = y2tau/k123;
+</pre><img vspace="5" hspace="5" src="parametros_05.png" alt=""> <p>Encontrar tau3</p><pre class="codeinput">coef1 = - (1-b-exp(-2)) / (1-a-exp(-1));
+coef2 = ((1-b)*exp(-1)-(1-a)*exp(-2)) / (1-a-exp(-1));
+x1x2 = roots([1, coef1, coef2]);
+x = x1x2(1); <span class="comment">% x1x2(2) &eacute; exp(-1)</span>
+tau3 = -tau2/log(x)
+</pre><pre class="codeoutput">
+tau3 =
+
+    0.0232
+
+</pre><h2>Est&aacute;gio IV: K4<a name="9"></a></h2><pre class="codeinput">inclinacao = (s4(400)-s4(100))/0.3;
+k4 = inclinacao/k123
+</pre><pre class="codeoutput">
+k4 =
+
+   -9.1333
+
+</pre><h2>Simula&ccedil;&atilde;o e verifica&ccedil;&atilde;o<a name="10"></a></h2><pre class="codeinput">s = tf(<span class="string">'s'</span>);
+G1 = tf(k1);
+G2 = k2/(tau2*s+1);
+G3 = k3/(tau3*s+1);
+G4 = k4/s;
+lsim(G1*G2*G3*G4, se, t);
+hold <span class="string">on</span>
+plot(t, s4, <span class="string">'r'</span>);
+</pre><img vspace="5" hspace="5" src="parametros_06.png" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2012b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Determinação dos parâmetros
+% Determinar os parâmetros da planta experimental, com base nos dados
+% coletados com o auxílio do ambiente LabView e Elvis
+
+%% Dados coletados
+load('single-sample.mat');
+plot(t, se, t, s1, t, s2, t, s3, t, s4);
+legend('Entrada', 'Estágio I', 'Estágio II', 'Estágio III', 'Estágio IV', 'Location', 'NorthWest');
+xlabel('Tempo (s)');
+
+%% Estágio I: K1
+entrada_mediana = median(se);
+saida_mediana = median(s1);
+k1 = saida_mediana/entrada_mediana
+
+%% Estágio II: K2
+s2sm = smooth(s2, 17);
+plot(t, s2, ':', t, s2sm);
+legend('Saída', 'Saída suavizada', 'Location', 'SouthEast');
+xlabel('Tempo (s)');
+k12 = median(s2sm(end-20:end));
+k2 = k12/k1
+
+%% Estágio II: Tau2
+line([0, 0.5], [k12, k12]*0.98, 'Color', 'red', 'LineStyle', '-.');
+tau2 = t(find(s2sm >= k12*0.98, 1))/4
+
+%% Estágio III: K3
+s3sm = smooth(s3, 17);
+plot(t, s3, ':', t, s3sm);
+legend('Saída', 'Saída suavizada');
+xlabel('Tempo (s)');
+k123 = median(s3sm(end-20:end));
+k3 = k123/k12
+
+%% Estágio III: Tau3
+
+%%
+% Encontrar y(tau2) e y(2*tau2)
+line(tau2*[1, 1], [-1, 0], 'Color', 'red', 'LineStyle', '-.');
+line(tau2*[2, 2], [-1, 0], 'Color', 'red', 'LineStyle', '-.');
+ytau = s3sm(find(t >= tau2, 1));
+y2tau = s3sm(find(t >= 2*tau2, 1));
+a = ytau/k123;
+b = y2tau/k123;
+
+%%
+% Encontrar tau3
+coef1 = - (1-b-exp(-2)) / (1-a-exp(-1));
+coef2 = ((1-b)*exp(-1)-(1-a)*exp(-2)) / (1-a-exp(-1));
+x1x2 = roots([1, coef1, coef2]);
+x = x1x2(1); % x1x2(2) é exp(-1)
+tau3 = -tau2/log(x)
+
+%% Estágio IV: K4
+inclinacao = (s4(400)-s4(100))/0.3;
+k4 = inclinacao/k123
+
+%% Simulação e verificação
+s = tf('s');
+G1 = tf(k1);
+G2 = k2/(tau2*s+1);
+G3 = k3/(tau3*s+1);
+G4 = k4/s;
+lsim(G1*G2*G3*G4, se, t);
+hold on
+plot(t, s4, 'r');
+##### SOURCE END #####
+--></body></html>

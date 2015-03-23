@@ -110,7 +110,6 @@ Dra. Grace Silva Deaecto
 
 \tableofcontents
 \listoffigures
-\listoftables
  
 \clearpage
 
@@ -183,6 +182,7 @@ plot(trandom,fit1p,'r')
 \end{figure}
 
 \subsection{Estágio 2}
+\label{subsec:est2}
 
 \begin{par}
 Pode-se perceber pela Figura \ref{fig:est2} que há um grande ruído que nos impede de inferir os valores de ganho apropriadamente. 
@@ -190,24 +190,29 @@ Uma forma interessante de filtrar o ruído pode ser alcançada observando dois fat
 feita com uma frequência de 1kHz, e a frequência da rede de distribuição (causa mais comum de ruídos 
 elétricos) é de 60Hz.
 \end{par}
+
 \begin{figure}[H]
 \centering
 \includegraphics [width=4in]{Relatorio/est2_leitura.png}
 \caption{Leitura feita para o segundo estágio.}
 \label{fig:est2}
 \end{figure}
+
 \begin{par}
 Tendo essas informações em vista, pode ser aplicado um filtro discreto de média rolante sobre o sinal 
 de forma a eliminar o ruído. A idéia é fazer a média de um ciclo inteiro de 60Hz, eliminando assim o ruído. 
 Assim, basta escolher a quantidade da pontos necessários para tal:
 \end{par}
+
 \begin{equation} \label{eq:pontosRuido}
 N°\, de\, pontos = \frac{Freq.\, Leitura}{Freq.\, Ruido} = \frac{1000}{60} = 16.667\, pontos
 \end{equation}
+
 \begin{par}
 Escolheu-se então $N = 17$ pontos para filtrar o sinal e adquirir uma boa aproximação. A partir dessa leitura, 
 foi possível encontrar a aproximação exibida na Figura{fig:est2filtro}. 
 \end{par}
+
 \begin{verbatim}
 figure, plot(t2,est2);
 hold on
@@ -221,8 +226,11 @@ plot(t2,smooth(est2,17),'r');
 \label{fig:est2filtro}
 \end{figure}
 
+\begin{par}
 A partir dos valores mostrados na figura \ref{fig:est2filtro}, pode-se então estimar o valor de ganho e 
 também obter o valor de $\tau_2$ a ser encontrado, de acordo com a equação:
+\end{par}
+
 \begin{equation*} \label{eq:tau2}
 \tau_2 = \frac{t}{4},\, em\, y(t)= 98\%\, _{regime}
 \end{equation*}
@@ -232,8 +240,65 @@ também obter o valor de $\tau_2$ a ser encontrado, de acordo com a equação:
 
 \subsection{Estágio 3}
 
+\begin{par}
+Os dados experimentais encontrados podem ser analisados na figura \ref{fig:est3_leitura}. 
+Utilizando o mesmo procedimento de filtragem apresentado no sub-tópico \ref{subsec:est2}, pode-se encontrar 
+a curva apresentada na Figura \ref{fig:est3_filtrado}.
+\end{par}
 
+\begin{figure}[H]
+\centering
+\includegraphics [width=4in]{Relatorio/est3_leitura.png}
+\caption{Filtro feito para o segundo estágio.}
+\label{fig:est3_leitura}
+\end{figure}
 
+\begin{figure}[H]
+\centering
+\includegraphics [width=4in]{Relatorio/est3_smooth.png}
+\caption{Filtro feito para o segundo estágio.}
+\label{fig:est3_filtrado}
+\end{figure}
+
+\begin{par}
+O valor de $\tau_3$ pode ser encontrado utilizando a seguinte equação:
+\end{par}
+
+\begin{equation} \label{eq:tau2}
+x^2 - \frac{1-b-\exp{^-2}}{1-a-\exp{^-1}} x + \frac{(1-b)exp{^-1} - (1-a)\exp{^-2}}{1-a-\exp{^-1}}=0
+\end{equation}
+\begin{par}
+Onde:
+\end{par}
+
+\begin{equation*}  
+a = y(\tau_2)/k
+\end{equation*}  
+\begin{equation*}  
+b = y(2\tau_2)/k
+\end{equation*}  
+
+\begin{par}
+Resolvendo para ambos os casos pelo código abaixo, e utilizando para isso 
+os pontos mostrados na Figura \ref{fig:est3_filtrado}:
+\end{par}
+
+\begin{verbatim}
+k3 = -0.9854;
+a = -0.1105 / k3;
+b = -0.4372 / k3;
+poly = [1 -(1-b-exp(-2))/(1-a-exp(-1)) ((1-b)*exp(-1)-(1-a)*exp(-2))/(1-a-exp(-1)) ];
+rpoly = roots(poly);
+tau3 = rpoly(1)
+\end{verbatim}
+
+\begin{equation*}
+\tau_3 = \frac{-\tau_2}{ln(x)}
+\end{equation*}
+
+\begin{equation}
+\tau_3 = 0.4417
+\end{equation}
 
 
 \end{document}
