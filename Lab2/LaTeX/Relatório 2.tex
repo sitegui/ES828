@@ -139,64 +139,58 @@ $f_e = 1 [Hz]$ e amplitude $V = 1 [V]$, e ler a resposta em cada um dos estágios
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Análise dos resultados}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\subsection{Estágio 1}
 \begin{par}
-Para o primeiro estágio, era esperado não haver dinâmica na resposta. Ao fazer a leitura, 
-foi encontrado um grande ruído, que pode ser identificado na Figura \ref{fig:est1}.
+Todos os dados adquiridos para cada um dos estágios foram coletados, e são apresentados na 
+Figura \ref{fig:param1}, gerada pelo código abaixo. 
 \end{par}
-\begin{figure}[H]
-\centering
-\includegraphics [width=4in]{Relatorio/est1_leitura.png}
-\caption{Leitura feita para o primeiro estágio.}
-\label{fig:est1}
-\end{figure}
-\begin{par}
-Sabe-se de imediato que os pontos próximos de zero podem ser considerados zero. 
-Basta então descobrir qual o valor médio dos valores abaixo. Uma maneira interessante 
-é o uso de mínimos quadrados para os valores abaixo de zero. O código abaixo resolve esse 
-problema de forma simples, e exibe seus resultados na Figura \ref{fig:est1minquad}. 
-O ganho encontrado é portanto de $-0.1011 \pm 0.0198$, colocando o ganho esperado dentro 
-de sua margem de erro.
-\end{par}
-
 \begin{verbatim}
-% Pega a parte debaixo do degrau
-indEst1 = find(est1<-0.04);
-est1l_min = est1(indEst1);
-trandom = 1:length(est1l_min);
-figure, scatter(trandom,est1l_min,'x')
-hold on
-
-% fit simples do vetor.
-[fit1,weight]=polyfit(trandom',est1l_min,0);
-[fit1p,delta] = polyval (fit1,trandom,weight);
-plot(trandom,fit1p,'r')
+load('single-sample.mat');
+plot(t, se, t, s1, t, s2, t, s3, t, s4);
+legend('Entrada', 'Estágio I', 'Estágio II', 'Estágio III',
+ 'Estágio IV', 'Location', 'NorthWest');
+xlabel('Tempo (s)');
 \end{verbatim}
 
 \begin{figure}[H]
 \centering
-\includegraphics [width=4in]{Relatorio/est1_minquad.png}
-\caption{Leitura feita para o primeiro estágio.}
-\label{fig:est1minquad}
+\includegraphics [width=4in]{Relatorio/parametros_01.png}
+\caption{Leituras feitas durante a aquisição.}
+\label{fig:param1}
 \end{figure}
+
+
+\subsection{Estágio 1}
+\begin{par}
+Para o primeiro estágio, era esperado não haver dinâmica na resposta. Ao fazer a leitura, 
+foi encontrado um grande ruído, que pode ser identificado na Figura \ref{fig:param1}.
+\end{par}
+
+\begin{par}
+Para estimar o ganho do primeiro estágio 
+basta descobrir qual o valor médio das medidas, após eliminar o ruído. Uma maneira interessante 
+é o uso de um filtro da mediana, gerando o seguinte resultado:
+\end{par}
+
+\begin{verbatim}
+entrada_mediana = median(se);
+saida_mediana = median(s1);
+k1 = saida_mediana/entrada_mediana
+\end{verbatim}
+
+\begin{equation} \label{eq:k1}
+k_1 = -0.0995
+\end{equation}
+
 
 \subsection{Estágio 2}
 \label{subsec:est2}
 
 \begin{par}
-Pode-se perceber pela Figura \ref{fig:est2} que há um grande ruído que nos impede de inferir os valores de ganho apropriadamente. 
+Pode-se perceber pela Figura \ref{fig:param1} que há um grande ruído que nos impede de inferir os valores de ganho apropriadamente. 
 Uma forma interessante de filtrar o ruído pode ser alcançada observando dois fatores: a leitura foi 
 feita com uma frequência de 1kHz, e a frequência da rede de distribuição (causa mais comum de ruídos 
 elétricos) é de 60Hz.
 \end{par}
-
-\begin{figure}[H]
-\centering
-\includegraphics [width=4in]{Relatorio/est2_leitura.png}
-\caption{Leitura feita para o segundo estágio.}
-\label{fig:est2}
-\end{figure}
 
 \begin{par}
 Tendo essas informações em vista, pode ser aplicado um filtro discreto de média rolante sobre o sinal 
@@ -221,8 +215,8 @@ plot(t2,smooth(est2,17),'r');
 
 \begin{figure}[H]
 \centering
-\includegraphics [width=4in]{Relatorio/est2_smooth.png}
-\caption{Filtro feito para o segundo estágio.}
+\includegraphics [width=4in]{Relatorio/parametros_03.png}
+\caption{Segundo estágio filtrado, com ponto selecionado em destaque.}
 \label{fig:est2filtro}
 \end{figure}
 
@@ -231,32 +225,47 @@ A partir dos valores mostrados na figura \ref{fig:est2filtro}, pode-se então est
 também obter o valor de $\tau_2$ a ser encontrado, de acordo com a equação:
 \end{par}
 
-\begin{equation*} \label{eq:tau2}
+\begin{equation*} \label{eq:tau2_1}
 \tau_2 = \frac{t}{4},\, em\, y(t)= 98\%\, _{regime}
 \end{equation*}
 \begin{equation} \label{eq:tau2}
-\tau_2 = 0.165
+\tau_2 =  0.0130
 \end{equation}
+
+\begin{par}
+O valor da constante $k_2$ pode ser encontrado fazendo uma mediana dos últimos 20 pontos apresentados 
+na Figura \ref{fig:est2filtro}.
+\end{par}
+
+\begin{verbatim}
+k12 = median(s2sm(end-20:end));
+k2 = k12/k1
+\end{verbatim}
+\begin{equation} \label{eq:k2}
+k_2 = -2.1626
+\end{equation}
+
 
 \subsection{Estágio 3}
 
 \begin{par}
-Os dados experimentais encontrados podem ser analisados na figura \ref{fig:est3_leitura}. 
+Os dados experimentais encontrados podem ser analisados na figura \ref{fig:param1}. 
 Utilizando o mesmo procedimento de filtragem apresentado no sub-tópico \ref{subsec:est2}, pode-se encontrar 
 a curva apresentada na Figura \ref{fig:est3_filtrado}.
 \end{par}
 
-\begin{figure}[H]
-\centering
-\includegraphics [width=4in]{Relatorio/est3_leitura.png}
-\caption{Filtro feito para o segundo estágio.}
-\label{fig:est3_leitura}
-\end{figure}
+\begin{verbatim}
+s3sm = smooth(s3, 17);
+plot(t, s3, ':', t, s3sm);
+legend('Saída', 'Saída suavizada');
+xlabel('Tempo (s)');
+\end{verbatim}
+
 
 \begin{figure}[H]
 \centering
-\includegraphics [width=4in]{Relatorio/est3_smooth.png}
-\caption{Filtro feito para o segundo estágio.}
+\includegraphics [width=4in]{Relatorio/parametros_05.png}
+\caption{Terceiro estágio filtrado, com pontos selecionados em destaque.}
 \label{fig:est3_filtrado}
 \end{figure}
 
@@ -267,6 +276,7 @@ O valor de $\tau_3$ pode ser encontrado utilizando a seguinte equação:
 \begin{equation} \label{eq:tau2}
 x^2 - \frac{1-b-\exp{^-2}}{1-a-\exp{^-1}} x + \frac{(1-b)exp{^-1} - (1-a)\exp{^-2}}{1-a-\exp{^-1}}=0
 \end{equation}
+
 \begin{par}
 Onde:
 \end{par}
@@ -274,6 +284,7 @@ Onde:
 \begin{equation*}  
 a = y(\tau_2)/k
 \end{equation*}  
+
 \begin{equation*}  
 b = y(2\tau_2)/k
 \end{equation*}  
@@ -284,12 +295,20 @@ os pontos mostrados na Figura \ref{fig:est3_filtrado}:
 \end{par}
 
 \begin{verbatim}
-k3 = -0.9854;
-a = -0.1105 / k3;
-b = -0.4372 / k3;
-poly = [1 -(1-b-exp(-2))/(1-a-exp(-1)) ((1-b)*exp(-1)-(1-a)*exp(-2))/(1-a-exp(-1)) ];
-rpoly = roots(poly);
-tau3 = rpoly(1)
+\% Encontrar y(tau2) e y(2*tau2)
+line(tau2*[1, 1], [-1, 0], 'Color', 'red', 'LineStyle', '-.');
+line(tau2*[2, 2], [-1, 0], 'Color', 'red', 'LineStyle', '-.');
+ytau = s3sm(find(t >= tau2, 1));
+y2tau = s3sm(find(t >= 2*tau2, 1));
+a = ytau/k123;
+b = y2tau/k123;
+
+\% Encontrar tau3
+coef1 = - (1-b-exp(-2)) / (1-a-exp(-1));
+coef2 = ((1-b)*exp(-1)-(1-a)*exp(-2)) / (1-a-exp(-1));
+x1x2 = roots([1, coef1, coef2]);
+x = x1x2(1); % x1x2(2) é exp(-1)
+tau3 = -tau2/log(x)
 \end{verbatim}
 
 \begin{equation*}
@@ -297,8 +316,53 @@ tau3 = rpoly(1)
 \end{equation*}
 
 \begin{equation}
-\tau_3 = 0.4417
+\tau_3 = 0.0232
 \end{equation}
+
+\begin{par}
+Para encontrar o ganho, o procedimento a ser feito é o mesmo daquele 
+feito no sub-tópico \ref{subsec:est2}.
+\end{par}
+
+\begin{verbatim}
+k123 = median(s3sm(end-20:end));
+k3 = k123/k12
+\end{verbatim}
+
+\begin{equation}
+k_3 = -4.5739
+\end{equation}
+
+
+\subsection{Estágio 4}
+\begin{par}
+Para o estágio 4, analisa-se \ref{fig:param1} novamente, buscando encontrar 
+a inclinação de subida de sua reta, assim facilmente encontrando o ganho 
+do estágio final da planta.
+\end{par}
+\begin{verbatim}
+inclinacao = (s4(400)-s4(100))/0.3;
+k4 = inclinacao/k123
+\end{verbatim}
+
+\begin{equation}
+k_4 = -9.1333
+\end{equation}
+
+\section{Resultado final}
+
+\begin{par}
+Por fim, utilizando todos os valores encontrados, pode ser feita a comparação entre a 
+planta teórica e a planta levantada durante o experimento. O resultado pode ser visto 
+na Figura \ref{fig:all_stages}
+\end{par}
+
+\begin{figure}[H]
+\centering
+\includegraphics [width=4in]{Relatorio/parametros_06.png}
+\caption{Comparação entre planta teórica e experimental.}
+\label{fig:all_stages}
+\end{figure}
 
 
 \end{document}

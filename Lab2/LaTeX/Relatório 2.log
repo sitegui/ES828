@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2015.3.13)  23 MAR 2015 02:30
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2015.3.13)  23 MAR 2015 04:32
 entering extended mode
 **Relatório*2.tex
 ("C:\Users\Augusto\Documents\GitHub\LabControle\Lab2\LaTeX\Relatório 2.tex"
@@ -272,9 +272,6 @@ LaTeX Info: Redefining \] on input line 2666.
 
 LaTeX Warning: Label `eq:tau2' multiply defined.
 
-
-LaTeX Warning: Label `eq:tau2' multiply defined.
-
 )
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 43.
 LaTeX Font Info:    ... okay on input line 43.
@@ -315,87 +312,66 @@ Non-PDF special ignored!
 ("C:\Users\Augusto\Documents\GitHub\LabControle\Lab2\LaTeX\Relatório 2.lof")
 \tf@lof=\write5
 
-[1] <Relatorio/est1_leitura.png, id=16, 422.32782pt x 316.18124pt>
-File: Relatorio/est1_leitura.png Graphic file (type png)
+[1]
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 146.
 
-<use Relatorio/est1_leitura.png>
-Package pdftex.def Info: Relatorio/est1_leitura.png used on input line 150.
-(pdftex.def)             Requested size: 289.07999pt x 216.42845pt.
- [2
-
- <C:/Users/Augusto/Documents/GitHub/LabControle/Lab2/LaTeX/Relatorio/est1_leitu
-ra.png (PNG copy)>]
-LaTeX Font Info:    Try loading font information for T1+cmtt on input line 163.
-
-
-("e:\Program Files\MiKTeX 2.9\tex\latex\base\t1cmtt.fd"
+ ("e:\Program Files\MiKTeX 2.9\tex\latex\base\t1cmtt.fd"
 File: t1cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
-<Relatorio/est1_minquad.png, id=25, 422.32782pt x 316.18124pt>
-File: Relatorio/est1_minquad.png Graphic file (type png)
+<Relatorio/parametros_01.png, id=16, 421.575pt x 316.18124pt>
+File: Relatorio/parametros_01.png Graphic file (type png)
 
-<use Relatorio/est1_minquad.png>
-Package pdftex.def Info: Relatorio/est1_minquad.png used on input line 179.
-(pdftex.def)             Requested size: 289.07999pt x 216.42845pt.
-
-<Relatorio/est2_leitura.png, id=26, 422.32782pt x 316.18124pt>
-File: Relatorio/est2_leitura.png Graphic file (type png)
-
-<use Relatorio/est2_leitura.png>
-Package pdftex.def Info: Relatorio/est2_leitura.png used on input line 196.
-(pdftex.def)             Requested size: 289.07999pt x 216.42845pt.
- [3 <C:/Users/Augusto/Documents/GitHub/LabControle/Lab2/LaTeX/Relatorio/est1_mi
-nquad.png (PNG copy)>]
-
-LaTeX Warning: Command \textdegree invalid in math mode on input line 208.
-
-<Relatorio/est2_smooth.png, id=32, 421.575pt x 316.18124pt>
-File: Relatorio/est2_smooth.png Graphic file (type png)
-
-<use Relatorio/est2_smooth.png>
-Package pdftex.def Info: Relatorio/est2_smooth.png used on input line 224.
+<use Relatorio/parametros_01.png>
+Package pdftex.def Info: Relatorio/parametros_01.png used on input line 156.
 (pdftex.def)             Requested size: 289.07999pt x 216.81442pt.
- [4 <C:/Users/Augusto/Documents/GitHub/LabControle/Lab2/LaTeX/Relatorio/est2_le
-itura.png (PNG copy)>]
-<Relatorio/est3_leitura.png, id=37, 422.32782pt x 316.18124pt>
-File: Relatorio/est3_leitura.png Graphic file (type png)
+ [2
 
-<use Relatorio/est3_leitura.png>
-Package pdftex.def Info: Relatorio/est3_leitura.png used on input line 251.
-(pdftex.def)             Requested size: 289.07999pt x 216.42845pt.
- [5 <C:/Users/Augusto/Documents/GitHub/LabControle/Lab2/LaTeX/Relatorio/est2_sm
-ooth.png (PNG copy)>]
-<Relatorio/est3_smooth.png, id=41, 421.575pt x 316.18124pt>
-File: Relatorio/est3_smooth.png Graphic file (type png)
+]
 
-<use Relatorio/est3_smooth.png>
-Package pdftex.def Info: Relatorio/est3_smooth.png used on input line 258.
+LaTeX Warning: Command \textdegree invalid in math mode on input line 202.
+
+[3 <C:/Users/Augusto/Documents/GitHub/LabControle/Lab2/LaTeX/Relatorio/parametr
+os_01.png (PNG copy)>]
+<Relatorio/parametros_03.png, id=30, 421.575pt x 316.18124pt>
+File: Relatorio/parametros_03.png Graphic file (type png)
+
+<use Relatorio/parametros_03.png>
+Package pdftex.def Info: Relatorio/parametros_03.png used on input line 218.
 (pdftex.def)             Requested size: 289.07999pt x 216.81442pt.
- [6 <C:/Users/Augusto/Documents/GitHub/LabControle/Lab2/LaTeX/Relatorio/est3_le
-itura.png (PNG copy)> <C:/Users/Augusto/Documents/GitHub/LabControle/Lab2/LaTeX
-/Relatorio/est3_smooth.png (PNG copy)>]
-Overfull \hbox (54.99184pt too wide) in paragraph at lines 293--293
-[]\T1/cmtt/m/n/12 poly = [1 -(1-b-exp(-2))/(1-a-exp(-1)) ((1-b)*exp(-1)-(1-a)*e
-xp(-2))/(1-a-exp(-1)) ];[] 
- []
+ [4 <C:/Users/Augusto/Documents/GitHub/LabControle/Lab2/LaTeX/Relatorio/paramet
+ros_03.png (PNG copy)>]
+<Relatorio/parametros_05.png, id=35, 421.575pt x 316.18124pt>
+File: Relatorio/parametros_05.png Graphic file (type png)
 
-[7] ("C:\Users\Augusto\Documents\GitHub\LabControle\Lab2\LaTeX\Relatório 2.aux
-")
+<use Relatorio/parametros_05.png>
+Package pdftex.def Info: Relatorio/parametros_05.png used on input line 267.
+(pdftex.def)             Requested size: 289.07999pt x 216.81442pt.
+ [5 <C:/Users/Augusto/Documents/GitHub/LabControle/Lab2/LaTeX/Relatorio/paramet
+ros_05.png (PNG copy)>]
+<Relatorio/parametros_06.png, id=39, 421.575pt x 316.18124pt>
+File: Relatorio/parametros_06.png Graphic file (type png)
+
+<use Relatorio/parametros_06.png>
+Package pdftex.def Info: Relatorio/parametros_06.png used on input line 362.
+(pdftex.def)             Requested size: 289.07999pt x 216.81442pt.
+ [6] [7 <C:/Users/Augusto/Documents/GitHub/LabControle/Lab2/LaTeX/Relatorio/par
+ametros_06.png (PNG copy)>]
+("C:\Users\Augusto\Documents\GitHub\LabControle\Lab2\LaTeX\Relatório 2.aux")
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 4154 strings out of 493921
- 60519 string characters out of 3147276
- 120941 words of memory out of 3000000
- 7351 multiletter control sequences out of 15000+200000
+ 4145 strings out of 493921
+ 60269 string characters out of 3147276
+ 121951 words of memory out of 3000000
+ 7344 multiletter control sequences out of 15000+200000
  15576 words of font info for 38 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 42i,7n,38p,324b,286s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 42i,6n,38p,324b,286s stack positions out of 5000i,500n,10000p,200000b,50000s
  <C:\Users\Augusto\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi60
-0\ectt1200.pk> <C:\Users\Augusto\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknap
-pen\ec\dpi600\ecbx1440.pk> <C:\Users\Augusto\AppData\Local\MiKTeX\2.9\fonts\pk\
+0\ecbx1440.pk> <C:\Users\Augusto\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknap
+pen\ec\dpi600\ectt1200.pk> <C:\Users\Augusto\AppData\Local\MiKTeX\2.9\fonts\pk\
 ljfour\jknappen\ec\dpi600\ecrm1200.pk> <C:\Users\Augusto\AppData\Local\MiKTeX\2
 .9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1200.pk> <C:\Users\Augusto\AppData\Lo
 cal\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1728.pk> <C:\Users\August
@@ -410,9 +386,9 @@ lic/amsfonts/cm/cmmi8.pfb><e:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfo
 nts/cm/cmr12.pfb><e:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cm
 r8.pfb><e:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><
 e:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on "Relatório 2.pdf" (8 pages, 248347 bytes).
+Output written on "Relatório 2.pdf" (8 pages, 208694 bytes).
 PDF statistics:
- 387 PDF objects out of 1000 (max. 8388607)
+ 403 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 31 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 21 words of extra memory for PDF output out of 10000 (max. 10000000)
 
