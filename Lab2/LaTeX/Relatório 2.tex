@@ -4,10 +4,20 @@
 \usepackage[brazil]{babel}
 \usepackage[latin1]{inputenc} 
 \usepackage[T1]{fontenc}
-\usepackage{epsfig}
 \usepackage{psfrag}
 \usepackage{fullpage}
 \usepackage{setspace}
+\usepackage{graphicx}
+\usepackage{epsfig}
+\usepackage{epstopdf}
+\usepackage{color}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage[section]{placeins}
+\usepackage{float}
+\usepackage{fixltx2e}
+\usepackage{amsmath}
+
 %----------------------------
 
 
@@ -124,7 +134,7 @@ suficiente de modo a simular a repetição de degraus na entrada.
 Para o procedimento experimental, foi utilizada a bancada Elvis para aquisição dos sinais do
 circuito, seguindo as instruções de montagem apresentadas no roteiro. Logo após, foi utilizado 
 o software de aquisição LabView, para aplicar uma entrada de onda quadrada com frequência 
-$f_e = 1 [Hz]$ e amplitude $V = 1 [V], e ler a resposta em cada um dos estágios.
+$f_e = 1 [Hz]$ e amplitude $V = 1 [V]$, e ler a resposta em cada um dos estágios.
 \end{par}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -132,54 +142,98 @@ $f_e = 1 [Hz]$ e amplitude $V = 1 [V], e ler a resposta em cada um dos estágios.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Estágio 1}
-Para o primeiro estágio, era esperado não haver dinâmica na resposta.
+\begin{par}
+Para o primeiro estágio, era esperado não haver dinâmica na resposta. Ao fazer a leitura, 
+foi encontrado um grande ruído, que pode ser identificado na Figura \ref{fig:est1}.
+\end{par}
+\begin{figure}[H]
+\centering
+\includegraphics [width=4in]{Relatorio/est1_leitura.png}
+\caption{Leitura feita para o primeiro estágio.}
+\label{fig:est1}
+\end{figure}
+\begin{par}
+Sabe-se de imediato que os pontos próximos de zero podem ser considerados zero. 
+Basta então descobrir qual o valor médio dos valores abaixo. Uma maneira interessante 
+é o uso de mínimos quadrados para os valores abaixo de zero. O código abaixo resolve esse 
+problema de forma simples, e exibe seus resultados na Figura \ref{fig:est1minquad}. 
+O ganho encontrado é portanto de $-0.1011 \pm 0.0198$, colocando o ganho esperado dentro 
+de sua margem de erro.
+\end{par}
+
+\begin{verbatim}
+% Pega a parte debaixo do degrau
+indEst1 = find(est1<-0.04);
+est1l_min = est1(indEst1);
+trandom = 1:length(est1l_min);
+figure, scatter(trandom,est1l_min,'x')
+hold on
+
+% fit simples do vetor.
+[fit1,weight]=polyfit(trandom',est1l_min,0);
+[fit1p,delta] = polyval (fit1,trandom,weight);
+plot(trandom,fit1p,'r')
+\end{verbatim}
+
+\begin{figure}[H]
+\centering
+\includegraphics [width=4in]{Relatorio/est1_minquad.png}
+\caption{Leitura feita para o primeiro estágio.}
+\label{fig:est1minquad}
+\end{figure}
 
 \subsection{Estágio 2}
 
+\begin{par}
+Pode-se perceber pela Figura \ref{fig:est2} que há um grande ruído que nos impede de inferir os valores de ganho apropriadamente. 
+Uma forma interessante de filtrar o ruído pode ser alcançada observando dois fatores: a leitura foi 
+feita com uma frequência de 1kHz, e a frequência da rede de distribuição (causa mais comum de ruídos 
+elétricos) é de 60Hz.
+\end{par}
+\begin{figure}[H]
+\centering
+\includegraphics [width=4in]{Relatorio/est2_leitura.png}
+\caption{Leitura feita para o segundo estágio.}
+\label{fig:est2}
+\end{figure}
+\begin{par}
+Tendo essas informações em vista, pode ser aplicado um filtro discreto de média rolante sobre o sinal 
+de forma a eliminar o ruído. A idéia é fazer a média de um ciclo inteiro de 60Hz, eliminando assim o ruído. 
+Assim, basta escolher a quantidade da pontos necessários para tal:
+\end{par}
+\begin{equation} \label{eq:pontosRuido}
+N°\, de\, pontos = \frac{Freq.\, Leitura}{Freq.\, Ruido} = \frac{1000}{60} = 16.667\, pontos
+\end{equation}
+\begin{par}
+Escolheu-se então $N = 17$ pontos para filtrar o sinal e adquirir uma boa aproximação. A partir dessa leitura, 
+foi possível encontrar a aproximação exibida na Figura{fig:est2filtro}. 
+\end{par}
+\begin{verbatim}
+figure, plot(t2,est2);
+hold on
+plot(t2,smooth(est2,17),'r');
+\end{verbatim}
+
+\begin{figure}[H]
+\centering
+\includegraphics [width=4in]{Relatorio/est2_smooth.png}
+\caption{Filtro feito para o segundo estágio.}
+\label{fig:est2filtro}
+\end{figure}
+
+A partir dos valores mostrados na figura \ref{fig:est2filtro}, pode-se então estimar o valor de ganho e 
+também obter o valor de $\tau_2$ a ser encontrado, de acordo com a equação:
+\begin{equation*} \label{eq:tau2}
+\tau_2 = \frac{t}{4},\, em\, y(t)= 98\%\, _{regime}
+\end{equation*}
+\begin{equation} \label{eq:tau2}
+\tau_2 = 0.165
+\end{equation}
+
 \subsection{Estágio 3}
 
-\subsection{Estágio 4}
 
- \begin{center}
-%	   \includegraphics*[width=15.5cm]{lista1g3.png}
- \end{center}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Circuito Integrador}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-Usando o modelo de amp-op do item anterior, contruímos um circuito integrador com resistência
-de entrada $R=1715\Omega$, $C=29$nF e resistência em paralelo com capacitor $R_F=70$k$\Omega$. 
-Os valor de C foi escolhido de forma que o pico do sinal de saída seja igual a 5V em
-regime permanente dada uma entrada de onda quadrada de 1V de amplitude e período 1ms.
-
-Para um circuito integrador, a saída é dada por
-
-\[ v_o(t) = -\frac{1}{RC}\int^0_{-\infty} v_i(\lambda)d\lambda  -\frac{1}{RC}\int^t_{0} v_i(\lambda)d\lambda\]
-
-Estamos interessados no valor de pico em regime permanente. O valor de C para o qual o
-valor de pico da saída
-é 5V será dado então por $C=T/10R = 29$nF, onde $T=0,5$ms é a largura do pulso.
-
-Para que constante de tempo $\tau=R_F\cdot C$ do resistor em paralelo com C seja de pelo menos
-2ms, usamos $R_F=70$k$\Omega$.
-
-O gráfico 4 apresenta a análise do transitório no intervalo de 1$\mu$s a 10ms. V(R1:1) e V(R2:2)
-representam $V_O$ e $V_I$, respectivamente.
-
- \begin{center}
-%	   \includegraphics*[width=15.5cm]{lista1g4.png}
- \end{center}
-
-A resposta em frequência do integrador será dada por $\frac{V_O}{V_I}(f) = -\frac{Z_2}{Z_1}=
--\frac{R_F/R}{1+j2\pi f R_FC}$, onde $R_F$ é o valor da resistência em paralelo com o capacitor.
-O gráfico 5 apresenta a as tensões $V_O$ e $V_I$ %(V(R2:2) e V(R1:1), respectivamente)
-do integrador em função da frequência.
-Observa-se o circuito comporta-se como um filtro passa-baixas.
-
- \begin{center}
-%	   \includegraphics*[width=15.5cm]{lista1g5.png}
- \end{center}
 
 
 \end{document}

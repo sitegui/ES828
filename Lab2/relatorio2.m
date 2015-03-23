@@ -22,22 +22,40 @@ est2 = a2( :,2);
 est3 = a3( :,2);
 est4 = a4( :,2);
 
-figure, scatter(t1,est1);
-figure, scatter(t2,est2);
-figure, plot(t3,est3);
-figure, plot(t4,est4);
+figure, scatter(t1,est1,'x');
+title('Leitura para o primeiro estágio.')
+xlabel('Tempo [s]')
+ylabel('Amplitude [V]')
+figure, scatter(t2,est2,'x');
+title('Leitura para o segundo estágio.')
+xlabel('Tempo [s]')
+ylabel('Amplitude [V]')
+
+figure, plot(t3,est3,'x');
+title('Leitura para o terceiro estágio.')
+xlabel('Tempo [s]')
+ylabel('Amplitude [V]')
+figure, plot(t4,est4,'x');
+title('Leitura para o quarto estágio.')
+xlabel('Tempo [s]')
+ylabel('Amplitude [V]')
 
 % Maneira de achar meio do degrau "corretamente"
 % Pego a parte debaixo do degrau
 indEst1 = find(est1<-0.04);
 est1l_min = est1(indEst1);
 trandom = 1:length(est1l_min);
-figure, scatter(trandom,est1l_min)
+figure, scatter(trandom,est1l_min,'x')
 hold on
+title('Fit encontrado para a leitura dos dados apresentados.')
+xlabel('Pontos')
+ylabel('Amplitude [V]')
 % fit simples do vetor.
 [fit1,weight]=polyfit(trandom',est1l_min,0);
 [fit1p,delta] = polyval (fit1,trandom,weight);
+
 plot(trandom,fit1p,'r')
+legend('Leitura estágio 1', 'Reta -0.1011')
 % Para a planta 1, a saída degrau é de -0.1011+-0.0198 (fit1p +- delta)
 
 % Dei uma procurada sobre o que pode estar causando o ruído forte, e o que
@@ -53,6 +71,7 @@ plot(t2,smooth(est2,17),'r');
 title('Saída do estágio 2 para a planta utilizada.')
 xlabel('Tempo de aquisição [s]');
 ylabel('Tensão de saída [V]');
+legend('Sinal com ruído','Sinal filtrado')
 % Tau2 encontrado por datatips
 tau2 = (11.54 - 10.88)/4
 
@@ -62,6 +81,7 @@ plot(t3,smooth(est3,17),'r');
 title('Saída do estágio 3 para a planta utilizada.')
 xlabel('Tempo de aquisição [s]');
 ylabel('Tensão de saída [V]');
+legend('Sinal com ruído','Sinal filtrado')
 
 k3 = -0.9854;
 a = -0.1105 / k3;
