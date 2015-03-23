@@ -1,7 +1,10 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2015.3.13)  23 MAR 2015 04:32
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.3.23)  23 MAR 2015 12:35
 entering extended mode
-**Relatório*2.tex
-("C:\Users\Augusto\Documents\GitHub\LabControle\Lab2\LaTeX\Relatório 2.tex"
+**C:/Users/Vinícius/Desktop/Graduacao/9*semestre/ES828/LabControle/Lab2/LaTeX/
+Relatório*2.tex
+
+("C:/Users/Vinícius/Desktop/Graduacao/9 semestre/ES828/LabControle/Lab2/LaTeX/
+Relatório 2.tex"
 LaTeX2e <2011/06/27>
 Babel <v3.8m> and hyphenation patterns for english, afrikaans, ancientgreek, ar
 abic, armenian, assamese, basque, bengali, bokmal, bulgarian, catalan, coptic, 
@@ -13,9 +16,9 @@ german-x-2013-05-26, nynorsk, oriya, panjabi, pinyin, polish, portuguese, roman
 ian, russian, sanskrit, serbian, slovak, slovenian, spanish, swedish, swissgerm
 an, tamil, telugu, turkish, turkmen, ukenglish, ukrainian, uppersorbian, usengl
 ishmax, welsh, loaded.
-("e:\Program Files\MiKTeX 2.9\tex\latex\base\article.cls"
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\article.cls"
 Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
-("e:\Program Files\MiKTeX 2.9\tex\latex\base\size12.clo"
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\size12.clo"
 File: size12.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 )
 \c@part=\count79
@@ -30,19 +33,19 @@ File: size12.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 \belowcaptionskip=\skip42
 \bibindent=\dimen102
 )
-("e:\Program Files\MiKTeX 2.9\tex\generic\babel\babel.sty"
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\babel\babel.sty"
 Package: babel 2008/07/08 v3.8m The Babel package
 
 *************************************
 * Local config file bblopts.cfg used
 *
-("e:\Program Files\MiKTeX 2.9\tex\latex\00miktex\bblopts.cfg"
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\00miktex\bblopts.cfg"
 File: bblopts.cfg 2006/07/31 v1.0 MiKTeX 'babel' configuration
 )
-("e:\Program Files\MiKTeX 2.9\tex\generic\babel\portuges.ldf"
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\babel\portuges.ldf"
 Language: portuges 2008/03/18 v1.2q Portuguese support from the babel system
 
-("e:\Program Files\MiKTeX 2.9\tex\generic\babel\babel.def"
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\babel\babel.def"
 File: babel.def 2008/07/08 v3.8m Babel common definitions
 \babel@savecnt=\count87
 \U@D=\dimen103
@@ -50,42 +53,42 @@ File: babel.def 2008/07/08 v3.8m Babel common definitions
 \l@brazil = a dialect from \language\l@portuges 
 Package babel Info: Making " an active character on input line 145.
 ))
-("e:\Program Files\MiKTeX 2.9\tex\latex\base\inputenc.sty"
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\inputenc.sty"
 Package: inputenc 2008/03/30 v1.1d Input encoding file
 \inpenc@prehook=\toks14
 \inpenc@posthook=\toks15
 
-("e:\Program Files\MiKTeX 2.9\tex\latex\base\latin1.def"
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\latin1.def"
 File: latin1.def 2008/03/30 v1.1d Input encoding file
 ))
-("e:\Program Files\MiKTeX 2.9\tex\latex\base\fontenc.sty"
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\fontenc.sty"
 Package: fontenc 2005/09/27 v1.99g Standard LaTeX package
 
-("e:\Program Files\MiKTeX 2.9\tex\latex\base\t1enc.def"
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\t1enc.def"
 File: t1enc.def 2005/09/27 v1.99g Standard LaTeX file
 LaTeX Font Info:    Redeclaring font encoding T1 on input line 43.
 ))
-("e:\Program Files\MiKTeX 2.9\tex\latex\psfrag\psfrag.sty"
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\psfrag\psfrag.sty"
 Package: psfrag 1998/04/11 v3.04 PSfrag (MCG)
 
-("e:\Program Files\MiKTeX 2.9\tex\latex\graphics\graphics.sty"
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\graphics.sty"
 Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
 
-("e:\Program Files\MiKTeX 2.9\tex\latex\graphics\trig.sty"
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\trig.sty"
 Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
 )
-("e:\Program Files\MiKTeX 2.9\tex\latex\00miktex\graphics.cfg"
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\00miktex\graphics.cfg"
 File: graphics.cfg 2007/01/18 v1.5 graphics configuration of teTeX/TeXLive
 )
 Package graphics Info: Driver file: pdftex.def on input line 91.
 
-("e:\Program Files\MiKTeX 2.9\tex\latex\pdftex-def\pdftex.def"
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\pdftex-def\pdftex.def"
 File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
 
-("e:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\infwarerr.sty"
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\infwarerr.sty"
 Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
 )
-("e:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\ltxcmds.sty"
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\ltxcmds.sty"
 Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
 )
 \Gread@gobject=\count88
@@ -94,50 +97,50 @@ Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
 \pfg@scount=\count90
 \pfg@temp=\write3
 )
-("e:\Program Files\MiKTeX 2.9\tex\latex\preprint\fullpage.sty"
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\preprint\fullpage.sty"
 Package: fullpage 1999/02/23 1.1 (PWD)
 \FP@margin=\skip43
 )
-("e:\Program Files\MiKTeX 2.9\tex\latex\setspace\setspace.sty"
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\setspace\setspace.sty"
 Package: setspace 2011/12/19 v6.7a set line spacing
 )
-("e:\Program Files\MiKTeX 2.9\tex\latex\graphics\graphicx.sty"
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\graphicx.sty"
 Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
 
-("e:\Program Files\MiKTeX 2.9\tex\latex\graphics\keyval.sty"
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\keyval.sty"
 Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
 \KV@toks@=\toks16
 )
 \Gin@req@height=\dimen104
 \Gin@req@width=\dimen105
 )
-("e:\Program Files\MiKTeX 2.9\tex\latex\graphics\epsfig.sty"
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\epsfig.sty"
 Package: epsfig 1999/02/16 v1.7a (e)psfig emulation (SPQR)
 \epsfxsize=\dimen106
 \epsfysize=\dimen107
 )
-("e:\Program Files\MiKTeX 2.9\tex\latex\oberdiek\epstopdf.sty"
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\oberdiek\epstopdf.sty"
 Package: epstopdf 2010/02/09 v2.5 Conversion with epstopdf on the fly (HO)
 
-("e:\Program Files\MiKTeX 2.9\tex\latex\oberdiek\epstopdf-base.sty"
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\oberdiek\epstopdf-base.sty"
 Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
 
-("e:\Program Files\MiKTeX 2.9\tex\latex\oberdiek\grfext.sty"
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\oberdiek\grfext.sty"
 Package: grfext 2010/08/19 v1.1 Manage graphics extensions (HO)
 
-("e:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\kvdefinekeys.sty"
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\kvdefinekeys.sty"
 Package: kvdefinekeys 2011/04/07 v1.3 Define keys (HO)
 ))
-("e:\Program Files\MiKTeX 2.9\tex\latex\oberdiek\kvoptions.sty"
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\oberdiek\kvoptions.sty"
 Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
 
-("e:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\kvsetkeys.sty"
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\kvsetkeys.sty"
 Package: kvsetkeys 2012/04/25 v1.16 Key value parser (HO)
 
-("e:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\etexcmds.sty"
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\etexcmds.sty"
 Package: etexcmds 2011/02/16 v1.5 Avoid name clashes with e-TeX commands (HO)
 
-("e:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\ifluatex.sty"
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\ifluatex.sty"
 Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
 Package ifluatex Info: LuaTeX not detected.
 )
@@ -146,11 +149,11 @@ Package etexcmds Info: Could not find \expanded.
 (etexcmds)             that some package has redefined \expanded.
 (etexcmds)             In the latter case, load this package earlier.
 )))
-("e:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\pdftexcmds.sty"
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\pdftexcmds.sty"
 Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
 )
 
-("e:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\ifpdf.sty"
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\ifpdf.sty"
 Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
 Package ifpdf Info: pdfTeX in PDF mode is detected.
 )
@@ -164,18 +167,18 @@ Package grfext Info: Graphics extension search list:
 G,.JBIG2,.JB2,.eps]
 (grfext)             \AppendGraphicsExtensions on input line 452.
 ))
-("e:\Program Files\MiKTeX 2.9\tex\latex\graphics\color.sty"
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\color.sty"
 Package: color 2005/11/14 v1.0j Standard LaTeX Color (DPC)
 
-("e:\Program Files\MiKTeX 2.9\tex\latex\00miktex\color.cfg"
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\00miktex\color.cfg"
 File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
 )
 Package color Info: Driver file: pdftex.def on input line 130.
 )
-("e:\Program Files\MiKTeX 2.9\tex\latex\caption\caption.sty"
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\caption\caption.sty"
 Package: caption 2013/05/02 v3.3-89 Customizing captions (AR)
 
-("e:\Program Files\MiKTeX 2.9\tex\latex\caption\caption3.sty"
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\caption\caption3.sty"
 Package: caption3 2013/05/02 v1.6-88 caption3 kernel (AR)
 Package caption3 Info: TeX engine: e-TeX on input line 57.
 \captionmargin=\dimen108
@@ -188,15 +191,15 @@ Package caption3 Info: TeX engine: e-TeX on input line 57.
 )
 \c@ContinuedFloat=\count91
 )
-("e:\Program Files\MiKTeX 2.9\tex\latex\caption\subcaption.sty"
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\caption\subcaption.sty"
 Package: subcaption 2013/02/03 v1.1-62 Sub-captions (AR)
 \c@subfigure=\count92
 \c@subtable=\count93
 )
-("e:\Program Files\MiKTeX 2.9\tex\latex\placeins\placeins.sty"
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\placeins\placeins.sty"
 Package: placeins 2005/04/18  v 2.2
 )
-("e:\Program Files\MiKTeX 2.9\tex\latex\float\float.sty"
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\float\float.sty"
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \c@float@type=\count94
 \float@exts=\toks17
@@ -204,28 +207,28 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \@float@everytoks=\toks18
 \@floatcapt=\box27
 )
-("e:\Program Files\MiKTeX 2.9\tex\latex\base\fixltx2e.sty"
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\fixltx2e.sty"
 Package: fixltx2e 2006/09/13 v1.1m fixes to LaTeX
 LaTeX Info: Redefining \em on input line 420.
 )
-("e:\Program Files\MiKTeX 2.9\tex\latex\amsmath\amsmath.sty"
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsmath\amsmath.sty"
 Package: amsmath 2013/01/14 v2.14 AMS math features
 \@mathmargin=\skip44
 
 For additional information on amsmath, use the `?' option.
-("e:\Program Files\MiKTeX 2.9\tex\latex\amsmath\amstext.sty"
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsmath\amstext.sty"
 Package: amstext 2000/06/29 v2.01
 
-("e:\Program Files\MiKTeX 2.9\tex\latex\amsmath\amsgen.sty"
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsmath\amsgen.sty"
 File: amsgen.sty 1999/11/30 v2.0
 \@emptytoks=\toks19
 \ex@=\dimen115
 ))
-("e:\Program Files\MiKTeX 2.9\tex\latex\amsmath\amsbsy.sty"
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsmath\amsbsy.sty"
 Package: amsbsy 1999/11/29 v1.2d
 \pmbraise@=\dimen116
 )
-("e:\Program Files\MiKTeX 2.9\tex\latex\amsmath\amsopn.sty"
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsmath\amsopn.sty"
 Package: amsopn 1999/12/14 v2.01 operator names
 )
 \inf@bad=\count95
@@ -268,7 +271,8 @@ LaTeX Info: Redefining \] on input line 2666.
 )
 \c@teorema=\count107
 
-("C:\Users\Augusto\Documents\GitHub\LabControle\Lab2\LaTeX\Relatório 2.aux"
+("C:\Users\Vinícius\Desktop\Graduacao\9 semestre\ES828\LabControle\Lab2\LaTeX\
+Relatório 2.aux"
 
 LaTeX Warning: Label `eq:tau2' multiply defined.
 
@@ -285,7 +289,7 @@ LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 43.
 LaTeX Font Info:    ... okay on input line 43.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 43.
 LaTeX Font Info:    ... okay on input line 43.
- ("e:\Program Files\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
+ ("C:\Program Files (x86)\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count108
 \scratchdimen=\dimen124
@@ -306,16 +310,18 @@ Package caption Info: End \AtBeginDocument code.
 Non-PDF special ignored!
 
 {C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}]
-("C:\Users\Augusto\Documents\GitHub\LabControle\Lab2\LaTeX\Relatório 2.toc")
+("C:\Users\Vinícius\Desktop\Graduacao\9 semestre\ES828\LabControle\Lab2\LaTeX\
+Relatório 2.toc")
 \tf@toc=\write4
 
-("C:\Users\Augusto\Documents\GitHub\LabControle\Lab2\LaTeX\Relatório 2.lof")
+("C:\Users\Vinícius\Desktop\Graduacao\9 semestre\ES828\LabControle\Lab2\LaTeX\
+Relatório 2.lof")
 \tf@lof=\write5
-
-[1]
+ [1]
 LaTeX Font Info:    Try loading font information for T1+cmtt on input line 146.
 
- ("e:\Program Files\MiKTeX 2.9\tex\latex\base\t1cmtt.fd"
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\t1cmtt.fd"
 File: t1cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 <Relatorio/parametros_01.png, id=16, 421.575pt x 316.18124pt>
@@ -330,63 +336,63 @@ Package pdftex.def Info: Relatorio/parametros_01.png used on input line 156.
 
 LaTeX Warning: Command \textdegree invalid in math mode on input line 202.
 
-[3 <C:/Users/Augusto/Documents/GitHub/LabControle/Lab2/LaTeX/Relatorio/parametr
-os_01.png (PNG copy)>]
+[3 <C:/Users/Vinícius/Desktop/Graduacao/9 semestre/ES828/LabControle/Lab2/LaTe
+X/Relatorio/parametros_01.png (PNG copy)>]
 <Relatorio/parametros_03.png, id=30, 421.575pt x 316.18124pt>
 File: Relatorio/parametros_03.png Graphic file (type png)
 
 <use Relatorio/parametros_03.png>
 Package pdftex.def Info: Relatorio/parametros_03.png used on input line 218.
 (pdftex.def)             Requested size: 289.07999pt x 216.81442pt.
- [4 <C:/Users/Augusto/Documents/GitHub/LabControle/Lab2/LaTeX/Relatorio/paramet
-ros_03.png (PNG copy)>]
+ [4 <C:/Users/Vinícius/Desktop/Graduacao/9 semestre/ES828/LabControle/Lab2/LaT
+eX/Relatorio/parametros_03.png (PNG copy)>]
 <Relatorio/parametros_05.png, id=35, 421.575pt x 316.18124pt>
 File: Relatorio/parametros_05.png Graphic file (type png)
 
 <use Relatorio/parametros_05.png>
 Package pdftex.def Info: Relatorio/parametros_05.png used on input line 267.
 (pdftex.def)             Requested size: 289.07999pt x 216.81442pt.
- [5 <C:/Users/Augusto/Documents/GitHub/LabControle/Lab2/LaTeX/Relatorio/paramet
-ros_05.png (PNG copy)>]
+ [5 <C:/Users/Vinícius/Desktop/Graduacao/9 semestre/ES828/LabControle/Lab2/LaT
+eX/Relatorio/parametros_05.png (PNG copy)>]
 <Relatorio/parametros_06.png, id=39, 421.575pt x 316.18124pt>
 File: Relatorio/parametros_06.png Graphic file (type png)
 
 <use Relatorio/parametros_06.png>
 Package pdftex.def Info: Relatorio/parametros_06.png used on input line 362.
 (pdftex.def)             Requested size: 289.07999pt x 216.81442pt.
- [6] [7 <C:/Users/Augusto/Documents/GitHub/LabControle/Lab2/LaTeX/Relatorio/par
-ametros_06.png (PNG copy)>]
-("C:\Users\Augusto\Documents\GitHub\LabControle\Lab2\LaTeX\Relatório 2.aux")
+ [6] [7 <C:/Users/Vinícius/Desktop/Graduacao/9 semestre/ES828/LabControle/Lab2
+/LaTeX/Relatorio/parametros_06.png (PNG copy)>]
+("C:\Users\Vinícius\Desktop\Graduacao\9 semestre\ES828\LabControle\Lab2\LaTeX\
+Relatório 2.aux")
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
  4145 strings out of 493921
- 60269 string characters out of 3147276
+ 61125 string characters out of 3144924
  121951 words of memory out of 3000000
  7344 multiletter control sequences out of 15000+200000
  15576 words of font info for 38 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 42i,6n,38p,324b,286s stack positions out of 5000i,500n,10000p,200000b,50000s
- <C:\Users\Augusto\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi60
-0\ecbx1440.pk> <C:\Users\Augusto\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknap
-pen\ec\dpi600\ectt1200.pk> <C:\Users\Augusto\AppData\Local\MiKTeX\2.9\fonts\pk\
-ljfour\jknappen\ec\dpi600\ecrm1200.pk> <C:\Users\Augusto\AppData\Local\MiKTeX\2
-.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1200.pk> <C:\Users\Augusto\AppData\Lo
-cal\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1728.pk> <C:\Users\August
-o\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1440.pk> <C:\
-Users\Augusto\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecti1
-440.pk> <C:\Users\Augusto\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\
-dpi600\ecbx2488.pk> <C:\Users\Augusto\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\
-jknappen\ec\dpi600\eccc1200.pk> <C:\Users\Augusto\AppData\Local\MiKTeX\2.9\font
-s\pk\ljfour\jknappen\ec\dpi600\eccc2074.pk><e:/Program Files/MiKTeX 2.9/fonts/t
-ype1/public/amsfonts/cm/cmmi12.pfb><e:/Program Files/MiKTeX 2.9/fonts/type1/pub
-lic/amsfonts/cm/cmmi8.pfb><e:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfo
-nts/cm/cmr12.pfb><e:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cm
-r8.pfb><e:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><
-e:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on "Relatório 2.pdf" (8 pages, 208694 bytes).
+ 42i,6n,38p,401b,286s stack positions out of 5000i,500n,10000p,200000b,50000s
+ <C:\ProgramData\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1440.pk> <
+C:\ProgramData\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ectt1200.pk> <C:\P
+rogramData\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1200.pk> <C:\Progr
+amData\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1200.pk> <C:\ProgramDa
+ta\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1728.pk> <C:\ProgramData\M
+iKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1440.pk> <C:\ProgramData\MiKTe
+X\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecti1440.pk> <C:\ProgramData\MiKTeX\2.
+9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx2488.pk> <C:\ProgramData\MiKTeX\2.9\fo
+nts\pk\ljfour\jknappen\ec\dpi600\eccc1200.pk> <C:\ProgramData\MiKTeX\2.9\fonts\
+pk\ljfour\jknappen\ec\dpi600\eccc2074.pk><C:/Program Files (x86)/MiKTeX 2.9/fon
+ts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts
+/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/ty
+pe1/public/amsfonts/cm/cmr12.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1
+/public/amsfonts/cm/cmr8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/pub
+lic/amsfonts/cm/cmsy10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/publi
+c/amsfonts/cm/cmsy8.pfb>
+Output written on "Relatório 2.pdf" (8 pages, 208856 bytes).
 PDF statistics:
  403 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

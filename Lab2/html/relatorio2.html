@@ -1,0 +1,225 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>relatorio2</title><meta name="generator" content="MATLAB 8.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2015-03-22"><meta name="DC.source" content="relatorio2.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, tt, code { font-size:12px; }
+pre { margin:0px 0px 20px; }
+pre.error { color:red; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><pre class="codeinput">close <span class="string">all</span>; clear <span class="string">all</span>; clc;
+
+load <span class="string">matlab.mat</span>
+
+t1 = a1(:, 1) * 10e-3;
+t2 = a2(:, 1) * 10e-3;
+t3 = a3(:, 1) * 10e-3;
+t4 = a4(:, 1) * 10e-3;
+
+t1 = t1 - t1(1);
+t2 = t2 - t2(1);
+t3 = t3 - t3(1);
+t4 = t4 - t4(1);
+
+t11 = a11(:, 1) * 10e-3;
+t22 = a22(:, 1) * 10e-3;
+t33 = a33(:, 1) * 10e-3;
+t44 = a44(:, 1) * 10e-3;
+
+est1 = a1( :,2);
+est2 = a2( :,2);
+est3 = a3( :,2);
+est4 = a4( :,2);
+
+figure, scatter(t1,est1);
+figure, scatter(t2,est2);
+figure, plot(t3,est3);
+figure, plot(t4,est4);
+
+<span class="comment">% Maneira de achar meio do degrau "corretamente"</span>
+<span class="comment">% Pego a parte debaixo do degrau</span>
+indEst1 = find(est1&lt;-0.04);
+est1l_min = est1(indEst1);
+trandom = 1:length(est1l_min);
+figure, scatter(trandom,est1l_min)
+hold <span class="string">on</span>
+<span class="comment">% fit simples do vetor.</span>
+[fit1,weight]=polyfit(trandom',est1l_min,0);
+[fit1p,delta] = polyval (fit1,trandom,weight);
+plot(trandom,fit1p,<span class="string">'r'</span>)
+<span class="comment">% Para a planta 1, a sa&iacute;da degrau &eacute; de -0.1011+-0.0198 (fit1p +- delta)</span>
+
+<span class="comment">% Dei uma procurada sobre o que pode estar causando o ru&iacute;do forte, e o que</span>
+<span class="comment">% encontrei foi o seguinte: a frequ&ecirc;ncia de 60Hz da rede de energia est&aacute;</span>
+<span class="comment">% ferrando o nosso sinal. 17 para a fun&ccedil;&atilde;o de m&eacute;dia rolante n&atilde;o &eacute;</span>
+<span class="comment">% aleat&oacute;rio, &eacute; na verdade uma tentativa de eliminar a influ&ecirc;ncia desses 60</span>
+<span class="comment">% Hz (taxa de amostragem = 1000 Hz, ta / freqruido = ~17 pontos de largura</span>
+<span class="comment">% do per&iacute;odo). Pra entender melhor:</span>
+<span class="comment">% http://www.mathworks.com/help/signal/examples/signal-smoothing.html</span>
+figure, plot(t2,est2);
+hold <span class="string">on</span>
+plot(t2,smooth(est2,17),<span class="string">'r'</span>);
+title(<span class="string">'Sa&iacute;da do est&aacute;gio 2 para a planta utilizada.'</span>)
+xlabel(<span class="string">'Tempo de aquisi&ccedil;&atilde;o [s]'</span>);
+ylabel(<span class="string">'Tens&atilde;o de sa&iacute;da [V]'</span>);
+<span class="comment">% Tau2 encontrado por datatips</span>
+tau2 = (11.54 - 10.88)/4
+
+figure, plot(t3,est3);
+hold <span class="string">on</span>
+plot(t3,smooth(est3,17),<span class="string">'r'</span>);
+title(<span class="string">'Sa&iacute;da do est&aacute;gio 3 para a planta utilizada.'</span>)
+xlabel(<span class="string">'Tempo de aquisi&ccedil;&atilde;o [s]'</span>);
+ylabel(<span class="string">'Tens&atilde;o de sa&iacute;da [V]'</span>);
+
+k3 = -0.9854;
+a = -0.1105 / k3;
+b = -0.4372 / k3;
+poly = [1 -(1-b-exp(-2))/(1-a-exp(-1)) ((1-b)*exp(-1)-(1-a)*exp(-2))/(1-a-exp(-1)) ];
+rpoly = roots(poly);
+tau3 = rpoly(1)
+</pre><pre class="codeoutput">
+tau2 =
+
+    0.1650
+
+
+tau3 =
+
+    0.4417
+
+</pre><img vspace="5" hspace="5" src="relatorio2_01.png" alt=""> <img vspace="5" hspace="5" src="relatorio2_02.png" alt=""> <img vspace="5" hspace="5" src="relatorio2_03.png" alt=""> <img vspace="5" hspace="5" src="relatorio2_04.png" alt=""> <img vspace="5" hspace="5" src="relatorio2_05.png" alt=""> <img vspace="5" hspace="5" src="relatorio2_06.png" alt=""> <img vspace="5" hspace="5" src="relatorio2_07.png" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2013a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+close all; clear all; clc;
+
+load matlab.mat
+
+t1 = a1(:, 1) * 10e-3;
+t2 = a2(:, 1) * 10e-3;
+t3 = a3(:, 1) * 10e-3;
+t4 = a4(:, 1) * 10e-3;
+
+t1 = t1 - t1(1);
+t2 = t2 - t2(1);
+t3 = t3 - t3(1);
+t4 = t4 - t4(1);
+
+t11 = a11(:, 1) * 10e-3;
+t22 = a22(:, 1) * 10e-3;
+t33 = a33(:, 1) * 10e-3;
+t44 = a44(:, 1) * 10e-3;
+
+est1 = a1( :,2);
+est2 = a2( :,2);
+est3 = a3( :,2);
+est4 = a4( :,2);
+
+figure, scatter(t1,est1);
+figure, scatter(t2,est2);
+figure, plot(t3,est3);
+figure, plot(t4,est4);
+
+% Maneira de achar meio do degrau "corretamente"
+% Pego a parte debaixo do degrau
+indEst1 = find(est1<-0.04);
+est1l_min = est1(indEst1);
+trandom = 1:length(est1l_min);
+figure, scatter(trandom,est1l_min)
+hold on
+% fit simples do vetor.
+[fit1,weight]=polyfit(trandom',est1l_min,0);
+[fit1p,delta] = polyval (fit1,trandom,weight);
+plot(trandom,fit1p,'r')
+% Para a planta 1, a saída degrau é de -0.1011+-0.0198 (fit1p +- delta)
+
+% Dei uma procurada sobre o que pode estar causando o ruído forte, e o que
+% encontrei foi o seguinte: a frequência de 60Hz da rede de energia está
+% ferrando o nosso sinal. 17 para a função de média rolante não é
+% aleatório, é na verdade uma tentativa de eliminar a influência desses 60
+% Hz (taxa de amostragem = 1000 Hz, ta / freqruido = ~17 pontos de largura 
+% do período). Pra entender melhor: 
+% http://www.mathworks.com/help/signal/examples/signal-smoothing.html
+figure, plot(t2,est2);
+hold on
+plot(t2,smooth(est2,17),'r');
+title('Saída do estágio 2 para a planta utilizada.')
+xlabel('Tempo de aquisição [s]');
+ylabel('Tensão de saída [V]');
+% Tau2 encontrado por datatips
+tau2 = (11.54 - 10.88)/4
+
+figure, plot(t3,est3);
+hold on
+plot(t3,smooth(est3,17),'r');
+title('Saída do estágio 3 para a planta utilizada.')
+xlabel('Tempo de aquisição [s]');
+ylabel('Tensão de saída [V]');
+
+k3 = -0.9854;
+a = -0.1105 / k3;
+b = -0.4372 / k3;
+poly = [1 -(1-b-exp(-2))/(1-a-exp(-1)) ((1-b)*exp(-1)-(1-a)*exp(-2))/(1-a-exp(-1)) ];
+rpoly = roots(poly);
+tau3 = rpoly(1)
+
+
+##### SOURCE END #####
+--></body></html>
