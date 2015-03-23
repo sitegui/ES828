@@ -146,3 +146,25 @@ sistemaZ = feedback(Gz*Cz, 1);
 % Simulação do sistema discreto
 lsim(sistemaZ, onda_quadrada, t), snapnow;
 lsim(sistemaZ, onda_rampa, t)
+
+
+%% Controlador utilizando o sisotool
+
+Csiso =  (2.0301*(s+48.86))/(s+70.82);
+sistemasiso = feedback(Csiso*G,1);
+figure
+step(sistemasiso);
+figure
+step(1/s*(sistemasiso));
+hold on
+step(1/s)
+hold off
+%Desempenho discreto
+
+Gz = c2d(G, Ts, 'zoh');
+Czsiso = c2d(Csiso, Ts, 'matched');
+sistemaZsiso = feedback(Gz*Czsiso, 1);
+figure
+lsim(sistemaZsiso, onda_quadrada, t), snapnow;
+figure
+lsim(sistemaZsiso, onda_rampa, t)

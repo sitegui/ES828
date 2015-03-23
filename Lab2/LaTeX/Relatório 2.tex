@@ -107,47 +107,38 @@ Dra. Grace Silva Deaecto
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Objetivos}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-A frequência de corte esperada do circuito RC simulado
-é dada pela expressão $f_c=1/2\pi RC$. Substituindo na equação os valores utilizados
-$R=1715\Omega$ e $C=100$nF, obtemos $f_c=928$Hz.
-Observando o gráfico 1, resultante da simulação do circuito no PSPICE8, verificamos
-que a frequência de corte obtida é coerente com o valor esperado pela teoria: ao aplicarmos
-uma senóide de entrada de 1V de amplitude e tensões DC e offset nulas, obtemos uma voltagem
-de saída V(C1:1)$\approx \sqrt{2}/2$mV$\approx$707mV para uma frequência $f\approx928$Hz.
-
- \begin{center}
-%\begin{figure}
-%%	   \includegraphics*[width=15.5cm]{lista1g1.png}
-%\caption{bla}
-%\renewcommand{\figurename}{Gráfico}
-%\end{figure}
- \end{center}
-
-A amplitude esperada da senóide de saída é dada por $A_{V_O} = |V_o/V_I|A_{V_I}$.
-Como $|V_o/V_I| = 1/\sqrt{1+(f/f_c)^2}$, obtemos $A_{V_O}=0,68$V para uma senóide de entrada
-de 1V e frequência 1kHz. A fase da senóide de saída esperada é dada por $-\tan^{-1}(f/f_c)\approx
--0,823$. Novamente, os resultados obtidos através da simulação foram coerentes com os
-valores esperados em teoria. O gráfico 2 apresenta as voltagens de entrada e saída (V(V1:+)
-e V(C1:1), respectivamente) em função
-do tempo. Nota-se que a senóide de saída apresenta amplitude muito próxima ao valor calculado,
-e fase atrasada em relação à senóide de entrada.
-
- \begin{center}
-%	   \includegraphics*[width=15.5cm]{lista1g2.png}
- \end{center}
-
+\begin{par}
+O objetivo deste experimento foi a identificação da função de transferência
+de um sistema eletrônico de terceira ordem composto por quatro
+estágios. A identificação dos parâmetros $i > 0, i = 1,...,4$,
+$\tau_2 > 0$ e $\tau_3 > 0$ deve ser feita sequencialmente, a cada estágio,
+levando em conta que em é aplicado um sinal de onda quadrada
+de frequência 1 [Hz] e amplitude 1 [volt]. A frequência é baixa o
+suficiente de modo a simular a repetição de degraus na entrada.
+\end{par}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Simulação de amplificador inversor}
+\section{Montagem experimental}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-O ganho teórico do amplificador inversor é dado por $V_O/V_I = -R_2/R_1$, onde $R_1$ e $R_2$ são
-o resistor de entrada do amplificador inversor e o resistor de realimentação, respectivamente.
-Substituindo pelos valores $R_1=1715\Omega$ e $R_2=10715\Omega$ e aplicando uma tensão de
-entrada de 1V, obtemos um ganho de
-$V_O/V_I \approx -6,25 V/V$. O gráfico 3 apresenta a análise de transitório. Nota-se que o pico
-da voltagem de saída V(R1:1)é 6,2478V e que as senóides estão invertidas,
-visto que trata-se de um
-integrador inversor.
+\begin{par}
+Para o procedimento experimental, foi utilizada a bancada Elvis para aquisição dos sinais do
+circuito, seguindo as instruções de montagem apresentadas no roteiro. Logo após, foi utilizado 
+o software de aquisição LabView, para aplicar uma entrada de onda quadrada com frequência 
+$f_e = 1 [Hz]$ e amplitude $V = 1 [V], e ler a resposta em cada um dos estágios.
+\end{par}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Análise dos resultados}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Estágio 1}
+Para o primeiro estágio, era esperado não haver dinâmica na resposta.
+
+\subsection{Estágio 2}
+
+\subsection{Estágio 3}
+
+\subsection{Estágio 4}
 
  \begin{center}
 %	   \includegraphics*[width=15.5cm]{lista1g3.png}
