@@ -1,0 +1,275 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>pre_relatorio</title><meta name="generator" content="MATLAB 8.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2015-03-26"><meta name="DC.source" content="pre_relatorio.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, tt, code { font-size:12px; }
+pre { margin:0px 0px 20px; }
+pre.error { color:red; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#1">ES868 &#8211; Pr&eacute; Relat&oacute;rio Lab 4</a></li><li><a href="#2">Controlador escolhido</a></li><li><a href="#3">Compara&ccedil;&atilde;o teoria vs pr&aacute;tica</a></li><li><a href="#4">Desempenho buscado</a></li><li><a href="#5">Valores de resistores</a></li><li><a href="#6">Poss&iacute;veis arranjos</a></li><li><a href="#7">Melhor arranjo</a></li></ul></div><h2>ES868 &#8211; Pr&eacute; Relat&oacute;rio Lab 4<a name="1"></a></h2><p><b>Controle de plantas eletr&#710;onicas utilizando um controlador PID anal&oacute;gico</b></p><p>Turma A - 30/03/2015</p><div><ul><li>Augusto Miranda Garcia - 104627</li><li>Guilherme de Oliveira Souza &#8211; 117093</li><li>Vin&iacute;cius Ragazi David - 120258</li></ul></div><pre class="codeinput">load <span class="string">../G.mat</span>
+load <span class="string">../pids.mat</span>
+load <span class="string">../lab3/sinais_tratados.mat</span>
+s = tf(<span class="string">'s'</span>);
+</pre><h2>Controlador escolhido<a name="2"></a></h2><p>Dentre os tr&ecirc;s controladores PID desenvolvidos no lab passado, o que apresentou melhor desempenho (menor overshoot e melhor tempo de estabiliza&ccedil;&atilde;o) foi o terceiro, feito pelo sisotool.</p><p>Veja compara&ccedil;&atilde;o abaixo:</p><pre class="codeinput">plot([referencia, saida1, saida2, saida3]);
+legend(<span class="string">'Refer&ecirc;ncia'</span>, <span class="string">'Proporcional'</span>, <span class="string">'Ziegler-Nichols'</span>, <span class="string">'Siso Tools'</span>);
+ylim([0, 1.8]);
+xlabel(<span class="string">'Tempo (s)'</span>);
+</pre><img vspace="5" hspace="5" src="pre_relatorio_01.png" alt=""> <h2>Compara&ccedil;&atilde;o teoria vs pr&aacute;tica<a name="3"></a></h2><p>O gr&aacute;fico abaixo mostra a compara&ccedil;&atilde;o do comportamento do modelo te&oacute;rico da planta e do controlador com os dados coletados no laborat&oacute;rio:</p><pre class="codeinput">sistema = feedback(Csiso*G,1);
+saida_teorica = lsim(sistema, referencia, t);
+plot(t, [referencia, saida_teorica, saida3]);
+xlim([0, 1]);
+xlabel(<span class="string">'Tempo (s)'</span>);
+legend(<span class="string">'Refer&ecirc;ncia'</span>, <span class="string">'Sa&iacute;da esperada'</span>, <span class="string">'Sa&iacute;da observada'</span>);
+</pre><img vspace="5" hspace="5" src="pre_relatorio_02.png" alt=""> <h2>Desempenho buscado<a name="4"></a></h2><p>O desempenho te&oacute;rico do controlador &eacute;:</p><pre class="codeinput">desempenho = stepinfo(sistema)
+tempo = desempenho.SettlingTime;
+overshoot = desempenho.Overshoot;
+</pre><pre class="codeoutput">
+desempenho = 
+
+        RiseTime: 0.0348
+    SettlingTime: 0.3023
+     SettlingMin: 0.9004
+     SettlingMax: 1.3353
+       Overshoot: 33.5313
+      Undershoot: 0
+            Peak: 1.3353
+        PeakTime: 0.0956
+
+</pre><h2>Valores de resistores<a name="5"></a></h2><p>Os poss&iacute;veis valores de resistores s&atilde;o:</p><pre class="codeinput">valores = [1, 10, 27, 39, 47, 68, 100, 120, 150, 180,<span class="keyword">...</span>
+	200, 220, 270, 330, 390, 470, 560, 680, 1e3, 1.2e3,<span class="keyword">...</span>
+	1.5e3, 1.8e3, 2.2e3, 2.7e3, 3.3e3, 3.9e3, 4.7e3, 6.8e3, 10e3, 12e3,<span class="keyword">...</span>
+	15e3, 20e3, 22e3, 27e3, 33e3, 39e3, 51e3, 56e3, 58e3, 68e3,<span class="keyword">...</span>
+	100e3, 150e3, 330e3, 470e3, 510e3, 560e3, 820e3, 200e3, 220e3, 270e3];
+</pre><h2>Poss&iacute;veis arranjos<a name="6"></a></h2><p>Todos os arranjos ser&atilde;o considerados</p><pre class="codeinput">C = 1e-6;
+minKd = 0.8*Csiso.Kd;
+maxKd = 1.2*Csiso.Kd;
+minKp = 0.8*Csiso.Kp;
+maxKp = 1.2*Csiso.Kp;
+minKi = 0.8*Csiso.Ki;
+maxKi = 1.2*Csiso.Ki;
+arranjos = [];
+<span class="keyword">for</span> R1 = valores
+	<span class="keyword">for</span> R2 = valores
+		<span class="keyword">for</span> R3 = valores
+			Kd = R1*R3*C/(R1+R2);
+			Kp = (R1+R3)/(R1+R2);
+			Ki = 1/((R1+R2)*C);
+			<span class="keyword">if</span> Kd &gt; minKd &amp;&amp; Kd &lt; maxKd &amp;&amp; Kp &gt; minKp &amp;&amp; Kp &lt; maxKp &amp;&amp; Ki &gt; minKi &amp;&amp; Ki &lt; maxKi
+				arranjos = [arranjos [R1 R2 R3]'];
+			<span class="keyword">end</span>
+		<span class="keyword">end</span>
+	<span class="keyword">end</span>
+<span class="keyword">end</span>
+arranjos
+</pre><pre class="codeoutput">
+arranjos =
+
+       20000       20000       20000       22000       22000       22000
+        3300        3900        4700        1800        2200        2700
+      100000      100000      100000      100000      100000      100000
+
+</pre><h2>Melhor arranjo<a name="7"></a></h2><pre class="codeinput">tempos = [];
+overshoots = [];
+Ys = [];
+<span class="keyword">for</span> R = arranjos
+	numerador = R(1)*R(3)*C^2*s^2+(R(1)+R(3))*C*s+1;
+	denominador = R(1)*R(2)*C^2*s^2+(R(1)+R(2))*C*s;
+	controlador = numerador/denominador;
+	sistema2 = feedback(controlador*G,1);
+	desempenho2 = stepinfo(sistema2);
+	tempos = [tempos desempenho2.SettlingTime];
+	overshoots = [overshoots desempenho2.Overshoot];
+	Ys = [Ys lsim(sistema2, referencia, t)];
+<span class="keyword">end</span>
+plot(t, Ys);
+xlim([0 1]);
+xlabel(<span class="string">'Tempo (s)'</span>);
+tempos
+overshoots
+</pre><pre class="codeoutput">
+tempos =
+
+    0.1653    0.1667    0.1689    0.2256    0.2177    0.2070
+
+
+overshoots =
+
+   38.3133   39.2225   40.2760   32.4657   33.0943   33.9253
+
+</pre><img vspace="5" hspace="5" src="pre_relatorio_03.png" alt=""> <p>O melhor arranjo escolhido foi o primeiro</p><pre class="codeinput">arranjos(:,1)
+
+plot(t, [referencia, saida_teorica, saida3, Ys(:,1)]);
+xlim([0, 1]);
+xlabel(<span class="string">'Tempo (s)'</span>);
+legend(<span class="string">'Refer&ecirc;ncia'</span>, <span class="string">'Sa&iacute;da esperada'</span>, <span class="string">'Sa&iacute;da observada'</span>, <span class="string">'Nova sa&iacute;da'</span>);
+</pre><pre class="codeoutput">
+ans =
+
+       20000
+        3300
+      100000
+
+</pre><img vspace="5" hspace="5" src="pre_relatorio_04.png" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2013a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% ES868 – Pré Relatório Lab 4
+% *Controle de plantas eletrˆonicas utilizando um controlador PID analógico*
+%
+% Turma A - 30/03/2015
+%
+% * Augusto Miranda Garcia - 104627
+% * Guilherme de Oliveira Souza – 117093
+% * Vinícius Ragazi David - 120258
+
+load ../G.mat
+load ../pids.mat
+load ../lab3/sinais_tratados.mat
+s = tf('s');
+
+%% Controlador escolhido
+% Dentre os três controladores PID desenvolvidos no lab passado, o que
+% apresentou melhor desempenho (menor overshoot e melhor tempo de
+% estabilização) foi o terceiro, feito pelo sisotool.
+%
+% Veja comparação abaixo:
+plot([referencia, saida1, saida2, saida3]);
+legend('Referência', 'Proporcional', 'Ziegler-Nichols', 'Siso Tools');
+ylim([0, 1.8]);
+xlabel('Tempo (s)');
+
+%% Comparação teoria vs prática
+% O gráfico abaixo mostra a comparação do comportamento do modelo teórico
+% da planta e do controlador com os dados coletados no laboratório:
+sistema = feedback(Csiso*G,1);
+saida_teorica = lsim(sistema, referencia, t);
+plot(t, [referencia, saida_teorica, saida3]);
+xlim([0, 1]);
+xlabel('Tempo (s)');
+legend('Referência', 'Saída esperada', 'Saída observada');
+
+%% Desempenho buscado
+% O desempenho teórico do controlador é:
+desempenho = stepinfo(sistema)
+tempo = desempenho.SettlingTime;
+overshoot = desempenho.Overshoot;
+
+%% Valores de resistores
+% Os possíveis valores de resistores são:
+valores = [1, 10, 27, 39, 47, 68, 100, 120, 150, 180,...
+	200, 220, 270, 330, 390, 470, 560, 680, 1e3, 1.2e3,...
+	1.5e3, 1.8e3, 2.2e3, 2.7e3, 3.3e3, 3.9e3, 4.7e3, 6.8e3, 10e3, 12e3,...
+	15e3, 20e3, 22e3, 27e3, 33e3, 39e3, 51e3, 56e3, 58e3, 68e3,...
+	100e3, 150e3, 330e3, 470e3, 510e3, 560e3, 820e3, 200e3, 220e3, 270e3];
+
+%% Possíveis arranjos
+% Todos os arranjos serão considerados
+C = 1e-6;
+minKd = 0.8*Csiso.Kd;
+maxKd = 1.2*Csiso.Kd;
+minKp = 0.8*Csiso.Kp;
+maxKp = 1.2*Csiso.Kp;
+minKi = 0.8*Csiso.Ki;
+maxKi = 1.2*Csiso.Ki;
+arranjos = [];
+for R1 = valores
+	for R2 = valores
+		for R3 = valores
+			Kd = R1*R3*C/(R1+R2);
+			Kp = (R1+R3)/(R1+R2);
+			Ki = 1/((R1+R2)*C);
+			if Kd > minKd && Kd < maxKd && Kp > minKp && Kp < maxKp && Ki > minKi && Ki < maxKi
+				arranjos = [arranjos [R1 R2 R3]'];
+			end
+		end
+	end
+end
+arranjos
+
+%% Melhor arranjo
+tempos = [];
+overshoots = [];
+Ys = [];
+for R = arranjos
+	numerador = R(1)*R(3)*C^2*s^2+(R(1)+R(3))*C*s+1;
+	denominador = R(1)*R(2)*C^2*s^2+(R(1)+R(2))*C*s;
+	controlador = numerador/denominador;
+	sistema2 = feedback(controlador*G,1);
+	desempenho2 = stepinfo(sistema2);
+	tempos = [tempos desempenho2.SettlingTime];
+	overshoots = [overshoots desempenho2.Overshoot];
+	Ys = [Ys lsim(sistema2, referencia, t)];
+end
+plot(t, Ys);
+xlim([0 1]);
+xlabel('Tempo (s)');
+tempos
+overshoots
+
+%%
+% O melhor arranjo escolhido foi o primeiro
+arranjos(:,1)
+
+plot(t, [referencia, saida_teorica, saida3, Ys(:,1)]);
+xlim([0, 1]);
+xlabel('Tempo (s)');
+legend('Referência', 'Saída esperada', 'Saída observada', 'Nova saída');
+##### SOURCE END #####
+--></body></html>
