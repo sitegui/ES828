@@ -6,8 +6,10 @@
 % * Augusto Miranda Garcia - 104627
 % * Guilherme de Oliveira Souza – 117093
 % * Vinícius Ragazi David - 120258
+close all;
 
 load ../G.mat
+load ../pids.mat
 load sinais.mat
 s = tf('s');
 
@@ -62,6 +64,8 @@ lsim(tf(1,[1 0]),'r',saida1,tempo1);
 lsim(tf(1,[1 0]),'r -.',controle1,tempo1);
 legend('y(t)', 'u(t)', 'y(t) real', 'u(t) real');
 figure,
+
+
 %% Controlador de Ziegler Nichols
 % O primeiro passo no método de Ziegler Nichols é encontrar $k = k_{osc}$
 % que deixa a planta no limiar de estabilidade quando em malha fechada:
@@ -96,7 +100,7 @@ C = kp*(1 + 1/(Ti*s) + Td*s)
 %
 % Comparação antes vs depois da alteração manual do lugar dos pólos:
 % 
-% <<../imgs/ziegler-nichols.png>>
+% % % % <<../imgs/ziegler-nichols.png>>
 kp_2 = 1.31*kp;
 C_2 = 1.31*C
 
@@ -104,40 +108,35 @@ C_2 = 1.31*C
 % Cálculo dos valores de desempenho
 sistema = feedback(G*C_2, 1);
 %%
-% <<../imgs/ziegler-nichols_step.png>>
+% % % % % <<../imgs/ziegler-nichols_step.png>>
 
 %% 
 % Desempenho do sistema discreto
 Ts = 0.001;
 Gz = c2d(G, Ts, 'zoh');
-Cz = c2d(C_2, Ts, 'matched');
+Cz = c2d(C_2, Ts, 'matched')
 sistemaZ = feedback(Gz*Cz, 1);
 %%
-% <<../imgs/ziegler-nichols_z_step.png>>
+% % % % % <<../imgs/ziegler-nichols_z_step.png>>
 
 %%
 % Simulação do sistema discreto
-lsim(sistemaZ, onda_quadrada, t), snapnow;
-lsim(sistemaZ, onda_rampa, t)
+lsim(sistemaZ, onda_quadrada, t, 'b');
+hold on
+lsim(Cz*(1-sistemaZ), onda_quadrada, t, 'b -.');
+plot (tempo1, saida2, 'r');
+plot (tempo1, controle2, 'r -.');
+figure;
 
+lsim(sistemaZ,onda_rampa,t,'b');
+hold on
+lsim(Cz*(1-sistemaZ),onda_rampa,t,'b -.');
+lsim(tf(1,[1 0]),'r',saida2,tempo1);
+lsim(tf(1,[1 0]),'-. r',controle2,tempo1);
+figure;
 
 %% Controlador utilizando o sisotool
 
-Csiso =  (2.0301*(s+48.86))/(s+70.82);
-sistemasiso = feedback(Csiso*G,1);
-figure
-step(sistemasiso);
-figure
-step(1/s*(sistemasiso));
-hold on
-step(1/s)
-hold off
-%Desempenho discreto
-
-Gz = c2d(G, Ts, 'zoh');
-Czsiso = c2d(Csiso, Ts, 'matched');
-sistemaZsiso = feedback(Gz*Czsiso, 1);
-figure
-lsim(sistemaZsiso, onda_quadrada, t), snapnow;
-figure
-lsim(sistemaZsiso, onda_rampa, t)
+Ck;
+Csiso;
+Czn;

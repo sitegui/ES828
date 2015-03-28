@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>relatorio3</title><meta name="generator" content="MATLAB 8.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2015-03-25"><meta name="DC.source" content="relatorio3.m"><style type="text/css">
+      --><title>relatorio3</title><meta name="generator" content="MATLAB 8.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2015-03-28"><meta name="DC.source" content="relatorio3.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -66,9 +66,9 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
 
   </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#1">ES868 &#8211; Relat&oacute;rio Lab 3</a></li><li><a href="#2">controlador proporcional</a></li><li><a href="#8">Controlador de Ziegler Nichols</a></li><li><a href="#15">Controlador utilizando o sisotool</a></li></ul></div><h2>ES868 &#8211; Relat&oacute;rio Lab 3<a name="1"></a></h2><p><b>Controle de plantas eletr&ocirc;nicas utilizando um controlador PID digital</b></p><p>Turma A - 16/03/2015</p><div><ul><li>Augusto Miranda Garcia - 104627</li><li>Guilherme de Oliveira Souza &#8211; 117093</li><li>Vin&iacute;cius Ragazi David - 120258</li></ul></div><pre class="codeinput">close <span class="string">all</span>;
-clear <span class="string">all</span>;
 
 load <span class="string">../G.mat</span>
+load <span class="string">../pids.mat</span>
 load <span class="string">sinais.mat</span>
 s = tf(<span class="string">'s'</span>);
 </pre><h2>controlador proporcional<a name="2"></a></h2><pre class="codeinput">A = G.num{1}(4);
@@ -122,7 +122,7 @@ C =
  
 Continuous-time transfer function.
 
-</pre><p>Usando o sisotool para ajustar o valor de kp e melhorar o desempenho do controlador, obtemos <img src="relatorio3_eq31446.png" alt="$kp_2 = 1.31 kp$">.</p><p>Compara&ccedil;&atilde;o antes vs depois da altera&ccedil;&atilde;o manual do lugar dos p&oacute;los:</p><p><img vspace="5" hspace="5" src="../imgs/ziegler-nichols.png" alt=""> </p><pre class="codeinput">kp_2 = 1.31*kp;
+</pre><p>Usando o sisotool para ajustar o valor de kp e melhorar o desempenho do controlador, obtemos <img src="relatorio3_eq31446.png" alt="$kp_2 = 1.31 kp$">.</p><p>Compara&ccedil;&atilde;o antes vs depois da altera&ccedil;&atilde;o manual do lugar dos p&oacute;los:</p><p>% % % <a href="<../imgs/ziegler-nichols.png">&lt;../imgs/ziegler-nichols.png</a>&gt;</p><pre class="codeinput">kp_2 = 1.31*kp;
 C_2 = 1.31*C
 </pre><pre class="codeoutput">
 C_2 =
@@ -134,13 +134,39 @@ C_2 =
 Continuous-time transfer function.
 
 </pre><p>C&aacute;lculo dos valores de desempenho</p><pre class="codeinput">sistema = feedback(G*C_2, 1);
-</pre><p><img vspace="5" hspace="5" src="../imgs/ziegler-nichols_step.png" alt=""> </p><p>Desempenho do sistema discreto</p><pre class="codeinput">Ts = 0.001;
+</pre><p>% % % % <a href="<../imgs/ziegler-nichols_step.png">&lt;../imgs/ziegler-nichols_step.png</a>&gt;</p><p>Desempenho do sistema discreto</p><pre class="codeinput">Ts = 0.001;
 Gz = c2d(G, Ts, <span class="string">'zoh'</span>);
-Cz = c2d(C_2, Ts, <span class="string">'matched'</span>);
+Cz = c2d(C_2, Ts, <span class="string">'matched'</span>)
 sistemaZ = feedback(Gz*Cz, 1);
-</pre><p><img vspace="5" hspace="5" src="../imgs/ziegler-nichols_z_step.png" alt=""> </p><p>Simula&ccedil;&atilde;o do sistema discreto</p><pre class="codeinput">lsim(sistemaZ, onda_quadrada, t), snapnow;
-lsim(sistemaZ, onda_rampa, t)
-</pre><img vspace="5" hspace="5" src="relatorio3_04.png" alt=""> <img vspace="5" hspace="5" src="relatorio3_05.png" alt=""> <h2>Controlador utilizando o sisotool<a name="15"></a></h2><pre class="codeinput">Csiso =  (2.0301*(s+48.86))/(s+70.82);
+</pre><pre class="codeoutput">
+Cz =
+ 
+  148.3 z^2 - 286 z + 137.9
+  -------------------------
+            z - 1
+ 
+Sample time: 0.001 seconds
+Discrete-time transfer function.
+
+</pre><p>% % % % <a href="<../imgs/ziegler-nichols_z_step.png">&lt;../imgs/ziegler-nichols_z_step.png</a>&gt;</p><p>Simula&ccedil;&atilde;o do sistema discreto</p><pre class="codeinput">lsim(sistemaZ, onda_quadrada, t, <span class="string">'b'</span>);
+hold <span class="string">on</span>
+lsim(sistemaZ/Gz, onda_quadrada, t, <span class="string">'b -.'</span>);
+plot (tempo1, saida2, <span class="string">'r'</span>);
+plot (tempo1, controle2, <span class="string">'r -.'</span>);
+figure;
+
+lsim(sistemaZ,onda_rampa,t,<span class="string">'b'</span>);
+hold <span class="string">on</span>
+lsim(sistemaZ/Gz,onda_rampa,t,<span class="string">'b -.'</span>);
+lsim(tf(1,[1 0]),<span class="string">'r'</span>,saida2,tempo1);
+lsim(tf(1,[1 0]),<span class="string">'-. r'</span>,controle2,tempo1);
+figure;
+</pre><pre class="codeoutput">Error using DynamicSystem/lsim (line 98)
+Cannot simulate the time response of models with more zeros than poles.
+
+Error in relatorio3 (line 126)
+lsim(sistemaZ/Gz, onda_quadrada, t, 'b -.');
+</pre><h2>Controlador utilizando o sisotool<a name="15"></a></h2><pre class="codeinput">Csiso =  (2.0301*(s+48.86))/(s+70.82);
 sistemasiso = feedback(Csiso*G,1);
 figure
 step(sistemasiso);
@@ -158,7 +184,7 @@ figure
 lsim(sistemaZsiso, onda_quadrada, t), snapnow;
 figure
 lsim(sistemaZsiso, onda_rampa, t)
-</pre><img vspace="5" hspace="5" src="relatorio3_06.png" alt=""> <img vspace="5" hspace="5" src="relatorio3_07.png" alt=""> <img vspace="5" hspace="5" src="relatorio3_08.png" alt=""> <img vspace="5" hspace="5" src="relatorio3_09.png" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2013a</a><br></p></div><!--
+</pre><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2013a</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 %% ES868 – Relatório Lab 3
 % *Controle de plantas eletrônicas utilizando um controlador PID digital*
@@ -169,9 +195,9 @@ lsim(sistemaZsiso, onda_rampa, t)
 % * Guilherme de Oliveira Souza – 117093
 % * Vinícius Ragazi David - 120258
 close all;
-clear all;
 
 load ../G.mat
+load ../pids.mat
 load sinais.mat
 s = tf('s');
 
@@ -226,6 +252,8 @@ lsim(tf(1,[1 0]),'r',saida1,tempo1);
 lsim(tf(1,[1 0]),'r -.',controle1,tempo1);
 legend('y(t)', 'u(t)', 'y(t) real', 'u(t) real');
 figure,
+
+
 %% Controlador de Ziegler Nichols
 % O primeiro passo no método de Ziegler Nichols é encontrar $k = k_{osc}$
 % que deixa a planta no limiar de estabilidade quando em malha fechada:
@@ -260,7 +288,7 @@ C = kp*(1 + 1/(Ti*s) + Td*s)
 %
 % Comparação antes vs depois da alteração manual do lugar dos pólos:
 % 
-% <<../imgs/ziegler-nichols.png>>
+% % % % <<../imgs/ziegler-nichols.png>>
 kp_2 = 1.31*kp;
 C_2 = 1.31*C
 
@@ -268,22 +296,32 @@ C_2 = 1.31*C
 % Cálculo dos valores de desempenho
 sistema = feedback(G*C_2, 1);
 %%
-% <<../imgs/ziegler-nichols_step.png>>
+% % % % % <<../imgs/ziegler-nichols_step.png>>
 
 %% 
 % Desempenho do sistema discreto
 Ts = 0.001;
 Gz = c2d(G, Ts, 'zoh');
-Cz = c2d(C_2, Ts, 'matched');
+Cz = c2d(C_2, Ts, 'matched')
 sistemaZ = feedback(Gz*Cz, 1);
 %%
-% <<../imgs/ziegler-nichols_z_step.png>>
+% % % % % <<../imgs/ziegler-nichols_z_step.png>>
 
 %%
 % Simulação do sistema discreto
-lsim(sistemaZ, onda_quadrada, t), snapnow;
-lsim(sistemaZ, onda_rampa, t)
+lsim(sistemaZ, onda_quadrada, t, 'b');
+hold on
+lsim(sistemaZ/Gz, onda_quadrada, t, 'b -.');
+plot (tempo1, saida2, 'r');
+plot (tempo1, controle2, 'r -.');
+figure;
 
+lsim(sistemaZ,onda_rampa,t,'b');
+hold on
+lsim(sistemaZ/Gz,onda_rampa,t,'b -.');
+lsim(tf(1,[1 0]),'r',saida2,tempo1);
+lsim(tf(1,[1 0]),'-. r',controle2,tempo1);
+figure;
 
 %% Controlador utilizando o sisotool
 
