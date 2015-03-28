@@ -1,0 +1,314 @@
+\documentclass[12pt]{article}
+
+%% Escrevendo em portuguÃªs:
+\usepackage[brazil]{babel}
+\usepackage[latin1]{inputenc} 
+\usepackage[T1]{fontenc}
+\usepackage{psfrag}
+\usepackage{fullpage}
+\usepackage{setspace}
+\usepackage{graphicx}
+\usepackage{epsfig}
+\usepackage{epstopdf}
+\usepackage{color}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage[section]{placeins}
+\usepackage{float}
+%----------------------------
+
+
+\newtheorem{teorema}{Teorema}%[chapter]
+\newtheorem{problema}[teorema]{Problema}
+\newtheorem{conj}[teorema]{Conjectura}
+\newtheorem{lema}[teorema]{Lema}
+\newtheorem{exerc}[teorema]{ExercÃ­cio}
+
+\definecolor{lightgray}{gray}{0.95}
+
+% Ad hoc macros
+\newcommand{\qed}       {\hfill\Box}
+\newcommand{\card}[1]   {\left|#1\right|}
+\newcommand{\nct}       {\chi_{_T}}
+\newcommand{\cnk}[2]    {C_{#1}^{#2}}
+\newcommand{\ed}[2]     {#1#2}
+\newcommand{\teto}[1]   {\lceil #1 \rceil}
+\newcommand{\piso}[1]   {\lfloor #1 \rfloor}
+\newcommand{\itab}[1]{\hspace{0em}\rlap{#1}}
+\newcommand{\tab}[1]{\hspace{.2\textwidth}\rlap{#1}}
+
+%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%
+
+\begin{titlepage}
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for the horizontal lines, change thickness here
+
+\center % Center everything on the page
+ 
+%----------------------------------------------------------------------------------------
+%	HEADING SECTIONS
+%----------------------------------------------------------------------------------------
+
+\textsc{\LARGE Universidade Estadual de Campinas}\\[0.5cm]
+\textsc{\normalsize ES828 - Laboratório de Controle de Sistemas}\\[0.2cm] % Major heading such as course name
+\textsc{\normalsize Turma A}\\[0.2cm] % Minor heading such as course title
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+\vspace {5cm}
+{ \huge \bfseries Experimento 03 - Relatório }\\[0.4cm] % Title of your document
+ 
+%----------------------------------------------------------------------------------------
+%	AUTHOR SECTION
+%----------------------------------------------------------------------------------------
+\vspace {5cm}
+\begin{minipage}{0.4\textwidth}
+\begin{flushleft} \large
+\emph{Alunos:}\\
+ \begin{tabbing}
+ Augusto Miranda Garcia\hspace{1cm} \=  \= 104627 \\
+ Guilherme de Oliveira Souza  \> 117093 \\
+ Vinícius Ragazi David \>{120258}\\
+ \end{tabbing}
+\end{flushleft}
+\end{minipage}
+\vspace {2cm}
+~
+\begin{minipage}{0.4\textwidth}
+\begin{flushright} \large
+\emph{Professora responsável:} \\
+Dra. Grace Silva Deaecto
+\end{flushright}
+\end{minipage}\\[2cm]
+
+% If you don't want a supervisor, uncomment the two lines below and remove the section above
+%\Large \emph{Author:}\\
+%John \textsc{Smith}\\[3cm] % Your name
+
+%----------------------------------------------------------------------------------------
+%	DATE SECTION
+%----------------------------------------------------------------------------------------
+
+{\large \today}\\[3cm] % Date, change the \today to a set date if you want to be precise
+
+%----------------------------------------------------------------------------------------
+%	LOGO SECTION
+%----------------------------------------------------------------------------------------
+
+%\includegraphics{Logo}\\[1cm] % Include a department/university logo - this will require the graphicx package
+ 
+%----------------------------------------------------------------------------------------
+
+\vfill % Fill the rest of the page with whitespace
+
+\end{titlepage}
+
+\tableofcontents
+%\listoffigures
+%\listoftables
+ 
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Objetivos}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{par}
+O objetivo deste experimento foi determinar 3 controladores, sendo dois PIDs e outro proporcional com base na planta determinada no experimento anterior e comparar os resultados teóricos e práticos realizados junto à bancada Elvis.
+\end{par}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Controlador proporcional}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace{1em}
+\begin{par}
+Utilizando o controlador encontrado anteriormente e comparando os seus resultados com a prática obtemos os seguintes dados:
+
+GRAFICOS DO PROPORCIONAL
+
+
+\end{par} \vspace{1em}
+\begin{verbatim}
+rlocus(G)
+\end{verbatim}
+\begin{center}
+\begin{figure}[H]
+\centering
+\includegraphics [width=4in]{pre_relatorio_01.eps}
+\end{figure}
+\end{center}
+
+\begin{par}
+Interessante notar que as respostas reais possuem erros as entradas entradas quadrada e rampa, disto verifica-se que não há polos em zero, importante notar também que os resultados práticos  são consideravelmente piores do que os da teoria. Essas diferenças são devidas a diversos fatores, entre eles ao não real conhecimento da planta (apesar do estudo feito no laboratório anterior, apenas uma aproximação foi obtida), as conecções físicas e também pelas diferenças geradas pela placa Elvis na simulação.
+
+Há mudanças também na resposta do controlador, como visível em ambos os gráficos. O controlador prático seria mais ativo devido ao erro sempre presente para seguir os sinais. Há ainda a questão do erro em relação a entrada rampa, como a resposta real não possui erro constate, o esforço do controlador aumentará sem limite, ou seja, é possível  que supere o limite e danifique o controlador.
+\end{par} \vspace{1em}
+\begin{par}
+No nosso caso, com $G(s) = \frac{P(s)}{Q(s)} = \frac{A}{B s^3 + C s^2 + D s + E}$ , $k(s) = -\frac{B s^3 + C s^2 + D s + E}{A}$.
+\end{par} \vspace{1em}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Controlador de Ziegler Nichols}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace{1em}
+\begin{par} 
+O primeiro passo no método de Ziegler Nichols é encontrar $k = k_{osc}$ que deixa a planta no limiar de estabilidade quando em malha fechada.
+\end{par} \vspace{1em}
+\begin{par}
+Para isso pode ser usado o critério de Routh com a equação característica:
+\end{par} \vspace{1em}
+\begin{par}
+$$1 + k G(s) = 0$$
+\end{par} \vspace{1em}
+\begin{par}
+$$1 + \frac{8.993 k}{0.0003019 s^3 + 0.03622 s^2 + s} = 0$$
+\end{par} \vspace{1em}
+\begin{par}
+$$\frac{0.0003019 s^3 + 0.03622 s^2 + s + 8.993 k}{0.0003019 s^3 + 0.03622 s^2 + s} = 0$$
+\end{par} \vspace{1em}
+\begin{par}
+$$0.0003019 s^3 + 0.03622 s^2 + s + 8.993 k = 0$$
+\end{par} \vspace{1em}
+\begin{par}
+Com o critério de Routh chega-se em: $k = \frac{0.03622}{0.0003019 * 8.993} = 13.3408$
+\end{par} \vspace{1em}
+\begin{verbatim}
+k_osc = 13.3408;
+GC_mf = feedback(G*k_osc,1);
+poles = esort(pole(GC_mf));
+w_osc = abs(poles(1));
+T_osc = 2*pi/w_osc;
+kp = 0.6*k_osc;
+Ti = T_osc/2;
+Td = T_osc/8;
+C = kp*(1 + 1/(Ti*s) + Td*s)
+\end{verbatim}
+
+         \begin{verbatim}
+C =
+ 
+  0.005963 s^2 + 0.4369 s + 8.004
+  -------------------------------
+             0.05459 s
+ 
+Continuous-time transfer function.
+
+\end{verbatim} \color{black}
+    \begin{par}
+Usando o sisotool para ajustar o valor de kp e melhorar o desempenho do controlador, obtemos $kp_2 = 1.31 kp$.
+\end{par} \vspace{1em}
+\begin{par}
+Comparação antes vs depois da alteração manual do lugar dos pólos:
+\end{par} \vspace{1em}
+\begin{par}
+\begin{center}
+\begin{figure}[H]
+\centering
+\includegraphics [width=4in]{../imgs/ziegler-nichols.png}
+\end{figure}
+\end{center}
+
+\end{par} \vspace{1em}
+\begin{verbatim}
+kp_2 = 1.31*kp;
+C_2 = 1.31*C
+\end{verbatim}
+
+         \begin{verbatim}
+C_2 =
+ 
+  0.007811 s^2 + 0.5724 s + 10.49
+  -------------------------------
+             0.05459 s
+ 
+Continuous-time transfer function.
+
+\subsection{Cálculo dos valores de desempenho}
+\begin{verbatim}
+sistema = feedback(G*C_2, 1);
+\end{verbatim}
+\begin{par}
+\begin{figure}[H]
+\centering
+\includegraphics [width=4in]{../imgs/ziegler-nichols_step.png}
+\end{figure}
+
+\end{par} \vspace{1em}
+\subsection{Desempenho do sistema discreto}
+\vspace{1em}
+\begin{verbatim}
+Ts = 0.001;
+Gz = c2d(G, Ts, 'zoh');
+Cz = c2d(C_2, Ts, 'matched');
+sistemaZ = feedback(Gz*Cz, 1);
+\end{verbatim}
+\begin{par}
+\begin{center}
+\begin{figure}[H]
+\centering
+\includegraphics [width=4in]{../imgs/ziegler-nichols_z_step.png}
+\end{figure}
+\end{center}
+
+\end{par} \vspace{1em}
+\begin{par}
+Simulação do sistema discreto
+\end{par} \vspace{1em}
+\begin{verbatim}
+lsim(sistemaZ, onda_quadrada, t), snapnow;
+lsim(sistemaZ, onda_rampa, t)
+\end{verbatim}
+\begin{figure}[H]
+\centering
+\includegraphics [width=4in]{pre_relatorio_07.eps}
+
+\includegraphics [width=4in]{pre_relatorio_08.eps}
+\end{figure}
+
+\section{Controlador utilizando o sisotool}
+\begin{par}
+	Utilizando o sisotool, foram adicionados um polo e um zero, caracterizando
+	assim um controlador em avanço, e com um posicionamento cuidadoso do polo
+	e zero, foi possível obter um desempenho melhor do sistema, que pode ser 
+	conferido a seguir.
+\end{par}
+
+\begin{figure}[H]
+\centering
+\includegraphics [width=4in]{sisotool_rootlocus.png}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics [width=4in]{sisotool_step.png}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics [width=4in]{sisotool_rampa.png}
+\end{figure}
+
+\subsection{Desempenho do sistema discreto}
+
+\begin{par}
+	Para a resposta discreta do sistema com esse controlador, os resultados obtidos
+	foram os seguintes:
+\end{par}
+
+\begin{figure}[H]
+\centering
+\includegraphics [width=4in]{sisotool_stepd.png}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics [width=4in]{sisotool_rampad.png}
+\end{figure}
+
+\end{document}
+    

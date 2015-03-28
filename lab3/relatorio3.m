@@ -41,11 +41,13 @@ onda_quadrada = square(2*pi*0.25*t)*0.5+0.5;
 tempo1=linspace(0, 2.5, length(saida1));
 
 lsim(sistema, k*(1-sistema), 'b -.', onda_quadrada, t);
+xlim([0, 1]);
 hold on
 plot (tempo1,saida1, 'r');
 plot (tempo1,controle1, 'r -.');
 title('Reposta à onda quadrada');
 legend('y(t)', 'u(t)', 'y(t) real', 'u(t) real');
+hold off;
 
 
 %%
@@ -57,12 +59,15 @@ onda_rampa = cumsum(onda_quadrada)*dt;
 
 %%
 % Resposta à rampa
-figure, lsim(sistema, k*(1-sistema), '-.', onda_rampa, t);
-title('Reposta à rampa');
+figure, lsim(sistema, 'b', onda_rampa, t);
+xlim([0, 1]);
 hold on
+lsim (k*(1-sistema), 'b -.', onda_rampa, t);
 lsim(tf(1,[1 0]),'r',saida1,tempo1);
 lsim(tf(1,[1 0]),'r -.',controle1,tempo1);
+title('Reposta à rampa');
 legend('y(t)', 'u(t)', 'y(t) real', 'u(t) real');
+hold off
 figure,
 
 
@@ -102,7 +107,7 @@ C = kp*(1 + 1/(Ti*s) + Td*s)
 % 
 % % % % <<../imgs/ziegler-nichols.png>>
 kp_2 = 1.31*kp;
-C_2 = 1.31*C
+C_2 = 1.31*C/(0.0001*s+1)
 
 %%
 % Cálculo dos valores de desempenho
@@ -122,17 +127,27 @@ sistemaZ = feedback(Gz*Cz, 1);
 %%
 % Simulação do sistema discreto
 lsim(sistemaZ, onda_quadrada, t, 'b');
+ylim([-2, 2]);
+xlim([0, 1]);
 hold on
 lsim(Cz*(1-sistemaZ), onda_quadrada, t, 'b -.');
 plot (tempo1, saida2, 'r');
 plot (tempo1, controle2, 'r -.');
+title('Reposta à onda quadrada');
+legend('y(t)', 'u(t)', 'y(t) real', 'u(t) real');
+hold off;
 figure;
-
+%%
 lsim(sistemaZ,onda_rampa,t,'b');
+ylim([-2, 2]);
+xlim([0, 1]);
 hold on
 lsim(Cz*(1-sistemaZ),onda_rampa,t,'b -.');
 lsim(tf(1,[1 0]),'r',saida2,tempo1);
 lsim(tf(1,[1 0]),'-. r',controle2,tempo1);
+title('Reposta à rampa');
+legend('y(t)', 'u(t)', 'y(t) real', 'u(t) real');
+hold off;
 figure;
 
 %% Controlador utilizando o sisotool
@@ -140,3 +155,31 @@ figure;
 Ck;
 Csiso;
 Czn;
+
+Cz2 = c2d(Csiso/(s*0.0001+1), Ts, 'matched')
+
+sistemaZ2=feedback(Gz*Cz2,1);
+
+figure, lsim(sistemaZ2, onda_quadrada, t, 'b');
+ylim([-2, 2]);
+xlim([0, 1]);
+hold on
+lsim(Cz2*(1-sistemaZ2), onda_quadrada, t, 'b -.');
+plot (tempo1, saida3, 'r');
+plot (tempo1, controle3, 'r -.');
+title('Reposta à onda quadrada');
+legend('y(t)', 'u(t)', 'y(t) real', 'u(t) real');
+hold off;
+figure;
+%%
+figure, lsim(sistemaZ2,onda_rampa,t,'b');
+ylim([-2, 2]);
+xlim([0, 1]);
+hold on
+lsim(Cz2*(1-sistemaZ2),onda_rampa,t,'b -.');
+lsim(tf(1,[1 0]),'r',saida3,tempo1);
+lsim(tf(1,[1 0]),'-. r',controle3,tempo1);
+title('Reposta à rampa');
+legend('y(t)', 'u(t)', 'y(t) real', 'u(t) real');
+hold off;
+figure;
