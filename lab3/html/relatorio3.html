@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>relatorio3</title><meta name="generator" content="MATLAB 8.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2015-03-28"><meta name="DC.source" content="relatorio3.m"><style type="text/css">
+      --><title>relatorio3</title><meta name="generator" content="MATLAB 8.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2015-03-29"><meta name="DC.source" content="relatorio3.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -65,51 +65,36 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
 
 
-  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#1">ES868 &#8211; Relat&oacute;rio Lab 3</a></li><li><a href="#2">controlador proporcional</a></li><li><a href="#8">Controlador de Ziegler Nichols</a></li><li><a href="#16">Controlador utilizando o sisotool</a></li></ul></div><h2>ES868 &#8211; Relat&oacute;rio Lab 3<a name="1"></a></h2><p><b>Controle de plantas eletr&ocirc;nicas utilizando um controlador PID digital</b></p><p>Turma A - 16/03/2015</p><div><ul><li>Augusto Miranda Garcia - 104627</li><li>Guilherme de Oliveira Souza &#8211; 117093</li><li>Vin&iacute;cius Ragazi David - 120258</li></ul></div><pre class="codeinput">close <span class="string">all</span>;
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#1">ES868 &#8211; Relat&oacute;rio Lab 3</a></li><li><a href="#2">controlador proporcional</a></li><li><a href="#8">Controlador de Ziegler Nichols</a></li><li><a href="#12">Controlador utilizando o sisotool</a></li></ul></div><h2>ES868 &#8211; Relat&oacute;rio Lab 3<a name="1"></a></h2><p><b>Controle de plantas eletr&ocirc;nicas utilizando um controlador PID digital</b></p><p>Turma A - 16/03/2015</p><div><ul><li>Augusto Miranda Garcia - 104627</li><li>Guilherme de Oliveira Souza &#8211; 117093</li><li>Vin&iacute;cius Ragazi David - 120258</li></ul></div><pre class="codeinput">close <span class="string">all</span>;
 
 load <span class="string">../G.mat</span>
 load <span class="string">../pids.mat</span>
-load <span class="string">sinais.mat</span>
+load <span class="string">sinais_tratados.mat</span>
 s = tf(<span class="string">'s'</span>);
 </pre><h2>controlador proporcional<a name="2"></a></h2><pre class="codeinput">A = G.num{1}(4);
 den = G.den{1};
 raizes = roots(-polyder(den)/A);
 k = -polyval(den, -17.7369)/A;
-</pre><p>A resposta &agrave; rampa do controlador &eacute; exibida abaixo:</p><pre class="codeinput">dt = 0.001;
-t = 0:dt:2;
-rampa = t;
-sistema = feedback(k*G, 1);
-<span class="comment">%lsim(sistema, rampa, t);</span>
+</pre><p>A resposta &agrave; rampa do controlador &eacute; exibida abaixo:</p><pre class="codeinput">sistema = feedback(k*G, 1);
 </pre><p>Entrada quadrada de amplitude 1 e 0.25Hz</p><pre class="codeinput">onda_quadrada = square(2*pi*0.25*t)*0.5+0.5;
-<span class="comment">%plot(t, onda_quadrada);</span>
-<span class="comment">%ylim([-0.1, 1.1]);</span>
-<span class="comment">%title('Entrada quadrada');</span>
-<span class="comment">%xlabel('t (s)');</span>
-</pre><p>Resposta &agrave; onda quadrada</p><pre class="codeinput">tempo1=linspace(0, 2.5, length(saida1));
-
-lsim(sistema, k*(1-sistema), <span class="string">'b -.'</span>, onda_quadrada, t);
-xlim([0, 1]);
-hold <span class="string">on</span>
-plot (tempo1,saida1, <span class="string">'r'</span>);
-plot (tempo1,controle1, <span class="string">'r -.'</span>);
+</pre><p>Resposta &agrave; onda quadrada</p><pre class="codeinput">y = lsim(sistema, onda_quadrada, t);
+u = lsim(k*(1-sistema), onda_quadrada, t);
+plot(t, y, t, u, <span class="string">'b-.'</span>, t, saida1, <span class="string">'r'</span>, t, controle1, <span class="string">'r-.'</span>);
+axis([0, 1, 0, 1]);
 title(<span class="string">'Reposta &agrave; onda quadrada'</span>);
+xlabel(<span class="string">'Tempo (s)'</span>);
 legend(<span class="string">'y(t)'</span>, <span class="string">'u(t)'</span>, <span class="string">'y(t) real'</span>, <span class="string">'u(t) real'</span>);
-hold <span class="string">off</span>;
-</pre><img vspace="5" hspace="5" src="relatorio3_01.png" alt=""> <p>Entrada de rampa</p><pre class="codeinput">onda_rampa = cumsum(onda_quadrada)*dt;
-<span class="comment">%figure, plot(t, onda_rampa);</span>
-<span class="comment">%title('Entrada em rampa');</span>
-<span class="comment">%xlabel('t (s)');</span>
-</pre><p>Resposta &agrave; rampa</p><pre class="codeinput">figure, lsim(sistema, <span class="string">'b'</span>, onda_rampa, t);
-xlim([0, 1]);
-hold <span class="string">on</span>
-lsim (k*(1-sistema), <span class="string">'b -.'</span>, onda_rampa, t);
-lsim(tf(1,[1 0]),<span class="string">'r'</span>,saida1,tempo1);
-lsim(tf(1,[1 0]),<span class="string">'r -.'</span>,controle1,tempo1);
+</pre><img vspace="5" hspace="5" src="relatorio3_01.png" alt=""> <p>Entrada de rampa</p><pre class="codeinput">onda_rampa = cumsum(onda_quadrada)*(t(2)-t(1));
+</pre><p>Resposta &agrave; rampa</p><pre class="codeinput">y = lsim(sistema, onda_rampa, t);
+u = lsim(k*(1-sistema), onda_rampa, t);
+y2 = lsim(tf(1, [1, 0]), saida1, t);
+u2 = lsim(tf(1, [1, 0]), controle1, t);
+plot(t, y, t, u, <span class="string">'b-.'</span>, t, y2, <span class="string">'r'</span>, t, u2, <span class="string">'r-.'</span>);
+axis([0, 1, 0, 1]);
 title(<span class="string">'Reposta &agrave; rampa'</span>);
+xlabel(<span class="string">'Tempo (s)'</span>);
 legend(<span class="string">'y(t)'</span>, <span class="string">'u(t)'</span>, <span class="string">'y(t) real'</span>, <span class="string">'u(t) real'</span>);
-hold <span class="string">off</span>
-figure,
-</pre><img vspace="5" hspace="5" src="relatorio3_02.png" alt=""> <img vspace="5" hspace="5" src="relatorio3_03.png" alt=""> <h2>Controlador de Ziegler Nichols<a name="8"></a></h2><p>O primeiro passo no m&eacute;todo de Ziegler Nichols &eacute; encontrar <img src="relatorio3_eq64032.png" alt="$k = k_{osc}$"> que deixa a planta no limiar de estabilidade quando em malha fechada:</p><p>Para isso pode ser usado o crit&eacute;rio de Routh com a equa&ccedil;&atilde;o caracter&iacute;stica:</p><p><img src="relatorio3_eq93316.png" alt="$$1 + k G(s) = 0$$"></p><p><img src="relatorio3_eq44316.png" alt="$$1 + \frac{8.993 k}{0.0003019 s^3 + 0.03622 s^2 + s} = 0$$"></p><p><img src="relatorio3_eq64259.png" alt="$$\frac{0.0003019 s^3 + 0.03622 s^2 + s + 8.993 k}{0.0003019 s^3 + 0.03622 s^2 + s} = 0$$"></p><p><img src="relatorio3_eq04220.png" alt="$$0.0003019 s^3 + 0.03622 s^2 + s + 8.993 k = 0$$"></p><p>Com o crit&eacute;rio de Routh chega-se em: <img src="relatorio3_eq77878.png" alt="$k = \frac{0.03622}{0.0003019 * 8.993} = 13.3408$"></p><pre class="codeinput">k_osc = 13.3408;
+</pre><img vspace="5" hspace="5" src="relatorio3_02.png" alt=""> <h2>Controlador de Ziegler Nichols<a name="8"></a></h2><p>O primeiro passo no m&eacute;todo de Ziegler Nichols &eacute; encontrar <img src="relatorio3_eq64032.png" alt="$k = k_{osc}$"> que deixa a planta no limiar de estabilidade quando em malha fechada:</p><p>Para isso pode ser usado o crit&eacute;rio de Routh com a equa&ccedil;&atilde;o caracter&iacute;stica:</p><p><img src="relatorio3_eq93316.png" alt="$$1 + k G(s) = 0$$"></p><p><img src="relatorio3_eq44316.png" alt="$$1 + \frac{8.993 k}{0.0003019 s^3 + 0.03622 s^2 + s} = 0$$"></p><p><img src="relatorio3_eq64259.png" alt="$$\frac{0.0003019 s^3 + 0.03622 s^2 + s + 8.993 k}{0.0003019 s^3 + 0.03622 s^2 + s} = 0$$"></p><p><img src="relatorio3_eq04220.png" alt="$$0.0003019 s^3 + 0.03622 s^2 + s + 8.993 k = 0$$"></p><p>Com o crit&eacute;rio de Routh chega-se em: <img src="relatorio3_eq77878.png" alt="$k = \frac{0.03622}{0.0003019 * 8.993} = 13.3408$"></p><pre class="codeinput">k_osc = 13.3408;
 GC_mf = feedback(G*k_osc,1);
 poles = esort(pole(GC_mf));
 w_osc = abs(poles(1));
@@ -127,7 +112,7 @@ C =
  
 Continuous-time transfer function.
 
-</pre><p>Usando o sisotool para ajustar o valor de kp e melhorar o desempenho do controlador, obtemos <img src="relatorio3_eq31446.png" alt="$kp_2 = 1.31 kp$">.</p><p>Compara&ccedil;&atilde;o antes vs depois da altera&ccedil;&atilde;o manual do lugar dos p&oacute;los:</p><p>% % % <a href="<../imgs/ziegler-nichols.png">&lt;../imgs/ziegler-nichols.png</a>&gt;</p><pre class="codeinput">kp_2 = 1.31*kp;
+</pre><p>Usando o sisotool para ajustar o valor de kp e melhorar o desempenho do controlador, obtemos <img src="relatorio3_eq31446.png" alt="$kp_2 = 1.31 kp$">.</p><p>Compara&ccedil;&atilde;o antes vs depois da altera&ccedil;&atilde;o manual do lugar dos p&oacute;los:</p><pre class="codeinput">kp_2 = 1.31*kp;
 C_2 = 1.31*C/(0.0001*s+1)
 </pre><pre class="codeoutput">
 C_2 =
@@ -138,84 +123,79 @@ C_2 =
  
 Continuous-time transfer function.
 
-</pre><p>C&aacute;lculo dos valores de desempenho</p><pre class="codeinput">sistema = feedback(G*C_2, 1);
-</pre><p>% % % % <a href="<../imgs/ziegler-nichols_step.png">&lt;../imgs/ziegler-nichols_step.png</a>&gt;</p><p>Desempenho do sistema discreto</p><pre class="codeinput">Ts = 0.001;
-Gz = c2d(G, Ts, <span class="string">'zoh'</span>);
-Cz = c2d(C_2, Ts, <span class="string">'matched'</span>)
-sistemaZ = feedback(Gz*Cz, 1);
-</pre><pre class="codeoutput">
-Cz =
- 
-  148.5 z^2 - 286.3 z + 138
-  -------------------------
-     z^2 - z + 4.54e-05
- 
-Sample time: 0.001 seconds
-Discrete-time transfer function.
-
-</pre><p>% % % % <a href="<../imgs/ziegler-nichols_z_step.png">&lt;../imgs/ziegler-nichols_z_step.png</a>&gt;</p><p>Simula&ccedil;&atilde;o do sistema discreto</p><pre class="codeinput">lsim(sistemaZ, onda_quadrada, t, <span class="string">'b'</span>);
-ylim([-2, 2]);
-xlim([0, 1]);
-hold <span class="string">on</span>
-lsim(Cz*(1-sistemaZ), onda_quadrada, t, <span class="string">'b -.'</span>);
-plot (tempo1, saida2, <span class="string">'r'</span>);
-plot (tempo1, controle2, <span class="string">'r -.'</span>);
+</pre><p>Resposta ao degrau do PID de Ziegler Nichols</p><pre class="codeinput">sistema = feedback(G*C_2, 1);
+y = lsim(sistema, onda_quadrada, t);
+plot(t, y, t, saida2, <span class="string">'r'</span>);
+axis([0, 1, 0, 2]);
 title(<span class="string">'Reposta &agrave; onda quadrada'</span>);
-legend(<span class="string">'y(t)'</span>, <span class="string">'u(t)'</span>, <span class="string">'y(t) real'</span>, <span class="string">'u(t) real'</span>);
-hold <span class="string">off</span>;
-figure;
-</pre><img vspace="5" hspace="5" src="relatorio3_04.png" alt=""> <img vspace="5" hspace="5" src="relatorio3_05.png" alt=""> <pre class="codeinput">lsim(sistemaZ,onda_rampa,t,<span class="string">'b'</span>);
-ylim([-2, 2]);
-xlim([0, 1]);
-hold <span class="string">on</span>
-lsim(Cz*(1-sistemaZ),onda_rampa,t,<span class="string">'b -.'</span>);
-lsim(tf(1,[1 0]),<span class="string">'r'</span>,saida2,tempo1);
-lsim(tf(1,[1 0]),<span class="string">'-. r'</span>,controle2,tempo1);
-title(<span class="string">'Reposta &agrave; rampa'</span>);
-legend(<span class="string">'y(t)'</span>, <span class="string">'u(t)'</span>, <span class="string">'y(t) real'</span>, <span class="string">'u(t) real'</span>);
-hold <span class="string">off</span>;
-figure;
-</pre><img vspace="5" hspace="5" src="relatorio3_06.png" alt=""> <img vspace="5" hspace="5" src="relatorio3_07.png" alt=""> <h2>Controlador utilizando o sisotool<a name="16"></a></h2><pre class="codeinput">Ck;
-Csiso;
-Czn;
+xlabel(<span class="string">'Tempo (s)'</span>);
+legend(<span class="string">'y(t)'</span>, <span class="string">'y(t) real'</span>);
+snapnow;
 
-Cz2 = c2d(Csiso/(s*0.0001+1), Ts, <span class="string">'matched'</span>)
-
-sistemaZ2=feedback(Gz*Cz2,1);
-
-figure, lsim(sistemaZ2, onda_quadrada, t, <span class="string">'b'</span>);
-ylim([-2, 2]);
-xlim([0, 1]);
-hold <span class="string">on</span>
-lsim(Cz2*(1-sistemaZ2), onda_quadrada, t, <span class="string">'b -.'</span>);
-plot (tempo1, saida3, <span class="string">'r'</span>);
-plot (tempo1, controle3, <span class="string">'r -.'</span>);
+u = lsim(C_2*(1-sistema), onda_quadrada, t);
+plot(t, u, <span class="string">'b-.'</span>, t, controle2, <span class="string">'r-.'</span>);
+axis([0, 1, -10, 10]);
 title(<span class="string">'Reposta &agrave; onda quadrada'</span>);
-legend(<span class="string">'y(t)'</span>, <span class="string">'u(t)'</span>, <span class="string">'y(t) real'</span>, <span class="string">'u(t) real'</span>);
-hold <span class="string">off</span>;
-figure;
-</pre><pre class="codeoutput">
-Cz2 =
- 
-  88.06 z^2 - 171.8 z + 83.74
-  ---------------------------
-      z^2 - z + 4.54e-05
- 
-Sample time: 0.001 seconds
-Discrete-time transfer function.
-
-</pre><img vspace="5" hspace="5" src="relatorio3_08.png" alt=""> <img vspace="5" hspace="5" src="relatorio3_09.png" alt=""> <pre class="codeinput">figure, lsim(sistemaZ2,onda_rampa,t,<span class="string">'b'</span>);
-ylim([-2, 2]);
-xlim([0, 1]);
-hold <span class="string">on</span>
-lsim(Cz2*(1-sistemaZ2),onda_rampa,t,<span class="string">'b -.'</span>);
-lsim(tf(1,[1 0]),<span class="string">'r'</span>,saida3,tempo1);
-lsim(tf(1,[1 0]),<span class="string">'-. r'</span>,controle3,tempo1);
+xlabel(<span class="string">'Tempo (s)'</span>);
+legend(<span class="string">'u(t)'</span>, <span class="string">'u(t) real'</span>);
+</pre><img vspace="5" hspace="5" src="relatorio3_03.png" alt=""> <img vspace="5" hspace="5" src="relatorio3_04.png" alt=""> <p>Resposta &agrave; rampa do PID de Ziegler Nichols</p><pre class="codeinput">y = lsim(sistema, onda_rampa, t);
+y2 = lsim(tf(1, [1, 0]), saida2, t);
+plot(t, y, t, y2, <span class="string">'r'</span>);
+axis([0, 1, 0, 1]);
 title(<span class="string">'Reposta &agrave; rampa'</span>);
-legend(<span class="string">'y(t)'</span>, <span class="string">'u(t)'</span>, <span class="string">'y(t) real'</span>, <span class="string">'u(t) real'</span>);
-hold <span class="string">off</span>;
-figure;
-</pre><img vspace="5" hspace="5" src="relatorio3_10.png" alt=""> <img vspace="5" hspace="5" src="relatorio3_11.png" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2013a</a><br></p></div><!--
+xlabel(<span class="string">'Tempo (s)'</span>);
+legend(<span class="string">'y(t)'</span>, <span class="string">'y(t) real'</span>);
+snapnow;
+
+u = lsim(C_2*(1-sistema), onda_rampa, t);
+u2 = lsim(tf(1, [1, 0]), controle2, t);
+plot(t, u, <span class="string">'b-.'</span>, t, u2, <span class="string">'r-.'</span>);
+axis([0, 1, 0, 0.5]);
+title(<span class="string">'Reposta &agrave; rampa'</span>);
+xlabel(<span class="string">'Tempo (s)'</span>);
+legend(<span class="string">'u(t)'</span>, <span class="string">'u(t) real'</span>);
+</pre><img vspace="5" hspace="5" src="relatorio3_05.png" alt=""> <img vspace="5" hspace="5" src="relatorio3_06.png" alt=""> <h2>Controlador utilizando o sisotool<a name="12"></a></h2><p>Resposta ao degrau</p><pre class="codeinput">Csiso_ = Csiso/(0.0001*s+1)
+sistema = feedback(G*Csiso_, 1);
+y = lsim(sistema, onda_quadrada, t);
+plot(t, y, t, saida3, <span class="string">'r'</span>);
+axis([0, 1, 0, 2]);
+title(<span class="string">'Reposta &agrave; onda quadrada'</span>);
+xlabel(<span class="string">'Tempo (s)'</span>);
+legend(<span class="string">'y(t)'</span>, <span class="string">'y(t) real'</span>);
+snapnow;
+
+u = lsim(Csiso_*(1-sistema), onda_quadrada, t);
+plot(t, u, <span class="string">'b-.'</span>, t, controle3, <span class="string">'r-.'</span>);
+axis([0, 1, -10, 10]);
+title(<span class="string">'Reposta &agrave; onda quadrada'</span>);
+xlabel(<span class="string">'Tempo (s)'</span>);
+legend(<span class="string">'u(t)'</span>, <span class="string">'u(t) real'</span>);
+</pre><pre class="codeoutput">
+Csiso_ =
+ 
+  0.08585 s^2 + 4.321 s + 50
+  --------------------------
+        0.0001 s^2 + s
+ 
+Continuous-time transfer function.
+
+</pre><img vspace="5" hspace="5" src="relatorio3_07.png" alt=""> <img vspace="5" hspace="5" src="relatorio3_08.png" alt=""> <p>Resposta &agrave; rampa</p><pre class="codeinput">y = lsim(sistema, onda_rampa, t);
+y2 = lsim(tf(1, [1, 0]), saida3, t);
+plot(t, y, t, y2, <span class="string">'r'</span>);
+axis([0, 1, 0, 1]);
+title(<span class="string">'Reposta &agrave; rampa'</span>);
+xlabel(<span class="string">'Tempo (s)'</span>);
+legend(<span class="string">'y(t)'</span>, <span class="string">'y(t) real'</span>);
+snapnow;
+
+u = lsim(Csiso_*(1-sistema), onda_rampa, t);
+u2 = lsim(tf(1, [1, 0]), controle3, t);
+plot(t, u, <span class="string">'b-.'</span>, t, u2, <span class="string">'r-.'</span>);
+axis([0, 1, 0, 0.5]);
+title(<span class="string">'Reposta &agrave; rampa'</span>);
+xlabel(<span class="string">'Tempo (s)'</span>);
+legend(<span class="string">'u(t)'</span>, <span class="string">'u(t) real'</span>);
+</pre><img vspace="5" hspace="5" src="relatorio3_09.png" alt=""> <img vspace="5" hspace="5" src="relatorio3_10.png" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2013a</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 %% ES868 – Relatório Lab 3
 % *Controle de plantas eletrônicas utilizando um controlador PID digital*
@@ -229,9 +209,8 @@ close all;
 
 load ../G.mat
 load ../pids.mat
-load sinais.mat
+load sinais_tratados.mat
 s = tf('s');
-
 
 %% controlador proporcional
 A = G.num{1}(4);
@@ -241,54 +220,37 @@ k = -polyval(den, -17.7369)/A;
 
 %%
 % A resposta à rampa do controlador é exibida abaixo:
-dt = 0.001;
-t = 0:dt:2;
-rampa = t;
 sistema = feedback(k*G, 1);
-%lsim(sistema, rampa, t);
 
 %%
 % Entrada quadrada de amplitude 1 e 0.25Hz
 onda_quadrada = square(2*pi*0.25*t)*0.5+0.5;
-%plot(t, onda_quadrada);
-%ylim([-0.1, 1.1]);
-%title('Entrada quadrada');
-%xlabel('t (s)');
 
 %%
 % Resposta à onda quadrada
-tempo1=linspace(0, 2.5, length(saida1));
-
-lsim(sistema, k*(1-sistema), 'b -.', onda_quadrada, t);
-xlim([0, 1]);
-hold on
-plot (tempo1,saida1, 'r');
-plot (tempo1,controle1, 'r -.');
+y = lsim(sistema, onda_quadrada, t);
+u = lsim(k*(1-sistema), onda_quadrada, t);
+plot(t, y, t, u, 'b-.', t, saida1, 'r', t, controle1, 'r-.');
+axis([0, 1, 0, 1]);
 title('Reposta à onda quadrada');
+xlabel('Tempo (s)');
 legend('y(t)', 'u(t)', 'y(t) real', 'u(t) real');
-hold off;
-
 
 %%
 % Entrada de rampa
-onda_rampa = cumsum(onda_quadrada)*dt;
-%figure, plot(t, onda_rampa);
-%title('Entrada em rampa');
-%xlabel('t (s)');
+onda_rampa = cumsum(onda_quadrada)*(t(2)-t(1));
 
 %%
 % Resposta à rampa
-figure, lsim(sistema, 'b', onda_rampa, t);
-xlim([0, 1]);
-hold on
-lsim (k*(1-sistema), 'b -.', onda_rampa, t);
-lsim(tf(1,[1 0]),'r',saida1,tempo1);
-lsim(tf(1,[1 0]),'r -.',controle1,tempo1);
+y = lsim(sistema, onda_rampa, t);
+u = lsim(k*(1-sistema), onda_rampa, t);
+y2 = lsim(tf(1, [1, 0]), saida1, t);
+u2 = lsim(tf(1, [1, 0]), controle1, t);
+plot(t, y, t, u, 'b-.', t, y2, 'r', t, u2, 'r-.');
+axis([0, 1, 0, 1]);
 title('Reposta à rampa');
+xlabel('Tempo (s)');
 legend('y(t)', 'u(t)', 'y(t) real', 'u(t) real');
-hold off
-figure,
-
 
 %% Controlador de Ziegler Nichols
 % O primeiro passo no método de Ziegler Nichols é encontrar $k = k_{osc}$
@@ -306,8 +268,7 @@ figure,
 %
 % Com o critério de Routh chega-se em: $k = \frac{0.03622}{0.0003019 *
 % 8.993} = 13.3408$
-% 
-% 
+%
 k_osc = 13.3408;
 GC_mf = feedback(G*k_osc,1);
 poles = esort(pole(GC_mf));
@@ -323,84 +284,83 @@ C = kp*(1 + 1/(Ti*s) + Td*s)
 % controlador, obtemos $kp_2 = 1.31 kp$.
 %
 % Comparação antes vs depois da alteração manual do lugar dos pólos:
-% 
-% % % % <<../imgs/ziegler-nichols.png>>
+%
 kp_2 = 1.31*kp;
 C_2 = 1.31*C/(0.0001*s+1)
 
 %%
-% Cálculo dos valores de desempenho
+% Resposta ao degrau do PID de Ziegler Nichols
 sistema = feedback(G*C_2, 1);
-%%
-% % % % % <<../imgs/ziegler-nichols_step.png>>
-
-%% 
-% Desempenho do sistema discreto
-Ts = 0.001;
-Gz = c2d(G, Ts, 'zoh');
-Cz = c2d(C_2, Ts, 'matched')
-sistemaZ = feedback(Gz*Cz, 1);
-%%
-% % % % % <<../imgs/ziegler-nichols_z_step.png>>
-
-%%
-% Simulação do sistema discreto
-lsim(sistemaZ, onda_quadrada, t, 'b');
-ylim([-2, 2]);
-xlim([0, 1]);
-hold on
-lsim(Cz*(1-sistemaZ), onda_quadrada, t, 'b -.');
-plot (tempo1, saida2, 'r');
-plot (tempo1, controle2, 'r -.');
+y = lsim(sistema, onda_quadrada, t);
+plot(t, y, t, saida2, 'r');
+axis([0, 1, 0, 2]);
 title('Reposta à onda quadrada');
-legend('y(t)', 'u(t)', 'y(t) real', 'u(t) real');
-hold off;
-figure;
+xlabel('Tempo (s)');
+legend('y(t)', 'y(t) real');
+snapnow;
+
+u = lsim(C_2*(1-sistema), onda_quadrada, t);
+plot(t, u, 'b-.', t, controle2, 'r-.');
+axis([0, 1, -10, 10]);
+title('Reposta à onda quadrada');
+xlabel('Tempo (s)');
+legend('u(t)', 'u(t) real');
+
 %%
-lsim(sistemaZ,onda_rampa,t,'b');
-ylim([-2, 2]);
-xlim([0, 1]);
-hold on
-lsim(Cz*(1-sistemaZ),onda_rampa,t,'b -.');
-lsim(tf(1,[1 0]),'r',saida2,tempo1);
-lsim(tf(1,[1 0]),'-. r',controle2,tempo1);
+% Resposta à rampa do PID de Ziegler Nichols
+y = lsim(sistema, onda_rampa, t);
+y2 = lsim(tf(1, [1, 0]), saida2, t);
+plot(t, y, t, y2, 'r');
+axis([0, 1, 0, 1]);
 title('Reposta à rampa');
-legend('y(t)', 'u(t)', 'y(t) real', 'u(t) real');
-hold off;
-figure;
+xlabel('Tempo (s)');
+legend('y(t)', 'y(t) real');
+snapnow;
+
+u = lsim(C_2*(1-sistema), onda_rampa, t);
+u2 = lsim(tf(1, [1, 0]), controle2, t);
+plot(t, u, 'b-.', t, u2, 'r-.');
+axis([0, 1, 0, 0.5]);
+title('Reposta à rampa');
+xlabel('Tempo (s)');
+legend('u(t)', 'u(t) real');
 
 %% Controlador utilizando o sisotool
-
-Ck;
-Csiso;
-Czn;
-
-Cz2 = c2d(Csiso/(s*0.0001+1), Ts, 'matched')
-
-sistemaZ2=feedback(Gz*Cz2,1);
-
-figure, lsim(sistemaZ2, onda_quadrada, t, 'b');
-ylim([-2, 2]);
-xlim([0, 1]);
-hold on
-lsim(Cz2*(1-sistemaZ2), onda_quadrada, t, 'b -.');
-plot (tempo1, saida3, 'r');
-plot (tempo1, controle3, 'r -.');
+% Resposta ao degrau
+Csiso_ = Csiso/(0.0001*s+1)
+sistema = feedback(G*Csiso_, 1);
+y = lsim(sistema, onda_quadrada, t);
+plot(t, y, t, saida3, 'r');
+axis([0, 1, 0, 2]);
 title('Reposta à onda quadrada');
-legend('y(t)', 'u(t)', 'y(t) real', 'u(t) real');
-hold off;
-figure;
+xlabel('Tempo (s)');
+legend('y(t)', 'y(t) real');
+snapnow;
+
+u = lsim(Csiso_*(1-sistema), onda_quadrada, t);
+plot(t, u, 'b-.', t, controle3, 'r-.');
+axis([0, 1, -10, 10]);
+title('Reposta à onda quadrada');
+xlabel('Tempo (s)');
+legend('u(t)', 'u(t) real');
+
 %%
-figure, lsim(sistemaZ2,onda_rampa,t,'b');
-ylim([-2, 2]);
-xlim([0, 1]);
-hold on
-lsim(Cz2*(1-sistemaZ2),onda_rampa,t,'b -.');
-lsim(tf(1,[1 0]),'r',saida3,tempo1);
-lsim(tf(1,[1 0]),'-. r',controle3,tempo1);
+% Resposta à rampa
+y = lsim(sistema, onda_rampa, t);
+y2 = lsim(tf(1, [1, 0]), saida3, t);
+plot(t, y, t, y2, 'r');
+axis([0, 1, 0, 1]);
 title('Reposta à rampa');
-legend('y(t)', 'u(t)', 'y(t) real', 'u(t) real');
-hold off;
-figure;
+xlabel('Tempo (s)');
+legend('y(t)', 'y(t) real');
+snapnow;
+
+u = lsim(Csiso_*(1-sistema), onda_rampa, t);
+u2 = lsim(tf(1, [1, 0]), controle3, t);
+plot(t, u, 'b-.', t, u2, 'r-.');
+axis([0, 1, 0, 0.5]);
+title('Reposta à rampa');
+xlabel('Tempo (s)');
+legend('u(t)', 'u(t) real');
 ##### SOURCE END #####
 --></body></html>
