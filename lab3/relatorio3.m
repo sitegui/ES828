@@ -10,7 +10,7 @@ close all;
 
 load ../G.mat
 load ../pids.mat
-load sinais.mat
+load sinais_tratados.mat
 s = tf('s');
 
 
