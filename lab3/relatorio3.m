@@ -99,7 +99,6 @@ title('Reposta à onda quadrada');
 xlabel('Tempo (s)');
 legend('y(t)', 'y(t) real');
 snapnow;
-
 u = lsim(C_2*(1-sistema), onda_quadrada, t);
 plot(t, u, 'b-.', t, controle2, 'r-.');
 axis([0, 1, -10, 10]);
@@ -117,7 +116,6 @@ title('Reposta à rampa');
 xlabel('Tempo (s)');
 legend('y(t)', 'y(t) real');
 snapnow;
-
 u = lsim(C_2*(1-sistema), onda_rampa, t);
 u2 = lsim(tf(1, [1, 0]), controle2, t);
 plot(t, u, 'b-.', t, u2, 'r-.');
@@ -137,7 +135,6 @@ title('Reposta à onda quadrada');
 xlabel('Tempo (s)');
 legend('y(t)', 'y(t) real');
 snapnow;
-
 u = lsim(Csiso_*(1-sistema), onda_quadrada, t);
 plot(t, u, 'b-.', t, controle3, 'r-.');
 axis([0, 1, -10, 10]);

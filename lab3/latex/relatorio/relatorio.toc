@@ -2,6 +2,4 @@
 \contentsline {section}{\numberline {1}Objetivos}{2}
 \contentsline {section}{\numberline {2}Controlador proporcional}{2}
 \contentsline {section}{\numberline {3}Controlador de Ziegler Nichols}{3}
-\contentsline {subsection}{\numberline {3.1}Desempenho do sistema discreto}{5}
 \contentsline {section}{\numberline {4}Controlador utilizando o sisotool}{6}
-\contentsline {subsection}{\numberline {4.1}Desempenho do sistema discreto}{8}

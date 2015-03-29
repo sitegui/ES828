@@ -128,17 +128,25 @@ O objetivo deste experimento foi determinar 3 controladores, sendo dois PIDs e o
 \begin{par}
 Utilizando o controlador encontrado anteriormente e comparando os seus resultados com a prática obtemos os seguintes dados:
 
-GRAFICOS DO PROPORCIONAL
-
-
 \end{par} \vspace{1em}
 \begin{verbatim}
-rlocus(G)
+Resposta à entrada quadrada do controlador proporcional
 \end{verbatim}
 \begin{center}
 \begin{figure}[H]
 \centering
-\includegraphics [width=4in]{pre_relatorio_01.eps}
+\includegraphics [width=4in]{q1.jpg}
+\end{figure}
+\end{center}
+
+\end{par} \vspace{1em}
+\begin{verbatim}
+Resposta à entrada rampa do controlador proporcional
+\end{verbatim}
+\begin{center}
+\begin{figure}[H]
+\centering
+\includegraphics [width=4in]{r1.jpg}
 \end{figure}
 \end{center}
 
@@ -147,9 +155,6 @@ Interessante notar que as respostas reais possuem erros as entradas entradas qua
 
 Há mudanças também na resposta do controlador, como visível em ambos os gráficos. O controlador prático seria mais ativo devido ao erro sempre presente para seguir os sinais. Há ainda a questão do erro em relação a entrada rampa, como a resposta real não possui erro constate, o esforço do controlador aumentará sem limite, ou seja, é possível  que supere o limite e danifique o controlador.
 \end{par} \vspace{1em}
-\begin{par}
-No nosso caso, com $G(s) = \frac{P(s)}{Q(s)} = \frac{A}{B s^3 + C s^2 + D s + E}$ , $k(s) = -\frac{B s^3 + C s^2 + D s + E}{A}$.
-\end{par} \vspace{1em}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -157,158 +162,102 @@ No nosso caso, com $G(s) = \frac{P(s)}{Q(s)} = \frac{A}{B s^3 + C s^2 + D s + E}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \vspace{1em}
 \begin{par} 
-O primeiro passo no método de Ziegler Nichols é encontrar $k = k_{osc}$ que deixa a planta no limiar de estabilidade quando em malha fechada.
+Da mesma forma tem-se:
 \end{par} \vspace{1em}
-\begin{par}
-Para isso pode ser usado o critério de Routh com a equação característica:
-\end{par} \vspace{1em}
-\begin{par}
-$$1 + k G(s) = 0$$
-\end{par} \vspace{1em}
-\begin{par}
-$$1 + \frac{8.993 k}{0.0003019 s^3 + 0.03622 s^2 + s} = 0$$
-\end{par} \vspace{1em}
-\begin{par}
-$$\frac{0.0003019 s^3 + 0.03622 s^2 + s + 8.993 k}{0.0003019 s^3 + 0.03622 s^2 + s} = 0$$
-\end{par} \vspace{1em}
-\begin{par}
-$$0.0003019 s^3 + 0.03622 s^2 + s + 8.993 k = 0$$
-\end{par} \vspace{1em}
-\begin{par}
-Com o critério de Routh chega-se em: $k = \frac{0.03622}{0.0003019 * 8.993} = 13.3408$
-\end{par} \vspace{1em}
+
 \begin{verbatim}
-k_osc = 13.3408;
-GC_mf = feedback(G*k_osc,1);
-poles = esort(pole(GC_mf));
-w_osc = abs(poles(1));
-T_osc = 2*pi/w_osc;
-kp = 0.6*k_osc;
-Ti = T_osc/2;
-Td = T_osc/8;
-C = kp*(1 + 1/(Ti*s) + Td*s)
+Resposta à entrada quadrada do sistema com controlador Ziegler Nichols
 \end{verbatim}
-
-         \begin{verbatim}
-C =
- 
-  0.005963 s^2 + 0.4369 s + 8.004
-  -------------------------------
-             0.05459 s
- 
-Continuous-time transfer function.
-
-\end{verbatim} \color{black}
-    \begin{par}
-Usando o sisotool para ajustar o valor de kp e melhorar o desempenho do controlador, obtemos $kp_2 = 1.31 kp$.
-\end{par} \vspace{1em}
-\begin{par}
-Comparação antes vs depois da alteração manual do lugar dos pólos:
-\end{par} \vspace{1em}
-\begin{par}
 \begin{center}
 \begin{figure}[H]
 \centering
-\includegraphics [width=4in]{../imgs/ziegler-nichols.png}
+\includegraphics [width=4in]{q2.jpg}
 \end{figure}
 \end{center}
 
-\end{par} \vspace{1em}
 \begin{verbatim}
-kp_2 = 1.31*kp;
-C_2 = 1.31*C
+Resposta à entrada quadrada do controlador Ziegler Nichols
 \end{verbatim}
-
-         \begin{verbatim}
-C_2 =
- 
-  0.007811 s^2 + 0.5724 s + 10.49
-  -------------------------------
-             0.05459 s
- 
-Continuous-time transfer function.
-
-\subsection{Cálculo dos valores de desempenho}
-\begin{verbatim}
-sistema = feedback(G*C_2, 1);
-\end{verbatim}
-\begin{par}
-\begin{figure}[H]
-\centering
-\includegraphics [width=4in]{../imgs/ziegler-nichols_step.png}
-\end{figure}
-
-\end{par} \vspace{1em}
-\subsection{Desempenho do sistema discreto}
-\vspace{1em}
-\begin{verbatim}
-Ts = 0.001;
-Gz = c2d(G, Ts, 'zoh');
-Cz = c2d(C_2, Ts, 'matched');
-sistemaZ = feedback(Gz*Cz, 1);
-\end{verbatim}
-\begin{par}
 \begin{center}
 \begin{figure}[H]
 \centering
-\includegraphics [width=4in]{../imgs/ziegler-nichols_z_step.png}
+\includegraphics [width=4in]{q22.jpg}
 \end{figure}
 \end{center}
 
-\end{par} \vspace{1em}
-\begin{par}
-Simulação do sistema discreto
-\end{par} \vspace{1em}
 \begin{verbatim}
-lsim(sistemaZ, onda_quadrada, t), snapnow;
-lsim(sistemaZ, onda_rampa, t)
+Resposta à entrada rampa do sistema com controlador Ziegler Nichols
 \end{verbatim}
+\begin{center}
 \begin{figure}[H]
 \centering
-\includegraphics [width=4in]{pre_relatorio_07.eps}
-
-\includegraphics [width=4in]{pre_relatorio_08.eps}
+\includegraphics [width=4in]{r2.jpg}
 \end{figure}
+\end{center}
+
+\begin{verbatim}
+Resposta à entrada rampa do controlador Ziegler Nichols
+\end{verbatim}
+\begin{center}
+\begin{figure}[H]
+\centering
+\includegraphics [width=4in]{r22.jpg}
+\end{figure}
+\end{center}
+
+\begin{par} 
+Verifica-se que as respostas reais, tanto do sistema como do controlador, são mais próximas com as respostas teóricas do que no caso do controlador proporcional, principalmente para o caso da entrada quadrada em que as curvas são bem próximas.
+
+Como ocorreu para o caso do proporcional o grande problema é para o controlador real que no caso da entrada rampa não se estabiliza, e desta forma poderá superar o limite permitido.
+\end{par} \vspace{1em}
 
 \section{Controlador utilizando o sisotool}
 \begin{par}
-	Utilizando o sisotool, foram adicionados um polo e um zero, caracterizando
-	assim um controlador em avanço, e com um posicionamento cuidadoso do polo
-	e zero, foi possível obter um desempenho melhor do sistema, que pode ser 
-	conferido a seguir.
+	Por fim tem-se as respostas para o controlador feito via sisotool:
 \end{par}
 
+\begin{verbatim}
+Resposta à entrada quadrada do sistema com controlador via sisotool
+\end{verbatim}
+\begin{center}
 \begin{figure}[H]
 \centering
-\includegraphics [width=4in]{sisotool_rootlocus.png}
+\includegraphics [width=4in]{q3.jpg}
 \end{figure}
+\end{center}
 
+\begin{verbatim}
+Resposta à entrada quadrada do  controlador via sisotool
+\end{verbatim}
+\begin{center}
 \begin{figure}[H]
 \centering
-\includegraphics [width=4in]{sisotool_step.png}
+\includegraphics [width=4in]{q33.jpg}
 \end{figure}
+\end{center}
 
+\begin{verbatim}
+Resposta à entrada rampa do sistema com controlador via sisotool
+\end{verbatim}
+\begin{center}
 \begin{figure}[H]
 \centering
-\includegraphics [width=4in]{sisotool_rampa.png}
+\includegraphics [width=4in]{r3.jpg}
 \end{figure}
+\end{center}
 
-\subsection{Desempenho do sistema discreto}
+\begin{verbatim}
+Resposta à entrada rampa do controlador via sisotool
+\end{verbatim}
+\begin{center}
+\begin{figure}[H]
+\centering
+\includegraphics [width=4in]{r33.jpg}
+\end{figure}
+\end{center}
 
 \begin{par}
-	Para a resposta discreta do sistema com esse controlador, os resultados obtidos
-	foram os seguintes:
+	Da mesma forma que ocorreu com o controlador Ziegle Nichols as respostas reais e teóricas são próximas e também como se esperado são ''melhores'' do que as respostas do controlador anterior.
 \end{par}
-
-\begin{figure}[H]
-\centering
-\includegraphics [width=4in]{sisotool_stepd.png}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics [width=4in]{sisotool_rampad.png}
-\end{figure}
-
 \end{document}
     
