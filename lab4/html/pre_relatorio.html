@@ -65,7 +65,7 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
 
 
-  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#1">ES868 &#8211; Pr&eacute; Relat&oacute;rio Lab 4</a></li><li><a href="#2">Controlador escolhido</a></li><li><a href="#3">Compara&ccedil;&atilde;o teoria vs pr&aacute;tica</a></li><li><a href="#4">Desempenho buscado</a></li><li><a href="#5">Valores de resistores</a></li><li><a href="#6">Poss&iacute;veis arranjos</a></li><li><a href="#7">Melhor arranjo</a></li></ul></div><h2>ES868 &#8211; Pr&eacute; Relat&oacute;rio Lab 4<a name="1"></a></h2><p><b>Controle de plantas eletr&#710;onicas utilizando um controlador PID anal&oacute;gico</b></p><p>Turma A - 30/03/2015</p><div><ul><li>Augusto Miranda Garcia - 104627</li><li>Guilherme de Oliveira Souza &#8211; 117093</li><li>Vin&iacute;cius Ragazi David - 120258</li></ul></div><pre class="codeinput">load <span class="string">../G.mat</span>
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#1">ES868 &#8211; Pr&eacute; Relat&oacute;rio Lab 4</a></li><li><a href="#2">Controlador escolhido</a></li><li><a href="#3">Compara&ccedil;&atilde;o teoria vs pr&aacute;tica</a></li><li><a href="#4">Desempenho buscado</a></li><li><a href="#5">Valores de resistores</a></li><li><a href="#6">Poss&iacute;veis arranjos</a></li><li><a href="#8">Melhor Aranjo</a></li><li><a href="#11">Sinal de controle</a></li></ul></div><h2>ES868 &#8211; Pr&eacute; Relat&oacute;rio Lab 4<a name="1"></a></h2><p><b>Controle de plantas eletr&ocirc;nicas utilizando um controlador PID anal&oacute;gico</b></p><p>Turma A - 30/03/2015</p><div><ul><li>Augusto Miranda Garcia - 104627</li><li>Guilherme de Oliveira Souza &#8211; 117093</li><li>Vin&iacute;cius Ragazi David - 120258</li></ul></div><pre class="codeinput">load <span class="string">../G.mat</span>
 load <span class="string">../pids.mat</span>
 load <span class="string">../lab3/sinais_tratados.mat</span>
 s = tf(<span class="string">'s'</span>);
@@ -99,7 +99,7 @@ desempenho =
 	1.5e3, 1.8e3, 2.2e3, 2.7e3, 3.3e3, 3.9e3, 4.7e3, 6.8e3, 10e3, 12e3,<span class="keyword">...</span>
 	15e3, 20e3, 22e3, 27e3, 33e3, 39e3, 51e3, 56e3, 58e3, 68e3,<span class="keyword">...</span>
 	100e3, 150e3, 330e3, 470e3, 510e3, 560e3, 820e3, 200e3, 220e3, 270e3];
-</pre><h2>Poss&iacute;veis arranjos<a name="6"></a></h2><p>Todos os arranjos ser&atilde;o considerados</p><pre class="codeinput">C = 1e-6;
+</pre><h2>Poss&iacute;veis arranjos<a name="6"></a></h2><p>Todos os arranjos os 125.000 arranjos ser&atilde;o considerados e calculados. Apesar de todos serem poss&iacute;veis inicialmente n&atilde;o ser&atilde;o todos a serem analisados, j&aacute; que n&atilde;o respeitam a regra R2&lt; R1/10. Calculando, com erro de 25%, os valores de Kd, Kp e Ki encontrou-se 44 arranjos. Todos esses arranjos foram simulados para definir o melhor.</p><pre class="codeinput">C = 1e-6;
 erro = 0.25;
 minKd = (1-erro)*Csiso.Kd;
 maxKd = (1+erro)*Csiso.Kd;
@@ -125,14 +125,14 @@ arranjos = [];
 	<span class="keyword">end</span>
 <span class="keyword">end</span>
 arranjos;
-</pre><h2>Melhor arranjo<a name="7"></a></h2><pre class="codeinput">tempos = [];
+</pre><p>Como todos os arranjos poss&iacute;veis com os valores de resistores dispon&iacute;veis foram calculados n&atilde;o foi necess&aacute;ria a aproxima&ccedil;&atilde;o de resistores. O estudo foi feito para os valores de resistores comerciais n&atilde;o sendo ent&atilde;o necess&aacute;rio verificar os poss&iacute;veis erros e defeitos.</p><h2>Melhor Aranjo<a name="8"></a></h2><p>O melhor arranjo ser&aacute; aquele que possui as melhores caracter&iacute;sticas, ou seja, que tenha sobressinal e tempo de estabilidade pr&oacute;ximos do desejado.</p><pre class="codeinput">tempos = [];
 overshoots = [];
 Ys = [];
 <span class="keyword">for</span> R = arranjos
 	numerador = R(1)*R(3)*C^2*s^2+(R(1)+R(3))*C*s+1;
 	denominador = R(1)*R(2)*C^2*s^2+(R(1)+R(2))*C*s;
 	controlador = numerador/denominador;
-	sistema2 = feedback(controlador*G,1);
+	sistema2 = feedback(controlador*G, 1);
 	desempenho2 = stepinfo(sistema2);
 	tempos = [tempos desempenho2.SettlingTime];
 	overshoots = [overshoots desempenho2.Overshoot];
@@ -151,23 +151,40 @@ melhor_i =
 
     20
 
-</pre><img vspace="5" hspace="5" src="pre_relatorio_03.png" alt=""> <p>O melhor arranjo escolhido foi:</p><pre class="codeinput">arranjos(:,melhor_i)
+</pre><img vspace="5" hspace="5" src="pre_relatorio_03.png" alt=""> <p>O melhor arranjo escolhido foi:</p><pre class="codeinput">R1=arranjos(1, melhor_i)
+R2=arranjos(2, melhor_i)
+R3=arranjos(3, melhor_i)
 
 plot(t, [referencia, saida_teorica, saida3, Ys(:,melhor_i)]);
 xlim([0, 1]);
 xlabel(<span class="string">'Tempo (s)'</span>);
-legend(<span class="string">'Refer&ecirc;ncia'</span>, <span class="string">'Sa&iacute;da esperada'</span>, <span class="string">'Sa&iacute;da observada'</span>, <span class="string">'Nova sa&iacute;da'</span>);
+legend(<span class="string">'Refer&ecirc;ncia'</span>, <span class="string">'Sa&iacute;da esperada'</span>, <span class="string">'Sa&iacute;da observada'</span>, <span class="string">'Novo controlador'</span>);
 </pre><pre class="codeoutput">
-ans =
+R1 =
 
        22000
-           1
+
+
+R2 =
+
+     1
+
+
+R3 =
+
        68000
 
-</pre><img vspace="5" hspace="5" src="pre_relatorio_04.png" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2013a</a><br></p></div><!--
+</pre><img vspace="5" hspace="5" src="pre_relatorio_04.png" alt=""> <p>Verifica-se pelo gr&aacute;fico que a resposta do novo controlador &eacute; pr&oacute;xima das respostas esperada (te&oacute;rica) e observada (pr&aacute;tica).</p><h2>Sinal de controle<a name="11"></a></h2><p>Veremos se o sinal est&aacute; entre -10 e +10 (limites f&iacute;sicos da planta)</p><pre class="codeinput">R = arranjos(:, melhor_i);
+numerador = R(1)*R(3)*C^2*s^2+(R(1)+R(3))*C*s+1;
+denominador = R(1)*R(2)*C^2*s^2+(R(1)+R(2))*C*s;
+controlador = numerador/denominador;
+sistema2 = feedback(controlador*G, 1);
+step(controlador*(1-sistema2), 1);
+ylim([-10, 10]);
+</pre><img vspace="5" hspace="5" src="pre_relatorio_05.png" alt=""> <p>Com isso, &eacute; poss&iacute;vel observar que o sinal de controle tem um grande pico em t0, mas todo o restante fica contido na faixa desejada.</p><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2013a</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 %% ES868 – Pré Relatório Lab 4
-% *Controle de plantas eletrˆonicas utilizando um controlador PID analógico*
+% *Controle de plantas eletrônicas utilizando um controlador PID analógico*
 %
 % Turma A - 30/03/2015
 %
@@ -216,7 +233,10 @@ valores = [1, 10, 27, 39, 47, 68, 100, 120, 150, 180,...
 	100e3, 150e3, 330e3, 470e3, 510e3, 560e3, 820e3, 200e3, 220e3, 270e3];
 
 %% Possíveis arranjos
-% Todos os arranjos serão considerados
+% Todos os arranjos os 125.000 arranjos serão considerados e calculados.
+% Apesar de todos serem possíveis inicialmente não serão todos a serem analisados, já que não respeitam a regra R2< R1/10.
+% Calculando, com erro de 25%, os valores de Kd, Kp e Ki encontrou-se 44
+% arranjos. Todos esses arranjos foram simulados para definir o melhor.
 C = 1e-6;
 erro = 0.25;
 minKd = (1-erro)*Csiso.Kd;
@@ -244,7 +264,16 @@ for R1 = valores
 end
 arranjos;
 
-%% Melhor arranjo
+%%
+% Como todos os arranjos possíveis com os valores de resistores disponíveis
+% foram calculados não foi necessária a aproximação de resistores. O estudo
+% foi feito para os valores de resistores comerciais não sendo então
+% necessário verificar os possíveis erros e defeitos.
+
+%% Melhor Aranjo
+% O melhor arranjo será aquele que possui as melhores características, ou
+% seja, que tenha sobressinal e tempo de estabilidade próximos do desejado.
+
 tempos = [];
 overshoots = [];
 Ys = [];
@@ -252,7 +281,7 @@ for R = arranjos
 	numerador = R(1)*R(3)*C^2*s^2+(R(1)+R(3))*C*s+1;
 	denominador = R(1)*R(2)*C^2*s^2+(R(1)+R(2))*C*s;
 	controlador = numerador/denominador;
-	sistema2 = feedback(controlador*G,1);
+	sistema2 = feedback(controlador*G, 1);
 	desempenho2 = stepinfo(sistema2);
 	tempos = [tempos desempenho2.SettlingTime];
 	overshoots = [overshoots desempenho2.Overshoot];
@@ -269,11 +298,30 @@ melhor_i = find(diff_t_o == min(diff_t_o), 1)
 
 %%
 % O melhor arranjo escolhido foi:
-arranjos(:,melhor_i)
+
+R1=arranjos(1, melhor_i)
+R2=arranjos(2, melhor_i)
+R3=arranjos(3, melhor_i)
 
 plot(t, [referencia, saida_teorica, saida3, Ys(:,melhor_i)]);
 xlim([0, 1]);
 xlabel('Tempo (s)');
-legend('Referência', 'Saída esperada', 'Saída observada', 'Nova saída');
+legend('Referência', 'Saída esperada', 'Saída observada', 'Novo controlador');
+%%
+% Verifica-se pelo gráfico que a resposta do novo controlador é próxima das respostas esperada (teórica) e observada (prática).
+
+%% Sinal de controle
+% Veremos se o sinal está entre -10 e +10 (limites físicos da planta)
+R = arranjos(:, melhor_i);
+numerador = R(1)*R(3)*C^2*s^2+(R(1)+R(3))*C*s+1;
+denominador = R(1)*R(2)*C^2*s^2+(R(1)+R(2))*C*s;
+controlador = numerador/denominador;
+sistema2 = feedback(controlador*G, 1);
+step(controlador*(1-sistema2), 1);
+ylim([-10, 10]);
+
+%%
+% Com isso, é possível observar que o sinal de controle tem um grande pico
+% em t0, mas todo o restante fica contido na faixa desejada.
 ##### SOURCE END #####
 --></body></html>

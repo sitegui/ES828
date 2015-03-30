@@ -1,5 +1,5 @@
 %% ES868 – Pré Relatório Lab 4
-% *Controle de plantas eletrˆonicas utilizando um controlador PID analógico*
+% *Controle de plantas eletrônicas utilizando um controlador PID analógico*
 %
 % Turma A - 30/03/2015
 %
@@ -48,7 +48,10 @@ valores = [1, 10, 27, 39, 47, 68, 100, 120, 150, 180,...
 	100e3, 150e3, 330e3, 470e3, 510e3, 560e3, 820e3, 200e3, 220e3, 270e3];
 
 %% Possíveis arranjos
-% Todos os arranjos serão considerados
+% Todos os arranjos os 125.000 arranjos serão considerados e calculados.
+% Apesar de todos serem possíveis inicialmente não serão todos a serem analisados, já que não respeitam a regra R2< R1/10.
+% Calculando, com erro de 25%, os valores de Kd, Kp e Ki encontrou-se 44
+% arranjos. Todos esses arranjos foram simulados para definir o melhor.
 C = 1e-6;
 erro = 0.25;
 minKd = (1-erro)*Csiso.Kd;
@@ -74,9 +77,18 @@ for R1 = valores
 		end
 	end
 end
-arranjos
+arranjos;
 
-%% Melhor arranjo
+%%
+% Como todos os arranjos possíveis com os valores de resistores disponíveis
+% foram calculados não foi necessária a aproximação de resistores. O estudo
+% foi feito para os valores de resistores comerciais não sendo então
+% necessário verificar os possíveis erros e defeitos.
+
+%% Melhor Aranjo
+% O melhor arranjo será aquele que possui as melhores características, ou
+% seja, que tenha sobressinal e tempo de estabilidade próximos do desejado.
+
 tempos = [];
 overshoots = [];
 Ys = [];
@@ -101,12 +113,17 @@ melhor_i = find(diff_t_o == min(diff_t_o), 1)
 
 %%
 % O melhor arranjo escolhido foi:
-arranjos(:, melhor_i)
+
+R1=arranjos(1, melhor_i)
+R2=arranjos(2, melhor_i)
+R3=arranjos(3, melhor_i)
 
 plot(t, [referencia, saida_teorica, saida3, Ys(:,melhor_i)]);
 xlim([0, 1]);
 xlabel('Tempo (s)');
-legend('Referência', 'Saída esperada', 'Saída observada', 'Nova saída');
+legend('Referência', 'Saída esperada', 'Saída observada', 'Novo controlador');
+%%
+% Verifica-se pelo gráfico que a resposta do novo controlador é próxima das respostas esperada (teórica) e observada (prática).
 
 %% Sinal de controle
 % Veremos se o sinal está entre -10 e +10 (limites físicos da planta)
