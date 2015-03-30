@@ -1,6 +1,6 @@
 \documentclass[12pt]{article}
 
-%% Escrevendo em portuguÃªs:
+%% Escrevendo em português:
 \usepackage[brazil]{babel}
 \usepackage[latin1]{inputenc} 
 \usepackage[T1]{fontenc}
@@ -16,6 +16,7 @@
 \usepackage[section]{placeins}
 \usepackage{float}
 %----------------------------
+\bibliographystyle{plain}
 
 
 \newtheorem{teorema}{Teorema}%[chapter]
@@ -141,21 +142,16 @@ Resposta à entrada quadrada do controlador proporcional
 \end{figure}
 \end{center}
 
-\vspace{1 cm}
-\begin{verbatim}
-Resposta à entrada rampa do controlador proporcional
-\end{verbatim}
-\begin{center}
 \begin{figure}[H]
 \centering
 \includegraphics [width=4in]{r1.jpg}
+\caption {Resposta à entrada rampa do controlador proporcional}
 \end{figure}
-\end{center}
 
 \begin{par}
-É interessante notar que as respostas reais possuem erros às entradas quadrada e rampa, disto verifica-se que não há polos em zero. importante notar também que os resultados práticos  são consideravelmente piores do que os da teoria. Essas diferenças são devidas a diversos fatores, entre eles ao não real conhecimento da planta (apesar do estudo feito no laboratório anterior, apenas uma aproximação foi obtida), às conexões físicas e também pelas diferenças geradas pela placa Elvis na simulação.
+É interessante notar que as respostas reais possuem erros às entradas quadrada e rampa, disto verifica-se que não há polos em zero. importante notar também que os resultados práticos  são consideravelmente piores do que os da teoria. Essas diferenças são devidas a diversos fatores, entre eles a não ser possível estabelecer o modelo real da planta (apesar do estudo feito no laboratório anterior, apenas uma aproximação foi obtida), as conexões físicas e também pelas diferenças geradas pela placa Elvis na simulação.
 
-Houveram mudanças também na resposta do controlador, como visível em ambos os gráficos. O controlador prático seria mais ativo devido ao erro sempre presente para seguir os sinais. Há ainda a questão do erro relacionado à entrada rampa: como a resposta real não possui erro constate, o esforço do controlador aumentará sem limite, ou seja, é possível  que supere o limite e danifique o controlador.
+Houveram mudanças também na resposta do controlador, como visível em ambos os gráficos. O controlador prático seria mais ativo devido ao erro sempre presente para seguir os sinais. Há ainda a questão do erro relacionado com a entrada rampa: como a resposta real nã possui erro constate, o esforço do controlador aumentará sem limites, ou seja, sendo possível  que supere o limite e danifique o controlador.
 \end{par} \vspace{1em}
 
 
@@ -177,100 +173,103 @@ Continuous-time transfer function.
 
 \end{verbatim}
 
-\begin{verbatim}
-Resposta à entrada quadrada do sistema com controlador Ziegler-Nichols
-\end{verbatim}
-\begin{center}
 \begin{figure}[H]
 \centering
 \includegraphics [width=4in]{q2.jpg}
+\caption {Resposta à entrada quadrada do sistema com controlador Ziegler-Nichols}
 \end{figure}
-\end{center}
 
-\begin{verbatim}
-Resposta à entrada quadrada do controlador Ziegler-Nichols
-\end{verbatim}
-\begin{center}
 \begin{figure}[H]
 \centering
 \includegraphics [width=4in]{q22.jpg}
+\caption {Resposta à entrada quadrada do controlador Ziegler-Nichols}
 \end{figure}
-\end{center}
 
-\begin{verbatim}
-Resposta à entrada rampa do sistema com controlador Ziegler Nichols
-\end{verbatim}
-\begin{center}
 \begin{figure}[H]
 \centering
 \includegraphics [width=4in]{r2.jpg}
+\caption {Resposta à entrada rampa do sistema com controlador Ziegler Nichols}
 \end{figure}
-\end{center}
 
-\begin{verbatim}
-Resposta à entrada rampa do controlador Ziegler Nichols
-\end{verbatim}
-\begin{center}
 \begin{figure}[H]
 \centering
 \includegraphics [width=4in]{r22.jpg}
+\caption {Resposta à entrada rampa do controlador Ziegler Nichols}
 \end{figure}
-\end{center}
 
 \begin{par} 
 Verifica-se que as respostas reais, tanto do sistema como do controlador, são mais próximas com as respostas teóricas do que no caso do controlador proporcional, principalmente para o caso da entrada quadrada em que as curvas estão bem próximas.
-Como ocorreu para o caso do controlador proporcional, o grande problema acontece no controlador real que no caso da entrada rampa não se estabiliza, e desta forma poderá superar o limite permitido.
+Como ocorreu para o caso do controlador proporcional, o grande problema acontece no controlador real que no caso da entrada rampa ão se estabiliza, e desta forma pode superar o limite permitido.
 \end{par} \vspace{1em}
 
 \section{Controlador utilizando o sisotool}
 
 
 \begin{par}
-	Por fim tem-se as respostas para o controlador feito via sisotool:
+	Por fim tem-se as respostas para o controlador PID feito através do sisotool:
 \end{par}
 
 \begin{verbatim}
-Resposta à entrada quadrada do sistema com controlador via sisotool
+Csiso_ =
+ 
+  0.08585 s^2 + 4.321 s + 50
+  --------------------------
+        0.0001 s^2 + s
 \end{verbatim}
-\begin{center}
+
+
 \begin{figure}[H]
 \centering
 \includegraphics [width=4in]{q3.jpg}
+\caption{Resposta à entrada quadrada do sistema com controlador via sisotool}
 \end{figure}
-\end{center}
 
-\begin{verbatim}
-Resposta à entrada quadrada do  controlador via sisotool
-\end{verbatim}
-\begin{center}
 \begin{figure}[H]
 \centering
 \includegraphics [width=4in]{q33.jpg}
+\caption{Resposta à entrada quadrada do  controlador via sisotool}
 \end{figure}
-\end{center}
 
-\begin{verbatim}
-Resposta à entrada rampa do sistema com controlador via sisotool
-\end{verbatim}
-\begin{center}
 \begin{figure}[H]
 \centering
 \includegraphics [width=4in]{r3.jpg}
+\caption{Resposta à entrada rampa do sistema com controlador via sisotool}
 \end{figure}
-\end{center}
 
-\begin{verbatim}
-Resposta à entrada rampa do controlador via sisotool
-\end{verbatim}
-\begin{center}
 \begin{figure}[H]
 \centering
 \includegraphics [width=4in]{r33.jpg}
+\caption{Resposta à entrada rampa do controlador via sisotool}
 \end{figure}
-\end{center}
 
 \begin{par}
-	Da mesma forma que ocorreu com o controlador Ziegler-Nichols as respostas reais e teóricas são próximas e também como se esperado são ''melhores'' do que as respostas do controlador anterior.
+	Da mesma forma ocorrida com o controlador Ziegler-Nichols, as respostas reais e teóricas são próximas e também como esperado são 
+	"melhores"\,do que as respostas do controlador anterior.
 \end{par}
+
+\section{Conclusão}
+
+\begin{par}
+A partir dos gráficos obtidos, pode-se notar as diversas discrepâncias obtidas entre o modelo levantado através 
+de análises experimentais, o controlador projetado para esse modelo e a resposta esperada entre cada um dos modelos. 
+A principal tendência observada em todos os modelos foi de que o controlador apresenta um requisito de potência muito maior do que o ganho esperado na análise experimental. Isso acontece devido, principalmente, a uma imprecisão entre a planta real e a levantada da posição de seus pólos. Como houve até mesmo erro estacionário ao degrau (comportamento não esperado para 
+a planta ideal), pode-se concluir que a planta não possui um pólo em zero (apesar de ser possível considerá-lo muito próximo).
+\end{par}
+\begin{par}
+Tendo em vista a não garantia da posição dos pólos, durante o projeto de um controlador que pode atender a sinais de maior 
+ordem (como a rampa) é necessária a observação dos limites de voltagem do controlador durante a fase de projeto, já que 
+existe um crescimento do ganho necessário pelo controlador à medida que o tempo passa (onde ele começa a se acumular 
+erro), o que pode levar à falha do sistema do controlador por saturação. 
+\end{par}
+
+\section{Bibliografia}
+
+\begin{thebibliography}{5}
+
+\bibitem{Ogata11} K. Ogata, \emph{Engenharia de Controle Moderno}, 6ª edição, 2011.
+
+
+\end{thebibliography}
+
 \end{document}
     
