@@ -1,0 +1,367 @@
+\documentclass[12pt]{article}
+
+%% Escrevendo em portuguÃªs:
+\usepackage[brazil]{babel}
+\usepackage[latin1]{inputenc} 
+\usepackage[T1]{fontenc}
+\usepackage{psfrag}
+\usepackage{fullpage}
+\usepackage{setspace}
+\usepackage{graphicx}
+\usepackage{epsfig}
+\usepackage{epstopdf}
+\usepackage{color}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage[section]{placeins}
+\usepackage{float}
+%----------------------------
+
+
+\newtheorem{teorema}{Teorema}%[chapter]
+\newtheorem{problema}[teorema]{Problema}
+\newtheorem{conj}[teorema]{Conjectura}
+\newtheorem{lema}[teorema]{Lema}
+\newtheorem{exerc}[teorema]{ExercÃ­cio}
+
+\definecolor{lightgray}{gray}{0.95}
+
+% Ad hoc macros
+\newcommand{\qed}       {\hfill\Box}
+\newcommand{\card}[1]   {\left|#1\right|}
+\newcommand{\nct}       {\chi_{_T}}
+\newcommand{\cnk}[2]    {C_{#1}^{#2}}
+\newcommand{\ed}[2]     {#1#2}
+\newcommand{\teto}[1]   {\lceil #1 \rceil}
+\newcommand{\piso}[1]   {\lfloor #1 \rfloor}
+\newcommand{\itab}[1]{\hspace{0em}\rlap{#1}}
+\newcommand{\tab}[1]{\hspace{.2\textwidth}\rlap{#1}}
+
+%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%
+
+\begin{titlepage}
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for the horizontal lines, change thickness here
+
+\center % Center everything on the page
+ 
+%----------------------------------------------------------------------------------------
+%	HEADING SECTIONS
+%----------------------------------------------------------------------------------------
+
+\textsc{\LARGE Universidade Estadual de Campinas}\\[0.5cm]
+\textsc{\normalsize ES828 - Laboratório de Controle de Sistemas}\\[0.2cm] % Major heading such as course name
+\textsc{\normalsize Turma A}\\[0.2cm] % Minor heading such as course title
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+\vspace {5cm}
+{ \huge \bfseries Experimento 04 - Pré-Relatório }\\[0.4cm] % Title of your document
+ 
+%----------------------------------------------------------------------------------------
+%	AUTHOR SECTION
+%----------------------------------------------------------------------------------------
+\vspace {5cm}
+\begin{minipage}{0.4\textwidth}
+\begin{flushleft} \large
+\emph{Alunos:}\\
+ \begin{tabbing}
+ Augusto Miranda Garcia\hspace{1cm} \=  \= 104627 \\
+ Guilherme de Oliveira Souza  \> 117093 \\
+ Vinícius Ragazi David \>{120258}\\
+ \end{tabbing}
+\end{flushleft}
+\end{minipage}
+\vspace {2cm}
+~
+\begin{minipage}{0.4\textwidth}
+\begin{flushright} \large
+\emph{Professora responsável:} \\
+Dra. Grace Silva Deaecto
+\end{flushright}
+\end{minipage}\\[2cm]
+
+% If you don't want a supervisor, uncomment the two lines below and remove the section above
+%\Large \emph{Author:}\\
+%John \textsc{Smith}\\[3cm] % Your name
+
+%----------------------------------------------------------------------------------------
+%	DATE SECTION
+%----------------------------------------------------------------------------------------
+
+{\large \today}\\[3cm] % Date, change the \today to a set date if you want to be precise
+
+%----------------------------------------------------------------------------------------
+%	LOGO SECTION
+%----------------------------------------------------------------------------------------
+
+%\includegraphics{Logo}\\[1cm] % Include a department/university logo - this will require the graphicx package
+ 
+%----------------------------------------------------------------------------------------
+
+\vfill % Fill the rest of the page with whitespace
+
+\end{titlepage}
+
+\tableofcontents
+%\listoffigures
+%\listoftables
+ 
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Objetivo}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{par}
+O objetivo do experimento a ser executado será a implementação de um controle PID 
+analógico utilizando um circuito com resistores, capacitores e amplificadores operacionais, que é apresentado na 
+figura \ref{figCircuito}. Será utilizado o controlador PID que apresentou o melhor desempenho pelos 
+requerimentos do relatório 3.
+\end{par}
+
+
+\begin{figure}[H]
+\centering
+\includegraphics [width=4in]{circuito.png}
+\caption {Circuito a ser montado e utilizado no laboratório.}
+\label{figCircuito}
+\end{figure}
+
+\section{Escolha do controlador}
+
+\begin{par}
+Dentre os três controladores PID desenvolvidos no lab passado, o que apresentou melhor desempenho (menor overshoot e melhor tempo de estabilização) foi o terceiro, feito pelo sisotool.
+\end{par}
+\begin{par}
+Veja comparação na Figura \ref{figRespTudo}.
+\end{par}
+\begin{verbatim}
+plot([referencia, saida1, saida2, saida3]);
+legend('Referência', 'Proporcional', 'Ziegler-Nichols', 'Siso Tools');
+ylim([0, 1.8]);
+xlabel('Tempo (s)');
+\end{verbatim}
+
+\begin{figure}[H]
+\centering
+\includegraphics [width=4in]{pre_relatorio_01.png}
+\caption {Comparação da resposta para todos os controladores desenvolvidos no Relatório 3.}
+\label{figRespTudo}
+\end{figure}
+
+\section{Comparação entre teoria e prática}
+\begin{par}
+O gráfico da Figura \ref{figRespSisotool} mostra a comparação do comportamento do modelo teórico da planta e do controlador com os dados coletados no laboratório:
+\end{par}
+\begin{verbatim}
+sistema = feedback(Csiso*G,1);
+saida_teorica = lsim(sistema, referencia, t);
+plot(t, [referencia, saida_teorica, saida3]);
+xlim([0, 1]);
+xlabel('Tempo (s)');
+legend('Referência', 'Saída esperada', 'Saída observada');
+\end{verbatim}
+
+\begin{figure}[H]
+\centering
+\includegraphics [width=4in]{pre_relatorio_02.png}
+\caption {Comparação da resposta teórica e prática para o controlador feito pelo Sisotool no Relatório 3.}
+\label{figRespSisotool}
+\end{figure}
+
+\section{Desempenho buscado para o Controlador}
+\begin{par}
+O desempenho teórico do controlador, encontrado pelo Matlab é mostrado a seguir.
+\end{par}
+\begin{verbatim}
+desempenho = stepinfo(sistema)
+tempo = desempenho.SettlingTime;
+overshoot = desempenho.Overshoot;
+\end{verbatim}
+
+\begin{verbatim}
+desempenho = 
+
+        RiseTime: 0.0348
+    SettlingTime: 0.3023
+     SettlingMin: 0.9004
+     SettlingMax: 1.3353
+       Overshoot: 33.5313
+      Undershoot: 0
+            Peak: 1.3353
+        PeakTime: 0.0956
+\end{verbatim}
+
+
+\section{Busca pelos melhores parâmetros de componentes para o controlador}
+\begin{par}
+Os possíveis valores de resistências para arranjo no circuito foram colocados como entrada no Matlab. A partir 
+desses valores, foi possível encontrar todos os 125.000 arranjos, que serão considerados e calculados. Apesar de todos serem possíveis inicialmente não serão todos a ser analisados, já que não respeitam a regra $R2< R1/10$. 
+Calculando, com erro de 25%, para os valores esperados de Kd, Kp e Ki, encontraram-se 44 arranjos. 
+Todos esses arranjos foram simulados para definir o melhor.
+\end{par}
+\begin{verbatim}
+valores = [1, 10, 27, 39, 47, 68, 100, 120, 150, 180,...
+	200, 220, 270, 330, 390, 470, 560, 680, 1e3, 1.2e3,...
+	1.5e3, 1.8e3, 2.2e3, 2.7e3, 3.3e3, 3.9e3, 4.7e3, 6.8e3, 10e3, 12e3,...
+	15e3, 20e3, 22e3, 27e3, 33e3, 39e3, 51e3, 56e3, 58e3, 68e3,...
+	100e3, 150e3, 330e3, 470e3, 510e3, 560e3, 820e3, 200e3, 220e3, 270e3];
+C = 1e-6;
+erro = 0.25;
+minKd = (1-erro)*Csiso.Kd;
+maxKd = (1+erro)*Csiso.Kd;
+minKp = (1-erro)*Csiso.Kp;
+maxKp = (1+erro)*Csiso.Kp;
+minKi = (1-erro)*Csiso.Ki;
+maxKi = (1+erro)*Csiso.Ki;
+arranjos = [];
+for R1 = valores
+	for R2 = valores
+		if R2 >= R1/10
+			% Queremos R2 << R1
+			continue
+		end
+		for R3 = valores
+			Kd = R1*R3*C/(R1+R2);
+			Kp = (R1+R3)/(R1+R2);
+			Ki = 1/((R1+R2)*C);
+			if Kd > minKd && Kd < maxKd && Kp > minKp && Kp < maxKp && Ki > minKi && Ki < maxKi
+				arranjos = [arranjos [R1 R2 R3]'];
+			end
+		end
+	end
+end
+arranjos;
+\end{verbatim}
+
+\begin{par}
+Como todos os arranjos possíveis com os valores de resistores disponíveis foram calculados 
+não foi necessária a aproximação de resistores. O estudo foi feito para os valores de 
+resistores comerciais não sendo então necessário verificar os possíveis erros e defeitos.
+\end{par}
+
+
+\subsection{Melhor Arranjo}
+\begin{par}
+O melhor arranjo será aquele que possui as melhores características, ou seja, que tenha sobressinal e tempo de estabilidade próximos do desejado.
+\end{par}
+\begin{verbatim}
+tempos = [];
+overshoots = [];
+Ys = [];
+for R = arranjos
+	numerador = R(1)*R(3)*C^2*s^2+(R(1)+R(3))*C*s+1;
+	denominador = R(1)*R(2)*C^2*s^2+(R(1)+R(2))*C*s;
+	controlador = numerador/denominador;
+	sistema2 = feedback(controlador*G, 1);
+	desempenho2 = stepinfo(sistema2);
+	tempos = [tempos desempenho2.SettlingTime];
+	overshoots = [overshoots desempenho2.Overshoot];
+	Ys = [Ys lsim(sistema2, referencia, t)];
+end
+plot(t, Ys);
+xlim([0 1]);
+xlabel('Tempo (s)');
+
+diff_tempos = abs(tempos/tempo-1);
+diff_overshoots = abs(overshoots/overshoot-1);
+diff_t_o = diff_tempos.^2 + diff_overshoots.^2;
+melhor_i = find(diff_t_o == min(diff_t_o), 1)
+\end{verbatim}
+
+\begin{verbatim}
+melhor_i =
+
+    20
+\end{verbatim}
+
+\begin{figure}[H]
+\centering
+\includegraphics [width=4in]{pre_relatorio_03.png}
+\caption {Comparação entre diversos arranjos de resistores e capacitores.}
+\label{figCompArranjos}
+\end{figure}
+
+\begin{par}
+O melhor arranjo escolhido está demonstrado na Figura \ref{figCompControleFinal}.
+\end{par}
+
+\begin{verbatim}
+R1=arranjos(1, melhor_i)
+R2=arranjos(2, melhor_i)
+R3=arranjos(3, melhor_i)
+
+plot(t, [referencia, saida_teorica, saida3, Ys(:,melhor_i)]);
+xlim([0, 1]);
+xlabel('Tempo (s)');
+legend('Referência', 'Saída esperada', 'Saída observada', 'Novo controlador');
+\end{verbatim}
+
+\begin{verbatim}
+R1 =
+
+       22000
+
+
+R2 =
+
+     1
+
+
+R3 =
+
+       68000
+\end{verbatim}
+
+\begin{figure}[H]
+\centering
+\includegraphics [width=4in]{pre_relatorio_04.png}
+\caption {Comparação entre o controladores: projetado, observado no Relatório 3 e analógico.}
+\label{figCompControleFinal}
+\end{figure}
+
+\begin{par}
+Verifica-se pelo gráfico que a resposta do novo controlador é próxima das respostas esperada (teórica) e observada (prática).
+\end{par}
+
+
+
+\section{Limites do sinal de controle}
+\begin{par}
+Foi verificado que o sinal está entre -10 e +10 [V] (limites físicos da planta). 
+
+\end{par}
+\begin{verbatim}
+R = arranjos(:, melhor_i);
+numerador = R(1)*R(3)*C^2*s^2+(R(1)+R(3))*C*s+1;
+denominador = R(1)*R(2)*C^2*s^2+(R(1)+R(2))*C*s;
+controlador = numerador/denominador;
+sistema2 = feedback(controlador*G, 1);
+step(controlador*(1-sistema2), 1);
+ylim([-10, 10]);
+\end{verbatim}
+
+\begin{figure}[H]
+\centering
+\includegraphics [width=4in]{pre_relatorio_05.png}
+\caption {Saída esperada do controlador projetado.}
+\label{figCompArranjos}
+\end{figure}
+
+\begin{par}
+Com isso, é possível observar que o sinal de controle tem um grande pico em $t_0$, mas todo o restante fica contido na faixa desejada.
+\end{par}
+
+
+\begin{thebibliography}{5}
+
+\bibitem{Ogata11} K. Ogata, \emph{Engenharia de Controle Moderno}, 6ª edição, 2011.
+
+
+\end{thebibliography}
+
+\end{document}
+    
