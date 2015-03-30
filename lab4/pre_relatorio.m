@@ -84,7 +84,7 @@ for R = arranjos
 	numerador = R(1)*R(3)*C^2*s^2+(R(1)+R(3))*C*s+1;
 	denominador = R(1)*R(2)*C^2*s^2+(R(1)+R(2))*C*s;
 	controlador = numerador/denominador;
-	sistema2 = feedback(controlador*G,1);
+	sistema2 = feedback(controlador*G, 1);
 	desempenho2 = stepinfo(sistema2);
 	tempos = [tempos desempenho2.SettlingTime];
 	overshoots = [overshoots desempenho2.Overshoot];
@@ -101,9 +101,23 @@ melhor_i = find(diff_t_o == min(diff_t_o), 1)
 
 %%
 % O melhor arranjo escolhido foi:
-arranjos(:,melhor_i)
+arranjos(:, melhor_i)
 
 plot(t, [referencia, saida_teorica, saida3, Ys(:,melhor_i)]);
 xlim([0, 1]);
 xlabel('Tempo (s)');
 legend('Referência', 'Saída esperada', 'Saída observada', 'Nova saída');
+
+%% Sinal de controle
+% Veremos se o sinal está entre -10 e +10 (limites físicos da planta)
+R = arranjos(:, melhor_i);
+numerador = R(1)*R(3)*C^2*s^2+(R(1)+R(3))*C*s+1;
+denominador = R(1)*R(2)*C^2*s^2+(R(1)+R(2))*C*s;
+controlador = numerador/denominador;
+sistema2 = feedback(controlador*G, 1);
+step(controlador*(1-sistema2), 1);
+ylim([-10, 10]);
+
+%%
+% Com isso, é possível observar que o sinal de controle tem um grande pico
+% em t0, mas todo o restante fica contido na faixa desejada.
