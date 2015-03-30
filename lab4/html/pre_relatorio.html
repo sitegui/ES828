@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>pre_relatorio</title><meta name="generator" content="MATLAB 8.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2015-03-26"><meta name="DC.source" content="pre_relatorio.m"><style type="text/css">
+      --><title>pre_relatorio</title><meta name="generator" content="MATLAB 8.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2015-03-30"><meta name="DC.source" content="pre_relatorio.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -100,15 +100,20 @@ desempenho =
 	15e3, 20e3, 22e3, 27e3, 33e3, 39e3, 51e3, 56e3, 58e3, 68e3,<span class="keyword">...</span>
 	100e3, 150e3, 330e3, 470e3, 510e3, 560e3, 820e3, 200e3, 220e3, 270e3];
 </pre><h2>Poss&iacute;veis arranjos<a name="6"></a></h2><p>Todos os arranjos ser&atilde;o considerados</p><pre class="codeinput">C = 1e-6;
-minKd = 0.8*Csiso.Kd;
-maxKd = 1.2*Csiso.Kd;
-minKp = 0.8*Csiso.Kp;
-maxKp = 1.2*Csiso.Kp;
-minKi = 0.8*Csiso.Ki;
-maxKi = 1.2*Csiso.Ki;
+erro = 0.25;
+minKd = (1-erro)*Csiso.Kd;
+maxKd = (1+erro)*Csiso.Kd;
+minKp = (1-erro)*Csiso.Kp;
+maxKp = (1+erro)*Csiso.Kp;
+minKi = (1-erro)*Csiso.Ki;
+maxKi = (1+erro)*Csiso.Ki;
 arranjos = [];
 <span class="keyword">for</span> R1 = valores
 	<span class="keyword">for</span> R2 = valores
+		<span class="keyword">if</span> R2 &gt;= R1/10
+			<span class="comment">% Queremos R2 &lt;&lt; R1</span>
+			<span class="keyword">continue</span>
+		<span class="keyword">end</span>
 		<span class="keyword">for</span> R3 = valores
 			Kd = R1*R3*C/(R1+R2);
 			Kp = (R1+R3)/(R1+R2);
@@ -119,14 +124,7 @@ arranjos = [];
 		<span class="keyword">end</span>
 	<span class="keyword">end</span>
 <span class="keyword">end</span>
-arranjos
-</pre><pre class="codeoutput">
-arranjos =
-
-       20000       20000       20000       22000       22000       22000
-        3300        3900        4700        1800        2200        2700
-      100000      100000      100000      100000      100000      100000
-
+arranjos;
 </pre><h2>Melhor arranjo<a name="7"></a></h2><pre class="codeinput">tempos = [];
 overshoots = [];
 Ys = [];
@@ -143,30 +141,28 @@ Ys = [];
 plot(t, Ys);
 xlim([0 1]);
 xlabel(<span class="string">'Tempo (s)'</span>);
-tempos
-overshoots
+
+diff_tempos = abs(tempos/tempo-1);
+diff_overshoots = abs(overshoots/overshoot-1);
+diff_t_o = diff_tempos.^2 + diff_overshoots.^2;
+melhor_i = find(diff_t_o == min(diff_t_o), 1)
 </pre><pre class="codeoutput">
-tempos =
+melhor_i =
 
-    0.1653    0.1667    0.1689    0.2256    0.2177    0.2070
+    20
 
+</pre><img vspace="5" hspace="5" src="pre_relatorio_03.png" alt=""> <p>O melhor arranjo escolhido foi:</p><pre class="codeinput">arranjos(:,melhor_i)
 
-overshoots =
-
-   38.3133   39.2225   40.2760   32.4657   33.0943   33.9253
-
-</pre><img vspace="5" hspace="5" src="pre_relatorio_03.png" alt=""> <p>O melhor arranjo escolhido foi o primeiro</p><pre class="codeinput">arranjos(:,1)
-
-plot(t, [referencia, saida_teorica, saida3, Ys(:,1)]);
+plot(t, [referencia, saida_teorica, saida3, Ys(:,melhor_i)]);
 xlim([0, 1]);
 xlabel(<span class="string">'Tempo (s)'</span>);
 legend(<span class="string">'Refer&ecirc;ncia'</span>, <span class="string">'Sa&iacute;da esperada'</span>, <span class="string">'Sa&iacute;da observada'</span>, <span class="string">'Nova sa&iacute;da'</span>);
 </pre><pre class="codeoutput">
 ans =
 
-       20000
-        3300
-      100000
+       22000
+           1
+       68000
 
 </pre><img vspace="5" hspace="5" src="pre_relatorio_04.png" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2013a</a><br></p></div><!--
 ##### SOURCE BEGIN #####
@@ -222,15 +218,20 @@ valores = [1, 10, 27, 39, 47, 68, 100, 120, 150, 180,...
 %% Possíveis arranjos
 % Todos os arranjos serão considerados
 C = 1e-6;
-minKd = 0.8*Csiso.Kd;
-maxKd = 1.2*Csiso.Kd;
-minKp = 0.8*Csiso.Kp;
-maxKp = 1.2*Csiso.Kp;
-minKi = 0.8*Csiso.Ki;
-maxKi = 1.2*Csiso.Ki;
+erro = 0.25;
+minKd = (1-erro)*Csiso.Kd;
+maxKd = (1+erro)*Csiso.Kd;
+minKp = (1-erro)*Csiso.Kp;
+maxKp = (1+erro)*Csiso.Kp;
+minKi = (1-erro)*Csiso.Ki;
+maxKi = (1+erro)*Csiso.Ki;
 arranjos = [];
 for R1 = valores
 	for R2 = valores
+		if R2 >= R1/10
+			% Queremos R2 << R1
+			continue
+		end
 		for R3 = valores
 			Kd = R1*R3*C/(R1+R2);
 			Kp = (R1+R3)/(R1+R2);
@@ -241,7 +242,7 @@ for R1 = valores
 		end
 	end
 end
-arranjos
+arranjos;
 
 %% Melhor arranjo
 tempos = [];
@@ -260,14 +261,17 @@ end
 plot(t, Ys);
 xlim([0 1]);
 xlabel('Tempo (s)');
-tempos
-overshoots
+
+diff_tempos = abs(tempos/tempo-1);
+diff_overshoots = abs(overshoots/overshoot-1);
+diff_t_o = diff_tempos.^2 + diff_overshoots.^2;
+melhor_i = find(diff_t_o == min(diff_t_o), 1)
 
 %%
-% O melhor arranjo escolhido foi o primeiro
-arranjos(:,1)
+% O melhor arranjo escolhido foi:
+arranjos(:,melhor_i)
 
-plot(t, [referencia, saida_teorica, saida3, Ys(:,1)]);
+plot(t, [referencia, saida_teorica, saida3, Ys(:,melhor_i)]);
 xlim([0, 1]);
 xlabel('Tempo (s)');
 legend('Referência', 'Saída esperada', 'Saída observada', 'Nova saída');

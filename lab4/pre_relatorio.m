@@ -50,15 +50,20 @@ valores = [1, 10, 27, 39, 47, 68, 100, 120, 150, 180,...
 %% Possíveis arranjos
 % Todos os arranjos serão considerados
 C = 1e-6;
-minKd = 0.8*Csiso.Kd;
-maxKd = 1.2*Csiso.Kd;
-minKp = 0.8*Csiso.Kp;
-maxKp = 1.2*Csiso.Kp;
-minKi = 0.8*Csiso.Ki;
-maxKi = 1.2*Csiso.Ki;
+erro = 0.25;
+minKd = (1-erro)*Csiso.Kd;
+maxKd = (1+erro)*Csiso.Kd;
+minKp = (1-erro)*Csiso.Kp;
+maxKp = (1+erro)*Csiso.Kp;
+minKi = (1-erro)*Csiso.Ki;
+maxKi = (1+erro)*Csiso.Ki;
 arranjos = [];
 for R1 = valores
 	for R2 = valores
+		if R2 >= R1/10
+			% Queremos R2 << R1
+			continue
+		end
 		for R3 = valores
 			Kd = R1*R3*C/(R1+R2);
 			Kp = (R1+R3)/(R1+R2);
@@ -88,14 +93,17 @@ end
 plot(t, Ys);
 xlim([0 1]);
 xlabel('Tempo (s)');
-tempos
-overshoots
+
+diff_tempos = abs(tempos/tempo-1);
+diff_overshoots = abs(overshoots/overshoot-1);
+diff_t_o = diff_tempos.^2 + diff_overshoots.^2;
+melhor_i = find(diff_t_o == min(diff_t_o), 1)
 
 %%
-% O melhor arranjo escolhido foi o primeiro
-arranjos(:,1)
+% O melhor arranjo escolhido foi:
+arranjos(:,melhor_i)
 
-plot(t, [referencia, saida_teorica, saida3, Ys(:,1)]);
+plot(t, [referencia, saida_teorica, saida3, Ys(:,melhor_i)]);
 xlim([0, 1]);
 xlabel('Tempo (s)');
 legend('Referência', 'Saída esperada', 'Saída observada', 'Nova saída');
