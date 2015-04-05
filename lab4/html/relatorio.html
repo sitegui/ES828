@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>pre_relatorio</title><meta name="generator" content="MATLAB 8.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2015-04-05"><meta name="DC.source" content="pre_relatorio.m"><style type="text/css">
+      --><title>relatorio</title><meta name="generator" content="MATLAB 8.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2015-04-05"><meta name="DC.source" content="relatorio.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -68,18 +68,19 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
   </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#1">ES868 &#8211; Pr&eacute; Relat&oacute;rio Lab 4</a></li><li><a href="#2">Controlador escolhido</a></li><li><a href="#3">Compara&ccedil;&atilde;o teoria vs pr&aacute;tica</a></li><li><a href="#4">Desempenho buscado</a></li><li><a href="#5">Valores de resistores</a></li><li><a href="#6">Poss&iacute;veis arranjos</a></li><li><a href="#8">Melhor Aranjo</a></li><li><a href="#11">Sinal de controle</a></li></ul></div><h2>ES868 &#8211; Pr&eacute; Relat&oacute;rio Lab 4<a name="1"></a></h2><p><b>Controle de plantas eletr&ocirc;nicas utilizando um controlador PID anal&oacute;gico</b></p><p>Turma A - 30/03/2015</p><div><ul><li>Augusto Miranda Garcia - 104627</li><li>Guilherme de Oliveira Souza &#8211; 117093</li><li>Vin&iacute;cius Ragazi David - 120258</li></ul></div><pre class="codeinput">load <span class="string">../G.mat</span>
 load <span class="string">../pids.mat</span>
 load <span class="string">../lab3/sinais_tratados.mat</span>
+load <span class="string">sinais_tratados4.mat</span>
 s = tf(<span class="string">'s'</span>);
-</pre><h2>Controlador escolhido<a name="2"></a></h2><p>Dentre os tr&ecirc;s controladores PID desenvolvidos no lab passado, o que apresentou melhor desempenho (menor overshoot e melhor tempo de estabiliza&ccedil;&atilde;o) foi o terceiro, feito pelo sisotool.</p><p>Veja compara&ccedil;&atilde;o abaixo:</p><pre class="codeinput">plot([referencia, saida1, saida2, saida3]);
-legend(<span class="string">'Refer&ecirc;ncia'</span>, <span class="string">'Proporcional'</span>, <span class="string">'Ziegler-Nichols'</span>, <span class="string">'Siso Tools'</span>);
+</pre><h2>Controlador escolhido<a name="2"></a></h2><p>Dentre os tr&ecirc;s controladores PID desenvolvidos no lab passado, o que apresentou melhor desempenho (menor overshoot e melhor tempo de estabiliza&ccedil;&atilde;o) foi o terceiro, feito pelo sisotool.</p><p>Veja compara&ccedil;&atilde;o abaixo:</p><pre class="codeinput">plot([referencia, saida1, saida2, saida3, saida]);
+legend(<span class="string">'Refer&ecirc;ncia'</span>, <span class="string">'Proporcional'</span>, <span class="string">'Ziegler-Nichols'</span>, <span class="string">'Siso Tools'</span>, <span class="string">'Saida experimental'</span>);
 ylim([0, 1.8]);
 xlabel(<span class="string">'Tempo (s)'</span>);
-</pre><img vspace="5" hspace="5" src="pre_relatorio_01.png" alt=""> <h2>Compara&ccedil;&atilde;o teoria vs pr&aacute;tica<a name="3"></a></h2><p>O gr&aacute;fico abaixo mostra a compara&ccedil;&atilde;o do comportamento do modelo te&oacute;rico da planta e do controlador com os dados coletados no laborat&oacute;rio:</p><pre class="codeinput">sistema = feedback(Csiso*G,1);
+</pre><img vspace="5" hspace="5" src="relatorio_01.png" alt=""> <h2>Compara&ccedil;&atilde;o teoria vs pr&aacute;tica<a name="3"></a></h2><p>O gr&aacute;fico abaixo mostra a compara&ccedil;&atilde;o do comportamento do modelo te&oacute;rico da planta e do controlador com os dados coletados no laborat&oacute;rio:</p><pre class="codeinput">sistema = feedback(Csiso*G,1);
 saida_teorica = lsim(sistema, referencia, t);
 plot(t, [referencia, saida_teorica, saida3]);
 xlim([0, 1]);
 xlabel(<span class="string">'Tempo (s)'</span>);
 legend(<span class="string">'Refer&ecirc;ncia'</span>, <span class="string">'Sa&iacute;da esperada'</span>, <span class="string">'Sa&iacute;da observada'</span>);
-</pre><img vspace="5" hspace="5" src="pre_relatorio_02.png" alt=""> <h2>Desempenho buscado<a name="4"></a></h2><p>O desempenho te&oacute;rico do controlador &eacute;:</p><pre class="codeinput">desempenho = stepinfo(sistema)
+</pre><img vspace="5" hspace="5" src="relatorio_02.png" alt=""> <h2>Desempenho buscado<a name="4"></a></h2><p>O desempenho te&oacute;rico do controlador &eacute;:</p><pre class="codeinput">desempenho = stepinfo(sistema)
 tempo = desempenho.SettlingTime;
 overshoot = desempenho.Overshoot;
 </pre><pre class="codeoutput">
@@ -138,10 +139,10 @@ Ys = [];
 	overshoots = [overshoots desempenho2.Overshoot];
 	Ys = [Ys lsim(sistema2, referencia, t)];
 <span class="keyword">end</span>
-plot(t, Ys);
+plot(t, [saida, Ys]);
 xlim([0 1]);
 xlabel(<span class="string">'Tempo (s)'</span>);
-
+legend(<span class="string">'Saida controlada experimental'</span>);
 diff_tempos = abs(tempos/tempo-1);
 diff_overshoots = abs(overshoots/overshoot-1);
 diff_t_o = diff_tempos.^2 + diff_overshoots.^2;
@@ -151,14 +152,14 @@ melhor_i =
 
     20
 
-</pre><img vspace="5" hspace="5" src="pre_relatorio_03.png" alt=""> <p>O melhor arranjo escolhido foi:</p><pre class="codeinput">R1=arranjos(1, melhor_i)
+</pre><img vspace="5" hspace="5" src="relatorio_03.png" alt=""> <p>O melhor arranjo escolhido foi:</p><pre class="codeinput">R1=arranjos(1, melhor_i)
 R2=arranjos(2, melhor_i)
 R3=arranjos(3, melhor_i)
 
-plot(t, [referencia, saida_teorica, saida3, Ys(:,melhor_i)]);
+plot(t, [referencia, saida_teorica, saida3, Ys(:,melhor_i), saida]);
 xlim([0, 1]);
 xlabel(<span class="string">'Tempo (s)'</span>);
-legend(<span class="string">'Refer&ecirc;ncia'</span>, <span class="string">'Sa&iacute;da esperada'</span>, <span class="string">'Sa&iacute;da observada'</span>, <span class="string">'Novo controlador'</span>);
+legend(<span class="string">'Refer&ecirc;ncia'</span>, <span class="string">'Sa&iacute;da esperada'</span>, <span class="string">'Sa&iacute;da observada'</span>, <span class="string">'Sa&iacute;da controlada te&oacute;rico'</span>, <span class="string">'Saida controlada experimental'</span>);
 </pre><pre class="codeoutput">
 R1 =
 
@@ -174,14 +175,19 @@ R3 =
 
        68000
 
-</pre><img vspace="5" hspace="5" src="pre_relatorio_04.png" alt=""> <p>Verifica-se pelo gr&aacute;fico que a resposta do novo controlador &eacute; pr&oacute;xima das respostas esperada (te&oacute;rica) e observada (pr&aacute;tica).</p><h2>Sinal de controle<a name="11"></a></h2><p>Veremos se o sinal est&aacute; entre -10 e +10 (limites f&iacute;sicos da planta)</p><pre class="codeinput">R = arranjos(:, melhor_i);
+</pre><img vspace="5" hspace="5" src="relatorio_04.png" alt=""> <p>Verifica-se pelo gr&aacute;fico que a resposta do novo controlador &eacute; pr&oacute;xima das respostas esperada (te&oacute;rica) e observada (pr&aacute;tica).</p><h2>Sinal de controle<a name="11"></a></h2><p>Veremos se o sinal est&aacute; entre -10 e +10 (limites f&iacute;sicos da planta)</p><pre class="codeinput">R = arranjos(:, melhor_i);
 numerador = R(1)*R(3)*C^2*s^2+(R(1)+R(3))*C*s+1;
 denominador = R(1)*R(2)*C^2*s^2+(R(1)+R(2))*C*s;
 controlador = numerador/denominador;
 sistema2 = feedback(controlador*G, 1);
 step(controlador*(1-sistema2), 1);
 ylim([-10, 10]);
-</pre><img vspace="5" hspace="5" src="pre_relatorio_05.png" alt=""> <p>Com isso, &eacute; poss&iacute;vel observar que o sinal de controle tem um grande pico em t0, mas todo o restante fica contido na faixa desejada.</p><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2013a</a><br></p></div><!--
+hold <span class="string">on</span>
+plot (t, controle, <span class="string">'r'</span>)
+xlabel(<span class="string">'Tempo (s)'</span>);
+legend (<span class="string">'Controle esperado'</span>, <span class="string">'Controle experimental'</span>)
+hold <span class="string">off</span>
+</pre><img vspace="5" hspace="5" src="relatorio_05.png" alt=""> <p>Com isso, &eacute; poss&iacute;vel observar que o sinal de controle tem um grande pico em t0, mas todo o restante fica contido na faixa desejada.</p><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2013a</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 %% ES868 – Pré Relatório Lab 4
 % *Controle de plantas eletrônicas utilizando um controlador PID analógico*
@@ -195,6 +201,7 @@ ylim([-10, 10]);
 load ../G.mat
 load ../pids.mat
 load ../lab3/sinais_tratados.mat
+load sinais_tratados4.mat
 s = tf('s');
 
 %% Controlador escolhido
@@ -203,8 +210,8 @@ s = tf('s');
 % estabilização) foi o terceiro, feito pelo sisotool.
 %
 % Veja comparação abaixo:
-plot([referencia, saida1, saida2, saida3]);
-legend('Referência', 'Proporcional', 'Ziegler-Nichols', 'Siso Tools');
+plot([referencia, saida1, saida2, saida3, saida]);
+legend('Referência', 'Proporcional', 'Ziegler-Nichols', 'Siso Tools', 'Saida experimental');
 ylim([0, 1.8]);
 xlabel('Tempo (s)');
 
@@ -287,10 +294,10 @@ for R = arranjos
 	overshoots = [overshoots desempenho2.Overshoot];
 	Ys = [Ys lsim(sistema2, referencia, t)];
 end
-plot(t, Ys);
+plot(t, [saida, Ys]);
 xlim([0 1]);
 xlabel('Tempo (s)');
-
+legend('Saida controlada experimental');
 diff_tempos = abs(tempos/tempo-1);
 diff_overshoots = abs(overshoots/overshoot-1);
 diff_t_o = diff_tempos.^2 + diff_overshoots.^2;
@@ -303,10 +310,10 @@ R1=arranjos(1, melhor_i)
 R2=arranjos(2, melhor_i)
 R3=arranjos(3, melhor_i)
 
-plot(t, [referencia, saida_teorica, saida3, Ys(:,melhor_i)]);
+plot(t, [referencia, saida_teorica, saida3, Ys(:,melhor_i), saida]);
 xlim([0, 1]);
 xlabel('Tempo (s)');
-legend('Referência', 'Saída esperada', 'Saída observada', 'Novo controlador');
+legend('Referência', 'Saída esperada', 'Saída observada', 'Saída controlada teórico', 'Saida controlada experimental');
 %%
 % Verifica-se pelo gráfico que a resposta do novo controlador é próxima das respostas esperada (teórica) e observada (prática).
 
@@ -319,7 +326,11 @@ controlador = numerador/denominador;
 sistema2 = feedback(controlador*G, 1);
 step(controlador*(1-sistema2), 1);
 ylim([-10, 10]);
-
+hold on
+plot (t, controle, 'r')
+xlabel('Tempo (s)');
+legend ('Controle esperado', 'Controle experimental')
+hold off
 %%
 % Com isso, é possível observar que o sinal de controle tem um grande pico
 % em t0, mas todo o restante fica contido na faixa desejada.
