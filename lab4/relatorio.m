@@ -29,10 +29,10 @@ xlabel('Tempo (s)');
 % da planta e do controlador com os dados coletados no laboratório:
 sistema = feedback(Csiso*G,1);
 saida_teorica = lsim(sistema, referencia, t);
-plot(t, [referencia, saida_teorica, saida3]);
+plot(t, [referencia, saida_teorica, saida3, saida]);
 xlim([0, 1]);
 xlabel('Tempo (s)');
-legend('Referência', 'Saída esperada', 'Saída observada');
+legend('Referência', 'Saída esperada', 'Saída controlada por Labview', 'Saida controlada experimental');
 
 %% Desempenho buscado
 % O desempenho teórico do controlador é:
@@ -122,7 +122,7 @@ R3=arranjos(3, melhor_i)
 plot(t, [referencia, saida_teorica, saida3, Ys(:,melhor_i), saida]);
 xlim([0, 1]);
 xlabel('Tempo (s)');
-legend('Referência', 'Saída esperada', 'Saída observada', 'Saída controlada teórico', 'Saida controlada experimental');
+legend('Referência', 'Saída esperada', 'Saída controlada por Labview', 'Saída controlada teórico', 'Saida controlada experimental');
 %%
 % Verifica-se pelo gráfico que a resposta do novo controlador é próxima das respostas esperada (teórica) e observada (prática).
 

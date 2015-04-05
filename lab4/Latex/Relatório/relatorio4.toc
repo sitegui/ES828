@@ -1,0 +1,5 @@
+\select@language {brazil}
+\contentsline {section}{\numberline {1}Objetivo}{2}
+\contentsline {section}{\numberline {2}Controlador}{2}
+\contentsline {section}{\numberline {3}Dados obtidos}{3}
+\contentsline {section}{\numberline {4}Conclus\~ao}{5}

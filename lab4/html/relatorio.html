@@ -76,10 +76,10 @@ ylim([0, 1.8]);
 xlabel(<span class="string">'Tempo (s)'</span>);
 </pre><img vspace="5" hspace="5" src="relatorio_01.png" alt=""> <h2>Compara&ccedil;&atilde;o teoria vs pr&aacute;tica<a name="3"></a></h2><p>O gr&aacute;fico abaixo mostra a compara&ccedil;&atilde;o do comportamento do modelo te&oacute;rico da planta e do controlador com os dados coletados no laborat&oacute;rio:</p><pre class="codeinput">sistema = feedback(Csiso*G,1);
 saida_teorica = lsim(sistema, referencia, t);
-plot(t, [referencia, saida_teorica, saida3]);
+plot(t, [referencia, saida_teorica, saida3, saida]);
 xlim([0, 1]);
 xlabel(<span class="string">'Tempo (s)'</span>);
-legend(<span class="string">'Refer&ecirc;ncia'</span>, <span class="string">'Sa&iacute;da esperada'</span>, <span class="string">'Sa&iacute;da observada'</span>);
+legend(<span class="string">'Refer&ecirc;ncia'</span>, <span class="string">'Sa&iacute;da esperada'</span>, <span class="string">'Sa&iacute;da controlada por Labview'</span>, <span class="string">'Saida controlada experimental'</span>);
 </pre><img vspace="5" hspace="5" src="relatorio_02.png" alt=""> <h2>Desempenho buscado<a name="4"></a></h2><p>O desempenho te&oacute;rico do controlador &eacute;:</p><pre class="codeinput">desempenho = stepinfo(sistema)
 tempo = desempenho.SettlingTime;
 overshoot = desempenho.Overshoot;
@@ -159,7 +159,7 @@ R3=arranjos(3, melhor_i)
 plot(t, [referencia, saida_teorica, saida3, Ys(:,melhor_i), saida]);
 xlim([0, 1]);
 xlabel(<span class="string">'Tempo (s)'</span>);
-legend(<span class="string">'Refer&ecirc;ncia'</span>, <span class="string">'Sa&iacute;da esperada'</span>, <span class="string">'Sa&iacute;da observada'</span>, <span class="string">'Sa&iacute;da controlada te&oacute;rico'</span>, <span class="string">'Saida controlada experimental'</span>);
+legend(<span class="string">'Refer&ecirc;ncia'</span>, <span class="string">'Sa&iacute;da esperada'</span>, <span class="string">'Sa&iacute;da controlada por Labview'</span>, <span class="string">'Sa&iacute;da controlada te&oacute;rico'</span>, <span class="string">'Saida controlada experimental'</span>);
 </pre><pre class="codeoutput">
 R1 =
 
@@ -220,10 +220,10 @@ xlabel('Tempo (s)');
 % da planta e do controlador com os dados coletados no laboratório:
 sistema = feedback(Csiso*G,1);
 saida_teorica = lsim(sistema, referencia, t);
-plot(t, [referencia, saida_teorica, saida3]);
+plot(t, [referencia, saida_teorica, saida3, saida]);
 xlim([0, 1]);
 xlabel('Tempo (s)');
-legend('Referência', 'Saída esperada', 'Saída observada');
+legend('Referência', 'Saída esperada', 'Saída controlada por Labview', 'Saida controlada experimental');
 
 %% Desempenho buscado
 % O desempenho teórico do controlador é:
@@ -313,7 +313,7 @@ R3=arranjos(3, melhor_i)
 plot(t, [referencia, saida_teorica, saida3, Ys(:,melhor_i), saida]);
 xlim([0, 1]);
 xlabel('Tempo (s)');
-legend('Referência', 'Saída esperada', 'Saída observada', 'Saída controlada teórico', 'Saida controlada experimental');
+legend('Referência', 'Saída esperada', 'Saída controlada por Labview', 'Saída controlada teórico', 'Saida controlada experimental');
 %%
 % Verifica-se pelo gráfico que a resposta do novo controlador é próxima das respostas esperada (teórica) e observada (prática).
 

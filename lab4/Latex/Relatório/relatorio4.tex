@@ -1,0 +1,196 @@
+\documentclass[12pt]{article}
+
+%% Escrevendo em portuguÃªs:
+\usepackage[brazil]{babel}
+\usepackage[latin1]{inputenc} 
+\usepackage[T1]{fontenc}
+\usepackage{psfrag}
+\usepackage{fullpage}
+\usepackage{setspace}
+\usepackage{graphicx}
+\usepackage{epsfig}
+\usepackage{epstopdf}
+\usepackage{color}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage[section]{placeins}
+\usepackage{float}
+%----------------------------
+
+
+\newtheorem{teorema}{Teorema}%[chapter]
+\newtheorem{problema}[teorema]{Problema}
+\newtheorem{conj}[teorema]{Conjectura}
+\newtheorem{lema}[teorema]{Lema}
+\newtheorem{exerc}[teorema]{ExercÃ­cio}
+
+\definecolor{lightgray}{gray}{0.95}
+
+% Ad hoc macros
+\newcommand{\qed}       {\hfill\Box}
+\newcommand{\card}[1]   {\left|#1\right|}
+\newcommand{\nct}       {\chi_{_T}}
+\newcommand{\cnk}[2]    {C_{#1}^{#2}}
+\newcommand{\ed}[2]     {#1#2}
+\newcommand{\teto}[1]   {\lceil #1 \rceil}
+\newcommand{\piso}[1]   {\lfloor #1 \rfloor}
+\newcommand{\itab}[1]{\hspace{0em}\rlap{#1}}
+\newcommand{\tab}[1]{\hspace{.2\textwidth}\rlap{#1}}
+
+%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%
+
+\begin{titlepage}
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for the horizontal lines, change thickness here
+
+\center % Center everything on the page
+ 
+%----------------------------------------------------------------------------------------
+%	HEADING SECTIONS
+%----------------------------------------------------------------------------------------
+
+\textsc{\LARGE Universidade Estadual de Campinas}\\[0.5cm]
+\textsc{\normalsize ES828 - Laboratório de Controle de Sistemas}\\[0.2cm] % Major heading such as course name
+\textsc{\normalsize Turma A}\\[0.2cm] % Minor heading such as course title
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+\vspace {5cm}
+{ \huge \bfseries Experimento 04 - Relatório }\\[0.4cm] % Title of your document
+ 
+%----------------------------------------------------------------------------------------
+%	AUTHOR SECTION
+%----------------------------------------------------------------------------------------
+\vspace {5cm}
+\begin{minipage}{0.4\textwidth}
+\begin{flushleft} \large
+\emph{Alunos:}\\
+ \begin{tabbing}
+ Augusto Miranda Garcia\hspace{1cm} \=  \= 104627 \\
+ Guilherme de Oliveira Souza  \> 117093 \\
+ Vinícius Ragazi David \>{120258}\\
+ \end{tabbing}
+\end{flushleft}
+\end{minipage}
+\vspace {2cm}
+~
+\begin{minipage}{0.4\textwidth}
+\begin{flushright} \large
+\emph{Professora responsável:} \\
+Dra. Grace Silva Deaecto
+\end{flushright}
+\end{minipage}\\[2cm]
+
+% If you don't want a supervisor, uncomment the two lines below and remove the section above
+%\Large \emph{Author:}\\
+%John \textsc{Smith}\\[3cm] % Your name
+
+%----------------------------------------------------------------------------------------
+%	DATE SECTION
+%----------------------------------------------------------------------------------------
+
+{\large \today}\\[3cm] % Date, change the \today to a set date if you want to be precise
+
+%----------------------------------------------------------------------------------------
+%	LOGO SECTION
+%----------------------------------------------------------------------------------------
+
+%\includegraphics{Logo}\\[1cm] % Include a department/university logo - this will require the graphicx package
+ 
+%----------------------------------------------------------------------------------------
+
+\vfill % Fill the rest of the page with whitespace
+
+\end{titlepage}
+
+\tableofcontents
+%\listoffigures
+%\listoftables
+ 
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Objetivo}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{par}
+O objetivo do experimento a ser executado será a implementação de um controle PID 
+analógico utilizando um circuito com resistores, capacitores e amplificadores operacionais, que é apresentado na 
+figura \ref{figCircuito}. Será utilizado o controlador PID que apresentou o melhor desempenho pelos 
+requerimentos do relatório 3.
+\end{par}
+
+
+\begin{figure}[H]
+\centering
+\includegraphics [width=4in]{circuito.png}
+\caption {Circuito a ser montado e utilizado no laboratório.}
+\label{figCircuito}
+\end{figure}
+
+\section{Controlador}
+
+\begin{par}
+Inicialmente utilizando o controlador obtido como melhor no pré-relatório encontrou-se o primeiro problema. Como tem erros entre as plantas real e a utilizada no matlab as respostas obtidas são diferentes, e desta forma o que acreditou-se ser bom, na realidade não era, sendo que em alguns casos a saída real foi instável. O melhor controlador encontrado via matlab foi substituido por outro mais eficaz para a planta real.
+
+O método para encontrar o novo controlador se baseou em teste experimentais. Fixando dois parametros (R1 e R2) e variando os valores de R3 buscou-se a melhor resposta a entrada quadrada dada. A melhor saída encontrada foi:
+ R1=22k$\Omega$, R2=1,5k$\Omega$ e  R3=200k$\Omega$.
+\end{par}
+
+\begin{figure}[H]
+\centering
+\includegraphics [width=4in]{relatorio_03.png}
+\caption {Comparação das respostas para todos os controladores possíveis e o utilizado na prática.}
+\label{figRespTudo}
+\end{figure}
+
+\begin{par}
+Como verifica-se pela figura a diferença entre o real e os teóricos é muito significativa, variando o sobressinal em quase 20\%, ficando claro que o método encontrado para atribuir os valores das resistencias não é eficaz. Essa diferença pode ser causada devido às diferenças entres as plantas reais e virtual, já que para o calculo da virtual  baseou-se em aproximações e simplificações, além disso as variações dos resistores e tambémm de erros de conecções elétricas podem influenciar as respostas.
+\end {par}
+
+\section{Dados obtidos}
+
+\begin{par}
+Tendo então encontrado outro controlador válido (que seja estável) encontrou-se a sua saída para a entrada quadrada.
+\end {par}
+
+\begin{figure}[H]
+\centering
+\includegraphics [width=4in]{relatorio_01.png}
+\caption {Comparação das respostas para todos os vários controladores feitos.}
+\label{figRespTudo}
+\end{figure}
+
+\begin{par}
+Apesar do melhor controlador teórico a ser seguido for o realizado via Siso Tools, o controlador prático se assemelhou mais com o Ziegler-Nichols, tendo menor sobressinal e mais tempo de estabilidade.
+
+Como ocorrido com a saída, o esforço do controlador também variou da teoria para a prática, sendo mais esforçado na prática do que teoricamente.
+\end {par}
+
+\begin{figure}[H]
+\centering
+\includegraphics [width=4in]{relatorio_05.png}
+\caption {Comparação dos esforços do controlador teórico e prático.}
+\label{figRespTudo}
+\end{figure}
+
+\section{Conclusão}
+
+\begin{par}
+A partir dos gráficos obtidos, pode-se notar as diversas discrepâncias obtidas entre o modelo levantado através de análises experimentais e as teóricas. A tendência observada é o posicionamento dos polos em malha fechada mais para direita, casusando em alguns casos, a instabilidade da resposta. As diferenças são prioritariamente causadas pela diferenças entre planta teórica e experimental, mas outros pontos também interferem, como conecções eleétricas falhas ou erros dos controlaores.
+
+Essas diferenças observadas são preocupantes, impossibilitando o mesmo processo em aplicações industriais principalmente para os casos que ocorrem instabilidade, o que pode ocorrer danos aos equipamentos e prejuisos à fabrica.
+\end {par}
+
+
+
+\begin{thebibliography}{5}
+
+\bibitem{Ogata11} K. Ogata, \emph{Engenharia de Controle Moderno}, 6ª edição, 2011.
+
+\end{thebibliography}
+
+\end{document}
+    
