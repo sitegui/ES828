@@ -24,3 +24,38 @@ s = tf('s');
 % $$K = \frac{50}{gk}$$
 kg = evalfr(minreal(s*G), 0)
 K = 50/kg
+
+%% Margem de fase
+[~, Mf] = margin(K*G)
+
+%% Margem de fase desejada
+Md = 45;
+phi = Md-Mf
+alpha_v = (1+sin(phi))/(1-sin(phi))
+
+%% Frequência de cruzamento
+amplitude = sqrt(alpha_v);
+[~, ~, ~, Wg] = margin(K*G/amplitude)
+
+%% Parâmetros restantes
+tau_v = 1/(Wg*sqrt(alpha_v))
+alpha_t = 1/alpha_v
+tau_t = 10*alpha_v*tau_v/alpha_t
+
+%% Controlador
+C_v = (alpha_v*tau_v*s+1)/(tau_v*s+1);
+C_t = (alpha_t*tau_t*s+1)/(tau_t*s+1);
+C = K*C_v*C_t
+
+%% Comparação de desempenho
+Y1 = lsim(feedback(C*G, 1), referencia, t);
+Y2 = lsim(feedback(Ck*G, 1), referencia, t);
+Y3 = lsim(feedback(Csiso*G, 1), referencia, t);
+plot(t, [Y1 Y2 Y3])
+xlim([0, 1]);
+legend('C', 'Ck', 'Csiso');
+
+%% Erro à rampa
+rampa = lsim(1/s, referencia, t);
+lsim(feedback(C*G, 1), rampa, t);
+xlim([0, 1]);
