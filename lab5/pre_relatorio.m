@@ -31,7 +31,7 @@ K = 50/kg
 %% Margem de fase desejada
 Md = 45;
 phi = Md-Mf
-alpha_v = (1+sin(phi))/(1-sin(phi))
+alpha_v = (1+sin(degtorad(phi)))/(1-sin(degtorad(phi)))
 
 %% Frequência de cruzamento
 amplitude = sqrt(alpha_v);
@@ -53,9 +53,14 @@ Y2 = lsim(feedback(Ck*G, 1), referencia, t);
 Y3 = lsim(feedback(Csiso*G, 1), referencia, t);
 plot(t, [Y1 Y2 Y3])
 xlim([0, 1]);
-legend('C', 'Ck', 'Csiso');
+legend('Atraso-avanço', 'Proporcional', 'Siso Tool');
+xlabel('Tempo (s)');
+
+%%
+% Desempenho
+stepinfo(feedback(C*G, 1))
 
 %% Erro à rampa
 rampa = lsim(1/s, referencia, t);
 lsim(feedback(C*G, 1), rampa, t);
-xlim([0, 1]);
+axis([0, 1, 0, 1])
