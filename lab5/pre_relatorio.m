@@ -24,7 +24,9 @@ s = tf('s');
 % $$K = \frac{50}{gk}$$
 kg = evalfr(minreal(s*G), 0)
 K = 50/kg
-
+t = 0:0.001:2;
+referencia = ones(length(t));
+referencia = referencia(1,:);
 %% Margem de fase
 [~, Mf] = margin(K*G)
 

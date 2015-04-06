@@ -1,0 +1,236 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>pre_relatorio</title><meta name="generator" content="MATLAB 8.0"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2015-04-06"><meta name="DC.source" content="pre_relatorio.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, tt, code { font-size:12px; }
+pre { margin:0px 0px 20px; }
+pre.error { color:red; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#1">ES868 &#8211; Pr&eacute; Relat&oacute;rio Lab 5</a></li><li><a href="#2">Determina&ccedil;&atilde;o do K</a></li><li><a href="#3">Margem de fase</a></li><li><a href="#4">Margem de fase desejada</a></li><li><a href="#5">Frequ&ecirc;ncia de cruzamento</a></li><li><a href="#6">Par&acirc;metros restantes</a></li><li><a href="#7">Controlador</a></li><li><a href="#8">Compara&ccedil;&atilde;o de desempenho</a></li><li><a href="#10">Erro &agrave; rampa</a></li></ul></div><h2>ES868 &#8211; Pr&eacute; Relat&oacute;rio Lab 5<a name="1"></a></h2><p><b>Controle de plantas eletr&#710;onicas utilizando um controlador atraso-avan&ccedil;o digital</b></p><p>Turma A - 06/04/2015</p><div><ul><li>Augusto Miranda Garcia - 104627</li><li>Guilherme de Oliveira Souza &#8211; 117093</li><li>Vin&iacute;cius Ragazi David - 120258</li></ul></div><pre class="codeinput">load <span class="string">../G.mat</span>
+load <span class="string">../pids.mat</span>
+s = tf(<span class="string">'s'</span>);
+</pre><h2>Determina&ccedil;&atilde;o do K<a name="2"></a></h2><p>Fazendo <img src="pre_relatorio_eq73504.png" alt="$C(s) = K$"> e buscando por um erro em regime permanente a uma entrada rampa de 2%:</p><p><img src="pre_relatorio_eq46113.png" alt="$$\frac{e(s)}{u(s)} = \frac{1}{1+C(s) G(s)}$$"></p><p><img src="pre_relatorio_eq93577.png" alt="$$\lim_{s \to 0}{s \cdot \frac{e(s)}{u(s)} \cdot \frac{1}{s^2}} = 0.02$$"></p><p>With <img src="pre_relatorio_eq16166.png" alt="$gk = \lim_{s \to 0}{s G(s)}$">:</p><p><img src="pre_relatorio_eq92538.png" alt="$$K = \frac{50}{gk}$$"></p><pre class="codeinput">kg = evalfr(minreal(s*G), 0)
+K = 50/kg
+t = 0:0.001:2;
+referencia = ones(length(t));
+referencia = referencia(1,:);
+</pre><pre class="codeoutput">
+kg =
+
+    8.9931
+
+
+K =
+
+    5.5598
+
+</pre><h2>Margem de fase<a name="3"></a></h2><pre class="codeinput">[~, Mf] = margin(K*G)
+</pre><pre class="codeoutput">
+Mf =
+
+   26.1470
+
+</pre><h2>Margem de fase desejada<a name="4"></a></h2><pre class="codeinput">Md = 45;
+phi = Md-Mf
+alpha_v = (1+sin(degtorad(phi)))/(1-sin(degtorad(phi)))
+</pre><pre class="codeoutput">
+phi =
+
+   18.8530
+
+
+alpha_v =
+
+    1.9548
+
+</pre><h2>Frequ&ecirc;ncia de cruzamento<a name="5"></a></h2><pre class="codeinput">amplitude = sqrt(alpha_v);
+[~, ~, ~, Wg] = margin(K*G/amplitude)
+</pre><pre class="codeoutput">
+Wg =
+
+   28.1219
+
+</pre><h2>Par&acirc;metros restantes<a name="6"></a></h2><pre class="codeinput">tau_v = 1/(Wg*sqrt(alpha_v))
+alpha_t = 1/alpha_v
+tau_t = 10*alpha_v*tau_v/alpha_t
+</pre><pre class="codeoutput">
+tau_v =
+
+    0.0254
+
+
+alpha_t =
+
+    0.5116
+
+
+tau_t =
+
+    0.9719
+
+</pre><h2>Controlador<a name="7"></a></h2><pre class="codeinput">C_v = (alpha_v*tau_v*s+1)/(tau_v*s+1);
+C_t = (alpha_t*tau_t*s+1)/(tau_t*s+1);
+C = K*C_v*C_t
+</pre><pre class="codeoutput">
+C =
+ 
+  0.1374 s^2 + 3.041 s + 5.56
+  ---------------------------
+  0.02472 s^2 + 0.9973 s + 1
+ 
+Continuous-time transfer function.
+
+</pre><h2>Compara&ccedil;&atilde;o de desempenho<a name="8"></a></h2><pre class="codeinput">Y1 = lsim(feedback(C*G, 1), referencia, t);
+Y2 = lsim(feedback(Ck*G, 1), referencia, t);
+Y3 = lsim(feedback(Csiso*G, 1), referencia, t);
+plot(t, [Y1 Y2 Y3])
+xlim([0, 1]);
+legend(<span class="string">'Atraso-avan&ccedil;o'</span>, <span class="string">'Proporcional'</span>, <span class="string">'Siso Tool'</span>);
+xlabel(<span class="string">'Tempo (s)'</span>);
+</pre><img vspace="5" hspace="5" src="pre_relatorio_01.png" alt=""> <p>Desempenho</p><pre class="codeinput">stepinfo(feedback(C*G, 1))
+</pre><pre class="codeoutput">
+ans = 
+
+        RiseTime: 0.0423
+    SettlingTime: 0.4088
+     SettlingMin: 0.9087
+     SettlingMax: 1.1581
+       Overshoot: 15.8098
+      Undershoot: 0
+            Peak: 1.1581
+        PeakTime: 0.0961
+
+</pre><h2>Erro &agrave; rampa<a name="10"></a></h2><pre class="codeinput">rampa = lsim(1/s, referencia, t);
+lsim(feedback(C*G, 1), rampa, t);
+axis([0, 1, 0, 1])
+</pre><img vspace="5" hspace="5" src="pre_relatorio_02.png" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2012b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% ES868 – Pré Relatório Lab 5
+% *Controle de plantas eletrˆonicas utilizando um controlador atraso-avanço digital*
+%
+% Turma A - 06/04/2015
+%
+% * Augusto Miranda Garcia - 104627
+% * Guilherme de Oliveira Souza – 117093
+% * Vinícius Ragazi David - 120258
+
+load ../G.mat
+load ../pids.mat
+s = tf('s');
+
+%% Determinação do K
+% Fazendo $C(s) = K$ e buscando por um erro em regime permanente a uma
+% entrada rampa de 2%:
+%
+% $$\frac{e(s)}{u(s)} = \frac{1}{1+C(s) G(s)}$$
+% 
+% $$\lim_{s \to 0}{s \cdot \frac{e(s)}{u(s)} \cdot \frac{1}{s^2}} = 0.02$$
+% 
+% With $gk = \lim_{s \to 0}{s G(s)}$:
+%
+% $$K = \frac{50}{gk}$$
+kg = evalfr(minreal(s*G), 0)
+K = 50/kg
+t = 0:0.001:2;
+referencia = ones(length(t));
+referencia = referencia(1,:);
+%% Margem de fase
+[~, Mf] = margin(K*G)
+
+%% Margem de fase desejada
+Md = 45;
+phi = Md-Mf
+alpha_v = (1+sin(degtorad(phi)))/(1-sin(degtorad(phi)))
+
+%% Frequência de cruzamento
+amplitude = sqrt(alpha_v);
+[~, ~, ~, Wg] = margin(K*G/amplitude)
+
+%% Parâmetros restantes
+tau_v = 1/(Wg*sqrt(alpha_v))
+alpha_t = 1/alpha_v
+tau_t = 10*alpha_v*tau_v/alpha_t
+
+%% Controlador
+C_v = (alpha_v*tau_v*s+1)/(tau_v*s+1);
+C_t = (alpha_t*tau_t*s+1)/(tau_t*s+1);
+C = K*C_v*C_t
+
+%% Comparação de desempenho
+Y1 = lsim(feedback(C*G, 1), referencia, t);
+Y2 = lsim(feedback(Ck*G, 1), referencia, t);
+Y3 = lsim(feedback(Csiso*G, 1), referencia, t);
+plot(t, [Y1 Y2 Y3])
+xlim([0, 1]);
+legend('Atraso-avanço', 'Proporcional', 'Siso Tool');
+xlabel('Tempo (s)');
+
+%%
+% Desempenho
+stepinfo(feedback(C*G, 1))
+
+%% Erro à rampa
+rampa = lsim(1/s, referencia, t);
+lsim(feedback(C*G, 1), rampa, t);
+axis([0, 1, 0, 1])
+##### SOURCE END #####
+--></body></html>
