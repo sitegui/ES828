@@ -9,6 +9,8 @@
 
 load ../G.mat
 load ../pids.mat
+referencia = ones(2000, 1);
+t = linspace(0, 2, 2000);
 s = tf('s');
 
 %% Determinação do K
