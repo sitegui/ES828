@@ -133,9 +133,9 @@ requerimentos do relatório 3.
 \section{Controlador}
 
 \begin{par}
-Inicialmente utilizando o controlador obtido como melhor no pré-relatório encontrou-se o primeiro problema. Como tem erros entre as plantas real e a utilizada no matlab as respostas obtidas são diferentes, e desta forma o que acreditou-se ser bom, na realidade não era, sendo que em alguns casos a saída real foi instável. O melhor controlador encontrado via matlab foi substituido por outro mais eficaz para a planta real.
+Inicialmente utilizando o controlador obtido como melhor no pré-relatório ( R1=22k$\Omega$, R2=1$\Omega$ e  R3=68k$\Omega$) encontrou-se o primeiro problema. Como tem erros entre as plantas real e a utilizada no matlab as respostas obtidas são diferentes, e desta forma o que acreditou-se ser bom, na realidade não era, sendo que em alguns casos a saída real foi instável. O melhor controlador encontrado via matlab foi substituido por outro mais eficaz para a planta real.
 
-O método para encontrar o novo controlador se baseou em teste experimentais. Fixando dois parametros (R1 e R2) e variando os valores de R3 buscou-se a melhor resposta a entrada quadrada dada. A melhor saída encontrada foi:
+O método para encontrar o novo controlador se baseou em teste experimentais. Fixando dois parametros (R1 e R2) e variando o valor de R3  e verificando a resposta à entrada quadrada dada. A melhor saída encontrada foi:
  R1=22k$\Omega$, R2=1,5k$\Omega$ e  R3=200k$\Omega$.
 \end{par}
 
@@ -147,13 +147,15 @@ O método para encontrar o novo controlador se baseou em teste experimentais. Fix
 \end{figure}
 
 \begin{par}
-Como verifica-se pela figura a diferença entre o real e os teóricos é muito significativa, variando o sobressinal em quase 20\%, ficando claro que o método encontrado para atribuir os valores das resistencias não é eficaz. Essa diferença pode ser causada devido às diferenças entres as plantas reais e virtual, já que para o calculo da virtual  baseou-se em aproximações e simplificações, além disso as variações dos resistores e tambémm de erros de conecções elétricas podem influenciar as respostas.
+Como verifica-se pela figura a diferença entre o real e os teóricos é muito significativa, variando o sobressinal em quase 15\%, ficando claro que o método encontrado para atribuir os valores das resistencias não foi eficaz. Essa diferença pode ser causada devido às diferenças entres as plantas reais e virtual, já que para o calculo da virtual  baseou-se em aproximações e simplificações, além disso de erros de conecções elétricas podem influenciar as respostas e as variações dos resistores.
+
+É importante notar que como é utilizado amplificadores operacionais e inicialemente decidimos utilizar resistores ''pequenos'' já havia a possibilidade de erros, já que valores pequenos de resistencia exigem altas amperagens, o que pode ser complicado de ocorrer com determinados amplificadores sem erros consideráveis.
 \end {par}
 
 \section{Dados obtidos}
 
 \begin{par}
-Tendo então encontrado outro controlador válido (que seja estável) encontrou-se a sua saída para a entrada quadrada.
+Tendo então encontrado outro controlador válido, que seja estável e com bom desempenho, encontrou-se a sua saída para a entrada quadrada.
 \end {par}
 
 \begin{figure}[H]
@@ -164,7 +166,7 @@ Tendo então encontrado outro controlador válido (que seja estável) encontrou-se 
 \end{figure}
 
 \begin{par}
-Apesar do melhor controlador teórico a ser seguido for o realizado via Siso Tools, o controlador prático se assemelhou mais com o Ziegler-Nichols, tendo menor sobressinal e mais tempo de estabilidade.
+Apesar do melhor controlador teórico a ser seguido for o realizado via Siso Tools, o controlador prático se assemelhou mais com o Ziegler-Nichols, tendo menor sobressinal e mais tempo de estabilidade que o mesmo.
 
 Como ocorrido com a saída, o esforço do controlador também variou da teoria para a prática, sendo mais esforçado na prática do que teoricamente.
 \end {par}
@@ -179,9 +181,11 @@ Como ocorrido com a saída, o esforço do controlador também variou da teoria para
 \section{Conclusão}
 
 \begin{par}
-A partir dos gráficos obtidos, pode-se notar as diversas discrepâncias obtidas entre o modelo levantado através de análises experimentais e as teóricas. A tendência observada é o posicionamento dos polos em malha fechada mais para direita, casusando em alguns casos, a instabilidade da resposta. As diferenças são prioritariamente causadas pela diferenças entre planta teórica e experimental, mas outros pontos também interferem, como conecções eleétricas falhas ou erros dos controlaores.
+A partir dos gráficos obtidos, pode-se notar as diversas discrepâncias obtidas entre o modelo levantado através de análises experimentais e as teóricas. A tendência observada é o posicionamento dos polos em malha fechada mais para direita no plano s do que no caso teórico, casusando em alguns casos anteriormente válidos, a instabilidade da resposta. As diferenças são prioritariamente causadas pela diferenças entre planta teórica e experimental, mas outros pontos também interferem, como conecções elétricas falhas ou erros dos controlaores.
 
-Essas diferenças observadas são preocupantes, impossibilitando o mesmo processo em aplicações industriais principalmente para os casos que ocorrem instabilidade, o que pode ocorrer danos aos equipamentos e prejuisos à fabrica.
+É importante também analisar o círcuito e definir quais são os pontos de maior perigo e assim selecionar componentes mais qualificados para tal, como foi verificado com a mudança do resistor R2 em 1$\Omega$ para 1,5k$\Omega$, como também o valor de R3. A depender dos componentes utilizados pode ocorrer maior erros dos mesmos devido a grande amperagem ou voltagem.
+
+Essas diferenças observadas são preocupantes, podendo impossibilitar o mesmo processo em aplicações industriais, principalmente para os casos que ocorrem instabilidade, já que pode ocorrer danos aos equipamentos e prejuisos à fabrica.
 \end {par}
 
 

@@ -4,5 +4,5 @@
 \contentsline {section}{\numberline {3}Compara\c c\~ao entre teoria e pr\'atica}{3}
 \contentsline {section}{\numberline {4}Desempenho buscado para o Controlador}{4}
 \contentsline {section}{\numberline {5}Busca pelos melhores par\^ametros de componentes para o controlador}{4}
-\contentsline {subsection}{\numberline {5.1}Melhor Arranjo}{5}
+\contentsline {subsection}{\numberline {5.1}Melhor Arranjo}{6}
 \contentsline {section}{\numberline {6}Limites do sinal de controle}{8}
