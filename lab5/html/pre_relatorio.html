@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>pre_relatorio</title><meta name="generator" content="MATLAB 8.0"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2015-04-06"><meta name="DC.source" content="pre_relatorio.m"><style type="text/css">
+      --><title>pre_relatorio</title><meta name="generator" content="MATLAB 8.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2015-04-13"><meta name="DC.source" content="pre_relatorio.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -67,6 +67,8 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
   </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#1">ES868 &#8211; Pr&eacute; Relat&oacute;rio Lab 5</a></li><li><a href="#2">Determina&ccedil;&atilde;o do K</a></li><li><a href="#3">Margem de fase</a></li><li><a href="#4">Margem de fase desejada</a></li><li><a href="#5">Frequ&ecirc;ncia de cruzamento</a></li><li><a href="#6">Par&acirc;metros restantes</a></li><li><a href="#7">Controlador</a></li><li><a href="#8">Compara&ccedil;&atilde;o de desempenho</a></li><li><a href="#10">Erro &agrave; rampa</a></li></ul></div><h2>ES868 &#8211; Pr&eacute; Relat&oacute;rio Lab 5<a name="1"></a></h2><p><b>Controle de plantas eletr&#710;onicas utilizando um controlador atraso-avan&ccedil;o digital</b></p><p>Turma A - 06/04/2015</p><div><ul><li>Augusto Miranda Garcia - 104627</li><li>Guilherme de Oliveira Souza &#8211; 117093</li><li>Vin&iacute;cius Ragazi David - 120258</li></ul></div><pre class="codeinput">load <span class="string">../G.mat</span>
 load <span class="string">../pids.mat</span>
+referencia = ones(2000, 1);
+t = linspace(0, 2, 2000);
 s = tf(<span class="string">'s'</span>);
 </pre><h2>Determina&ccedil;&atilde;o do K<a name="2"></a></h2><p>Fazendo <img src="pre_relatorio_eq73504.png" alt="$C(s) = K$"> e buscando por um erro em regime permanente a uma entrada rampa de 2%:</p><p><img src="pre_relatorio_eq46113.png" alt="$$\frac{e(s)}{u(s)} = \frac{1}{1+C(s) G(s)}$$"></p><p><img src="pre_relatorio_eq93577.png" alt="$$\lim_{s \to 0}{s \cdot \frac{e(s)}{u(s)} \cdot \frac{1}{s^2}} = 0.02$$"></p><p>With <img src="pre_relatorio_eq16166.png" alt="$gk = \lim_{s \to 0}{s G(s)}$">:</p><p><img src="pre_relatorio_eq92538.png" alt="$$K = \frac{50}{gk}$$"></p><pre class="codeinput">kg = evalfr(minreal(s*G), 0)
 K = 50/kg
@@ -162,7 +164,7 @@ ans =
 </pre><h2>Erro &agrave; rampa<a name="10"></a></h2><pre class="codeinput">rampa = lsim(1/s, referencia, t);
 lsim(feedback(C*G, 1), rampa, t);
 axis([0, 1, 0, 1])
-</pre><img vspace="5" hspace="5" src="pre_relatorio_02.png" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2012b</a><br></p></div><!--
+</pre><img vspace="5" hspace="5" src="pre_relatorio_02.png" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2013a</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 %% ES868 – Pré Relatório Lab 5
 % *Controle de plantas eletrˆonicas utilizando um controlador atraso-avanço digital*
@@ -175,6 +177,8 @@ axis([0, 1, 0, 1])
 
 load ../G.mat
 load ../pids.mat
+referencia = ones(2000, 1);
+t = linspace(0, 2, 2000);
 s = tf('s');
 
 %% Determinação do K
