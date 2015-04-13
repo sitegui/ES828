@@ -10,6 +10,8 @@
 load ../G.mat
 load ../pids.mat
 load sinais_tratados.mat
+load ../lab3/sinais_tratados.mat
+load ../lab4/sinais_tratados4.mat
 s = tf('s');
 
 %% Resposta ao degrau
@@ -38,4 +40,11 @@ Y2 = lsim(1/s, saida, t);
 plot(t, [Y1 Y2], t, rampa, 'r-.')
 axis([0, 2, 0, 2]);
 legend('Teórico', 'Prático', 'Location', 'NorthWest');
+xlabel('Tempo (s)');
+
+%% Comparação entre controladores práticos
+
+plot([referencia, saida1, saida2, saida3, saida]);
+legend('Referência', 'Proporcional', 'Ziegler-Nichols', 'Siso Tools', 'Saida experimental');
+ylim([0, 1.8]);
 xlabel('Tempo (s)');
