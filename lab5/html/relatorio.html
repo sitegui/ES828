@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>relatorio</title><meta name="generator" content="MATLAB 8.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2015-04-13"><meta name="DC.source" content="relatorio.m"><style type="text/css">
+      --><title>relatorio</title><meta name="generator" content="MATLAB 8.0"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2015-04-13"><meta name="DC.source" content="relatorio.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -65,8 +65,10 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
 
 
-  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#1">ES868 &#8211; Relat&oacute;rio Lab 5</a></li><li><a href="#2">Resposta ao degrau</a></li><li><a href="#3">Desempenho</a></li><li><a href="#4">Esfor&ccedil;o de controle</a></li><li><a href="#5">Resposta &agrave; rampa</a></li></ul></div><h2>ES868 &#8211; Relat&oacute;rio Lab 5<a name="1"></a></h2><p><b>Controle de plantas eletr&#710;onicas utilizando um controlador atraso-avan&ccedil;o digital</b></p><p>Turma A - 13/04/2015</p><div><ul><li>Augusto Miranda Garcia - 104627</li><li>Guilherme de Oliveira Souza &#8211; 117093</li><li>Vin&iacute;cius Ragazi David - 120258</li></ul></div><pre class="codeinput">load <span class="string">../G.mat</span>
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#1">ES868 &#8211; Relat&oacute;rio Lab 5</a></li><li><a href="#2">Resposta ao degrau</a></li><li><a href="#3">Desempenho</a></li><li><a href="#4">Esfor&ccedil;o de controle</a></li><li><a href="#5">Resposta &agrave; rampa</a></li><li><a href="#6">Compara&ccedil;&atilde;o entre os controladores pr&aacute;ticos</a></li></ul></div><h2>ES868 &#8211; Relat&oacute;rio Lab 5<a name="1"></a></h2><p><b>Controle de plantas eletr&#710;onicas utilizando um controlador atraso-avan&ccedil;o digital</b></p><p>Turma A - 13/04/2015</p><div><ul><li>Augusto Miranda Garcia - 104627</li><li>Guilherme de Oliveira Souza &#8211; 117093</li><li>Vin&iacute;cius Ragazi David - 120258</li></ul></div><pre class="codeinput">load <span class="string">../G.mat</span>
 load <span class="string">../pids.mat</span>
+load <span class="string">../lab3/sinais_tratados.mat</span>
+load <span class="string">../lab4/sinais_tratados4p5.mat</span>
 load <span class="string">sinais_tratados.mat</span>
 s = tf(<span class="string">'s'</span>);
 </pre><h2>Resposta ao degrau<a name="2"></a></h2><pre class="codeinput">sistema = feedback(Caa*G, 1);
@@ -113,7 +115,11 @@ plot(t, [Y1 Y2], t, rampa, <span class="string">'r-.'</span>)
 axis([0, 2, 0, 2]);
 legend(<span class="string">'Te&oacute;rico'</span>, <span class="string">'Pr&aacute;tico'</span>, <span class="string">'Location'</span>, <span class="string">'NorthWest'</span>);
 xlabel(<span class="string">'Tempo (s)'</span>);
-</pre><img vspace="5" hspace="5" src="relatorio_03.png" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2013a</a><br></p></div><!--
+</pre><img vspace="5" hspace="5" src="relatorio_03.png" alt=""> <h2>Compara&ccedil;&atilde;o entre os controladores pr&aacute;ticos<a name="6"></a></h2><pre class="codeinput">plot(t,[referencia, saida1, saida2, saida3, saida4,saida]);
+legend(<span class="string">'Refer&ecirc;ncia'</span>, <span class="string">'Proporcional'</span>, <span class="string">'Ziegler-Nichols'</span>, <span class="string">'PID Sisotool'</span>, <span class="string">'PID anal&oacute;gico'</span>,<span class="string">'Avan&ccedil;o-atraso'</span>);
+ylim([0, 1.8]);
+xlabel(<span class="string">'Tempo (s)'</span>);
+</pre><img vspace="5" hspace="5" src="relatorio_04.png" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2012b</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 %% ES868 – Relatório Lab 5
 % *Controle de plantas eletrˆonicas utilizando um controlador atraso-avanço digital*
@@ -126,6 +132,8 @@ xlabel(<span class="string">'Tempo (s)'</span>);
 
 load ../G.mat
 load ../pids.mat
+load ../lab3/sinais_tratados.mat
+load ../lab4/sinais_tratados4p5.mat
 load sinais_tratados.mat
 s = tf('s');
 
@@ -156,5 +164,13 @@ plot(t, [Y1 Y2], t, rampa, 'r-.')
 axis([0, 2, 0, 2]);
 legend('Teórico', 'Prático', 'Location', 'NorthWest');
 xlabel('Tempo (s)');
+
+%% Comparação entre os controladores práticos
+
+plot(t,[referencia, saida1, saida2, saida3, saida4,saida]);
+legend('Referência', 'Proporcional', 'Ziegler-Nichols', 'PID Sisotool', 'PID analógico','Avanço-atraso');
+ylim([0, 1.8]);
+xlabel('Tempo (s)');
+
 ##### SOURCE END #####
 --></body></html>

@@ -5,3 +5,4 @@
 \contentsline {subsection}{\numberline {2.2}Desempenho}{2}
 \contentsline {subsection}{\numberline {2.3}Esfor\c co de controle}{3}
 \contentsline {subsection}{\numberline {2.4}Resposta \`a rampa}{4}
+\contentsline {section}{\numberline {3}Compara\c c\~ao entre os controladores pr\'aticos}{5}
