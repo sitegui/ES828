@@ -1,0 +1,215 @@
+\documentclass[12pt]{article}
+
+%% Escrevendo em portuguÃªs:
+\usepackage[brazil]{babel}
+\usepackage[latin1]{inputenc} 
+\usepackage[T1]{fontenc}
+\usepackage{psfrag}
+\usepackage{fullpage}
+\usepackage{setspace}
+\usepackage{graphicx}
+\usepackage{epsfig}
+\usepackage{epstopdf}
+\usepackage{color}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage[section]{placeins}
+\usepackage{float}
+%----------------------------
+
+
+\newtheorem{teorema}{Teorema}%[chapter]
+\newtheorem{problema}[teorema]{Problema}
+\newtheorem{conj}[teorema]{Conjectura}
+\newtheorem{lema}[teorema]{Lema}
+\newtheorem{exerc}[teorema]{ExercÃ­cio}
+
+\definecolor{lightgray}{gray}{0.95}
+
+% Ad hoc macros
+\newcommand{\qed}       {\hfill\Box}
+\newcommand{\card}[1]   {\left|#1\right|}
+\newcommand{\nct}       {\chi_{_T}}
+\newcommand{\cnk}[2]    {C_{#1}^{#2}}
+\newcommand{\ed}[2]     {#1#2}
+\newcommand{\teto}[1]   {\lceil #1 \rceil}
+\newcommand{\piso}[1]   {\lfloor #1 \rfloor}
+\newcommand{\itab}[1]{\hspace{0em}\rlap{#1}}
+\newcommand{\tab}[1]{\hspace{.2\textwidth}\rlap{#1}}
+
+%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%
+
+\begin{titlepage}
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for the horizontal lines, change thickness here
+
+\center % Center everything on the page
+ 
+%----------------------------------------------------------------------------------------
+%	HEADING SECTIONS
+%----------------------------------------------------------------------------------------
+
+\textsc{\LARGE Universidade Estadual de Campinas}\\[0.5cm]
+\textsc{\normalsize ES828 - Laboratório de Controle de Sistemas}\\[0.2cm] % Major heading such as course name
+\textsc{\normalsize Turma A}\\[0.2cm] % Minor heading such as course title
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+\vspace {5cm}
+{ \huge \bfseries Experimento 05 - Relatório }\\[0.4cm] % Title of your document
+ 
+%----------------------------------------------------------------------------------------
+%	AUTHOR SECTION
+%----------------------------------------------------------------------------------------
+\vspace {5cm}
+\begin{minipage}{0.4\textwidth}
+\begin{flushleft} \large
+\emph{Alunos:}\\
+ \begin{tabbing}
+ Augusto Miranda Garcia\hspace{1cm} \=  \= 104627 \\
+ Guilherme de Oliveira Souza  \> 117093 \\
+ Vinícius Ragazi David \>{120258}\\
+ \end{tabbing}
+\end{flushleft}
+\end{minipage}
+\vspace {2cm}
+~
+\begin{minipage}{0.4\textwidth}
+\begin{flushright} \large
+\emph{Professora responsável:} \\
+Dra. Grace Silva Deaecto
+\end{flushright}
+\end{minipage}\\[2cm]
+
+% If you don't want a supervisor, uncomment the two lines below and remove the section above
+%\Large \emph{Author:}\\
+%John \textsc{Smith}\\[3cm] % Your name
+
+%----------------------------------------------------------------------------------------
+%	DATE SECTION
+%----------------------------------------------------------------------------------------
+
+{\large \today}\\[3cm] % Date, change the \today to a set date if you want to be precise
+
+%----------------------------------------------------------------------------------------
+%	LOGO SECTION
+%----------------------------------------------------------------------------------------
+
+%\includegraphics{Logo}\\[1cm] % Include a department/university logo - this will require the graphicx package
+ 
+%----------------------------------------------------------------------------------------
+
+\vfill % Fill the rest of the page with whitespace
+
+\end{titlepage}
+
+\tableofcontents
+%\listoffigures
+%\listoftables
+ 
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Objetivo}
+\begin{par}
+Para este experimento, o objetivo foi o projeto, e depois a comparação do controlador 
+avanço-atraso com os controladores projetados anteriormente. Visto que uma comparação 
+parecida já foi efetuada no relatório 4, será feita apenas a comparação com o controlador 
+Siso projetado no mesmo.
+\end{par}
+
+\section{Dados coletados no laboratório}
+
+\subsection{Resposta ao degrau}
+\begin{par}
+A resposta ao degrau do controlador teórico foi comparado com a resposta prática 
+obtida na Figura \ref{figRespDegrau}. Notou-se uma diminuição acentuada do overshoot, que não chegou a prejudicar o tempo 
+de estabilização.
+\end{par}
+
+\begin{verbatim}
+sistema = feedback(Caa*G, 1);
+Y = lsim(sistema, referencia, t);
+plot(t, [Y saida])
+axis([0, 1, 0, 1.2]);
+legend('Teórico', 'Prático');
+xlabel('Tempo (s)');
+\end{verbatim}
+
+\begin{figure}[H]
+\centering
+\includegraphics [width=4in]{relatorio_01.png}
+\caption {Comparação da resposta ao degrau entre os controladores teórico e prático.}
+\label{figRespDegrau}
+\end{figure}
+
+\subsection{Desempenho}
+\begin{par}
+A comparação entre os controladores teórico e prático projetados pode ser vista abaixo.
+\end{par}
+
+\begin{verbatim}
+ans = 
+
+        RiseTime: 0.0423
+    SettlingTime: 0.4088
+     SettlingMin: 0.9087
+     SettlingMax: 1.1581
+       Overshoot: 15.8098
+      Undershoot: 0
+            Peak: 1.1581
+        PeakTime: 0.0961
+
+
+ans = 
+
+        RiseTime: 0.0698
+    SettlingTime: 0.3696
+     SettlingMin: 0.9001
+     SettlingMax: 1.0208
+       Overshoot: 2.0849
+      Undershoot: 0.6885
+            Peak: 1.0208
+        PeakTime: 0.3612
+\end{verbatim}
+
+\subsection{Esforço de controle}
+\begin{par}
+Para o controlador prático, a resposta do controlador foi bem parecida, mas 
+com um overshoot mínimo menor do que o teórico.
+\end{par}
+
+\begin{figure}[H]
+\centering
+\includegraphics [width=4in]{relatorio_02.png}
+\caption {Comparação do esforço de controle teórico e prático.}
+\label{figRespControlador}
+\end{figure}
+
+
+\subsection{Resposta à rampa}
+\begin{par}
+Para a resposta à rampa, o controlador prático apresentou um erro 0,0125 maior do que 
+o teórico. 
+\end{par}
+\begin{figure}[H]
+\centering
+\includegraphics [width=4in]{relatorio_03.png}
+\caption {Comparação da resposta à rampa entre os controladores teórico e prático.}
+\label{figRespRampa}
+\end{figure}
+
+\section{Comparação entre os controladores}
+
+
+\begin{thebibliography}{5}
+
+\bibitem{Ogata11} K. Ogata, \emph{Engenharia de Controle Moderno}, 6ª edição, 2011.
+
+\end{thebibliography}
+
+\end{document}
+    
