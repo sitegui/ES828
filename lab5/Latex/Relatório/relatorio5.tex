@@ -115,7 +115,7 @@ Dra. Grace Silva Deaecto
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Objetivo}
 \begin{par}
-Para este experimento, o objetivo foi o projeto, e depois a comparação do controlador 
+	Para este experimento, o objetivo foi o projeto, e depois a comparação do controlador 
 avanço-atraso com os controladores projetados anteriormente. Visto que uma comparação 
 parecida já foi efetuada no relatório 4, será feita apenas a comparação com o controlador 
 Siso projetado no mesmo.
@@ -125,7 +125,7 @@ Siso projetado no mesmo.
 
 \subsection{Resposta ao degrau}
 \begin{par}
-A resposta ao degrau do controlador teórico foi comparado com a resposta prática 
+	A resposta ao degrau do controlador teórico foi comparado com a resposta prática 
 obtida na Figura \ref{figRespDegrau}. Notou-se uma diminuição acentuada do overshoot, que não chegou a prejudicar o tempo 
 de estabilização.
 \end{par}
@@ -148,7 +148,7 @@ xlabel('Tempo (s)');
 
 \subsection{Desempenho}
 \begin{par}
-A comparação entre os controladores teórico e prático projetados pode ser vista abaixo.
+	A comparação entre os controladores teórico e prático projetados pode ser vista abaixo.
 \end{par}
 
 \begin{verbatim}
@@ -176,9 +176,13 @@ ans =
         PeakTime: 0.3612
 \end{verbatim}
 
+\begin{par}
+	Ou seja desconsiderando o sobressinal as saídas ficaram com desempenhos bem próximos.
+\end{par}
+
 \subsection{Esforço de controle}
 \begin{par}
-Para o controlador prático, a resposta do controlador foi bem parecida, mas 
+	Para o controlador prático, a resposta do controlador foi bem parecida, mas 
 com um overshoot mínimo menor do que o teórico.
 \end{par}
 
@@ -192,7 +196,7 @@ com um overshoot mínimo menor do que o teórico.
 
 \subsection{Resposta à rampa}
 \begin{par}
-Para a resposta à rampa, o controlador prático apresentou um erro 0,0125 maior do que 
+	Para a resposta à rampa, o controlador prático apresentou um erro 0,0125 maior do que 
 o teórico. 
 \end{par}
 \begin{figure}[H]
@@ -204,7 +208,7 @@ o teórico.
 
 \section{Comparação entre os controladores práticos}
 \begin{par}
-Pode ser notado pela Figura \ref{figRespTodos} que o controlador avanço-atraso está, em geral, superior a 
+	Pode ser notado pela Figura \ref{figRespTodos} que o controlador avanço-atraso está, em geral, superior a 
 todos os outros controladores projetados anteriormente. 
 \end{par}
 \begin{figure}[H]
@@ -213,6 +217,12 @@ todos os outros controladores projetados anteriormente.
 \caption {Comparação da resposta à rampa entre os controladores teórico e prático.}
 \label{figRespTodos}
 \end{figure}
+
+\section{Conclusão}
+\begin{par}
+	Pelas figuras anteriormentes expostas nota-se apenas uma grande diferenças entre os sobressinais (diferença considerável), contudo para os demais critérios de desempenho a saída teórica e a prática são próximas o suficiente para que suas diferenças sejam desconsideradas.
+	A diferença de sobressinal está relacionada a mudança da teoria para a prática do circuito. O valor de $\xi$ prático promovel a diminuição do sobressinal, enquanto o valor do próprio $\xi$ com a mudaça de $\omega_n$ mantiveram o tempo de acomodação próximo com o visto na teoria. Desta forma pode-se verificar que na prática a posição dos polos é  mais a direita do que na teoria ($\xi$ menor), isto por vezes pode ser complicado (como visto no laboratório 4), já que pode ocorrer a instabilidade dos polos práticos.
+\end{par}
 
 \begin{thebibliography}{5}
 
