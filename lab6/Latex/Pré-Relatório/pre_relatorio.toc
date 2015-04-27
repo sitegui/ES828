@@ -1,0 +1,10 @@
+\select@language {brazil}
+\contentsline {section}{\numberline {1}Objetivo}{2}
+\contentsline {section}{\numberline {2}Projeto do Controlador}{2}
+\contentsline {subsection}{\numberline {2.1}Determina\c c\~ao de K}{2}
+\contentsline {subsection}{\numberline {2.2}Margem de fase}{2}
+\contentsline {subsection}{\numberline {2.3}Margem de fase desejada}{2}
+\contentsline {subsection}{\numberline {2.4}Frequ\^encia de cruzamento de ganho}{3}
+\contentsline {subsection}{\numberline {2.5}Par\^ametros Restantes}{3}
+\contentsline {subsection}{\numberline {2.6}Controlador encontrado}{3}
+\contentsline {section}{\numberline {3}Compara\c c\~ao de desempenho dos controladores}{4}
