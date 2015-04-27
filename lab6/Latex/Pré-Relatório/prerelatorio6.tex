@@ -115,36 +115,198 @@ Dra. Grace Silva Deaecto
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Objetivo}
 \begin{par}
-	O objetivo deste pré-roteiro foi encontrar os ganhos de um controlador que satisfaz os seguintes requisitos:
+	O objetivo deste pré-roteiro é encontrar os ganhos de um controlador que satisfaz os seguintes requisitos:
 \end{par}
 
 
-\begin{equation}
-\ksi = frac{\sqrt{2}}{2}
-\end{equation}
-Terceiro polo alocado em $-30$\\
-Erro nulo para entrada do tipo rampa.\\
+\begin{itemize}
+ \item $\xi = \frac{\sqrt{2}}{2}$
 
+ \item Terceiro polo alocado em $-30$
 
-\section{Encontrando os ganhos}
+ \item Erro nulo para entrada do tipo rampa.
+ 
+  \item Estabilização em $0,5 [s]$
+
+\end{itemize}
+
+\section{Localização dos polos}
 
 \begin{par}
+Com a especificação do tempo de estabilização de $0,5[s]$ e com coeficiente de amortecimento de $\sqrt{2}/2$, pode-se encontrar $\omega_n$.
+\end{par}
+
+\begin {equation}
+\xi = \sqrt{2}/2
+\end {equation}
+
+\begin {equation}
+t_e = 4 / (\xi \cdot \omega_n)
+\end {equation}
+
+\begin {par}
+Desta forma encontra-se $\omega_n=11.3137$. Ou seja, tem-se os seguintes polos dominantes:
+\end{par}
+
+\begin {equation}
+p_1 = -8.0000 + 8.0000i
+\end {equation}
+
+\begin {equation}
+p_2 = -8.0000 - 8.0000i
+\end {equation}
+
+\begin {par}
+É necessário ainda definir o último polo, este foi definido arbitrariamente no ponto $p_3$=-30.
+\end{par}
+
+\section{Modelo de estados}
+
+\begin {par}
+A matriz que representa a planta no modelo de estados é definida como:
+\end{par}
+
+
+\[ \left( \begin{array}{ccc}
+A & B \\
+C & D \end{array} \right)\]
+
+\begin {par}
+Onde A, B, C e D são representados por:
+\end{par}
+
+\[ A = \left( \begin{array}{ccc}
+- 120 & -51.76 & 0 \\
+64 & 0 & 0 \\
+0 & 1 & 0 \end{array} \right).\] 
+
+\[ B = \left( \begin{array}{c}
+16\\
+0 \\
+0 \end{array} \right).\]
+
+\[ C = \left( \begin{array}{ccc}
+0 & 0 & 29.09  \end{array} \right).\]
+
+\begin {equation}
+D = (0)
+\end {equation}
+
+\section{Determinação da matriz de ganho K}
+
+\begin {par}
+Com o auxílio do MATLAB pode-se encontrar o valor da matriz de ganho K via o seguinte comando:
 \end{par}
 
 \begin{verbatim}
+K = place(A, B, p)
 \end{verbatim}
+
+\[ K = \left( \begin{array}{ccc}
+-4.6242 & -2.6412 & 3.7500  \end{array} \right).\]
+
+\section{Pólos do observador}
+
+\begin {par}
+Os pólos do observador devem ser escolhidos de forma que o estado estimado siga o estado verdadeiro o mais rápido possível. Para isso, eles devem estar mais à esqueda que os pólos do controlador.
+Dessa forma, foi escolhido arbitrariamente que a parte real deveria ser 50\% mais negativa.
+\end{par}
+
+\[ po = \left( \begin{array}{c}
+-12.0000 + 8.0000i\\
+-12.0000 - 8.0000i \\
+-45.0000 + 0.0000i \end{array} \right).\]
+
+\section{Pólos do observador}
+
+\begin {par}
+Com os pólos do observador calcula-se a matriz L, novamente via MATLAB com o seguinte comando:
+\end{par}
+
+\begin{verbatim}
+L = place(A', C', po)'
+\end{verbatim}
+
+\[ B = \left( \begin{array}{c}
+-168.0343\\
+140.6948 \\
+-1.7526 \end{array} \right).\]
+
+\section{Determinação de $M(s)$}
+
+\begin{par}
+Para encontrar o M(s), inicialmente encontra-se a função $S(s)$ denominada por:
+\end{par}
+
+\begin{equation}
+S = C*(s*I - (A - B*K))^{-1}*B
+\end{equation}
+
+\begin{equation}
+S = \frac {2.979 *10^4} { s^3 + 46 s^2 + 608 s + 3840}
+\end{equation}
+
+\begin{par}
+Encontrado a função $S(s)$, o próximo passo é determinar $M(0)$
+\end{par}
+
+\begin{verbatim}
+M0 = pinv(evalfr(S, 0)*K)
+\end{verbatim}
+
+\[ M(0) = \left( \begin{array}{c}
+-0.0141\\
+-0.0080 \\
+0.0114 \end{array} \right).\]
+
+\begin{par}
+Supondo que a forma de $M(s)$ é:
+\end{par}
+
+\begin{equation}
+M(s) = \frac{s/\tau + 1}{s/30 + 1} M0
+\end{equation}
+
+\begin{par}
+Deve-se determinar $\tau$ de forma que:
+\end{par}
+
+\begin{equation}
+(\frac{d}{ds} S(s) K M(s))_{s=0} = 0
+\end{equation}
+
+\begin{equation}
+\tau = 5.2174
+\end{equation}
+
+
+\[ \arraycolsep=5pt\def\arraystretch{2.5}
+M(s) = \left( \begin{array}{c}
+\frac{-0.4215s-2.199}{5.217s+156.5}\\
+\frac{-0.208s-1.256}{5.217s+156.5} \\
+\frac{-0.3418s+1.783}{5.217s+156.5} \end{array} \right).\]
+
+\section{Simulação do sistema}
+
+\begin{par}
+Calculando a resposta em malha fechada para uma entrada degrau:
+\end{par}
 
 \begin{figure}[H]
 \centering
 \includegraphics [width=4in]{pre_relatorio_01.png}
-\caption {}
+\caption {Resposta ao degrau do sistema em espaço de estados}
 \label{figRespDegrau}
 \end{figure}
+
+\begin{par}
+Calculando a resposta em malha fechada para uma entrada rampa:
+\end{par}
 
 \begin{figure}[H]
 \centering
 \includegraphics [width=4in]{pre_relatorio_02.png}
-\caption {}
+\caption {Resposta à rampa do sistema em espaço de estados}
 \label{figRespRampa}
 \end{figure}
 \begin{thebibliography}{5}
