@@ -91,4 +91,4 @@ C_y = minreal(minreal(K*temp)*L)
 %% Função de transferência de malha fechada
 sistema = minreal(H*G / (1+C_u+G*C_y), 1e-4)
 step(sistema)
-[Y, t] = step(sistema);
+stepinfo(sistema)
