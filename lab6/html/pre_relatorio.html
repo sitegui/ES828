@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>pre_relatorio</title><meta name="generator" content="MATLAB 8.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2015-04-27"><meta name="DC.source" content="pre_relatorio.m"><style type="text/css">
+      --><title>pre_relatorio</title><meta name="generator" content="MATLAB 8.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2015-05-04"><meta name="DC.source" content="pre_relatorio.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -123,27 +123,25 @@ Gss =
  
 Continuous-time state-space model.
 
-</pre><h2>Determina&ccedil;&atilde;o da matriz K<a name="7"></a></h2><pre class="codeinput">K = place(A, B, p)
+</pre><h2>Determina&ccedil;&atilde;o da matriz K<a name="7"></a></h2><pre class="codeinput">K = acker(A, B, p)
 </pre><pre class="codeoutput">
 K =
 
    -4.6242   -2.6412    3.7500
 
-</pre><h2>P&oacute;los do observador<a name="8"></a></h2><p>Os p&oacute;los do observador devem ser escolhidos de forma que o estado estimado siga o estado verdadeiro o mais r&aacute;pido poss&iacute;vel. Para isso, eles devem estar mais &agrave; esqueda que os p&oacute;los do controlador.</p><p>Dessa forma, foi escolhido arbitrariamente que a parte real deveria ser 50% mais negativa</p><pre class="codeinput">po = p+real(p)*0.5
+</pre><h2>P&oacute;los do observador<a name="8"></a></h2><p>Os p&oacute;los do observador devem ser escolhidos de forma que o estado estimado siga o estado verdadeiro o mais r&aacute;pido poss&iacute;vel. Para isso, eles devem estar mais &agrave; esqueda que os p&oacute;los do controlador.</p><p>Dessa forma, foi escolhido arbitrariamente que a parte real deveria ser 50% mais negativa</p><pre class="codeinput">po = [-150, -150, -150]
 </pre><pre class="codeoutput">
 po =
 
- -12.0000 + 8.0000i
- -12.0000 - 8.0000i
- -45.0000 + 0.0000i
+  -150  -150  -150
 
-</pre><h2>Determina&ccedil;&atilde;o da matriz L<a name="9"></a></h2><pre class="codeinput">L = place(A', C', po)'
+</pre><h2>Determina&ccedil;&atilde;o da matriz L<a name="9"></a></h2><pre class="codeinput">L = acker(A', C', po)'
 </pre><pre class="codeoutput">
 L =
 
- -168.0343
-  140.6948
-   -1.7526
+ -359.1449
+  845.2453
+   11.3436
 
 </pre><h2>Determina&ccedil;&atilde;o de M(s)<a name="10"></a></h2><p>Para determinar M(s) precisamos antes definir S</p><p><img src="pre_relatorio_eq17749.png" alt="$$S(s) = C (s I - (A - B K))^{-1} B$$"></p><pre class="codeinput">s = tf(<span class="string">'s'</span>);
 I = eye(3);
@@ -210,18 +208,18 @@ Continuous-time transfer function.
 
 C_u =
  
-  -73.99 s^2 + 1068 s - 1.611e05
-  ------------------------------
-   s^3 + 69 s^2 + 1288 s + 9360
+   -73.99 s^2 - 2.712e04 s - 2.708e06
+  ------------------------------------
+  s^3 + 450 s^2 + 6.75e04 s + 3.375e06
  
 Continuous-time transfer function.
 
 
 C_y =
  
-  398.8 s^2 + 1.723e04 s + 1207
-  -----------------------------
-  s^3 + 69 s^2 + 1288 s + 9360
+     -529.2 s^2 + 3420 s + 4.35e05
+  ------------------------------------
+  s^3 + 450 s^2 + 6.75e04 s + 3.375e06
  
 Continuous-time transfer function.
 
@@ -292,7 +290,7 @@ B = Gss.b;
 C = Gss.c;
 
 %% Determinação da matriz K
-K = place(A, B, p)
+K = acker(A, B, p)
 
 %% Pólos do observador
 % Os pólos do observador devem ser escolhidos de forma que o estado
@@ -301,10 +299,10 @@ K = place(A, B, p)
 %
 % Dessa forma, foi escolhido arbitrariamente que a parte real deveria ser
 % 50% mais negativa
-po = p+real(p)*0.5
+po = [-150, -150, -150]
 
 %% Determinação da matriz L
-L = place(A', C', po)'
+L = acker(A', C', po)'
 
 %% Determinação de M(s)
 % Para determinar M(s) precisamos antes definir S

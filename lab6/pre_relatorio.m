@@ -39,7 +39,7 @@ B = Gss.b;
 C = Gss.c;
 
 %% Determinação da matriz K
-K = place(A, B, p)
+K = acker(A, B, p)
 
 %% Pólos do observador
 % Os pólos do observador devem ser escolhidos de forma que o estado
@@ -48,10 +48,10 @@ K = place(A, B, p)
 %
 % Dessa forma, foi escolhido arbitrariamente que a parte real deveria ser
 % 50% mais negativa
-po = p+real(p)*0.5
+po = [-150, -150, -150]
 
 %% Determinação da matriz L
-L = place(A', C', po)'
+L = acker(A', C', po)'
 
 %% Determinação de M(s)
 % Para determinar M(s) precisamos antes definir S
