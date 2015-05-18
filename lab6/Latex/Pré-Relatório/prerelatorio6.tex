@@ -53,14 +53,14 @@
 %----------------------------------------------------------------------------------------
 
 \textsc{\LARGE Universidade Estadual de Campinas}\\[0.5cm]
-\textsc{\normalsize ES828 - Laboratï¿½rio de Controle de Sistemas}\\[0.2cm] % Major heading such as course name
+\textsc{\normalsize ES828 - Laboratório de Controle de Sistemas}\\[0.2cm] % Major heading such as course name
 \textsc{\normalsize Turma A}\\[0.2cm] % Minor heading such as course title
 
 %----------------------------------------------------------------------------------------
 %	TITLE SECTION
 %----------------------------------------------------------------------------------------
 \vspace {5cm}
-{ \huge \bfseries Experimento 06 - Prï¿½-Relatï¿½rio }\\[0.4cm] % Title of your document
+{ \huge \bfseries Experimento 06 - Pré-Relatório }\\[0.4cm] % Title of your document
  
 %----------------------------------------------------------------------------------------
 %	AUTHOR SECTION
@@ -72,7 +72,7 @@
  \begin{tabbing}
  Augusto Miranda Garcia\hspace{1cm} \=  \= 104627 \\
  Guilherme de Oliveira Souza  \> 117093 \\
- Vinï¿½cius Ragazi David \>{120258}\\
+ Vinícius Ragazi David \>{120258}\\
  \end{tabbing}
 \end{flushleft}
 \end{minipage}
@@ -80,7 +80,7 @@
 ~
 \begin{minipage}{0.4\textwidth}
 \begin{flushright} \large
-\emph{Professora responsï¿½vel:} \\
+\emph{Professora responsável:} \\
 Dra. Grace Silva Deaecto
 \end{flushright}
 \end{minipage}\\[2cm]
@@ -116,7 +116,7 @@ Dra. Grace Silva Deaecto
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Objetivo}
 \begin{par}
-	O objetivo deste prï¿½-roteiro ï¿½ encontrar os ganhos de um controlador que satisfaï¿½a os seguintes requisitos:
+	O objetivo deste pré-roteiro é encontrar os ganhos de um controlador que satisfaça os seguintes requisitos:
 \end{par}
 
 \begin{itemize}
@@ -126,13 +126,13 @@ Dra. Grace Silva Deaecto
 
  \item Erro nulo para entrada do tipo rampa.
  
-  \item Estabilizaï¿½ï¿½o em $0,5 [s]$
+  \item Estabilização em $0,5 [s]$
 
 \end{itemize}
 
 \begin{par}
-O controlador servirï¿½ para o controle da planta eletrï¿½nica 8 utilizada nos laboratï¿½rios anteriores, cuja funï¿½ï¿½o de transferï¿½ncia 
-ï¿½:
+O controlador servirá para o controle da planta eletrônica 8 utilizada nos laboratórios anteriores, cuja função de transferência 
+é:
 \end{par}
 
 \begin{equation}
@@ -140,10 +140,10 @@ G(s) = \frac{2.979e04}{s^3 + 120 s^2 + 3313 s}
 \end{equation}
 
 
-\section{Localizaï¿½ï¿½o dos polos}
+\section{Localização dos polos}
 
 \begin{par}
-Com a especificaï¿½ï¿½o do tempo de estabilizaï¿½ï¿½o de $0,5[s]$ e com coeficiente de amortecimento de $\sqrt{2}/2$, pode-se encontrar $\omega_n$.
+Com a especificação do tempo de estabilização de $0,5[s]$ e com coeficiente de amortecimento de $\sqrt{2}/2$, pode-se encontrar $\omega_n$.
 \end{par}
 
 \begin {equation}
@@ -167,13 +167,13 @@ p_2 = -8.0000 - 8.0000i
 \end {equation}
 
 \begin {par}
-ï¿½ necessï¿½rio ainda definir o ï¿½ltimo polo, este foi definido arbitrariamente no ponto $p_3$=-30.
+É necessário ainda definir o último polo, este foi definido arbitrariamente no ponto $p_3$=-30.
 \end{par}
 
 \section{Modelo de estados}
 
 \begin {par}
-A matriz que representa a planta no modelo de estados ï¿½ definida como:
+A matriz que representa a planta no modelo de estados é definida como:
 \end{par}
 
 \[ \left( \begin{array}{ccc}
@@ -181,7 +181,7 @@ A & B \\
 C & D \end{array} \right)\]
 
 \begin {par}
-Onde A, B, C e D sï¿½o representados por:
+Onde A, B, C e D são representados por:
 \end{par}
 
 \begin{equation*}
@@ -210,11 +210,11 @@ C = 	\begin{pmatrix} 0 & 0 & 29.09
 D = 	\begin{pmatrix} 0 \end{pmatrix}\\
 \end{equation*}
 
-\section{Determinaï¿½ï¿½o da matriz de ganho K}
+\section{Determinação da matriz de ganho K}
 
 \begin {par}
-Com o auxï¿½lio do MATLAB pode-se encontrar o valor da matriz de ganho K utilizando o comando "acker". Com ele, 
-ï¿½ computada a fï¿½rmula de Ackermann (equaï¿½ï¿½o \ref{eq:Ackermmann} para matrizes com $n = 3$) para a determinaï¿½ï¿½o da matriz de ganho K. \cite{PCChao}
+Com o auxílio do MATLAB pode-se encontrar o valor da matriz de ganho K utilizando o comando "acker". Com ele, 
+é computada a fórmula de Ackermann (equação \ref{eq:Ackermmann} para matrizes com $n = 3$) para a determinação da matriz de ganho K. \cite{PCChao}
 \end{par}
 
 \begin {equation*}
@@ -229,22 +229,22 @@ K = \begin{bmatrix} 0 & 0 & 1 \end{bmatrix}\begin{bmatrix} B & AB & A^2B \end{bm
 \begin {equation}
 K = \begin{pmatrix} -4.6242 & -2.6412 & 3.7500 \end{pmatrix}
 \end {equation}
-\section{Pï¿½los do observador}
+\section{Pólos do observador}
 
 \begin {par}
-Os pï¿½los do observador devem ser escolhidos de forma que o estado estimado siga o estado verdadeiro o mais rï¿½pido possï¿½vel. Para isso, eles devem estar mais ï¿½ esqueda que os pï¿½los do controlador.
-Dessa forma, inicialmente foi escolhida a parte real 50% mais negativa. No entanto, apï¿½s experimentaï¿½ï¿½o foi observado que 
-tais pï¿½los ainda nï¿½o satisfizeram o sistema. Foi tentado entï¿½o o posicionamento dos pï¿½los do observador ainda mais afastados dos pï¿½los da planta, de forma a garantir que ele consiga responder mais rapidamente que ela. Os pï¿½los escolhidos estï¿½o representados abaixo.
+Os pólos do observador devem ser escolhidos de forma que o estado estimado siga o estado verdadeiro o mais rápido possível. Para isso, eles devem estar mais à esqueda que os pólos do controlador.
+Dessa forma, inicialmente foi escolhida a parte real 50% mais negativa. No entanto, após experimentação foi observado que 
+tais pólos ainda não satisfizeram o sistema. Foi tentado então o posicionamento dos pólos do observador ainda mais afastados dos pólos da planta, de forma a garantir que ele consiga responder mais rapidamente que ela. Os pólos escolhidos estão representados abaixo.
 \end{par}
 
 \begin {equation}
 p_o = \begin{pmatrix} -150.0 \\ -150.0 \\ -150.0 \end{pmatrix}
 \end {equation}
 
-\section{Cï¿½lculo da matriz L}
+\section{Cálculo da matriz L}
 
 \begin {par}
-Tendo-se os pï¿½los do observador, calcula-se a matriz L, utilizando-se novamente da equaï¿½ï¿½o \ref{eq:Ackermmann}, sendo
+Tendo-se os pólos do observador, calcula-se a matriz L, utilizando-se novamente da equação \ref{eq:Ackermmann}, sendo
  esta computada pelo matlab:
 \end{par}
 
@@ -261,10 +261,10 @@ L = 	\begin{pmatrix} -359.1449 \\
 \end {equation}
 
 
-\section{Determinaï¿½ï¿½o de $M(s)$}
+\section{Determinação de $M(s)$}
 
 \begin{par}
-Para encontrar o M(s), inicialmente encontra-se a funï¿½ï¿½o $S(s)$ denominada por:
+Para encontrar o M(s), inicialmente encontra-se a função $S(s)$ denominada por:
 \end{par}
 
 \begin{equation}
@@ -276,7 +276,7 @@ S(s) = \frac {2.979 *10^4} { s^3 + 46 s^2 + 608 s + 3840}
 \end{equation}
 
 \begin{par}
-Encontrado a funï¿½ï¿½o $S(s)$, o prï¿½ximo passo ï¿½ determinar $M(0)$
+Encontrado a função $S(s)$, o próximo passo é determinar $M(0)$
 \end{par}
 
 \begin{equation}
@@ -288,7 +288,7 @@ M_0 = 	\begin{pmatrix} -0.0141 \\
 
 
 \begin{par}
-Supondo que a forma de $M(s)$ ï¿½:
+Supondo que a forma de $M(s)$ é:
 \end{par}
 
 \begin{equation*}
@@ -315,19 +315,7 @@ Deve-se determinar $\tau$ de forma que:
 	\end{pmatrix}
 \end{equation}
 
-\section{Simulaï¿½ï¿½o do sistema}
-
-\begin{par}
-Por fim, foi feita a montagem da simulaï¿½ï¿½o do sistema no Simulink, para que seja possï¿½vel fazer a simulaï¿½ï¿½o das respostas degrau e rampa do sistema em malha fechada. O circuito estï¿½ apresentado na Figura \ref{fig:simulink}.
-\end{par}
-
-\begin{figure}[H]
-\centering
-\includegraphics [width=4in]{pre_relatorio_03.png}
-\caption {Circuito montado para a Simulaï¿½ï¿½o utilizando o SIMULINK.}
-\label{fig:simulink}
-\end{figure}
-
+\section{Simulação do sistema}
 
 \begin{par}
 Calculando a resposta em malha fechada para uma entrada degrau:
@@ -336,7 +324,7 @@ Calculando a resposta em malha fechada para uma entrada degrau:
 \begin{figure}[H]
 \centering
 \includegraphics [width=4in]{pre_relatorio_01.png}
-\caption {Resposta ao degrau do sistema em espaï¿½o de estados}
+\caption {Resposta ao degrau do sistema em espaço de estados}
 \label{figRespDegrau}
 \end{figure}
 
@@ -347,13 +335,13 @@ Calculando a resposta em malha fechada para uma entrada rampa:
 \begin{figure}[H]
 \centering
 \includegraphics [width=4in]{pre_relatorio_02.png}
-\caption {Resposta ï¿½ rampa do sistema em espaï¿½o de estados}
+\caption {Resposta à rampa do sistema em espaço de estados}
 \label{figRespRampa}
 \end{figure}
 \begin{thebibliography}{5}
 
-\bibitem{Ogata11} K. Ogata, \emph{Engenharia de Controle Moderno}, 6ï¿½ ediï¿½ï¿½o, 2011.
-\bibitem{PCChao} P. C. Chao, \emph{Chemical Process Control: a first Course}, capï¿½tulo 9, 1ï¿½ ediï¿½ï¿½o, 2002.
+\bibitem{Ogata11} K. Ogata, \emph{Engenharia de Controle Moderno}, 6ª edição, 2011.
+\bibitem{PCChao} P. C. Chao, \emph{Chemical Process Control: a first Course}, capítulo 9, 1ª edição, 2002.
 
 \end{thebibliography}
 
