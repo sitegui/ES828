@@ -15,6 +15,7 @@
 \usepackage{subcaption}
 \usepackage[section]{placeins}
 \usepackage{float}
+\usepackage{amsmath}
 %----------------------------
 
 
@@ -115,20 +116,29 @@ Dra. Grace Silva Deaecto
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Objetivo}
 \begin{par}
-	O objetivo deste pré-roteiro é encontrar os ganhos de um controlador que satisfaz os seguintes requisitos:
+	O objetivo deste pré-roteiro é encontrar os ganhos de um controlador que satisfaça os seguintes requisitos:
 \end{par}
-
 
 \begin{itemize}
  \item $\xi = \frac{\sqrt{2}}{2}$
 
- \item Terceiro polo alocado em $-30$
+ \item Terceiro polo alocado em $-30$ (escolhido arbitrariamente).
 
  \item Erro nulo para entrada do tipo rampa.
  
   \item Estabilização em $0,5 [s]$
 
 \end{itemize}
+
+\begin{par}
+O controlador servirá para o controle da planta eletrônica 8 utilizada nos laboratórios anteriores, cuja função de transferência 
+é:
+\end{par}
+
+\begin{equation}
+G(s) = \frac{2.979e04}{s^3 + 120 s^2 + 3313 s}
+\end{equation}
+
 
 \section{Localização dos polos}
 
@@ -166,7 +176,6 @@ p_2 = -8.0000 - 8.0000i
 A matriz que representa a planta no modelo de estados é definida como:
 \end{par}
 
-
 \[ \left( \begin{array}{ccc}
 A & B \\
 C & D \end{array} \right)\]
@@ -175,62 +184,82 @@ C & D \end{array} \right)\]
 Onde A, B, C e D são representados por:
 \end{par}
 
-\[ A = \left( \begin{array}{ccc}
-- 120 & -51.76 & 0 \\
-64 & 0 & 0 \\
-0 & 1 & 0 \end{array} \right).\] 
-
-\[ B = \left( \begin{array}{c}
-16\\
-0 \\
-0 \end{array} \right).\]
-
-\[ C = \left( \begin{array}{ccc}
-0 & 0 & 29.09  \end{array} \right).\]
-
-\begin {equation}
-D = (0)
-\end {equation}
+\begin{equation*}
+X(t)' = A*X(t) + B*U(t)\\
+\end{equation*}
+\begin{equation*}
+Y(t) = C*X(t) + D*U(t)\\
+\end{equation*}
+\begin{equation*}
+A = 	\begin{pmatrix} -120 & -51.76 & 0 \\
+						64 & 0 & 0 \\
+						0 & 1 & 0 \\
+		\end{pmatrix}\\
+\end{equation*}
+\begin{equation*}
+B = 	\begin{pmatrix} 16 \\
+						0 \\
+						0 \\
+		\end{pmatrix}\\
+\end{equation*}
+\begin{equation*}
+C = 	\begin{pmatrix} 0 & 0 & 29.09
+		\end{pmatrix}\\
+\end{equation*}
+\begin{equation*}
+D = 	\begin{pmatrix} 0 \end{pmatrix}\\
+\end{equation*}
 
 \section{Determinação da matriz de ganho K}
 
 \begin {par}
-Com o auxílio do MATLAB pode-se encontrar o valor da matriz de ganho K via o seguinte comando:
+Com o auxílio do MATLAB pode-se encontrar o valor da matriz de ganho K utilizando o comando "acker". Com ele, 
+é computada a fórmula de Ackermann (equação \ref{eq:Ackermmann} para matrizes com $n = 3$) para a determinação da matriz de ganho K. \cite{PCChao}
 \end{par}
 
-\begin{verbatim}
-K = place(A, B, p)
-\end{verbatim}
+\begin {equation*}
+det(sI - (A- BK)) = s^n + \sum_{i=0}^{n-1} p_i s_i
+\end {equation*}
 
-\[ K = \left( \begin{array}{ccc}
--4.6242 & -2.6412 & 3.7500  \end{array} \right).\]
+\begin {equation}
+K = \begin{bmatrix} 0 & 0 & 1 \end{bmatrix}\begin{bmatrix} B & AB & A^2B \end{bmatrix}^{-1} \alpha _c(A)
+\label{eq:Ackermmann}
+\end {equation}
 
+\begin {equation}
+K = \begin{pmatrix} -4.6242 & -2.6412 & 3.7500 \end{pmatrix}
+\end {equation}
 \section{Pólos do observador}
 
 \begin {par}
 Os pólos do observador devem ser escolhidos de forma que o estado estimado siga o estado verdadeiro o mais rápido possível. Para isso, eles devem estar mais à esqueda que os pólos do controlador.
-Dessa forma, foi escolhido arbitrariamente que a parte real deveria ser 50\% mais negativa.
+Dessa forma, inicialmente foi escolhida a parte real 50% mais negativa. No entanto, após experimentação foi observado que 
+tais pólos ainda não satisfizeram o sistema. Foi tentado então o posicionamento dos pólos do observador ainda mais afastados dos pólos da planta, de forma a garantir que ele consiga responder mais rapidamente que ela. Os pólos escolhidos estão representados abaixo.
 \end{par}
 
-\[ po = \left( \begin{array}{c}
--12.0000 + 8.0000i\\
--12.0000 - 8.0000i \\
--45.0000 + 0.0000i \end{array} \right).\]
+\begin {equation}
+p_o = \begin{pmatrix} -150.0 \\ -150.0 \\ -150.0 \end{pmatrix}
+\end {equation}
 
-\section{Pólos do observador}
+\section{Cálculo da matriz L}
 
 \begin {par}
-Com os pólos do observador calcula-se a matriz L, novamente via MATLAB com o seguinte comando:
+Tendo-se os pólos do observador, calcula-se a matriz L, utilizando-se novamente da equação \ref{eq:Ackermmann}, sendo
+ esta computada pelo matlab:
 \end{par}
 
-\begin{verbatim}
-L = place(A', C', po)'
-\end{verbatim}
+\begin {equation*}
+det(sI - (A- LC)) = s^n + \sum_{i=0}^{n-1} q_i s_i
+\end {equation*}
 
-\[ B = \left( \begin{array}{c}
--168.0343\\
-140.6948 \\
--1.7526 \end{array} \right).\]
+
+\begin {equation}
+L = 	\begin{pmatrix} -359.1449 \\
+						845.2453 \\
+						11.3436 \\
+		\end{pmatrix}
+\end {equation}
+
 
 \section{Determinação de $M(s)$}
 
@@ -239,11 +268,11 @@ Para encontrar o M(s), inicialmente encontra-se a função $S(s)$ denominada por:
 \end{par}
 
 \begin{equation}
-S = C*(s*I - (A - B*K))^{-1}*B
+S(s) = C*(s*I - (A - B*K))^{-1}*B
 \end{equation}
 
 \begin{equation}
-S = \frac {2.979 *10^4} { s^3 + 46 s^2 + 608 s + 3840}
+S(s) = \frac {2.979 *10^4} { s^3 + 46 s^2 + 608 s + 3840}
 \end{equation}
 
 \begin{par}
@@ -312,6 +341,7 @@ Calculando a resposta em malha fechada para uma entrada rampa:
 \begin{thebibliography}{5}
 
 \bibitem{Ogata11} K. Ogata, \emph{Engenharia de Controle Moderno}, 6ª edição, 2011.
+\bibitem{PCChao} P. C. Chao, \emph{Chemical Process Control: a first Course}, capítulo 9, 1ª edição, 2002.
 
 \end{thebibliography}
 

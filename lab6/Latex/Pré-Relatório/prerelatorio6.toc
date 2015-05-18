@@ -4,6 +4,6 @@
 \contentsline {section}{\numberline {3}Modelo de estados}{2}
 \contentsline {section}{\numberline {4}Determina\c c\~ao da matriz de ganho K}{3}
 \contentsline {section}{\numberline {5}P\'olos do observador}{3}
-\contentsline {section}{\numberline {6}P\'olos do observador}{3}
+\contentsline {section}{\numberline {6}C\'alculo da matriz L}{4}
 \contentsline {section}{\numberline {7}Determina\c c\~ao de $M(s)$}{4}
-\contentsline {section}{\numberline {8}Simula\c c\~ao do sistema}{4}
+\contentsline {section}{\numberline {8}Simula\c c\~ao do sistema}{5}
