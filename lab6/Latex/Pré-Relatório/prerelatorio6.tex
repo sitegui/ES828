@@ -279,22 +279,21 @@ S(s) = \frac {2.979 *10^4} { s^3 + 46 s^2 + 608 s + 3840}
 Encontrado a função $S(s)$, o próximo passo é determinar $M(0)$
 \end{par}
 
-\begin{verbatim}
-M0 = pinv(evalfr(S, 0)*K)
-\end{verbatim}
+\begin{equation}
+M_0 = 	\begin{pmatrix} -0.0141 \\
+									-0.0080  \\
+									0.0114 \\
+\end{pmatrix}
+\end{equation}
 
-\[ M(0) = \left( \begin{array}{c}
--0.0141\\
--0.0080 \\
-0.0114 \end{array} \right).\]
 
 \begin{par}
 Supondo que a forma de $M(s)$ é:
 \end{par}
 
-\begin{equation}
-M(s) = \frac{s/\tau + 1}{s/30 + 1} M0
-\end{equation}
+\begin{equation*}
+M(s) = \frac{s/\tau + 1}{s/30 + 1} M_0
+\end{equation*}
 
 \begin{par}
 Deve-se determinar $\tau$ de forma que:
@@ -308,12 +307,13 @@ Deve-se determinar $\tau$ de forma que:
 \tau = 5.2174
 \end{equation}
 
-
-\[ \arraycolsep=5pt\def\arraystretch{2.5}
-M(s) = \left( \begin{array}{c}
-\frac{-0.4215s-2.199}{5.217s+156.5}\\
-\frac{-0.208s-1.256}{5.217s+156.5} \\
-\frac{-0.3418s+1.783}{5.217s+156.5} \end{array} \right).\]
+\begin{equation}
+	M(s) = 	\begin{pmatrix}   \frac{-0.4215s-2.199}{5.217s+156.5}\\
+											\frac{-0.2408s-1.256}{5.217s+156.5} \\
+											\frac{-0.3418s+1.783}{5.217s+156.5}
+	
+	\end{pmatrix}
+\end{equation}
 
 \section{Simulação do sistema}
 
