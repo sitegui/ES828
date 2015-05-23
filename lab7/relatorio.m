@@ -63,3 +63,35 @@ b = K*i2_inf/v2_inf
 index_tau_m = find(v2_f(index_inf:end) < 0.3679*v2_inf, 1);
 tau_m = index_tau_m*dt
 J = tau_m*b
+
+%% Modelo de estado
+% Juntando as seguintes equações:
+%
+% $$L \dot{i} + R i = V - K \dot{\theta}$$
+%
+% $$J \dot{v} + b v = K i$$
+%
+% $$\dot{\theta} = v$$
+%
+% Chega-se no modelo de estados
+%
+% $$\left[ \begin{array}{c} \dot{i} \\ \dot{v} \\ \dot{\theta} \end{array} \right] =
+% \left[ \begin{array}{ccc} -R/L & -K/L & 0 \\ K/J & -b/J & 0 \\ 0 & 1 & 0 \end{array} \right]
+% \left[ \begin{array}{c} i \\ v \\ \theta \end{array} \right] + 
+% \left[ \begin{array}{c} 1/L \\ 0 \\ 0 \end{array} \right]
+% \left[ \begin{array}{c} V \end{array} \right]$$
+%
+% $$\left[ \begin{array}{c} i \\ v \end{array} \right] =
+% \left[ \begin{array}{ccc} 1 & 0 & 0 \\ 0 & 1 & 0 \end{array} \right]
+% \left[ \begin{array}{c} i \\ v \\ \theta \end{array} \right]$$
+A = [-R/L, -K/L, 0; K/J, -b/J, 0; 0, 1, 0];
+B = [1/L; 0; 0];
+C = [1, 0, 0; 0, 1, 0];
+D = [0; 0];
+planta = ss(A, B, C, D)
+
+%% Comparação teórico x real
+v2_step = v2_f(116:6285);
+t2_step = t2(116:6285);
+[Y, T] = step(planta, t2_step(end));
+plot(T, Y(:,2), t2_step, v2_step);
