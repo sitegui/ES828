@@ -16,6 +16,7 @@
 \usepackage[section]{placeins}
 \usepackage{float}
 \usepackage{amsmath}
+\usepackage{booktabs}
 %----------------------------
 
 
@@ -132,18 +133,49 @@ G(s) = \frac{2.979e04}{s^3 + 120 s^2 + 3313 s}
 \section{Resultados Obtidos}
 
 \begin{par}
-Os resultados obtidos no laboratório estão exibidos nas figuras a seguir.
+Os resultados obtidos no laboratório estão exibidos nas figuras a seguir. Nota-se a existência de um offset visível na resposta ao degrau, o que implica ao controlador não cumprir o requisito de seguir com erro zero a rampa unitária.
 \end{par}
 
+\begin{figure}[H]
+\centering
+\includegraphics [width=4in]{relatorio_01.png}
+\caption {Resposta ao degrau do sistema prático.}
+\label{fig:respDegrau}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics [width=4in]{relatorio_03.png}
+\caption {Resposta à rampa do sistema prático.}
+\label{fig:respRampa}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics [width=4in]{relatorio_02.png}
+\caption {Esforço de Controle do sistema prático.}
+\label{fig:respRampa}
+\end{figure}
 
 \section{Comparação com os resultados anteriores}
 
-%\begin{figure}[H]
-%\centering
-%\includegraphics [width=4in]{pre_relatorio_02.png}
-%\caption {Resposta à rampa do sistema em espaço de %estados}
-%\label{figRespRampa}
-%\end{figure}
+\begin{par}
+Foi feita a comparação entre todos os controladores para se descobrir qual possui a melhor resposta esperada, apresentado nas figuras a seguir. Lembrando que todos os controladores seguem o requisito de não-saturação no controle.
+\end{par}
+
+\begin{figure}[H]
+\centering
+\includegraphics [width=4in]{relatorio_04.png}
+\caption {Comparação entre os requisitos de desmpenho dos controladores.}
+\label{fig:respTudo}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\includegraphics [width=4in]{tabela.png}
+\caption {Comparação entre todas as respostas ao degrau dos controladores.}
+\label{fig:respTabela}
+\end{table}
 
 \section{Conclusão}
 Com a utilização da planta em espaço de estados, foi possível seguir o degrau unitário, mas existiu nesse caso um pequeno offset com relação ao valor de saída esperado. O controlador avanço-atraso se demonstrou superior a essa metodologia de controle em diversos aspectos.

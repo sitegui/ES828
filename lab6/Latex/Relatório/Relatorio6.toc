@@ -1,4 +1,5 @@
 \select@language {brazil}
 \contentsline {section}{\numberline {1}Objetivo}{2}
 \contentsline {section}{\numberline {2}Resultados Obtidos}{2}
-\contentsline {section}{\numberline {3}Compara\c c\~ao com os resultados anteriores}{2}
+\contentsline {section}{\numberline {3}Compara\c c\~ao com os resultados anteriores}{3}
+\contentsline {section}{\numberline {4}Conclus\~ao}{4}

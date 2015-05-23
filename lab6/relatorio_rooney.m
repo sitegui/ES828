@@ -12,39 +12,39 @@ load ../pids.mat
 load ../lab3/sinais_tratados.mat
 load ../lab4/sinais_tratados4p5.mat
 load ../lab5/sinais_tratados.mat
+saida5 = saida;
+load sinais_tratados.mat
+
 s = tf('s');
 
 %% Resposta ao degrau
-sistema = feedback(Caa*G, 1);
-Y = lsim(sistema, referencia, t);
-plot(t, [Y saida])
+plot(t, saida)
 axis([0, 1, 0, 1.2]);
-legend('Teórico', 'Prático');
+legend('Prático');
 xlabel('Tempo (s)');
 
 %% Desempenho
-stepinfo(sistema)
+%stepinfo(sistema)
 stepinfo(saida, t, 1)
 
 %% Esforço de controle
 Y = lsim(Caa*(1-sistema), referencia, t);
-plot(t, [Y controle])
+plot(t, controle)
 axis([0, 1, -1.2, 6]);
-legend('Teórico', 'Prático');
+legend('Prático');
 xlabel('Tempo (s)');
 
 %% Resposta à rampa
 rampa = lsim(1/s, referencia, t);
-Y1 = lsim(sistema, rampa, t);
 Y2 = lsim(1/s, saida, t);
-plot(t, [Y1 Y2], t, rampa, 'r-.')
+plot(t, Y2, t, rampa, 'r-.')
 axis([0, 2, 0, 2]);
-legend('Teórico', 'Prático', 'Location', 'NorthWest');
+legend('Prático', 'Location', 'NorthWest');
 xlabel('Tempo (s)');
 
 %% Comparação entre os controladores práticos
 
-plot(t,[referencia, saida1, saida2, saida3, saida4,saida]);
-legend('Referência', 'Proporcional', 'Ziegler-Nichols', 'PID Sisotool', 'PID analógico','Avanço-atraso');
+plot(t,[referencia, saida1, saida2, saida3, saida4,saida5,saida]);
+legend('Referência', 'Proporcional', 'Ziegler-Nichols', 'PID Sisotool', 'PID analógico','Avanço-atraso','Estados');
 ylim([0, 1.8]);
 xlabel('Tempo (s)');

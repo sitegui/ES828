@@ -1,0 +1,164 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>relatorio_rooney</title><meta name="generator" content="MATLAB 8.0"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2015-05-18"><meta name="DC.source" content="relatorio_rooney.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, tt, code { font-size:12px; }
+pre { margin:0px 0px 20px; }
+pre.error { color:red; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#1">ES868 &#8211; Relat&oacute;rio Lab 5</a></li><li><a href="#2">Resposta ao degrau</a></li><li><a href="#3">Desempenho</a></li><li><a href="#4">Esfor&ccedil;o de controle</a></li><li><a href="#5">Resposta &agrave; rampa</a></li><li><a href="#6">Compara&ccedil;&atilde;o entre os controladores pr&aacute;ticos</a></li></ul></div><h2>ES868 &#8211; Relat&oacute;rio Lab 5<a name="1"></a></h2><p><b>Controle de plantas eletr&#710;onicas utilizando um controlador atraso-avan&ccedil;o digital</b></p><p>Turma A - 13/04/2015</p><div><ul><li>Augusto Miranda Garcia - 104627</li><li>Guilherme de Oliveira Souza &#8211; 117093</li><li>Vin&iacute;cius Ragazi David - 120258</li></ul></div><pre class="codeinput">load <span class="string">../G.mat</span>
+load <span class="string">../pids.mat</span>
+load <span class="string">../lab3/sinais_tratados.mat</span>
+load <span class="string">../lab4/sinais_tratados4p5.mat</span>
+load <span class="string">../lab5/sinais_tratados.mat</span>
+saida5 = saida;
+load <span class="string">sinais_tratados.mat</span>
+
+s = tf(<span class="string">'s'</span>);
+</pre><h2>Resposta ao degrau<a name="2"></a></h2><pre class="codeinput">plot(t, saida)
+axis([0, 1, 0, 1.2]);
+legend(<span class="string">'Pr&aacute;tico'</span>);
+xlabel(<span class="string">'Tempo (s)'</span>);
+</pre><img vspace="5" hspace="5" src="relatorio_rooney_01.png" alt=""> <h2>Desempenho<a name="3"></a></h2><pre class="codeinput"><span class="comment">%stepinfo(sistema)</span>
+stepinfo(saida, t, 1)
+</pre><pre class="codeoutput">
+ans = 
+
+        RiseTime: 0.1626
+    SettlingTime: NaN
+     SettlingMin: 0.8966
+     SettlingMax: 1.0209
+       Overshoot: 2.0901
+      Undershoot: 4.4383
+            Peak: 1.0209
+        PeakTime: 0.3452
+
+</pre><h2>Esfor&ccedil;o de controle<a name="4"></a></h2><pre class="codeinput">Y = lsim(Caa*(1-sistema), referencia, t);
+plot(t, controle)
+axis([0, 1, -1.2, 6]);
+legend(<span class="string">'Pr&aacute;tico'</span>);
+xlabel(<span class="string">'Tempo (s)'</span>);
+</pre><img vspace="5" hspace="5" src="relatorio_rooney_02.png" alt=""> <h2>Resposta &agrave; rampa<a name="5"></a></h2><pre class="codeinput">rampa = lsim(1/s, referencia, t);
+Y2 = lsim(1/s, saida, t);
+plot(t, Y2, t, rampa, <span class="string">'r-.'</span>)
+axis([0, 2, 0, 2]);
+legend(<span class="string">'Pr&aacute;tico'</span>, <span class="string">'Location'</span>, <span class="string">'NorthWest'</span>);
+xlabel(<span class="string">'Tempo (s)'</span>);
+</pre><img vspace="5" hspace="5" src="relatorio_rooney_03.png" alt=""> <h2>Compara&ccedil;&atilde;o entre os controladores pr&aacute;ticos<a name="6"></a></h2><pre class="codeinput">plot(t,[referencia, saida1, saida2, saida3, saida4,saida5,saida]);
+legend(<span class="string">'Refer&ecirc;ncia'</span>, <span class="string">'Proporcional'</span>, <span class="string">'Ziegler-Nichols'</span>, <span class="string">'PID Sisotool'</span>, <span class="string">'PID anal&oacute;gico'</span>,<span class="string">'Avan&ccedil;o-atraso'</span>,<span class="string">'Estados'</span>);
+ylim([0, 1.8]);
+xlabel(<span class="string">'Tempo (s)'</span>);
+</pre><img vspace="5" hspace="5" src="relatorio_rooney_04.png" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2012b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% ES868 – Relatório Lab 5
+% *Controle de plantas eletrˆonicas utilizando um controlador atraso-avanço digital*
+%
+% Turma A - 13/04/2015
+%
+% * Augusto Miranda Garcia - 104627
+% * Guilherme de Oliveira Souza – 117093
+% * Vinícius Ragazi David - 120258
+
+load ../G.mat
+load ../pids.mat
+load ../lab3/sinais_tratados.mat
+load ../lab4/sinais_tratados4p5.mat
+load ../lab5/sinais_tratados.mat
+saida5 = saida;
+load sinais_tratados.mat
+
+s = tf('s');
+
+%% Resposta ao degrau
+plot(t, saida)
+axis([0, 1, 0, 1.2]);
+legend('Prático');
+xlabel('Tempo (s)');
+
+%% Desempenho
+%stepinfo(sistema)
+stepinfo(saida, t, 1)
+
+%% Esforço de controle
+Y = lsim(Caa*(1-sistema), referencia, t);
+plot(t, controle)
+axis([0, 1, -1.2, 6]);
+legend('Prático');
+xlabel('Tempo (s)');
+
+%% Resposta à rampa
+rampa = lsim(1/s, referencia, t);
+Y2 = lsim(1/s, saida, t);
+plot(t, Y2, t, rampa, 'r-.')
+axis([0, 2, 0, 2]);
+legend('Prático', 'Location', 'NorthWest');
+xlabel('Tempo (s)');
+
+%% Comparação entre os controladores práticos
+
+plot(t,[referencia, saida1, saida2, saida3, saida4,saida5,saida]);
+legend('Referência', 'Proporcional', 'Ziegler-Nichols', 'PID Sisotool', 'PID analógico','Avanço-atraso','Estados');
+ylim([0, 1.8]);
+xlabel('Tempo (s)');
+
+##### SOURCE END #####
+--></body></html>
