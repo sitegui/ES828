@@ -84,14 +84,21 @@ J = tau_m*b
 % $$\left[ \begin{array}{c} i \\ v \end{array} \right] =
 % \left[ \begin{array}{ccc} 1 & 0 & 0 \\ 0 & 1 & 0 \end{array} \right]
 % \left[ \begin{array}{c} i \\ v \\ \theta \end{array} \right]$$
-A = [-R/L, -K/L, 0; K/J, -b/J, 0; 0, 1, 0];
+A = [-(R+Rs)/L, -K/L, 0; K/J, -b/J, 0; 0, 1, 0];
 B = [1/L; 0; 0];
 C = [1, 0, 0; 0, 1, 0];
 D = [0; 0];
 planta = ss(A, B, C, D)
 
 %% Comparação teórico x real
-v2_step = v2_f(116:6285);
-t2_step = t2(116:6285);
-[Y, T] = step(planta, t2_step(end));
-plot(T, Y(:,2), t2_step, v2_step);
+v2_t = V*(i2_f>1);
+[Y, T] = lsim(planta, v2_t, t2);
+plot(T, Y(:,1), t2, i2_f);
+title('Corrente (A)');
+legend('Teórico', 'Experimental');
+xlabel('Tempo (s)');
+snapnow;
+plot(T, Y(:,2), t2, v2_f);
+title('Velocidade (rad/s)');
+legend('Teórico', 'Experimental');
+xlabel('Tempo (s)');
