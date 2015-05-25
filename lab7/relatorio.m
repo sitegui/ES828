@@ -102,3 +102,7 @@ plot(T, Y(:,2), t2, v2_f);
 title('Velocidade (rad/s)');
 legend('Teórico', 'Experimental');
 xlabel('Tempo (s)');
+
+%% G(s) = v/V
+s = tf('s');
+G = tf([K/(J*L)], [1, ((R+Rs)/L + b/J), ((R+Rs)*b+K^2)/(J*L)])
