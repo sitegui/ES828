@@ -1,0 +1,5 @@
+\select@language {brazil}
+\contentsline {section}{\numberline {1}Objetivo}{2}
+\contentsline {section}{\numberline {2}Planta estudada}{2}
+\contentsline {section}{\numberline {3}Projeto 1: Controlador proporcional}{2}
+\contentsline {section}{\numberline {4}Projeto 02: Controlador proporcional que sazisfaz $\xi $ e $t_s$}{6}
