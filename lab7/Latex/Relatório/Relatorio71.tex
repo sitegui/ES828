@@ -1,0 +1,376 @@
+\documentclass[12pt]{article}
+
+%% Escrevendo em portuguÃªs:
+\usepackage[brazil]{babel}
+\usepackage[latin1]{inputenc} 
+\usepackage[T1]{fontenc}
+\usepackage{psfrag}
+\usepackage{fullpage}
+\usepackage{setspace}
+\usepackage{graphicx}
+\usepackage{epsfig}
+\usepackage{epstopdf}
+\usepackage{color}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage[section]{placeins}
+\usepackage{float}
+\usepackage{amsmath}
+%----------------------------
+
+
+\newtheorem{teorema}{Teorema}%[chapter]
+\newtheorem{problema}[teorema]{Problema}
+\newtheorem{conj}[teorema]{Conjectura}
+\newtheorem{lema}[teorema]{Lema}
+\newtheorem{exerc}[teorema]{ExercÃ­cio}
+
+\definecolor{lightgray}{gray}{0.95}
+
+% Ad hoc macros
+\newcommand{\qed}       {\hfill\Box}
+\newcommand{\card}[1]   {\left|#1\right|}
+\newcommand{\nct}       {\chi_{_T}}
+\newcommand{\cnk}[2]    {C_{#1}^{#2}}
+\newcommand{\ed}[2]     {#1#2}
+\newcommand{\teto}[1]   {\lceil #1 \rceil}
+\newcommand{\piso}[1]   {\lfloor #1 \rfloor}
+\newcommand{\itab}[1]{\hspace{0em}\rlap{#1}}
+\newcommand{\tab}[1]{\hspace{.2\textwidth}\rlap{#1}}
+
+%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%
+
+\begin{titlepage}
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for the horizontal lines, change thickness here
+
+\center % Center everything on the page
+ 
+%----------------------------------------------------------------------------------------
+%	HEADING SECTIONS
+%----------------------------------------------------------------------------------------
+
+\textsc{\LARGE Universidade Estadual de Campinas}\\[0.5cm]
+\textsc{\normalsize ES828 - Laboratório de Controle de Sistemas}\\[0.2cm] % Major heading such as course name
+\textsc{\normalsize Turma A}\\[0.2cm] % Minor heading such as course title
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+\vspace {5cm}
+{ \huge \bfseries Experimento 07 - Relatório }\\[0.4cm] % Title of your document
+ 
+%----------------------------------------------------------------------------------------
+%	AUTHOR SECTION
+%----------------------------------------------------------------------------------------
+\vspace {5cm}
+\begin{minipage}{0.4\textwidth}
+\begin{flushleft} \large
+\emph{Alunos:}\\
+ \begin{tabbing}
+ Augusto Miranda Garcia\hspace{1cm} \=  \= 104627 \\
+ Guilherme de Oliveira Souza  \> 117093 \\
+ Vinícius Ragazi David \>{120258}\\
+ \end{tabbing}
+\end{flushleft}
+\end{minipage}
+\vspace {2cm}
+~
+\begin{minipage}{0.4\textwidth}
+\begin{flushright} \large
+\emph{Professora responsável:} \\
+Dra. Grace Silva Deaecto
+\end{flushright}
+\end{minipage}\\[2cm]
+
+% If you don't want a supervisor, uncomment the two lines below and remove the section above
+%\Large \emph{Author:}\\
+%John \textsc{Smith}\\[3cm] % Your name
+
+%----------------------------------------------------------------------------------------
+%	DATE SECTION
+%----------------------------------------------------------------------------------------
+
+{\large \today}\\[3cm] % Date, change the \today to a set date if you want to be precise
+
+%----------------------------------------------------------------------------------------
+%	LOGO SECTION
+%----------------------------------------------------------------------------------------
+
+%\includegraphics{Logo}\\[1cm] % Include a department/university logo - this will require the graphicx package
+ 
+%----------------------------------------------------------------------------------------
+
+\vfill % Fill the rest of the page with whitespace
+
+\end{titlepage}
+
+\tableofcontents
+%\listoffigures
+%\listoftables
+ 
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Objetivo}
+\begin{par}
+	O objetivo deste relatório é determinar a planta de um motor de corrente contínua com base no modelo apresentado no guia.
+\end{par}
+
+\begin{figure}[H]
+\centering
+\includegraphics [width=4in]{planta.png}
+\caption {Modelo de planta estudada.}
+\end{figure}
+
+\begin{par}
+	A determinação da planta é baseada em 3 análises, com o motor acionado, mas travado, com o motor acionado girando livremente e finalmente com o motor desacionado, girando livremente até a parada devido ao atrito.
+\end{par}
+
+\section{Motor parado}
+
+\begin{par}
+	O primeiro estudo a ser feito é analisando o motor ligado, mas com seu movimento travado (não rodando). Com este experimento é possível encontrar o valor da resistencia e a indutancia do motor.
+\end{par}
+
+\begin{figure}[H]
+\centering
+\includegraphics [width=4in]{motor_parado.png}
+\caption {Modelo do motor paralisado.}
+\label{fig:rotorparado}
+\end{figure}
+
+\begin{par}
+	Com base nesse modelo, e com$ R_s$ = 1, pode-se calcular o valor de R da seguinte forma:
+\end{par}
+
+\begin{equation}
+R = \frac{V-R_sI_o}{I_o}
+\end{equation}
+
+\begin{par}
+	O valor $I_o$ é calculado com base numa média dos valores da corrente que passa pelo motor. Pode-se calcular isso pelo gráfico experimental a seguir:
+\end{par}
+
+\begin{figure}[H]
+\centering
+\includegraphics [width=4in]{relatorio_01.png}
+\caption {Corrente com o rotor parado.}
+\label{fig:corrente}
+\end{figure}
+
+\begin{par}
+$I_o$=2.7948
+\end{par}
+
+\begin{par}
+R=3.2937
+\end{par}
+
+\begin{par}
+	Com o valor de R pode-se também definir o valor da constante de tempo elétrica $ztau_e$ e a indutancia L.
+\end{par}
+
+\begin{equation}
+L=\tau_e (R *R_s)
+\end{equation}
+\begin{par}
+L=0.0215
+\end{par}
+
+\section{Motor ligado}
+
+\begin{par}
+	Com o motor girando livremente pode-se definir, com base nos experimentos, a constante de torque do motor, K, como também o seu atrito viscoso, b.
+
+Para isso necessita-se primeiramente filtra os dados e encontrar os valores finais de corrente e velocidade.
+\end{par}
+
+\begin{figure}[H]
+\centering
+\includegraphics [width=4in]{relatorio_02.png}
+\caption {Valores não filtrados.}
+\label{fig:corrente}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics [width=4in]{relatorio_03.png}
+\caption {Valores filtrados.}
+\label{fig:corrente}
+\end{figure}
+
+\begin{par}
+	Pela saída analisada encontra-se que a velocidade máxima encontrada é:
+
+
+v=216,9617[rad/s].
+
+	Para essa velocidade tem-se:
+
+
+i=2,4243([A]
+\end{par}
+
+\begin{par}
+	Pelas seguintes formulas, e com V=12{V}, é possível calcular K e b:
+\end{par}
+
+\begin{equation}
+K = \frac{V - (R+Rs)*i}{v}
+=0.0073
+\end{equation}
+
+\begin{equation}
+b = \frac{K*i}{v}
+=8.1920*10^{-5}
+\end{equation}
+
+\section{Motor desligado}
+
+\begin{par}
+	O próximo passo é definir o valor do momento de inércia J, para isto deve-se desligar o motor, deixando-o girar até sua parada pelo efeito do atrito r definir a constante de tempo mecânica $\tau_m$. $\tau_m$ será definido como o tempo que a tensão de queda atinge 36,79\% do valor máximo, ou seja:
+\end{par}
+
+\begin{par}
+$\tau_m$= 26,64
+\end{par}
+
+\begin{par}
+Sabendo deste valor, e com b, pode-se encontrar o valor de J.
+\end{par}
+
+\begin{equation}
+J = \tau_m*b
+=0,0022
+\end{equation}
+
+\section{Modelo de estado}
+
+\begin{par}
+Para efeito de validação é necessário testar os valores encontrados e comparar suas respostas às saídas experimentais.
+
+Com as seguintes equações  pode-se definir o modelo de estados da planta:
+\end{par}
+
+
+
+\begin{equation*}
+\theta'=v
+\end{equation*}
+\begin{equation*}
+Li+Ri=V-K\theta'
+\end{equation*}
+\begin{equation*}
+Jv'+bv=Ki
+\end{equation*}
+
+\begin{equation*}
+\begin{pmatrix} i \\
+		v \\
+\end{pmatrix}\\ = 
+\begin{pmatrix} 1& 0 & 0 \\
+		0&1&0 \\
+\end{pmatrix}\\*
+\begin{pmatrix} i \\ v \\ \theta'\\
+\end{pmatrix}\\
+\end{equation*}
+
+\begin{equation*}
+	\begin{pmatrix} i' \\ v' \\ \theta'\\
+	\end{pmatrix}\\=
+	\begin{pmatrix} -R/L & -K/L & 0 \\
+			K/J & -b/J & 0 \\
+			0 & 1 & 0 \\
+		\end{pmatrix}\\*
+	\begin{pmatrix} i \\ v \\ \theta\\
+	\end{pmatrix}\\+
+	\begin{pmatrix} 1/L\\
+				0 \\
+				0 \\
+	\end{pmatrix}[V]\\
+\end{equation*}
+
+\begin{par}
+Substituindo os valores:
+\end{par}
+\begin{equation*}
+A = 	\begin{pmatrix} -200 & -0.3415 & 0 \\
+			3.359 & -0.03754 & 0 \\
+			0 & 1 & 0 \\
+		\end{pmatrix}\\
+\end{equation*}
+\begin{equation*}
+B = 	\begin{pmatrix} 46,58\\
+				0 \\
+				0 \\
+\end{pmatrix}\\
+\end{equation*}
+\begin{equation*}
+C = 	\begin{pmatrix} 1 & 0 & 0 \\
+			0 & 1 & 0 \\
+\end{pmatrix}\\
+\end{equation*}
+\begin{equation*}
+D = 	\begin{pmatrix} 0 \\
+				0 \\
+\end{pmatrix}\\
+\end{equation*}
+		
+\begin{par}
+Sendo a planta do seguinte formato:
+\end{par}
+\begin{equation*}
+planta = 	\begin{pmatrix}A & B \\
+			C & D \\
+		\end{pmatrix}\\
+\end{equation*}
+
+\section{Comparação de resultados}
+
+\begin{figure}[H]
+\centering
+\includegraphics [width=4in]{relatorio_04.png}
+\caption {Corrente teórica e experimental.}
+\label{fig:corrente}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics [width=4in]{relatorio_05.png}
+\caption {Velocidade teórica e experimental.}
+\label{fig:corrente}
+\end{figure}
+
+
+
+\section{Conclusão}
+	
+\begin{par}
+Tanto a a velocidade quanto a corrente experimental obtiveram valores maiores do que o teórico. Isto está relacionado com as incertezaspráticas.
+\end{par}
+
+\begin{par}
+No plano teórico constantes como as voltagens de entrada são valores invariáveis, no pllano experimental esses valores variam, mesmo que pouco, e podem causar diferenças consideráveis. Funcionalidades dos componenetes ou os seus valores também diferem da prática para a teórica.
+\end{par}
+
+\begin{par}
+A diferença entre as correntes teórica e experimental está relacionada ao funcionamento do motor e a geração da força-eletrômotriz e suas consequências na corrente. O pico de mínimo criado é relacionado a isso, já que o modelo teórico não diz respeito a não existência da corrente induzida com a falta da corrente criadora do campo. O mesmo pode ser dito pela diferença de queda entre as curvas, em que no experimental é menos assentuado que no prático.
+\end{par}
+
+\begin{par}
+Com as diferenças entre as correntes, as velocidades teórica e experimental por consequência também terão diferenças. Como a corrente experimental tem valores superiores em relação a teórica, a velocidade experimental também será maior, já que é uma função da corrente. Também por consequência da diferenças do funcionamento teórico pro prático a queda da velocidade também varia.
+\end{par}
+
+
+
+\begin{thebibliography}{5}
+
+\bibitem{Ogata11} K. Ogata, \emph{Engenharia de Controle Moderno}, 6ª edição, 2011.
+
+\end{thebibliography}
+
+\end{document}
+    
