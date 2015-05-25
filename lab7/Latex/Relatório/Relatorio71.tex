@@ -126,8 +126,12 @@ Dra. Grace Silva Deaecto
 \end{figure}
 
 \begin{par}
-	A determinação da planta é baseada em 3 análises, com o motor acionado, mas travado, com o motor acionado girando livremente e finalmente com o motor desacionado, girando livremente até a parada devido ao atrito.
+	A determinação da planta é baseada em 3 análises, com o motor acionado, mas travado, com o motor acionado girando livremente e finalmente com o motor desacionado, girando livremente até a parada devido ao atrito. A teoria mostra que a planta deve ser da seguinte forma:
 \end{par}
+
+\begin{equation}
+G(s)=\frac {cK_T}{(J_c+c^2J_m)Ls^2+((J_c+c^2J_m)R+bL)s+Rb+(cK_T)^2}
+\end{equation}
 
 \section{Motor parado}
 
@@ -328,6 +332,14 @@ planta = 	\begin{pmatrix}A & B \\
 		\end{pmatrix}\\
 \end{equation*}
 
+\begin{par}
+Também pode-se definir G(s) como:
+\end{par}
+
+\begin{equation}
+G(s)=\frac {156,5}{s^2+200s+8,655}
+\end{equation}
+
 \section{Comparação de resultados}
 
 \begin{figure}[H]
@@ -343,6 +355,7 @@ planta = 	\begin{pmatrix}A & B \\
 \caption {Velocidade teórica e experimental.}
 \label{fig:corrente}
 \end{figure}
+
 
 
 

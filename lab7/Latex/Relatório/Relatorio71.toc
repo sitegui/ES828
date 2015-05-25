@@ -1,8 +1,8 @@
 \select@language {brazil}
 \contentsline {section}{\numberline {1}Objetivo}{2}
 \contentsline {section}{\numberline {2}Motor parado}{2}
-\contentsline {section}{\numberline {3}Motor ligado}{3}
+\contentsline {section}{\numberline {3}Motor ligado}{4}
 \contentsline {section}{\numberline {4}Motor desligado}{5}
-\contentsline {section}{\numberline {5}Modelo de estado}{5}
-\contentsline {section}{\numberline {6}Compara\c c\~ao de resultados}{6}
+\contentsline {section}{\numberline {5}Modelo de estado}{6}
+\contentsline {section}{\numberline {6}Compara\c c\~ao de resultados}{7}
 \contentsline {section}{\numberline {7}Conclus\~ao}{7}

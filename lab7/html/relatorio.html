@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>relatorio</title><meta name="generator" content="MATLAB 8.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2015-05-24"><meta name="DC.source" content="relatorio.m"><style type="text/css">
+      --><title>relatorio</title><meta name="generator" content="MATLAB 8.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2015-05-25"><meta name="DC.source" content="relatorio.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -65,7 +65,7 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
 
 
-  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#1">ES868 &#8211; Relat&oacute;rio Lab 6</a></li><li><a href="#2">Ensaio de motor travado</a></li><li><a href="#5">Ensaio de motor livre</a></li><li><a href="#9">Modelo de estado</a></li><li><a href="#10">Compara&ccedil;&atilde;o te&oacute;rico x real</a></li></ul></div><h2>ES868 &#8211; Relat&oacute;rio Lab 6<a name="1"></a></h2><p><b>Identifica&ccedil;&atilde;o de um motor de corrente cont&iacute;nua</b></p><p>Turma A - 23/05/2015</p><div><ul><li>Augusto Miranda Garcia - 104627</li><li>Guilherme de Oliveira Souza &#8211; 117093</li><li>Vin&iacute;cius Ragazi David - 120258</li></ul></div><pre class="codeinput">dt = 10e-3;
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#1">ES868 &#8211; Relat&oacute;rio Lab 6</a></li><li><a href="#2">Ensaio de motor travado</a></li><li><a href="#5">Ensaio de motor livre</a></li><li><a href="#9">Modelo de estado</a></li><li><a href="#10">Compara&ccedil;&atilde;o te&oacute;rico x real</a></li><li><a href="#11">G(s) = v/V</a></li></ul></div><h2>ES868 &#8211; Relat&oacute;rio Lab 6<a name="1"></a></h2><p><b>Identifica&ccedil;&atilde;o de um motor de corrente cont&iacute;nua</b></p><p>Turma A - 23/05/2015</p><div><ul><li>Augusto Miranda Garcia - 104627</li><li>Guilherme de Oliveira Souza &#8211; 117093</li><li>Vin&iacute;cius Ragazi David - 120258</li></ul></div><pre class="codeinput">dt = 10e-3;
 </pre><h2>Ensaio de motor travado<a name="2"></a></h2><p>Dado coletado</p><pre class="codeinput">i1 = load(<span class="string">'dados_coletados/corrente_parado.lvm'</span>);
 n1 = numel(i1);
 t1 = linspace(0, (n1-1)*dt, n1)';
@@ -193,7 +193,18 @@ plot(T, Y(:,2), t2, v2_f);
 title(<span class="string">'Velocidade (rad/s)'</span>);
 legend(<span class="string">'Te&oacute;rico'</span>, <span class="string">'Experimental'</span>);
 xlabel(<span class="string">'Tempo (s)'</span>);
-</pre><img vspace="5" hspace="5" src="relatorio_04.png" alt=""> <img vspace="5" hspace="5" src="relatorio_05.png" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2013a</a><br></p></div><!--
+</pre><img vspace="5" hspace="5" src="relatorio_04.png" alt=""> <img vspace="5" hspace="5" src="relatorio_05.png" alt=""> <h2>G(s) = v/V<a name="11"></a></h2><pre class="codeinput">s = tf(<span class="string">'s'</span>);
+G = tf([K/(J*L)], [1, ((R+Rs)/L + b/J), ((R+Rs)*b+K^2)/(J*L)])
+</pre><pre class="codeoutput">
+G =
+ 
+         156.5
+  -------------------
+  s^2 + 200 s + 8.655
+ 
+Continuous-time transfer function.
+
+</pre><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2013a</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 %% ES868 – Relatório Lab 6
 % *Identificação de um motor de corrente contínua*
@@ -299,5 +310,10 @@ plot(T, Y(:,2), t2, v2_f);
 title('Velocidade (rad/s)');
 legend('Teórico', 'Experimental');
 xlabel('Tempo (s)');
+
+%% G(s) = v/V
+s = tf('s');
+G = tf([K/(J*L)], [1, ((R+Rs)/L + b/J), ((R+Rs)*b+K^2)/(J*L)])
+
 ##### SOURCE END #####
 --></body></html>
