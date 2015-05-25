@@ -1,4 +1,4 @@
-%% ES868 – Relatório Lab 7
+%% ES868 – Relatório Lab 6
 % *Identificação de um motor de corrente contínua*
 %
 % Turma A - 23/05/2015
@@ -18,6 +18,7 @@ plot(t1, i1);
 title('Corrente observada no teste com motor travado');
 xlabel('Tempo (s)');
 ylabel('Corrente (A)');
+
 %%
 % Corrente de regime permanente
 I0 = median(i1(i1 > 1))
@@ -27,7 +28,7 @@ R = V/I0-Rs
 
 %%
 % Constante de tempo elétrica
-tau_e = 6.3e-3; % sabemos somente que tau_e < 10ms :/
+tau_e = 5e-3; % sabemos somente que tau_e < 10ms :/
 L = tau_e*(R+Rs)
 
 %% Ensaio de motor livre
@@ -97,7 +98,6 @@ title('Corrente (A)');
 legend('Teórico', 'Experimental');
 xlabel('Tempo (s)');
 snapnow;
-
 plot(T, Y(:,2), t2, v2_f);
 title('Velocidade (rad/s)');
 legend('Teórico', 'Experimental');
