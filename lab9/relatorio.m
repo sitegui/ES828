@@ -9,7 +9,7 @@
 
 clear all;
 dt1 = 1e-3;
-dt2 = 10e-3;
+dt = 10e-3;
 
 %% Ensaio de motor travado
 % Dado coletado
@@ -41,7 +41,7 @@ L = tau_e*R
 i2 = load('dados_coletados/corrente_livre_disco1.lvm');
 v2 = load('dados_coletados/velocidade_livre_disco1.lvm');
 n2 = numel(i2);
-t2 = linspace(0, (n2-1)*dt2, n2)';
+t2 = linspace(0, (n2-1)*dt, n2)';
 plotyy(t2, i2, t2, v2);
 title('Valores observados no teste com motor livre');
 xlabel('Tempo (s)');
@@ -66,8 +66,52 @@ b = K*i2_inf/v2_inf
 %%
 % Constante de tempo mecânica
 index_tau_m = find(v2_f(index_inf:end) < 0.3679*v2_inf, 1);
-tau_m = index_tau_m*dt2
+tau_m = index_tau_m*dt
 J = tau_m*b
+
+%% Ensaio com disco 1 (disco 2 travado)
+vd1 = load('dados_coletados/velocidade_disco2_travado.lvm');
+pd1 = cumsum(vd1)*dt;
+pd1 = pd1 - pd1(end);
+nd1 = numel(pd1);
+td1 = linspace(0, (nd1-1)*dt, nd1)';
+picosd1 = [77, 92, 109, 125, 140, 156, 172, 187, 203, 218, 232]';
+p_picosd1 = pd1(picosd1+1);
+plot(td1, pd1, picosd1*dt, p_picosd1, 'o');
+title('Valores observados no teste com disco 1');
+xlabel('Tempo (s)');
+legend('Posição (rad)');
+xlim([0, 3]);
+
+%%
+% Cálculo de $\omega_{n_{d1}}$ e $\xi_{d1}$
+m = numel(picosd1);
+omegad_d1 = (m-1)*pi/sum(diff(picosd1*dt))
+tg = (m-1)*pi/sum(diff(log(abs(p_picosd1))));
+xi_d1 = sqrt(1/(tg*tg+1))
+omegan_n1 = omegad_d1/sqrt(1-xi_d1*xi_d1)
+
+%% Ensaio com disco 2 (disco 1 travado)
+vd2 = load('dados_coletados/velocidade_disco1_travado.lvm');
+pd2 = cumsum(vd2)*dt;
+pd2 = pd2 - pd2(end);
+nd2 = numel(pd2);
+td2 = linspace(0, (nd2-1)*dt, nd2)';
+picosd2 = [63, 79, 95, 111, 127, 142, 160, 174, 191, 208, 223, 239, 255, 272, 287, 303, 319, 336, 351, 367, 383, 399, 416, 433, 448, 463, 478, 495, 510, 527, 542]';
+p_picosd2 = pd2(picosd2+1);
+plot(td2, pd2, picosd2*dt, p_picosd2, 'o');
+title('Valores observados no teste com disco 2');
+xlabel('Tempo (s)');
+legend('Posição (rad)');
+xlim([0, 7]);
+
+%%
+% Cálculo de $\omega_{n_{d1}}$ e $\xi_{d1}$
+m = numel(picosd2);
+omegad_d2 = (m-1)*pi/sum(diff(picosd2*dt))
+tg = (m-1)*pi/sum(diff(log(abs(p_picosd2))));
+xi_d2 = sqrt(1/(tg*tg+1))
+omegan_n2 = omegad_d2/sqrt(1-xi_d2*xi_d2)
 
 %% Modelo de estado
 % Juntando as seguintes equações:
