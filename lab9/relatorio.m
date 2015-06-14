@@ -29,13 +29,6 @@ I0 = median(i1(i1 > 1))
 V = 12;
 R = V/I0
 
-%%
-% Constante de tempo elétrica
-inicio = find(i1_f > 0.06, 1);
-fim = find(i1_f > 0.63*I0, 1);
-tau_e = (fim-inicio)*dt1;
-L = tau_e*R
-
 %% Ensaio de motor livre
 % Dado coletado
 i2 = load('dados_coletados/corrente_livre_disco1.lvm');
@@ -61,13 +54,6 @@ legend('Corrente (A)', 'Velocidade (rad/s)');
 [v2_inf, index_inf] = max(v2_f)
 i2_inf = i2_f(index_inf-1)
 K = (V - R*i2_inf)/v2_inf
-b = K*i2_inf/v2_inf
-
-%%
-% Constante de tempo mecânica
-index_tau_m = find(v2_f(index_inf:end) < 0.3679*v2_inf, 1);
-tau_m = index_tau_m*dt
-J = tau_m*b
 
 %% Ensaio com disco 1 (disco 2 travado)
 vd1 = load('dados_coletados/velocidade_disco2_travado.lvm');
@@ -84,12 +70,12 @@ legend('Posição (rad)');
 xlim([0, 3]);
 
 %%
-% Cálculo de $\omega_{n_{d1}}$ e $\xi_{d1}$
+% Cálculo de $\omega_{n1}$ e $\xi_1$
 m = numel(picosd1);
-omegad_d1 = (m-1)*pi/sum(diff(picosd1*dt))
+omega_d1 = (m-1)*pi/sum(diff(picosd1*dt))
 tg = (m-1)*pi/sum(diff(log(abs(p_picosd1))));
-xi_d1 = sqrt(1/(tg*tg+1))
-omegan_n1 = omegad_d1/sqrt(1-xi_d1*xi_d1)
+xi_1 = sqrt(1/(tg*tg+1))
+omega_n1 = omega_d1/sqrt(1-xi_1*xi_1)
 
 %% Ensaio com disco 2 (disco 1 travado)
 vd2 = load('dados_coletados/velocidade_disco1_travado.lvm');
@@ -106,52 +92,60 @@ legend('Posição (rad)');
 xlim([0, 7]);
 
 %%
-% Cálculo de $\omega_{n_{d1}}$ e $\xi_{d1}$
+% Cálculo de $\omega_{n2}$ e $\xi_2$
 m = numel(picosd2);
-omegad_d2 = (m-1)*pi/sum(diff(picosd2*dt))
+omega_d2 = (m-1)*pi/sum(diff(picosd2*dt))
 tg = (m-1)*pi/sum(diff(log(abs(p_picosd2))));
-xi_d2 = sqrt(1/(tg*tg+1))
-omegan_n2 = omegad_d2/sqrt(1-xi_d2*xi_d2)
+xi_2 = sqrt(1/(tg*tg+1))
+omega_n2 = omega_d2/sqrt(1-xi_2*xi_2)
+
+%% Parâmetros dos discos
+% Das equações (5) a (9) do pdf:
+%
+% $$\left\{ \begin{array}{ccccccl}
+% b_1 & +b_2 & & & & = & \frac{K}{R} \left( \frac{V - K \nu}{\nu} \right) \\
+% & & \kappa & -\omega_{n1}^2 J_1 & & = & 0 \\
+% & & \kappa & & -\omega_{n2}^2 J_2 & = & 0 \\
+% b_1 & & & -2 \xi_1 \omega_{n1} J_1 & & = & -\frac{K^2}{R} \\
+% & b_2 & & & -2 \xi_2 \omega_{n2} J_2 & = & 0
+% \end{array} \right.$$
+parametros = [...
+	1, 1, 0, 0, 0; ...
+	0, 0, 1, -omega_n1^2, 0; ...
+	0, 0, 1, 0, -omega_n2^2; ...
+	1, 0, 0, -2*xi_1*omega_n1, 0; ...
+	0, 1, 0, 0, -2*xi_2*omega_n2]\[K/R*(V-K*v2_inf)/v2_inf; 0; 0; -K^2/R; 0];
+b1 = parametros(1)
+b2 = parametros(2)
+k = parametros(3)
+J1 = parametros(4)
+J2 = parametros(5)
 
 %% Modelo de estado
-% Juntando as seguintes equações:
+% Definindo as variáveis de estados:
 %
-% $$L \dot{i} + R i = V - K \dot{\theta}$$
+% $$x_1 = \theta_1 - \theta_2$$
 %
-% $$J \dot{v} + b v = K i$$
+% $$x_2 = \dot{\theta_1}$$
 %
-% $$\dot{\theta} = v$$
+% $$x_3 = \dot{\theta_2}$$
 %
-% Chega-se no modelo de estados
+% Tem-se modelo de estados
 %
-% $$\left[ \begin{array}{c} \dot{i} \\ \dot{v} \\ \dot{\theta} \end{array} \right] =
-% \left[ \begin{array}{ccc} -R/L & -K/L & 0 \\ K/J & -b/J & 0 \\ 0 & 1 & 0 \end{array} \right]
-% \left[ \begin{array}{c} i \\ v \\ \theta \end{array} \right] + 
-% \left[ \begin{array}{c} 1/L \\ 0 \\ 0 \end{array} \right]
+% $$\left[ \begin{array}{c} \dot{x_1} \\ \dot{x_2} \\ \dot{x_3} \end{array} \right] =
+% \left[ \begin{array}{ccc} 0 & 1 & -1 \\ -\frac{\kappa}{J_1} & -\frac{b_1+K^2/R}{J_1} & 0 \\ \frac{\kappa}{J_2} & 0 & -\frac{b_2}{J_2} \end{array} \right]
+% \left[ \begin{array}{c} x_1 \\ x_2 \\ x_3 \end{array} \right] + 
+% \left[ \begin{array}{c} 0 \\ \frac{K}{R J_1} \\ 0 \end{array} \right]
 % \left[ \begin{array}{c} V \end{array} \right]$$
-%
-% $$\left[ \begin{array}{c} i \\ v \end{array} \right] =
-% \left[ \begin{array}{ccc} 1 & 0 & 0 \\ 0 & 1 & 0 \end{array} \right]
-% \left[ \begin{array}{c} i \\ v \\ \theta \end{array} \right]$$
-A = [-R/L, -K/L, 0; K/J, -b/J, 0; 0, 1, 0];
-B = [1/L; 0; 0];
-C = [1, 0, 0; 0, 1, 0];
-D = [0; 0];
-planta = ss(A, B, C, D)
+A = [0, 1, -1; -k/J1, -(b1+K^2/R)/J1, 0; k/J2, 0, -b2/J2];
+B = [0; K/(R*J1); 0];
+C = eye(3);
+planta = ss(A, B, C, 0)
 
 %% Comparação teórico x real
 v2_t = V*(i2_f>0.5);
 [Y, T] = lsim(planta, v2_t, t2);
-plot(T, Y(:,1), t2, i2_f);
-title('Corrente (A)');
-legend('Teórico', 'Experimental');
-xlabel('Tempo (s)');
-snapnow;
 plot(T, Y(:,2), t2, v2_f);
-title('Velocidade (rad/s)');
+title('Velocidade disco 1 (rad/s)');
 legend('Teórico', 'Experimental');
 xlabel('Tempo (s)');
-
-%% G(s) = v/V
-s = tf('s');
-G = tf([K/(J*L)], [1, (R/L + b/J), (R*b+K^2)/(J*L)])
