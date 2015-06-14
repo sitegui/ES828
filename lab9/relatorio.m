@@ -14,10 +14,10 @@ dt2 = 10e-3;
 %% Ensaio de motor travado
 % Dado coletado
 i1 = load('dados_coletados/corrente_parado_disco1.lvm');
-i1_ = medfilt1(i1, 17);
+i1_f = medfilt1(i1, 17);
 n1 = numel(i1);
 t1 = linspace(0, (n1-1)*dt1, n1)';
-plot(t1, [i1 i1_]);
+plot(t1, [i1 i1_f]);
 title('Corrente observada no teste com motor travado');
 xlabel('Tempo (s)');
 ylabel('Corrente (A)');
@@ -26,16 +26,15 @@ legend('Original', 'Filtrado');
 %%
 % Corrente de regime permanente
 I0 = median(i1(i1 > 1))
-Rs = 1;
-V = 12; % ???
-R = V/I0-Rs
+V = 12;
+R = V/I0
 
 %%
 % Constante de tempo elétrica
-inicio = find(i1_ > 0.06, 1);
-fim = find(i1_ > 0.63*I0, 1);
+inicio = find(i1_f > 0.06, 1);
+fim = find(i1_f > 0.63*I0, 1);
 tau_e = (fim-inicio)*dt1;
-L = tau_e*(R+Rs)
+L = tau_e*R
 
 %% Ensaio de motor livre
 % Dado coletado
@@ -50,8 +49,8 @@ legend('Corrente (A)', 'Velocidade (rad/s)');
 
 %%
 % Filtrado
-i2_f = smooth(medfilt1(smooth(i2, 9), 9), 9);
-v2_f = smooth(medfilt1(smooth(v2, 9), 9), 9);
+i2_f = smooth(medfilt1(smooth(i2, 5), 17), 5);
+v2_f = smooth(medfilt1(smooth(v2, 5), 17), 5);
 plotyy(t2, i2_f, t2, v2_f);
 title('Valores observados no teste com motor livre');
 xlabel('Tempo (s)');
@@ -60,8 +59,8 @@ legend('Corrente (A)', 'Velocidade (rad/s)');
 %%
 % Regime permanente
 [v2_inf, index_inf] = max(v2_f)
-i2_inf = i2_f(index_inf)
-K = (V - (R+Rs)*i2_inf)/v2_inf
+i2_inf = i2_f(index_inf-1)
+K = (V - R*i2_inf)/v2_inf
 b = K*i2_inf/v2_inf
 
 %%
@@ -90,7 +89,7 @@ J = tau_m*b
 % $$\left[ \begin{array}{c} i \\ v \end{array} \right] =
 % \left[ \begin{array}{ccc} 1 & 0 & 0 \\ 0 & 1 & 0 \end{array} \right]
 % \left[ \begin{array}{c} i \\ v \\ \theta \end{array} \right]$$
-A = [-(R+Rs)/L, -K/L, 0; K/J, -b/J, 0; 0, 1, 0];
+A = [-R/L, -K/L, 0; K/J, -b/J, 0; 0, 1, 0];
 B = [1/L; 0; 0];
 C = [1, 0, 0; 0, 1, 0];
 D = [0; 0];
@@ -111,4 +110,4 @@ xlabel('Tempo (s)');
 
 %% G(s) = v/V
 s = tf('s');
-G = tf([K/(J*L)], [1, ((R+Rs)/L + b/J), ((R+Rs)*b+K^2)/(J*L)])
+G = tf([K/(J*L)], [1, (R/L + b/J), (R*b+K^2)/(J*L)])
