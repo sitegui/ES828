@@ -76,6 +76,7 @@ T1 = feedback(G * C1,1)
 
 
 <span class="keyword">for</span> vel = [50,80,100]
+figure
 step(T1*vel,vel)
 legend(<span class="string">'Sa&iacute;da'</span>)
 figure
@@ -91,13 +92,14 @@ T1 =
  
 Continuous-time transfer function.
 
-</pre><img vspace="5" hspace="5" src="pre_relatorio_01.png" alt=""> <img vspace="5" hspace="5" src="pre_relatorio_02.png" alt=""> <img vspace="5" hspace="5" src="pre_relatorio_03.png" alt=""> <img vspace="5" hspace="5" src="pre_relatorio_04.png" alt=""> <h2>Controlador proporcional para os outros dois requisitos.<a name="3"></a></h2><pre class="codeinput">C2 = 126;
+</pre><img vspace="5" hspace="5" src="pre_relatorio_01.png" alt=""> <img vspace="5" hspace="5" src="pre_relatorio_02.png" alt=""> <img vspace="5" hspace="5" src="pre_relatorio_03.png" alt=""> <img vspace="5" hspace="5" src="pre_relatorio_04.png" alt=""> <img vspace="5" hspace="5" src="pre_relatorio_05.png" alt=""> <img vspace="5" hspace="5" src="pre_relatorio_06.png" alt=""> <h2>Controlador proporcional para os outros dois requisitos.<a name="3"></a></h2><pre class="codeinput">C2 = 126;
 T2 = feedback(G * C2,1)
 
 <span class="keyword">for</span> vel = [50,80,100]
+figure
 step(T2*vel,vel)
 legend(<span class="string">'Sa&iacute;da'</span>)
-xlabel(<span class="string">'Tempo (s)'</span>)
+figure
 step(C2*(vel-T2), vel);
 legend(<span class="string">'Esfor&ccedil;o de Controle'</span>)
 <span class="keyword">end</span>
@@ -110,7 +112,7 @@ T2 =
  
 Continuous-time transfer function.
 
-</pre><img vspace="5" hspace="5" src="pre_relatorio_05.png" alt=""> <h2>Controlador Integral<a name="4"></a></h2><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2012b</a><br></p></div><!--
+</pre><img vspace="5" hspace="5" src="pre_relatorio_07.png" alt=""> <img vspace="5" hspace="5" src="pre_relatorio_08.png" alt=""> <img vspace="5" hspace="5" src="pre_relatorio_09.png" alt=""> <img vspace="5" hspace="5" src="pre_relatorio_10.png" alt=""> <img vspace="5" hspace="5" src="pre_relatorio_11.png" alt=""> <img vspace="5" hspace="5" src="pre_relatorio_12.png" alt=""> <h2>Controlador Integral<a name="4"></a></h2><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2012b</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 %% ES868 – Pré-Relatório Lab 8
 % *Identificação de um motor de corrente contínua*
@@ -135,6 +137,7 @@ T1 = feedback(G * C1,1)
 
 
 for vel = [50,80,100]
+figure
 step(T1*vel,vel)
 legend('Saída')
 figure
@@ -148,9 +151,10 @@ C2 = 126;
 T2 = feedback(G * C2,1)
 
 for vel = [50,80,100]
+figure
 step(T2*vel,vel)
 legend('Saída')
-xlabel('Tempo (s)')
+figure
 step(C2*(vel-T2), vel);
 legend('Esforço de Controle')
 end

@@ -21,6 +21,7 @@ T1 = feedback(G * C1,1)
 
 
 for vel = [50,80,100]
+figure
 step(T1*vel,vel)
 legend('Saída')
 figure
@@ -34,9 +35,10 @@ C2 = 126;
 T2 = feedback(G * C2,1)
 
 for vel = [50,80,100]
+figure
 step(T2*vel,vel)
 legend('Saída')
-xlabel('Tempo (s)')
+figure
 step(C2*(vel-T2), vel);
 legend('Esforço de Controle')
 end
