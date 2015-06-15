@@ -1,0 +1,388 @@
+\documentclass[12pt]{article}
+
+%% Escrevendo em portuguÃªs:
+\usepackage[brazil]{babel}
+\usepackage[latin1]{inputenc} 
+\usepackage[T1]{fontenc}
+\usepackage{psfrag}
+\usepackage{fullpage}
+\usepackage{setspace}
+\usepackage{graphicx}
+\usepackage{epsfig}
+\usepackage{epstopdf}
+\usepackage{color}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage[section]{placeins}
+\usepackage{float}
+\usepackage{amsmath}
+%----------------------------
+
+
+\newtheorem{teorema}{Teorema}%[chapter]
+\newtheorem{problema}[teorema]{Problema}
+\newtheorem{conj}[teorema]{Conjectura}
+\newtheorem{lema}[teorema]{Lema}
+\newtheorem{exerc}[teorema]{ExercÃ­cio}
+
+\definecolor{lightgray}{gray}{0.95}
+
+% Ad hoc macros
+\newcommand{\qed}       {\hfill\Box}
+\newcommand{\card}[1]   {\left|#1\right|}
+\newcommand{\nct}       {\chi_{_T}}
+\newcommand{\cnk}[2]    {C_{#1}^{#2}}
+\newcommand{\ed}[2]     {#1#2}
+\newcommand{\teto}[1]   {\lceil #1 \rceil}
+\newcommand{\piso}[1]   {\lfloor #1 \rfloor}
+\newcommand{\itab}[1]{\hspace{0em}\rlap{#1}}
+\newcommand{\tab}[1]{\hspace{.2\textwidth}\rlap{#1}}
+
+%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%
+
+\begin{titlepage}
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for the horizontal lines, change thickness here
+
+\center % Center everything on the page
+ 
+%----------------------------------------------------------------------------------------
+%	HEADING SECTIONS
+%----------------------------------------------------------------------------------------
+
+\textsc{\LARGE Universidade Estadual de Campinas}\\[0.5cm]
+\textsc{\normalsize ES828 - Laboratório de Controle de Sistemas}\\[0.2cm] % Major heading such as course name
+\textsc{\normalsize Turma A}\\[0.2cm] % Minor heading such as course title
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+\vspace {5cm}
+{ \huge \bfseries Experimento 09 - Relatório }\\[0.4cm] % Title of your document
+ 
+%----------------------------------------------------------------------------------------
+%	AUTHOR SECTION
+%----------------------------------------------------------------------------------------
+\vspace {5cm}
+\begin{minipage}{0.4\textwidth}
+\begin{flushleft} \large
+\emph{Alunos:}\\
+ \begin{tabbing}
+ Augusto Miranda Garcia\hspace{1cm} \=  \= 104627 \\
+ Guilherme de Oliveira Souza  \> 117093 \\
+ Vinícius Ragazi David \>{120258}\\
+ \end{tabbing}
+\end{flushleft}
+\end{minipage}
+\vspace {2cm}
+~
+\begin{minipage}{0.4\textwidth}
+\begin{flushright} \large
+\emph{Professora responsável:} \\
+Dra. Grace Silva Deaecto
+\end{flushright}
+\end{minipage}\\[2cm]
+
+% If you don't want a supervisor, uncomment the two lines below and remove the section above
+%\Large \emph{Author:}\\
+%John \textsc{Smith}\\[3cm] % Your name
+
+%----------------------------------------------------------------------------------------
+%	DATE SECTION
+%----------------------------------------------------------------------------------------
+
+{\large \today}\\[3cm] % Date, change the \today to a set date if you want to be precise
+
+%----------------------------------------------------------------------------------------
+%	LOGO SECTION
+%----------------------------------------------------------------------------------------
+
+%\includegraphics{Logo}\\[1cm] % Include a department/university logo - this will require the graphicx package
+ 
+%----------------------------------------------------------------------------------------
+
+\vfill % Fill the rest of the page with whitespace
+
+\end{titlepage}
+
+\tableofcontents
+%\listoffigures
+%\listoftables
+ 
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Objetivo}
+\begin{par}
+	O objetivo deste relatório é analisar e encontrar o parametros elétricos e mecânicos de um sistema torcional com dois discos e com base neles definir a planta.
+\end{par}
+
+\begin{figure}[H]
+\centering
+\includegraphics [width=4in]{planta.png}
+\caption {Modelo da planta estudada.}
+\end{figure}
+
+\begin{par}
+	A determinação da planta é baseada em 3 análises, com o motor acionado, mas travado, com o motor acionado girando livremente e finalmente com o motor desacionado e com um deslocamento inicial, girando livremente até a parada devido ao atrito. A teoria mostra que a planta deve ser da seguinte forma:
+\end{par}
+
+\begin{figure}[H]
+\centering
+\includegraphics [width=4in]{modelo_mat.png}
+\caption {Modelo matemático da planta estudada.}
+\end{figure}
+
+\section{Motor ligado e travado}
+
+\begin{par}
+	O primeiro estudo a ser feito é analisando o motor ligado, mas com seu movimento travado (não rodando). Com este experimento é possível encontrar o valor da resistencia e a indutancia do conjunto.
+\end{par}
+
+\begin{figure}[H]
+\centering
+\includegraphics [width=4in]{motor_parado.png}
+\caption {Modelo do motor paralisado.}
+\label{fig:rotorparado}
+\end{figure}
+
+\begin{par}
+	Com base nesse modelo, e com$ R_s$ = 1, pode-se calcular o valor de R da seguinte forma:
+\end{par}
+
+\begin{equation}
+R = \frac{V-R_sI_o}{I_o}
+\end{equation}
+
+\begin{par}
+	O valor $I_o$ é calculado com base numa média dos valores da corrente que passa pelo motor. Pode-se calcular isso pelo gráfico experimental a seguir:
+\end{par}
+
+\begin{figure}[H]
+\centering
+\includegraphics [width=4in]{relatorio_01.png}
+\caption {Corrente com o rotor parado.}
+\label{fig:corrente}
+\end{figure}
+
+\begin{par}
+$I_o$=2.6917
+\end{par}
+
+\begin{par}
+R=4.4581
+\end{par}
+
+\begin{par}
+	Para este estudo foi suposto L=0, assim o carregamento do indutor é instantâneo.
+\end{par}
+
+\section{Motor ligado}
+
+\begin{par}
+	Com o motor girando livremente até a saturação pode-se definir a velocidade final do disco em estudo, no caso disco 1, para posteriormente analisar o motor desligado e efim definir os parâmetros mecânicos do sistema.
+
+Para isso necessita-se primeiramente filtra os dados e encontrar os valores finais de corrente e velocidade.
+\end{par}
+
+\begin{figure}[H]
+\centering
+\includegraphics [width=4in]{relatorio_02.png}
+\caption {Valores não filtrados.}
+\label{fig:corrente}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics [width=4in]{relatorio_03.png}
+\caption {Valores filtrados.}
+\label{fig:corrente}
+\end{figure}
+
+\begin{par}
+	Pela saída analisada encontra-se que a velocidade máxima encontrada é:
+
+
+v=106,9247[rad/s].
+
+	Para essa velocidade tem-se:
+
+
+i=0,8808[A]
+\end{par}
+
+\begin{par}
+	Com este valores pode-se definir o valor de K.
+\end{par}
+
+\begin{equation}
+K = \frac{V - (R*i)/v}{v}
+=0,0755
+\end{equation}
+
+\section{Motor desligado com disco 2 travado}
+
+\begin{par}
+Agora com o motor desligado e o disco 2 travado encontra-se a forma da curva que o disco 1 fará quando um deslocamento inicial for efetuado.
+\end{par}
+
+\begin{figure}[H]
+\centering
+\includegraphics [width=4in]{relatorio_04.png}
+\caption {Posição disco 1 para disco 2 travado.}
+\label{fig:corrente}
+\end{figure}
+
+Pela forma da curva (decaimento logarítmico) pode-se calcular $w_{n1}$ e $\xi_{1}$, isso porque pela teoria sabe-se das ações de cada componente faz na curva de saída.
+\\
+$w_{n1}$ =20,3193
+$\xi_{1}$=0,0708
+
+\section{Motor desligado com disco 1 travado}
+
+Fazendo o mesmo estudo, mas para o caso do disco 1 parado encontra-se $w_{n2}$ e $\xi_{2}$:
+
+\begin{figure}[H]
+\centering
+\includegraphics [width=4in]{relatorio_05.png}
+\caption {Posição disco 2 para disco 1 travado.}
+\label{fig:corrente}
+\end{figure}
+
+$w_{n2}$ =19,6823 
+$\xi_{2}$=0,0255
+
+\section{Definição dos parâmetros}
+
+Sabendo das equações, fornecidas pelo roteiro, pode-se por fim definir os parâmetros restantes:
+
+
+\begin{equation*}
+	\begin{pmatrix} b_1 & b_2 & & &\\
+	 & & k & -w_{n1}^2J_1 \\
+	 & & k& &-w_{n2}^2J_2 \\
+	 b_1 & & &-2\xi_{1}w_{n1}^2J_1\\
+	 & b_2& & & -2\xi_{2}w_{n2}^2J_2\\
+	\end{pmatrix}\\=
+	\begin{pmatrix} \frac{k(V-Kv)}{Rv} \\ 0 \\ \frac{-K^2}{R} \\ 0
+	\end{pmatrix}\\
+\end{equation*}
+
+Com base nisso tem-se:
+\\
+\begin{equation*}
+b_1=1.0651*10^{-4}\\
+\end{equation*}
+\begin{equation*}
+b_2=5,1545*10^{-4}\\
+\end{equation*}
+\begin{equation*}
+k=0,1989\\
+\end{equation*}
+\begin{equation*}
+J_1=4,8176*10^{-4}\\
+\end{equation*}
+\begin{equation*}
+J_2=5,1345*10^{-4}\\
+\end{equation*}
+
+
+
+\section{Modelo de estado}
+
+\begin{par}
+Para efeito de validação é necessário testar os valores encontrados e comparar suas respostas às saídas experimentais.
+
+Com as seguintes equações  pode-se definir o modelo de estados da planta:
+\end{par}
+
+
+
+\begin{equation*}
+x_1=\theta_1-\theta_2
+\end{equation*}
+\begin{equation*}
+x_2=\theta_1'
+\end{equation*}
+\begin{equation*}
+x_3=\theta_2'
+\end{equation*}
+
+\begin{equation*}
+	\begin{pmatrix} 
+	x_1' \\ x_2' \\ x_3'\\
+	\end{pmatrix}\\=
+	\begin{pmatrix} 0 & 1 & -1 \\
+			-K/J_1 & \frac{-b_1+K^2/R}{J_1} & 0 \\
+			K/J_2 & 0 & -b_2/J_2 \\
+		\end{pmatrix}\\*
+	\begin{pmatrix} _1 \\ _x2 \\ x_3\\
+	\end{pmatrix}\\+
+	\begin{pmatrix} 0\\
+				\frac{K}{RJ_1} \\
+				0 \\
+	\end{pmatrix}[V]\\
+\end{equation*}
+
+\begin{par}
+Com:
+\end{par}
+\begin{equation*}
+A = 	\begin{pmatrix} 0 & 1 & -1 \\
+			-412,9 & -2,875 & 0 \\
+			387,4 & 0 & -1,004 \\
+		\end{pmatrix}\\
+\end{equation*}
+\begin{equation*}
+B = 	\begin{pmatrix} 0\\
+				35,15 \\
+				0 \\
+\end{pmatrix}\\
+\end{equation*}
+\begin{equation*}
+C = 	\begin{pmatrix} 1 & 0 & 0 \\
+			0 & 1 & 0 \\
+			0 & 0&1\\
+\end{pmatrix}\\
+\end{equation*}
+\begin{equation*}
+D = 	\begin{pmatrix} 0 \\
+				0 \\
+				0\\
+\end{pmatrix}\\
+\end{equation*}
+		
+\begin{par}
+Sendo a planta do seguinte formato:
+\end{par}
+\begin{equation*}
+planta = 	\begin{pmatrix}A & B \\
+			C & D \\
+		\end{pmatrix}\\
+\end{equation*}
+
+\section{Conclusão}
+
+\begin{figure}[H]
+\centering
+\includegraphics [width=4in]{relatorio_06.png}
+\caption {Corrente teórica e experimental.}
+\label{fig:corrente}
+\end{figure}
+	
+Pela figura anterior pode-se notar que há diferenças, e por vezes até grandes entre o modelo teórico e o prático. Essas diferenças podem-se ser formadas pela coleta dos dados ou mesmo pelas suposições e aproximações feitas neste documento.
+Com essas mudanças o usuário deve se precaver sabendo que a resposta no experimental será mais lento do que o teórico, com isso em mente pode-se fazer um controlador ruím na teoria, mas que acaba sendo bom no experimental, da mesma forma o contrário também pode acontecer.
+
+
+\begin{thebibliography}{5}
+
+\bibitem{Ogata11} K. Ogata, \emph{Engenharia de Controle Moderno}, 6ª edição, 2011.
+
+\bibitem {Grace}Grace Deaecto, \emph{Laboratório de Controle de Sistemas - experimento 9}, 2014
+
+\end{thebibliography}
+
+\end{document}
+    
