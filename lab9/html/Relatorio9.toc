@@ -1,0 +1,9 @@
+\select@language {brazil}
+\contentsline {section}{\numberline {1}Objetivo}{2}
+\contentsline {section}{\numberline {2}Motor ligado e travado}{2}
+\contentsline {section}{\numberline {3}Motor ligado}{4}
+\contentsline {section}{\numberline {4}Motor desligado com disco 2 travado}{5}
+\contentsline {section}{\numberline {5}Motor desligado com disco 1 travado}{5}
+\contentsline {section}{\numberline {6}Defini\c c\~ao dos par\^ametros}{6}
+\contentsline {section}{\numberline {7}Modelo de estado}{7}
+\contentsline {section}{\numberline {8}Conclus\~ao}{8}
