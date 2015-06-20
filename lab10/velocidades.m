@@ -1,65 +1,79 @@
 clear all;
+filter = @(v)smooth(medfilt1(smooth(v(1:3000), 5), 17), 5);
+t = (0:10e-3:30-10e-3)';
 
-filter = @(v)smooth(medfilt1(smooth(v, 5), 17), 5);
-files = dir('dados_coletados/*.lvm');
-files = {files.name};
-allData = struct();
+%% P = 1.1; I = 11.6
+v = load('dados_coletados\velocidade_1.1_11.6.lvm');
+c = load('dados_coletados\controle_1.1_11.6.lvm');
+v = v(1:3000);
+c = c(1:3000);
 
-for file = files
-	name = file{1};
-	parts = strsplit(name(1:end-4), '_');
-	data.raw = load(['dados_coletados/', name]);
-	data.filtered = filter(data.raw);
-	data.type = parts(1);
-	data.P = str2double(parts(2));
-	data.D = str2double(parts(3));
-	
-	allData.(type) = data;
-end
+plot(t, v);
+title('Velocidade experimental (não filtrado)');
+xlabel('Tempo (s)');
+ylabel('(rad/s)');
+snapnow;
 
-%{
-v = load('../lab9/dados_coletados/velocidade_livre_disco1.lvm');
-v = smooth(medfilt1(smooth(v, 5), 17), 5);
-v = v(70:3800);
+plot(t, filter(c));
+title('Sinal de controle experimental');
+xlabel('Tempo (s)');
+ylim([-10.1, 10.1]);
+snapnow;
 
-v1 = load('velocidade.lvm');
-v2 = load('velocidade_1.lvm');
-v3 = load('velocidade_2.lvm');
-v4 = load('velocidade_3.lvm');
-v5 = load('velocidade_4.lvm');
-v6 = load('velocidade_5.lvm');
+plot(t, filter(v));
+title('Velocidade experimental');
+xlabel('Tempo (s)');
+ylabel('(rad/s)');
+stepinfo(v, t, 80, 'SettlingTimeThreshold', 0.1)
 
-c1 = load('controle.lvm');
-c2 = load('controle_1.lvm');
-c3 = load('controle_2.lvm');
-c4 = load('controle_3.lvm');
-c5 = load('controle_4.lvm');
-c6 = load('controle_5.lvm');
+%% Proporcional
+v1 = filter(load('dados_coletados\velocidade_1_0.lvm'));
+v2 = filter(load('dados_coletados\velocidade_2_0.lvm'));
+c1 = filter(load('dados_coletados\controle_1_0.lvm'));
+c2 = filter(load('dados_coletados\controle_2_0.lvm'));
+plot(t, [v1, v2]);
+title('Velocidade experimental');
+xlabel('Tempo (s)');
+ylabel('(rad/s)');
+ylim([0, 120]);
+legend('P = 1', 'P = 2', 'Location', 'SouthEast');
+snapnow;
 
-n = min([numel(v1), numel(v2), numel(v3), numel(v4), numel(v5), numel(v6)]);
-v1 = v1(1:n);
-v2 = v2(1:n);
-v3 = v3(1:n);
-v4 = v4(1:n);
-v5 = v5(1:n);
-v6 = v6(1:n);
-c1 = c1(1:n);
-c2 = c2(1:n);
-c3 = c3(1:n);
-c4 = c4(1:n);
-c5 = c5(1:n);
-c6 = c6(1:n);
-v = [v; ones(n-numel(v), 1)*v(end)];
-t = linspace(0, (n-1)*10e-3, n)';
+plot(t, [c1, c2]);
+title('Sinal de controle experimental');
+xlabel('Tempo (s)');
+legend('P = 1', 'P = 2', 'Location', 'SouthEast');
+ylim([-10.1, 10.1]);
+snapnow;
 
-v1 = smooth(medfilt1(smooth(v1, 5), 17), 5);
-v2 = smooth(medfilt1(smooth(v2, 5), 17), 5);
-v3 = smooth(medfilt1(smooth(v3, 5), 17), 5);
-v4 = smooth(medfilt1(smooth(v4, 5), 17), 5);
-v5 = smooth(medfilt1(smooth(v5, 5), 17), 5);
-v6 = smooth(medfilt1(smooth(v6, 5), 17), 5);
-plot(t, [v1 v2 v3 v4 v5 v6 v]);
-legend('1 0.1', '2 0.2', '1 0.2', '1 0', '2 0', '2 0.1', 'Sem Controle');
-xlim([0, 30]);
-ylim([0, 100]);
-%}
+%%
+% Erro estático
+err1 = 100*(80-median(v1))/80
+err2 = 100*(80-median(v2))/80
+
+%% Proporcional integrativo
+v1_1 = filter(load('dados_coletados\velocidade_1_0.1.lvm'));
+v2_1 = filter(load('dados_coletados\velocidade_2_0.1.lvm'));
+v1_2 = filter(load('dados_coletados\velocidade_1_0.2.lvm'));
+v2_2 = filter(load('dados_coletados\velocidade_2_0.2.lvm'));
+c1_1 = filter(load('dados_coletados\controle_1_0.1.lvm'));
+c2_1 = filter(load('dados_coletados\controle_2_0.1.lvm'));
+c1_2 = filter(load('dados_coletados\controle_1_0.2.lvm'));
+c2_2 = filter(load('dados_coletados\controle_2_0.2.lvm'));
+
+plot(t, [v1_1, v2_1, v1_2, v2_2]);
+title('Velocidade experimental');
+xlabel('Tempo (s)');
+ylabel('(rad/s)');
+ylim([0, 120]);
+legend('P = 1; I = 0.1', 'P = 2; I = 0.1', 'P = 1; I = 0.2', 'P = 2; I = 0.2', 'Location', 'SouthEast');
+snapnow;
+
+plot(t, [c1_1, c2_1, c1_2, c2_2]);
+title('Sinal de controle experimental');
+xlabel('Tempo (s)');
+legend('P = 1; I = 0.1', 'P = 2; I = 0.1', 'P = 1; I = 0.2', 'P = 2; I = 0.2', 'Location', 'SouthEast');
+ylim([-10.1, 10.1]);
+snapnow;
+
+stepinfo(v2_1, t, 80, 'SettlingTimeThreshold', 0.1)

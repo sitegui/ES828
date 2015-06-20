@@ -1,0 +1,254 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>velocidades</title><meta name="generator" content="MATLAB 8.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2015-06-20"><meta name="DC.source" content="velocidades.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, tt, code { font-size:12px; }
+pre { margin:0px 0px 20px; }
+pre.error { color:red; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#2">P = 1.1; I = 11.6</a></li><li><a href="#3">Proporcional</a></li><li><a href="#5">Proporcional integrativo</a></li></ul></div><pre class="codeinput">clear <span class="string">all</span>;
+filter = @(v)smooth(medfilt1(smooth(v(1:3000), 5), 17), 5);
+t = (0:10e-3:30-10e-3)';
+</pre><h2>P = 1.1; I = 11.6<a name="2"></a></h2><pre class="codeinput">v = load(<span class="string">'dados_coletados\velocidade_1.1_11.6.lvm'</span>);
+c = load(<span class="string">'dados_coletados\controle_1.1_11.6.lvm'</span>);
+v = v(1:3000);
+c = c(1:3000);
+
+plot(t, v);
+title(<span class="string">'Velocidade experimental (n&atilde;o filtrado)'</span>);
+xlabel(<span class="string">'Tempo (s)'</span>);
+ylabel(<span class="string">'(rad/s)'</span>);
+snapnow;
+
+plot(t, filter(c));
+title(<span class="string">'Sinal de controle experimental'</span>);
+xlabel(<span class="string">'Tempo (s)'</span>);
+ylim([-10.1, 10.1]);
+snapnow;
+
+plot(t, filter(v));
+title(<span class="string">'Velocidade experimental'</span>);
+xlabel(<span class="string">'Tempo (s)'</span>);
+ylabel(<span class="string">'(rad/s)'</span>);
+stepinfo(v, t, 80, <span class="string">'SettlingTimeThreshold'</span>, 0.1)
+</pre><img vspace="5" hspace="5" src="velocidades_01.png" alt=""> <img vspace="5" hspace="5" src="velocidades_02.png" alt=""> <pre class="codeoutput">
+ans = 
+
+        RiseTime: 4.2645
+    SettlingTime: 28.4402
+     SettlingMin: 57.5540
+     SettlingMax: 114.1026
+       Overshoot: 42.6283
+      Undershoot: 0
+            Peak: 114.1026
+        PeakTime: 15.8100
+
+</pre><img vspace="5" hspace="5" src="velocidades_03.png" alt=""> <h2>Proporcional<a name="3"></a></h2><pre class="codeinput">v1 = filter(load(<span class="string">'dados_coletados\velocidade_1_0.lvm'</span>));
+v2 = filter(load(<span class="string">'dados_coletados\velocidade_2_0.lvm'</span>));
+c1 = filter(load(<span class="string">'dados_coletados\controle_1_0.lvm'</span>));
+c2 = filter(load(<span class="string">'dados_coletados\controle_2_0.lvm'</span>));
+plot(t, [v1, v2]);
+title(<span class="string">'Velocidade experimental'</span>);
+xlabel(<span class="string">'Tempo (s)'</span>);
+ylabel(<span class="string">'(rad/s)'</span>);
+ylim([0, 120]);
+legend(<span class="string">'P = 1'</span>, <span class="string">'P = 2'</span>, <span class="string">'Location'</span>, <span class="string">'SouthEast'</span>);
+snapnow;
+
+plot(t, [c1, c2]);
+title(<span class="string">'Sinal de controle experimental'</span>);
+xlabel(<span class="string">'Tempo (s)'</span>);
+legend(<span class="string">'P = 1'</span>, <span class="string">'P = 2'</span>, <span class="string">'Location'</span>, <span class="string">'SouthEast'</span>);
+ylim([-10.1, 10.1]);
+snapnow;
+</pre><img vspace="5" hspace="5" src="velocidades_04.png" alt=""> <img vspace="5" hspace="5" src="velocidades_05.png" alt=""> <p>Erro est&aacute;tico</p><pre class="codeinput">err1 = 100*(80-median(v1))/80
+err2 = 100*(80-median(v2))/80
+</pre><pre class="codeoutput">
+err1 =
+
+    5.9784
+
+
+err2 =
+
+    5.3752
+
+</pre><h2>Proporcional integrativo<a name="5"></a></h2><pre class="codeinput">v1_1 = filter(load(<span class="string">'dados_coletados\velocidade_1_0.1.lvm'</span>));
+v2_1 = filter(load(<span class="string">'dados_coletados\velocidade_2_0.1.lvm'</span>));
+v1_2 = filter(load(<span class="string">'dados_coletados\velocidade_1_0.2.lvm'</span>));
+v2_2 = filter(load(<span class="string">'dados_coletados\velocidade_2_0.2.lvm'</span>));
+c1_1 = filter(load(<span class="string">'dados_coletados\controle_1_0.1.lvm'</span>));
+c2_1 = filter(load(<span class="string">'dados_coletados\controle_2_0.1.lvm'</span>));
+c1_2 = filter(load(<span class="string">'dados_coletados\controle_1_0.2.lvm'</span>));
+c2_2 = filter(load(<span class="string">'dados_coletados\controle_2_0.2.lvm'</span>));
+
+plot(t, [v1_1, v2_1, v1_2, v2_2]);
+title(<span class="string">'Velocidade experimental'</span>);
+xlabel(<span class="string">'Tempo (s)'</span>);
+ylabel(<span class="string">'(rad/s)'</span>);
+ylim([0, 120]);
+legend(<span class="string">'P = 1; I = 0.1'</span>, <span class="string">'P = 2; I = 0.1'</span>, <span class="string">'P = 1; I = 0.2'</span>, <span class="string">'P = 2; I = 0.2'</span>, <span class="string">'Location'</span>, <span class="string">'SouthEast'</span>);
+snapnow;
+
+plot(t, [c1_1, c2_1, c1_2, c2_2]);
+title(<span class="string">'Sinal de controle experimental'</span>);
+xlabel(<span class="string">'Tempo (s)'</span>);
+legend(<span class="string">'P = 1; I = 0.1'</span>, <span class="string">'P = 2; I = 0.1'</span>, <span class="string">'P = 1; I = 0.2'</span>, <span class="string">'P = 2; I = 0.2'</span>, <span class="string">'Location'</span>, <span class="string">'SouthEast'</span>);
+ylim([-10.1, 10.1]);
+snapnow;
+
+stepinfo(v2_1, t, 80, <span class="string">'SettlingTimeThreshold'</span>, 0.1)
+</pre><img vspace="5" hspace="5" src="velocidades_06.png" alt=""> <img vspace="5" hspace="5" src="velocidades_07.png" alt=""> <pre class="codeoutput">
+ans = 
+
+        RiseTime: 5.1333
+    SettlingTime: 5.3391
+     SettlingMin: 72.0103
+     SettlingMax: 84.2852
+       Overshoot: 5.3565
+      Undershoot: 0
+            Peak: 84.2852
+        PeakTime: 7.9000
+
+</pre><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2013a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+clear all;
+filter = @(v)smooth(medfilt1(smooth(v(1:3000), 5), 17), 5);
+t = (0:10e-3:30-10e-3)';
+
+%% P = 1.1; I = 11.6
+v = load('dados_coletados\velocidade_1.1_11.6.lvm');
+c = load('dados_coletados\controle_1.1_11.6.lvm');
+v = v(1:3000);
+c = c(1:3000);
+
+plot(t, v);
+title('Velocidade experimental (não filtrado)');
+xlabel('Tempo (s)');
+ylabel('(rad/s)');
+snapnow;
+
+plot(t, filter(c));
+title('Sinal de controle experimental');
+xlabel('Tempo (s)');
+ylim([-10.1, 10.1]);
+snapnow;
+
+plot(t, filter(v));
+title('Velocidade experimental');
+xlabel('Tempo (s)');
+ylabel('(rad/s)');
+stepinfo(v, t, 80, 'SettlingTimeThreshold', 0.1)
+
+%% Proporcional
+v1 = filter(load('dados_coletados\velocidade_1_0.lvm'));
+v2 = filter(load('dados_coletados\velocidade_2_0.lvm'));
+c1 = filter(load('dados_coletados\controle_1_0.lvm'));
+c2 = filter(load('dados_coletados\controle_2_0.lvm'));
+plot(t, [v1, v2]);
+title('Velocidade experimental');
+xlabel('Tempo (s)');
+ylabel('(rad/s)');
+ylim([0, 120]);
+legend('P = 1', 'P = 2', 'Location', 'SouthEast');
+snapnow;
+
+plot(t, [c1, c2]);
+title('Sinal de controle experimental');
+xlabel('Tempo (s)');
+legend('P = 1', 'P = 2', 'Location', 'SouthEast');
+ylim([-10.1, 10.1]);
+snapnow;
+
+%%
+% Erro estático
+err1 = 100*(80-median(v1))/80
+err2 = 100*(80-median(v2))/80
+
+%% Proporcional integrativo
+v1_1 = filter(load('dados_coletados\velocidade_1_0.1.lvm'));
+v2_1 = filter(load('dados_coletados\velocidade_2_0.1.lvm'));
+v1_2 = filter(load('dados_coletados\velocidade_1_0.2.lvm'));
+v2_2 = filter(load('dados_coletados\velocidade_2_0.2.lvm'));
+c1_1 = filter(load('dados_coletados\controle_1_0.1.lvm'));
+c2_1 = filter(load('dados_coletados\controle_2_0.1.lvm'));
+c1_2 = filter(load('dados_coletados\controle_1_0.2.lvm'));
+c2_2 = filter(load('dados_coletados\controle_2_0.2.lvm'));
+
+plot(t, [v1_1, v2_1, v1_2, v2_2]);
+title('Velocidade experimental');
+xlabel('Tempo (s)');
+ylabel('(rad/s)');
+ylim([0, 120]);
+legend('P = 1; I = 0.1', 'P = 2; I = 0.1', 'P = 1; I = 0.2', 'P = 2; I = 0.2', 'Location', 'SouthEast');
+snapnow;
+
+plot(t, [c1_1, c2_1, c1_2, c2_2]);
+title('Sinal de controle experimental');
+xlabel('Tempo (s)');
+legend('P = 1; I = 0.1', 'P = 2; I = 0.1', 'P = 1; I = 0.2', 'P = 2; I = 0.2', 'Location', 'SouthEast');
+ylim([-10.1, 10.1]);
+snapnow;
+
+stepinfo(v2_1, t, 80, 'SettlingTimeThreshold', 0.1)
+##### SOURCE END #####
+--></body></html>
