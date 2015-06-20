@@ -1,6 +1,24 @@
 clear all;
 
-v = load('../lab9/velocidade_livre_disco1.lvm');
+filter = @(v)smooth(medfilt1(smooth(v, 5), 17), 5);
+files = dir('dados_coletados/*.lvm');
+files = {files.name};
+allData = struct();
+
+for file = files
+	name = file{1};
+	parts = strsplit(name(1:end-4), '_');
+	data.raw = load(['dados_coletados/', name]);
+	data.filtered = filter(data.raw);
+	data.type = parts(1);
+	data.P = str2double(parts(2));
+	data.D = str2double(parts(3));
+	
+	allData.(type) = data;
+end
+
+%{
+v = load('../lab9/dados_coletados/velocidade_livre_disco1.lvm');
 v = smooth(medfilt1(smooth(v, 5), 17), 5);
 v = v(70:3800);
 
@@ -44,3 +62,4 @@ plot(t, [v1 v2 v3 v4 v5 v6 v]);
 legend('1 0.1', '2 0.2', '1 0.2', '1 0', '2 0', '2 0.1', 'Sem Controle');
 xlim([0, 30]);
 ylim([0, 100]);
+%}
